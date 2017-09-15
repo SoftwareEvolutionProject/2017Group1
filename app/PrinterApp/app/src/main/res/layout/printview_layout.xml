@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_panel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pager_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="@dimen/content_padding_xsmall"
+        android:weightSum="2">
+
+        <!-- Left panel. Include the progress info and extruder options -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/content_padding_small">
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/printview_options_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+
+        </LinearLayout>
+
+        <!-- Right panel. Include a tab host with two views: video and render 3D -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/content_padding_xsmall">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/progress_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <TabHost
+                    android:id="@+id/printviews_tabhost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/printview_camera"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TabWidget
+                            android:id="@android:id/tabs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="@dimen/content_margin_xsmall"
+                            android:layout_marginRight="0dip"
+                            android:paddingLeft="0dip" />
+
+                        <FrameLayout
+                            android:id="@android:id/tabcontent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@android:id/tabs">
+
+                            <!-- VIDEO VIEW -->
+                            <FrameLayout
+                                android:id="@+id/printview_video"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/black">
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:id="@+id/videocam_off_layout">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:id="@+id/videocam_off_icon"
+                                        android:src="@drawable/ic_videocam_off_gray"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:id="@+id/videocam_off_text"
+                                        android:layout_below="@id/videocam_off_icon"
+                                        android:layout_margin="20dp"
+                                        android:textColor="@color/white"
+                                        android:text="@string/printview_video_error"/>
+
+                                    </RelativeLayout>
+
+
+                                 </FrameLayout>
+
+                            <!-- 3D RENDER VIEW -->
+                            <FrameLayout
+                                android:id="@+id/view_gcode"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/black">
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:id="@+id/render_off_icon"
+                                        android:src="@drawable/ic_nomodel_grey600"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textColor="@color/white"
+                                        android:layout_below="@id/render_off_icon"
+                                        android:layout_margin="20dp"
+                                        android:text="@string/printview_render_error"/>
+                                    </RelativeLayout>
+
+
+                                </FrameLayout>
+
+                        </FrameLayout>
+
+                    </RelativeLayout>
+
+                </TabHost>
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

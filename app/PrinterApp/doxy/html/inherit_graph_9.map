@@ -1,0 +1,12 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classandroid_1_1app_1_1printerapp_1_1devices_1_1_devices_fragment.html" title="android.app.printerapp.devices.\lDevicesFragment" alt="" coords="159,5,361,47"/>
+<area shape="rect" id="node3" href="$classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_initial_fragment.html" title="android.app.printerapp.devices.discovery.\lInitialFragment" alt="" coords="131,71,389,112"/>
+<area shape="rect" id="node4" href="$classandroid_1_1app_1_1printerapp_1_1devices_1_1printview_1_1_print_view_fragment.html" title="android.app.printerapp.devices.printview.\lPrintViewFragment" alt="" coords="133,136,387,177"/>
+<area shape="rect" id="node5" href="$classandroid_1_1app_1_1printerapp_1_1library_1_1detail_1_1_detail_view_fragment.html" title="android.app.printerapp.library.detail.\lDetailViewFragment" alt="" coords="146,201,374,243"/>
+<area shape="rect" id="node6" href="$classandroid_1_1app_1_1printerapp_1_1library_1_1_library_fragment.html" title="android.app.printerapp.library.\lLibraryFragment" alt="" coords="163,267,357,308"/>
+<area shape="rect" id="node7" href="$classandroid_1_1app_1_1printerapp_1_1settings_1_1_settings_about_fragment.html" title="android.app.printerapp.settings.\lSettingsAboutFragment" alt="" coords="158,332,362,373"/>
+<area shape="rect" id="node8" href="$classandroid_1_1app_1_1printerapp_1_1settings_1_1_settings_devices_fragment.html" title="android.app.printerapp.settings.\lSettingsDevicesFragment" alt="" coords="158,397,362,439"/>
+<area shape="rect" id="node9" href="$classandroid_1_1app_1_1printerapp_1_1settings_1_1_settings_fragment.html" title="android.app.printerapp.settings.\lSettingsFragment" alt="" coords="158,463,362,504"/>
+<area shape="rect" id="node10" href="$classandroid_1_1app_1_1printerapp_1_1settings_1_1_settings_general_fragment.html" title="android.app.printerapp.settings.\lSettingsGeneralFragment" alt="" coords="158,528,362,569"/>
+<area shape="rect" id="node11" href="$classandroid_1_1app_1_1printerapp_1_1viewer_1_1_viewer_main_fragment.html" title="android.app.printerapp.viewer.\lViewerMainFragment" alt="" coords="163,593,357,635"/>
+</map>

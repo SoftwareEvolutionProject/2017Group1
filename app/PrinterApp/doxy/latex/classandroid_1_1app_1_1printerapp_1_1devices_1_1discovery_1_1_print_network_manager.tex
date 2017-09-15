@@ -1,0 +1,210 @@
+\hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager}{}\section{android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager Class Reference}
+\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager}\index{android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager@{android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a1259a433b9864cae63c62a63c0f2a36f}{Print\+Network\+Manager} (\hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_discovery_controller}{Discovery\+Controller} context)
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ad88f529fde71b1302c0c2b34643cbe0d}{setup\+Network} (\hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p, int position)
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a58ab66e04451c1020210982594ac298a}{select\+Network\+Printer} (J\+S\+O\+N\+Object response, final String url)
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ad71cc446747229a1c3be1838893a2e55}{configure\+Selected\+Network} (String ssid, String pass, String url)
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a6e80f7bbb80f9506f0a5f5a4f65b31a0}{connect\+Specific\+Network} (int n\+Id)
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ac0fe117be3cec83f09345d1fc0b616f3}{create\+Network\+Dialog} (String message)
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a517a8cc9f3433ac259ffb81c7f3d74eb}{dismiss\+Network\+Dialog} ()
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a161c3b0a232f267bc612db8b4f3e2f38}{error\+Network\+Dialog} ()
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a737f099ecad6b68d6bad42a7c2a5d20d}{add\+Element\+Controller} (\hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p)
+\item 
+Context \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ac84a4314b046fac2d5614c50a1fcb95d}{get\+Context} ()
+\item 
+void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_acfe0da9b27ec65e3fdfd198767f47b7a}{reload\+Networks} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a9b931b59f760cdf5e8f6260279d4796a}{reverse} (byte\mbox{[}$\,$\mbox{]} array)
+\item 
+static String \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_aed529535f7524fc494367f07ea9e99d2}{get\+Network\+Id} (String s)
+\item 
+static boolean \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_af4916f04a5130c6dbae4b591df7d2b6f}{check\+Network\+Id} (String ssid, boolean result)
+\item 
+static String \hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a98e270943d301d7daddf3205e20335d2}{get\+Current\+Network} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class will connect to the server AP and select a wifi from the list to connect the server to T\+O\+DO As it is right now, the server part is unstable and doesn\textquotesingle{}t always creates the AP
+
+\begin{DoxyAuthor}{Author}
+alberto-\/baeza 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a1259a433b9864cae63c62a63c0f2a36f}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a1259a433b9864cae63c62a63c0f2a36f}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!Print\+Network\+Manager@{Print\+Network\+Manager}}
+\index{Print\+Network\+Manager@{Print\+Network\+Manager}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{Print\+Network\+Manager()}{PrintNetworkManager()}}
+{\footnotesize\ttfamily android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+Print\+Network\+Manager (\begin{DoxyParamCaption}\item[{\hyperlink{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_discovery_controller}{Discovery\+Controller}}]{context }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a737f099ecad6b68d6bad42a7c2a5d20d}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a737f099ecad6b68d6bad42a7c2a5d20d}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!add\+Element\+Controller@{add\+Element\+Controller}}
+\index{add\+Element\+Controller@{add\+Element\+Controller}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{add\+Element\+Controller()}{addElementController()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+add\+Element\+Controller (\begin{DoxyParamCaption}\item[{\hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p }\end{DoxyParamCaption})}
+
+Add a new Printer calling to the Controller
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_af4916f04a5130c6dbae4b591df7d2b6f}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_af4916f04a5130c6dbae4b591df7d2b6f}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!check\+Network\+Id@{check\+Network\+Id}}
+\index{check\+Network\+Id@{check\+Network\+Id}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{check\+Network\+Id()}{checkNetworkId()}}
+{\footnotesize\ttfamily static boolean android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+check\+Network\+Id (\begin{DoxyParamCaption}\item[{String}]{ssid,  }\item[{boolean}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Check if the network was on the preference list to link it to the service
+
+
+\begin{DoxyParams}{Parameters}
+{\em ssid} & \\
+\hline
+{\em result} & \\
+\hline
+\end{DoxyParams}
+Check for pending networks in the preference list\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ad71cc446747229a1c3be1838893a2e55}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ad71cc446747229a1c3be1838893a2e55}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!configure\+Selected\+Network@{configure\+Selected\+Network}}
+\index{configure\+Selected\+Network@{configure\+Selected\+Network}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{configure\+Selected\+Network()}{configureSelectedNetwork()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+configure\+Selected\+Network (\begin{DoxyParamCaption}\item[{String}]{ssid,  }\item[{String}]{pass,  }\item[{String}]{url }\end{DoxyParamCaption})}
+
+S\+A\+VE P\+A\+R\+A\+M\+E\+T\+E\+RS
+
+T\+O\+DO Need a handler for this? Remove AP from the network list and connect to the Target network\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a6e80f7bbb80f9506f0a5f5a4f65b31a0}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a6e80f7bbb80f9506f0a5f5a4f65b31a0}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!connect\+Specific\+Network@{connect\+Specific\+Network}}
+\index{connect\+Specific\+Network@{connect\+Specific\+Network}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{connect\+Specific\+Network()}{connectSpecificNetwork()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+connect\+Specific\+Network (\begin{DoxyParamCaption}\item[{int}]{n\+Id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ac0fe117be3cec83f09345d1fc0b616f3}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ac0fe117be3cec83f09345d1fc0b616f3}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!create\+Network\+Dialog@{create\+Network\+Dialog}}
+\index{create\+Network\+Dialog@{create\+Network\+Dialog}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{create\+Network\+Dialog()}{createNetworkDialog()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+create\+Network\+Dialog (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption})}
+
+Create Network Dialog while connecting to the Printer
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a517a8cc9f3433ac259ffb81c7f3d74eb}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a517a8cc9f3433ac259ffb81c7f3d74eb}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!dismiss\+Network\+Dialog@{dismiss\+Network\+Dialog}}
+\index{dismiss\+Network\+Dialog@{dismiss\+Network\+Dialog}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{dismiss\+Network\+Dialog()}{dismissNetworkDialog()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+dismiss\+Network\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Called when the Network is established, should open a Dialog with the network list from the server only will be called if there\textquotesingle{}s a Network available (Dialog won\textquotesingle{}t be null) \mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a161c3b0a232f267bc612db8b4f3e2f38}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a161c3b0a232f267bc612db8b4f3e2f38}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!error\+Network\+Dialog@{error\+Network\+Dialog}}
+\index{error\+Network\+Dialog@{error\+Network\+Dialog}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{error\+Network\+Dialog()}{errorNetworkDialog()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+error\+Network\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ac84a4314b046fac2d5614c50a1fcb95d}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ac84a4314b046fac2d5614c50a1fcb95d}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!get\+Context@{get\+Context}}
+\index{get\+Context@{get\+Context}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{get\+Context()}{getContext()}}
+{\footnotesize\ttfamily Context android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+get\+Context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get Device context
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a98e270943d301d7daddf3205e20335d2}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a98e270943d301d7daddf3205e20335d2}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!get\+Current\+Network@{get\+Current\+Network}}
+\index{get\+Current\+Network@{get\+Current\+Network}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{get\+Current\+Network()}{getCurrentNetwork()}}
+{\footnotesize\ttfamily static String android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+get\+Current\+Network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_aed529535f7524fc494367f07ea9e99d2}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_aed529535f7524fc494367f07ea9e99d2}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!get\+Network\+Id@{get\+Network\+Id}}
+\index{get\+Network\+Id@{get\+Network\+Id}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{get\+Network\+Id()}{getNetworkId()}}
+{\footnotesize\ttfamily static String android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+get\+Network\+Id (\begin{DoxyParamCaption}\item[{String}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+E\+X\+C\+L\+U\+S\+I\+VE TO T\+H\+IS I\+M\+P\+L\+E\+M\+E\+N\+T\+A\+T\+I\+ON 
+
+Parse the network ID to search in the preference list
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & ssid to get the number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the parsed number 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_acfe0da9b27ec65e3fdfd198767f47b7a}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_acfe0da9b27ec65e3fdfd198767f47b7a}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!reload\+Networks@{reload\+Networks}}
+\index{reload\+Networks@{reload\+Networks}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{reload\+Networks()}{reloadNetworks()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+reload\+Networks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a9b931b59f760cdf5e8f6260279d4796a}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a9b931b59f760cdf5e8f6260279d4796a}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!reverse@{reverse}}
+\index{reverse@{reverse}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{reverse()}{reverse()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+reverse (\begin{DoxyParamCaption}\item[{byte \mbox{[}$\,$\mbox{]}}]{array }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Reverse an array of bytes to get the actual IP address
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a58ab66e04451c1020210982594ac298a}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_a58ab66e04451c1020210982594ac298a}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!select\+Network\+Printer@{select\+Network\+Printer}}
+\index{select\+Network\+Printer@{select\+Network\+Printer}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{select\+Network\+Printer()}{selectNetworkPrinter()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+select\+Network\+Printer (\begin{DoxyParamCaption}\item[{J\+S\+O\+N\+Object}]{response,  }\item[{final String}]{url }\end{DoxyParamCaption})}
+
+Get the network list from the server and select one to connect
+
+
+\begin{DoxyParams}{Parameters}
+{\em response} & list with the networks \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ad88f529fde71b1302c0c2b34643cbe0d}\label{classandroid_1_1app_1_1printerapp_1_1devices_1_1discovery_1_1_print_network_manager_ad88f529fde71b1302c0c2b34643cbe0d}} 
+\index{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}!setup\+Network@{setup\+Network}}
+\index{setup\+Network@{setup\+Network}!android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager@{android\+::app\+::printerapp\+::devices\+::discovery\+::\+Print\+Network\+Manager}}
+\subsubsection{\texorpdfstring{setup\+Network()}{setupNetwork()}}
+{\footnotesize\ttfamily void android.\+app.\+printerapp.\+devices.\+discovery.\+Print\+Network\+Manager.\+setup\+Network (\begin{DoxyParamCaption}\item[{\hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p,  }\item[{int}]{position }\end{DoxyParamCaption})}
+
+Method to connect to the AP
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/android/app/printerapp/devices/discovery/\hyperlink{_print_network_manager_8java}{Print\+Network\+Manager.\+java}\end{DoxyCompactItemize}

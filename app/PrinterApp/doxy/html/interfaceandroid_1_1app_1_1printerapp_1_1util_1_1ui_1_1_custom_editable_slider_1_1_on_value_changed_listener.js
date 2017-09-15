@@ -1,0 +1,4 @@
+var interfaceandroid_1_1app_1_1printerapp_1_1util_1_1ui_1_1_custom_editable_slider_1_1_on_value_changed_listener =
+[
+    [ "onValueChanged", "interfaceandroid_1_1app_1_1printerapp_1_1util_1_1ui_1_1_custom_editable_slider_1_1_on_value_changed_listener.html#ac6fc7765bd20e7183a3d5e6153f09c59", null ]
+];

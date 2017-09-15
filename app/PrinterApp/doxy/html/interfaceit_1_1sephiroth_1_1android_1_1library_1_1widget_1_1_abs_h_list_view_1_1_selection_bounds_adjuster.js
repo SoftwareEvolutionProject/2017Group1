@@ -1,0 +1,4 @@
+var interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_selection_bounds_adjuster =
+[
+    [ "adjustListItemSelectionBounds", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_selection_bounds_adjuster.html#a80ec9753af22a27964458b04b931d4d4", null ]
+];

@@ -1,0 +1,5 @@
+<map id="it.sephiroth.android.library.widget.AdapterView&lt; T extends Adapter &gt;" name="it.sephiroth.android.library.widget.AdapterView&lt; T extends Adapter &gt;">
+<area shape="rect" id="node3" href="$interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_long_click_listener.html" title="it.sephiroth.android.library.widget.\lAdapterView\&lt; T extends Adapter\l \&gt;.OnItemLongClickListener" alt="" coords="5,56,221,112"/>
+<area shape="rect" id="node4" href="$interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener.html" title="it.sephiroth.android.library.widget.\lAdapterView\&lt; T extends Adapter\l \&gt;.OnItemSelectedListener" alt="" coords="5,136,221,192"/>
+<area shape="rect" id="node6" href="$interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_click_listener.html" title="it.sephiroth.android.library.widget.\lAdapterView\&lt; T extends Adapter\l \&gt;.OnItemClickListener" alt="" coords="5,267,221,323"/>
+</map>

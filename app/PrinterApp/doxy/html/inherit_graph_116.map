@@ -1,0 +1,10 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classandroid_1_1app_1_1printerapp_1_1devices_1_1_devices_grid_adapter.html" title="android.app.printerapp.devices.\lDevicesGridAdapter" alt="" coords="216,71,417,112"/>
+<area shape="rect" id="node3" href="$classandroid_1_1app_1_1printerapp_1_1library_1_1detail_1_1_detail_view_adapter.html" title="android.app.printerapp.library.detail.\lDetailViewAdapter" alt="" coords="203,463,431,504"/>
+<area shape="rect" id="node4" href="$classandroid_1_1app_1_1printerapp_1_1library_1_1detail_1_1_detail_view_comm_adapter.html" title="android.app.printerapp.library.detail.\lDetailViewCommAdapter" alt="" coords="203,201,431,243"/>
+<area shape="rect" id="node5" href="$classandroid_1_1app_1_1printerapp_1_1library_1_1_library_adapter.html" title="android.app.printerapp.library.\lLibraryAdapter" alt="" coords="220,136,413,177"/>
+<area shape="rect" id="node6" href="$classandroid_1_1app_1_1printerapp_1_1settings_1_1_settings_list_adapter.html" title="android.app.printerapp.settings.\lSettingsListAdapter" alt="" coords="215,267,419,308"/>
+<area shape="rect" id="node7" href="$classandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel_1_1_side_panel_printer_adapter.html" title="android.app.printerapp.viewer.sidepanel.\lSidePanelPrinterAdapter" alt="" coords="191,332,443,373"/>
+<area shape="rect" id="node8" href="$classandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel_1_1_side_panel_profile_adapter.html" title="android.app.printerapp.viewer.sidepanel.\lSidePanelProfileAdapter" alt="" coords="191,397,443,439"/>
+<area shape="rect" id="node10" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_header_view_list_adapter.html" title="it.sephiroth.android.library.widget.\lHeaderViewListAdapter" alt="" coords="209,5,425,47"/>
+</map>

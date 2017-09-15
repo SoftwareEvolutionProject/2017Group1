@@ -1,0 +1,54 @@
+\hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener}{}\section{it.\+sephiroth.\+android.\+library.\+widget.\+Adapter\+View$<$ T extends Adapter $>$.On\+Item\+Selected\+Listener Interface Reference}
+\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener}\index{it.\+sephiroth.\+android.\+library.\+widget.\+Adapter\+View$<$ T extends Adapter $>$.\+On\+Item\+Selected\+Listener@{it.\+sephiroth.\+android.\+library.\+widget.\+Adapter\+View$<$ T extends Adapter $>$.\+On\+Item\+Selected\+Listener}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener_a0f166b5a47627d5b8d25491ef24ef3e3}{on\+Item\+Selected} (\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{Adapter\+View}$<$?$>$ parent, View view, int position, long id)
+\item 
+void \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener_a3439ca8b37442f4f9fe69cae64f08fa4}{on\+Nothing\+Selected} (\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{Adapter\+View}$<$?$>$ parent)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface definition for a callback to be invoked when an item in this view has been selected. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener_a0f166b5a47627d5b8d25491ef24ef3e3}\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener_a0f166b5a47627d5b8d25491ef24ef3e3}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Adapter\+View\+::\+On\+Item\+Selected\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Adapter\+View\+::\+On\+Item\+Selected\+Listener}!on\+Item\+Selected@{on\+Item\+Selected}}
+\index{on\+Item\+Selected@{on\+Item\+Selected}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Adapter\+View\+::\+On\+Item\+Selected\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Adapter\+View\+::\+On\+Item\+Selected\+Listener}}
+\subsubsection{\texorpdfstring{on\+Item\+Selected()}{onItemSelected()}}
+{\footnotesize\ttfamily void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{it.\+sephiroth.\+android.\+library.\+widget.\+Adapter\+View}$<$ T extends Adapter $>$.On\+Item\+Selected\+Listener.\+on\+Item\+Selected (\begin{DoxyParamCaption}\item[{\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{Adapter\+View}$<$?$>$}]{parent,  }\item[{View}]{view,  }\item[{int}]{position,  }\item[{long}]{id }\end{DoxyParamCaption})}
+
+Callback method to be invoked when an item in this view has been selected. This callback is invoked only when the newly selected position is different from the previously selected position or if there was no selected item. 
+
+Impelmenters can call get\+Item\+At\+Position(position) if they need to access the data associated with the selected item.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{Adapter\+View} where the selection happened \\
+\hline
+{\em view} & The view within the \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{Adapter\+View} that was clicked \\
+\hline
+{\em position} & The position of the view in the adapter \\
+\hline
+{\em id} & The col id of the item that is selected \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener_a3439ca8b37442f4f9fe69cae64f08fa4}\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener_a3439ca8b37442f4f9fe69cae64f08fa4}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Adapter\+View\+::\+On\+Item\+Selected\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Adapter\+View\+::\+On\+Item\+Selected\+Listener}!on\+Nothing\+Selected@{on\+Nothing\+Selected}}
+\index{on\+Nothing\+Selected@{on\+Nothing\+Selected}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Adapter\+View\+::\+On\+Item\+Selected\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Adapter\+View\+::\+On\+Item\+Selected\+Listener}}
+\subsubsection{\texorpdfstring{on\+Nothing\+Selected()}{onNothingSelected()}}
+{\footnotesize\ttfamily void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{it.\+sephiroth.\+android.\+library.\+widget.\+Adapter\+View}$<$ T extends Adapter $>$.On\+Item\+Selected\+Listener.\+on\+Nothing\+Selected (\begin{DoxyParamCaption}\item[{\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{Adapter\+View}$<$?$>$}]{parent }\end{DoxyParamCaption})}
+
+Callback method to be invoked when the selection disappears from this view. The selection can disappear for instance when touch is activated or when the adapter becomes empty.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view}{Adapter\+View} that now contains no selected item. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+horizontallistlibrary/src/main/java/it/sephiroth/android/library/widget/\hyperlink{_adapter_view_8java}{Adapter\+View.\+java}\end{DoxyCompactItemize}

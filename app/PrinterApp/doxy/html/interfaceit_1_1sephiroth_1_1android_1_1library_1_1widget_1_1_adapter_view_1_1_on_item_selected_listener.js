@@ -1,0 +1,5 @@
+var interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener =
+[
+    [ "onItemSelected", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener.html#a0f166b5a47627d5b8d25491ef24ef3e3", null ],
+    [ "onNothingSelected", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_selected_listener.html#a3439ca8b37442f4f9fe69cae64f08fa4", null ]
+];

@@ -1,0 +1,5 @@
+var classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_connector_1_1_my_data_set_observer =
+[
+    [ "onChanged", "classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_connector_1_1_my_data_set_observer.html#a7358feec3bd480ce675f8862c2190211", null ],
+    [ "onInvalidated", "classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_connector_1_1_my_data_set_observer.html#a0890f9ba44f6d35592add621c24595af", null ]
+];

@@ -1,0 +1,157 @@
+\hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection}{}\section{android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection Class Reference}
+\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection}\index{android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection@{android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_ad721cab32888b9d25310d554cf7714e3}{start\+Connection} (String url, final Context context, String port, String profile)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aab02ef037b086aeeba3170084282df1d}{disconnect} (Context context, String url)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a27735987deae4dc8da0502686868be5f}{get\+Linked\+Connection} (final Context context, final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a263de2b33bf33ff2339f7307ba545175}{get\+New\+Connection} (final Context context, final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a40c048fe9317c5c8bd1fa089fa323aa7}{show\+Api\+Disabled\+Dialog} (final Context context)
+\item 
+static int \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aac6590890bf09bc60b27af00a6d6bfc1}{convert\+Color} (String color)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a57773e4742e779bc5117add9f2f59dc3}{get\+Updated\+Settings} (final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p, String profile)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aff0110477d72e6f2618f0cf0561f6b57}{get\+Settings} (final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a6890bc490ac28e4c7929ed68b8a54dc3}{set\+Settings} (final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p, String new\+Name, final String new\+Color, Context context)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a5e4e16d3f4131c9fac795d701d6856ea}{open\+Socket} (final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p, final Context context)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a44dc057c8bf6560949ce5d8abbcfd9bc}{do\+Connection} (Context context, \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p)
+\item 
+static int \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a5d696d93278124ade54d8a24279d664f}{create\+Status} (J\+S\+O\+N\+Object flags)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a8205b26c7a35d0530e4fb36748ba4ca9}{add\+To\+History} (\hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer} p, J\+S\+O\+N\+Object history)
+\item 
+static String \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aeeec4075b1388619a0573f9d3e89aef9}{Convert\+Second\+To\+H\+H\+M\+M\+String} (String secondt\+Time)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final String \hyperlink{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aa75c1a4b840d111cfe50a36d28763b0e}{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT} = \char`\"{}/dev/tty\+U\+S\+B0\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for Connection handling with Octoprint\textquotesingle{}s A\+PI. Since the A\+PI is still on developement we need more than one method, and they need interaction between them, this may change. \begin{DoxyAuthor}{Author}
+alberto-\/baeza 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a8205b26c7a35d0530e4fb36748ba4ca9}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a8205b26c7a35d0530e4fb36748ba4ca9}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!add\+To\+History@{add\+To\+History}}
+\index{add\+To\+History@{add\+To\+History}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{add\+To\+History()}{addToHistory()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+add\+To\+History (\begin{DoxyParamCaption}\item[{\hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p,  }\item[{J\+S\+O\+N\+Object}]{history }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aac6590890bf09bc60b27af00a6d6bfc1}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aac6590890bf09bc60b27af00a6d6bfc1}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!convert\+Color@{convert\+Color}}
+\index{convert\+Color@{convert\+Color}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{convert\+Color()}{convertColor()}}
+{\footnotesize\ttfamily static int android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+convert\+Color (\begin{DoxyParamCaption}\item[{String}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aeeec4075b1388619a0573f9d3e89aef9}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aeeec4075b1388619a0573f9d3e89aef9}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!Convert\+Second\+To\+H\+H\+M\+M\+String@{Convert\+Second\+To\+H\+H\+M\+M\+String}}
+\index{Convert\+Second\+To\+H\+H\+M\+M\+String@{Convert\+Second\+To\+H\+H\+M\+M\+String}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{Convert\+Second\+To\+H\+H\+M\+M\+String()}{ConvertSecondToHHMMString()}}
+{\footnotesize\ttfamily static String android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+Convert\+Second\+To\+H\+H\+M\+M\+String (\begin{DoxyParamCaption}\item[{String}]{secondt\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a5d696d93278124ade54d8a24279d664f}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a5d696d93278124ade54d8a24279d664f}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!create\+Status@{create\+Status}}
+\index{create\+Status@{create\+Status}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{create\+Status()}{createStatus()}}
+{\footnotesize\ttfamily static int android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+create\+Status (\begin{DoxyParamCaption}\item[{J\+S\+O\+N\+Object}]{flags }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aab02ef037b086aeeba3170084282df1d}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aab02ef037b086aeeba3170084282df1d}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+disconnect (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{String}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a44dc057c8bf6560949ce5d8abbcfd9bc}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a44dc057c8bf6560949ce5d8abbcfd9bc}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!do\+Connection@{do\+Connection}}
+\index{do\+Connection@{do\+Connection}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{do\+Connection()}{doConnection()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+do\+Connection (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{\hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a27735987deae4dc8da0502686868be5f}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a27735987deae4dc8da0502686868be5f}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!get\+Linked\+Connection@{get\+Linked\+Connection}}
+\index{get\+Linked\+Connection@{get\+Linked\+Connection}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{get\+Linked\+Connection()}{getLinkedConnection()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+get\+Linked\+Connection (\begin{DoxyParamCaption}\item[{final Context}]{context,  }\item[{final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a263de2b33bf33ff2339f7307ba545175}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a263de2b33bf33ff2339f7307ba545175}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!get\+New\+Connection@{get\+New\+Connection}}
+\index{get\+New\+Connection@{get\+New\+Connection}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{get\+New\+Connection()}{getNewConnection()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+get\+New\+Connection (\begin{DoxyParamCaption}\item[{final Context}]{context,  }\item[{final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Obtains the current state of the machine and issues new connection commands 
+\begin{DoxyParams}{Parameters}
+{\em p} & printer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aff0110477d72e6f2618f0cf0561f6b57}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aff0110477d72e6f2618f0cf0561f6b57}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!get\+Settings@{get\+Settings}}
+\index{get\+Settings@{get\+Settings}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{get\+Settings()}{getSettings()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+get\+Settings (\begin{DoxyParamCaption}\item[{final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Function to get the settings from the server 
+\begin{DoxyParams}{Parameters}
+{\em p} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a57773e4742e779bc5117add9f2f59dc3}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a57773e4742e779bc5117add9f2f59dc3}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!get\+Updated\+Settings@{get\+Updated\+Settings}}
+\index{get\+Updated\+Settings@{get\+Updated\+Settings}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{get\+Updated\+Settings()}{getUpdatedSettings()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+get\+Updated\+Settings (\begin{DoxyParamCaption}\item[{final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p,  }\item[{String}]{profile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a5e4e16d3f4131c9fac795d701d6856ea}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a5e4e16d3f4131c9fac795d701d6856ea}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!open\+Socket@{open\+Socket}}
+\index{open\+Socket@{open\+Socket}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{open\+Socket()}{openSocket()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+open\+Socket (\begin{DoxyParamCaption}\item[{final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p,  }\item[{final Context}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Obtains the state of the machine that will be on the Connection A\+PI, that\textquotesingle{}s why this is here. Works in conjunction with G\+ET /api/connection on the N\+EW A\+PI.
+
+New client implementation uses Websockets to receive status updates from the server so we only need to open a new connection and parse the payload. \mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a6890bc490ac28e4c7929ed68b8a54dc3}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a6890bc490ac28e4c7929ed68b8a54dc3}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!set\+Settings@{set\+Settings}}
+\index{set\+Settings@{set\+Settings}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{set\+Settings()}{setSettings()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+set\+Settings (\begin{DoxyParamCaption}\item[{final \hyperlink{classandroid_1_1app_1_1printerapp_1_1model_1_1_model_printer}{Model\+Printer}}]{p,  }\item[{String}]{new\+Name,  }\item[{final String}]{new\+Color,  }\item[{Context}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Function to set the settings to the server \mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a40c048fe9317c5c8bd1fa089fa323aa7}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_a40c048fe9317c5c8bd1fa089fa323aa7}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!show\+Api\+Disabled\+Dialog@{show\+Api\+Disabled\+Dialog}}
+\index{show\+Api\+Disabled\+Dialog@{show\+Api\+Disabled\+Dialog}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{show\+Api\+Disabled\+Dialog()}{showApiDisabledDialog()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+show\+Api\+Disabled\+Dialog (\begin{DoxyParamCaption}\item[{final Context}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_ad721cab32888b9d25310d554cf7714e3}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_ad721cab32888b9d25310d554cf7714e3}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!start\+Connection@{start\+Connection}}
+\index{start\+Connection@{start\+Connection}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{start\+Connection()}{startConnection()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+start\+Connection (\begin{DoxyParamCaption}\item[{String}]{url,  }\item[{final Context}]{context,  }\item[{String}]{port,  }\item[{String}]{profile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Post parameters to handle connection. J\+S\+ON for the new A\+PI is made but never used. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aa75c1a4b840d111cfe50a36d28763b0e}\label{classandroid_1_1app_1_1printerapp_1_1octoprint_1_1_octoprint_connection_aa75c1a4b840d111cfe50a36d28763b0e}} 
+\index{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}!D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT@{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT@{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT}!android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection@{android\+::app\+::printerapp\+::octoprint\+::\+Octoprint\+Connection}}
+\subsubsection{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT}{DEFAULT\_PORT}}
+{\footnotesize\ttfamily final String android.\+app.\+printerapp.\+octoprint.\+Octoprint\+Connection.\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT = \char`\"{}/dev/tty\+U\+S\+B0\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/android/app/printerapp/octoprint/\hyperlink{_octoprint_connection_8java}{Octoprint\+Connection.\+java}\end{DoxyCompactItemize}

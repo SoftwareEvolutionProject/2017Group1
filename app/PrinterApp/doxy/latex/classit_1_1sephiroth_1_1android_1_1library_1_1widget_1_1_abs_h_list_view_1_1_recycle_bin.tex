@@ -1,0 +1,121 @@
+\hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin}{}\section{it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin Class Reference}
+\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin}\index{it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin@{it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a6ffa81602739cfe394921022f2fcea76}{set\+View\+Type\+Count} (int view\+Type\+Count)
+\item 
+void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a5b44c87d750b6f271e41fc6d642626c8}{mark\+Children\+Dirty} ()
+\item 
+boolean \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_ae18756b75e4ad9f538eec25f17bf3e18}{should\+Recycle\+View\+Type} (int view\+Type)
+\item 
+void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a4d3d15886e4b6de483c1881fd2fbd971}{clear} ()
+\item 
+void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_abdfb4b32bdca56f3182e45ab285f3fb6}{fill\+Active\+Views} (int child\+Count, int first\+Active\+Position)
+\item 
+View \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_acf9bc2e8a845ccb7956366eeccaa2434}{get\+Active\+View} (int position)
+\item 
+void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a2d534ed45386e876172e9c6982e3ed2d}{add\+Scrap\+View} (View scrap, int position)
+\item 
+void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_ad65afc6ecd764bf10e8ec4fa4b601669}{remove\+Skipped\+Scrap} ()
+\item 
+void \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a8a95b571d26ee2f21e60a18cacc1058b}{scrap\+Active\+Views} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin}{Recycle\+Bin} facilitates reuse of views across layouts. The \hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin}{Recycle\+Bin} has two levels of storage\+: Active\+Views and Scrap\+Views. Active\+Views are those views which were onscreen at the start of a layout. By construction, they are displaying current information. At the end of layout, all views in Active\+Views are demoted to Scrap\+Views. Scrap\+Views are old views that could potentially be used by the adapter to avoid allocating views unnecessarily.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_a3eadd4738e3c529aafefa4f6bb1f5b94}{it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View\+::set\+Recycler\+Listener}(it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycler\+Listener) 
+
+it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycler\+Listener 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a2d534ed45386e876172e9c6982e3ed2d}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a2d534ed45386e876172e9c6982e3ed2d}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!add\+Scrap\+View@{add\+Scrap\+View}}
+\index{add\+Scrap\+View@{add\+Scrap\+View}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{add\+Scrap\+View()}{addScrapView()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+add\+Scrap\+View (\begin{DoxyParamCaption}\item[{View}]{scrap,  }\item[{int}]{position }\end{DoxyParamCaption})}
+
+Put a view into the Scrap\+Views list. These views are unordered.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scrap} & The view to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a4d3d15886e4b6de483c1881fd2fbd971}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a4d3d15886e4b6de483c1881fd2fbd971}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!clear@{clear}}
+\index{clear@{clear}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Clears the scrap heap. \mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_abdfb4b32bdca56f3182e45ab285f3fb6}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_abdfb4b32bdca56f3182e45ab285f3fb6}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!fill\+Active\+Views@{fill\+Active\+Views}}
+\index{fill\+Active\+Views@{fill\+Active\+Views}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{fill\+Active\+Views()}{fillActiveViews()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+fill\+Active\+Views (\begin{DoxyParamCaption}\item[{int}]{child\+Count,  }\item[{int}]{first\+Active\+Position }\end{DoxyParamCaption})}
+
+Fill Active\+Views with all of the children of the Abs\+List\+View.
+
+
+\begin{DoxyParams}{Parameters}
+{\em child\+Count} & The minimum number of views m\+Active\+Views should hold \\
+\hline
+{\em first\+Active\+Position} & The position of the first view that will be stored in m\+Active\+Views \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_acf9bc2e8a845ccb7956366eeccaa2434}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_acf9bc2e8a845ccb7956366eeccaa2434}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!get\+Active\+View@{get\+Active\+View}}
+\index{get\+Active\+View@{get\+Active\+View}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{get\+Active\+View()}{getActiveView()}}
+{\footnotesize\ttfamily View it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+get\+Active\+View (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})}
+
+Get the view corresponding to the specified position. The view will be removed from m\+Active\+Views if it is found.
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to look up in m\+Active\+Views \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The view if it is found, null otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a5b44c87d750b6f271e41fc6d642626c8}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a5b44c87d750b6f271e41fc6d642626c8}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!mark\+Children\+Dirty@{mark\+Children\+Dirty}}
+\index{mark\+Children\+Dirty@{mark\+Children\+Dirty}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{mark\+Children\+Dirty()}{markChildrenDirty()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+mark\+Children\+Dirty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_ad65afc6ecd764bf10e8ec4fa4b601669}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_ad65afc6ecd764bf10e8ec4fa4b601669}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!remove\+Skipped\+Scrap@{remove\+Skipped\+Scrap}}
+\index{remove\+Skipped\+Scrap@{remove\+Skipped\+Scrap}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{remove\+Skipped\+Scrap()}{removeSkippedScrap()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+remove\+Skipped\+Scrap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Finish the removal of any views that skipped the scrap heap. \mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a8a95b571d26ee2f21e60a18cacc1058b}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a8a95b571d26ee2f21e60a18cacc1058b}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!scrap\+Active\+Views@{scrap\+Active\+Views}}
+\index{scrap\+Active\+Views@{scrap\+Active\+Views}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{scrap\+Active\+Views()}{scrapActiveViews()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+scrap\+Active\+Views (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Move all views remaining in m\+Active\+Views to m\+Scrap\+Views. \mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a6ffa81602739cfe394921022f2fcea76}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_a6ffa81602739cfe394921022f2fcea76}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!set\+View\+Type\+Count@{set\+View\+Type\+Count}}
+\index{set\+View\+Type\+Count@{set\+View\+Type\+Count}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{set\+View\+Type\+Count()}{setViewTypeCount()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+set\+View\+Type\+Count (\begin{DoxyParamCaption}\item[{int}]{view\+Type\+Count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_ae18756b75e4ad9f538eec25f17bf3e18}\label{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin_ae18756b75e4ad9f538eec25f17bf3e18}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}!should\+Recycle\+View\+Type@{should\+Recycle\+View\+Type}}
+\index{should\+Recycle\+View\+Type@{should\+Recycle\+View\+Type}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+Recycle\+Bin}}
+\subsubsection{\texorpdfstring{should\+Recycle\+View\+Type()}{shouldRecycleViewType()}}
+{\footnotesize\ttfamily boolean it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+Recycle\+Bin.\+should\+Recycle\+View\+Type (\begin{DoxyParamCaption}\item[{int}]{view\+Type }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+horizontallistlibrary/src/main/java/it/sephiroth/android/library/widget/\hyperlink{_abs_h_list_view_8java}{Abs\+H\+List\+View.\+java}\end{DoxyCompactItemize}

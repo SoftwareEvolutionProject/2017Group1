@@ -1,0 +1,84 @@
+\hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener}{}\section{it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+On\+Scroll\+Listener Interface Reference}
+\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener}\index{it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+On\+Scroll\+Listener@{it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+On\+Scroll\+Listener}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a58710cada74ee13d7e5c57e2b6ea0db8}{on\+Scroll\+State\+Changed} (\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view}{Abs\+H\+List\+View} view, int scroll\+State)
+\item 
+void \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a723da32580a9e0e6f98f7c2826850ee5}{on\+Scroll} (\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view}{Abs\+H\+List\+View} view, int first\+Visible\+Item, int visible\+Item\+Count, int total\+Item\+Count)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a7e8ebaabff9997917f64a44fb32df9c1}{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE} = 0
+\item 
+static int \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_ac223314e9f1d1cd748c8478fca711a12}{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+O\+U\+C\+H\+\_\+\+S\+C\+R\+O\+LL} = 1
+\item 
+static int \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a2807bd29ac4279868ad19ba76b343bb0}{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+L\+I\+NG} = 2
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface definition for a callback to be invoked when the list or grid has been scrolled. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a723da32580a9e0e6f98f7c2826850ee5}\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a723da32580a9e0e6f98f7c2826850ee5}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}!on\+Scroll@{on\+Scroll}}
+\index{on\+Scroll@{on\+Scroll}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}}
+\subsubsection{\texorpdfstring{on\+Scroll()}{onScroll()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+On\+Scroll\+Listener.\+on\+Scroll (\begin{DoxyParamCaption}\item[{\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view}{Abs\+H\+List\+View}}]{view,  }\item[{int}]{first\+Visible\+Item,  }\item[{int}]{visible\+Item\+Count,  }\item[{int}]{total\+Item\+Count }\end{DoxyParamCaption})}
+
+Callback method to be invoked when the list or grid has been scrolled. This will be called after the scroll has completed
+
+
+\begin{DoxyParams}{Parameters}
+{\em view} & The view whose scroll state is being reported \\
+\hline
+{\em first\+Visible\+Item} & the index of the first visible cell (ignore if visible\+Item\+Count == 0) \\
+\hline
+{\em visible\+Item\+Count} & the number of visible cells \\
+\hline
+{\em total\+Item\+Count} & the number of items in the list adaptor \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a58710cada74ee13d7e5c57e2b6ea0db8}\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a58710cada74ee13d7e5c57e2b6ea0db8}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}!on\+Scroll\+State\+Changed@{on\+Scroll\+State\+Changed}}
+\index{on\+Scroll\+State\+Changed@{on\+Scroll\+State\+Changed}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}}
+\subsubsection{\texorpdfstring{on\+Scroll\+State\+Changed()}{onScrollStateChanged()}}
+{\footnotesize\ttfamily void it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+On\+Scroll\+Listener.\+on\+Scroll\+State\+Changed (\begin{DoxyParamCaption}\item[{\hyperlink{classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view}{Abs\+H\+List\+View}}]{view,  }\item[{int}]{scroll\+State }\end{DoxyParamCaption})}
+
+Callback method to be invoked while the list view or grid view is being scrolled. If the view is being scrolled, this method will be called before the next frame of the scroll is rendered. In particular, it will be called before any calls to \hyperlink{}{Adapter\#get\+View(int, View, View\+Group)}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em view} & The view whose scroll state is being reported\\
+\hline
+{\em scroll\+State} & The current scroll state. One of \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a7e8ebaabff9997917f64a44fb32df9c1}{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE}, \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_ac223314e9f1d1cd748c8478fca711a12}{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+O\+U\+C\+H\+\_\+\+S\+C\+R\+O\+LL} or \hyperlink{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a7e8ebaabff9997917f64a44fb32df9c1}{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE}. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a2807bd29ac4279868ad19ba76b343bb0}\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a2807bd29ac4279868ad19ba76b343bb0}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}!S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+L\+I\+NG@{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+L\+I\+NG}}
+\index{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+L\+I\+NG@{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+L\+I\+NG}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}}
+\subsubsection{\texorpdfstring{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+L\+I\+NG}{SCROLL\_STATE\_FLING}}
+{\footnotesize\ttfamily int it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+On\+Scroll\+Listener.\+S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+F\+L\+I\+NG = 2\hspace{0.3cm}{\ttfamily [static]}}
+
+The user had previously been scrolling using touch and had performed a fling. The animation is now coasting to a stop \mbox{\Hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a7e8ebaabff9997917f64a44fb32df9c1}\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_a7e8ebaabff9997917f64a44fb32df9c1}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}!S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE@{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE}}
+\index{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE@{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}}
+\subsubsection{\texorpdfstring{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE}{SCROLL\_STATE\_IDLE}}
+{\footnotesize\ttfamily int it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+On\+Scroll\+Listener.\+S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+I\+D\+LE = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+The view is not scrolling. Note navigating the list using the trackball counts as being in the idle state since these transitions are not animated. \mbox{\Hypertarget{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_ac223314e9f1d1cd748c8478fca711a12}\label{interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_on_scroll_listener_ac223314e9f1d1cd748c8478fca711a12}} 
+\index{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}!S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+O\+U\+C\+H\+\_\+\+S\+C\+R\+O\+LL@{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+O\+U\+C\+H\+\_\+\+S\+C\+R\+O\+LL}}
+\index{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+O\+U\+C\+H\+\_\+\+S\+C\+R\+O\+LL@{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+O\+U\+C\+H\+\_\+\+S\+C\+R\+O\+LL}!it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener@{it\+::sephiroth\+::android\+::library\+::widget\+::\+Abs\+H\+List\+View\+::\+On\+Scroll\+Listener}}
+\subsubsection{\texorpdfstring{S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+O\+U\+C\+H\+\_\+\+S\+C\+R\+O\+LL}{SCROLL\_STATE\_TOUCH\_SCROLL}}
+{\footnotesize\ttfamily int it.\+sephiroth.\+android.\+library.\+widget.\+Abs\+H\+List\+View.\+On\+Scroll\+Listener.\+S\+C\+R\+O\+L\+L\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+O\+U\+C\+H\+\_\+\+S\+C\+R\+O\+LL = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+The user is scrolling using touch, and their finger is still on the screen 
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+horizontallistlibrary/src/main/java/it/sephiroth/android/library/widget/\hyperlink{_abs_h_list_view_8java}{Abs\+H\+List\+View.\+java}\end{DoxyCompactItemize}

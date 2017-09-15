@@ -1,0 +1,4 @@
+var interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_view_1_1_on_group_expand_listener =
+[
+    [ "onGroupExpand", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_view_1_1_on_group_expand_listener.html#a1eb8ee4e4a14a661d4dc6c566b058d1e", null ]
+];

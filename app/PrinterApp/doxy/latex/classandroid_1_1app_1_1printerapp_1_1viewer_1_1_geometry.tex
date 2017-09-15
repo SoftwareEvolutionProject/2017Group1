@@ -1,0 +1,80 @@
+\hypertarget{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry}{}\section{android.\+app.\+printerapp.\+viewer.\+Geometry Class Reference}
+\label{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry}\index{android.\+app.\+printerapp.\+viewer.\+Geometry@{android.\+app.\+printerapp.\+viewer.\+Geometry}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Box}
+\item 
+class {\bfseries Point}
+\item 
+class {\bfseries Ray}
+\item 
+class {\bfseries Vector}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a22b7d2c79b772f3b2a31b2a2769caff3}{intersects} (Box box, Ray ray)
+\item 
+static Vector \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_ab016cd77ad8db00642e7cff95d60a779}{vector\+Between} (Point from, Point to)
+\item 
+static Point \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a3827ef80605c58d7383124c5a0d04dbe}{intersection\+Point\+Witbox\+Plate} (Ray ray)
+\item 
+static boolean \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a9c12465b13faef1cc584c574a7450913}{overlaps} (float maxX, float minX, float maxY, float minY, \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_data_storage}{Data\+Storage} d)
+\item 
+static boolean \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_ab2c7eda77052eb4ace97fb72b14379c9}{relocate\+If\+Overlaps} (List$<$ \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_data_storage}{Data\+Storage} $>$ objects)
+\item 
+static boolean \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a8465ccc737d89aaabfa00bcf9d2c95c3}{is\+Valid\+Position} (float new\+MaxX, float new\+MinX, float new\+MaxY, float new\+MinY, List$<$ \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_data_storage}{Data\+Storage} $>$ objects, int object)
+\item 
+static void \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a539751338e38d7235cceaa9a4aceebf6}{change\+Model\+To\+Fit} (float new\+MaxX, float new\+MinX, float new\+MaxY, float new\+MinY, \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_data_storage}{Data\+Storage} d)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a539751338e38d7235cceaa9a4aceebf6}\label{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a539751338e38d7235cceaa9a4aceebf6}} 
+\index{android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}!change\+Model\+To\+Fit@{change\+Model\+To\+Fit}}
+\index{change\+Model\+To\+Fit@{change\+Model\+To\+Fit}!android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}}
+\subsubsection{\texorpdfstring{change\+Model\+To\+Fit()}{changeModelToFit()}}
+{\footnotesize\ttfamily static void android.\+app.\+printerapp.\+viewer.\+Geometry.\+change\+Model\+To\+Fit (\begin{DoxyParamCaption}\item[{float}]{new\+MaxX,  }\item[{float}]{new\+MinX,  }\item[{float}]{new\+MaxY,  }\item[{float}]{new\+MinY,  }\item[{\hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_data_storage}{Data\+Storage}}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a3827ef80605c58d7383124c5a0d04dbe}\label{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a3827ef80605c58d7383124c5a0d04dbe}} 
+\index{android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}!intersection\+Point\+Witbox\+Plate@{intersection\+Point\+Witbox\+Plate}}
+\index{intersection\+Point\+Witbox\+Plate@{intersection\+Point\+Witbox\+Plate}!android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}}
+\subsubsection{\texorpdfstring{intersection\+Point\+Witbox\+Plate()}{intersectionPointWitboxPlate()}}
+{\footnotesize\ttfamily static Point android.\+app.\+printerapp.\+viewer.\+Geometry.\+intersection\+Point\+Witbox\+Plate (\begin{DoxyParamCaption}\item[{Ray}]{ray }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a22b7d2c79b772f3b2a31b2a2769caff3}\label{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a22b7d2c79b772f3b2a31b2a2769caff3}} 
+\index{android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}!intersects@{intersects}}
+\index{intersects@{intersects}!android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}}
+\subsubsection{\texorpdfstring{intersects()}{intersects()}}
+{\footnotesize\ttfamily static boolean android.\+app.\+printerapp.\+viewer.\+Geometry.\+intersects (\begin{DoxyParamCaption}\item[{Box}]{box,  }\item[{Ray}]{ray }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a8465ccc737d89aaabfa00bcf9d2c95c3}\label{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a8465ccc737d89aaabfa00bcf9d2c95c3}} 
+\index{android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}!is\+Valid\+Position@{is\+Valid\+Position}}
+\index{is\+Valid\+Position@{is\+Valid\+Position}!android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}}
+\subsubsection{\texorpdfstring{is\+Valid\+Position()}{isValidPosition()}}
+{\footnotesize\ttfamily static boolean android.\+app.\+printerapp.\+viewer.\+Geometry.\+is\+Valid\+Position (\begin{DoxyParamCaption}\item[{float}]{new\+MaxX,  }\item[{float}]{new\+MinX,  }\item[{float}]{new\+MaxY,  }\item[{float}]{new\+MinY,  }\item[{List$<$ \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_data_storage}{Data\+Storage} $>$}]{objects,  }\item[{int}]{object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a9c12465b13faef1cc584c574a7450913}\label{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_a9c12465b13faef1cc584c574a7450913}} 
+\index{android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}!overlaps@{overlaps}}
+\index{overlaps@{overlaps}!android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}}
+\subsubsection{\texorpdfstring{overlaps()}{overlaps()}}
+{\footnotesize\ttfamily static boolean android.\+app.\+printerapp.\+viewer.\+Geometry.\+overlaps (\begin{DoxyParamCaption}\item[{float}]{maxX,  }\item[{float}]{minX,  }\item[{float}]{maxY,  }\item[{float}]{minY,  }\item[{\hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_data_storage}{Data\+Storage}}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_ab2c7eda77052eb4ace97fb72b14379c9}\label{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_ab2c7eda77052eb4ace97fb72b14379c9}} 
+\index{android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}!relocate\+If\+Overlaps@{relocate\+If\+Overlaps}}
+\index{relocate\+If\+Overlaps@{relocate\+If\+Overlaps}!android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}}
+\subsubsection{\texorpdfstring{relocate\+If\+Overlaps()}{relocateIfOverlaps()}}
+{\footnotesize\ttfamily static boolean android.\+app.\+printerapp.\+viewer.\+Geometry.\+relocate\+If\+Overlaps (\begin{DoxyParamCaption}\item[{List$<$ \hyperlink{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_data_storage}{Data\+Storage} $>$}]{objects }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_ab016cd77ad8db00642e7cff95d60a779}\label{classandroid_1_1app_1_1printerapp_1_1viewer_1_1_geometry_ab016cd77ad8db00642e7cff95d60a779}} 
+\index{android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}!vector\+Between@{vector\+Between}}
+\index{vector\+Between@{vector\+Between}!android\+::app\+::printerapp\+::viewer\+::\+Geometry@{android\+::app\+::printerapp\+::viewer\+::\+Geometry}}
+\subsubsection{\texorpdfstring{vector\+Between()}{vectorBetween()}}
+{\footnotesize\ttfamily static Vector android.\+app.\+printerapp.\+viewer.\+Geometry.\+vector\+Between (\begin{DoxyParamCaption}\item[{Point}]{from,  }\item[{Point}]{to }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/android/app/printerapp/viewer/\hyperlink{_geometry_8java}{Geometry.\+java}\end{DoxyCompactItemize}
