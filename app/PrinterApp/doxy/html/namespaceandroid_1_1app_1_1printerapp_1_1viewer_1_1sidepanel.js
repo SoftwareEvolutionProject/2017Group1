@@ -1,6 +1,0 @@
-var namespaceandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel =
-[
-    [ "SidePanelHandler", "classandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel_1_1_side_panel_handler.html", "classandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel_1_1_side_panel_handler" ],
-    [ "SidePanelPrinterAdapter", "classandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel_1_1_side_panel_printer_adapter.html", "classandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel_1_1_side_panel_printer_adapter" ],
-    [ "SidePanelProfileAdapter", "classandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel_1_1_side_panel_profile_adapter.html", "classandroid_1_1app_1_1printerapp_1_1viewer_1_1sidepanel_1_1_side_panel_profile_adapter" ]
-];

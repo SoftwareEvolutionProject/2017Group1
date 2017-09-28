@@ -1,4 +1,0 @@
-var interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_view_1_1_on_child_click_listener =
-[
-    [ "onChildClick", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_view_1_1_on_child_click_listener.html#a6f98c39d7adf25b6b00ae2fdd62e159b", null ]
-];

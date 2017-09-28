@@ -1,4 +1,0 @@
-var interfaceit_1_1sephiroth_1_1android_1_1library_1_1util_1_1v11_1_1_multi_choice_mode_listener =
-[
-    [ "onItemCheckedStateChanged", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1util_1_1v11_1_1_multi_choice_mode_listener.html#a449f3d52f861a2834035f100b29393e6", null ]
-];

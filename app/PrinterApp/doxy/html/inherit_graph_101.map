@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view.html" title="it.sephiroth.android.library.widget.\lAdapterView\&lt; ListAdapter \&gt;" alt="" coords="5,5,221,47"/>
-<area shape="rect" id="node2" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view.html" title="it.sephiroth.android.library.widget.\lAbsHListView" alt="" coords="269,64,485,105"/>
-<area shape="rect" id="node3" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_h_list_view.html" title="it.sephiroth.android.library.widget.\lHListView" alt="" coords="533,64,749,105"/>
-<area shape="rect" id="node4" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_view.html" title="it.sephiroth.android.library.widget.\lExpandableHListView" alt="" coords="797,64,1013,105"/>
-</map>

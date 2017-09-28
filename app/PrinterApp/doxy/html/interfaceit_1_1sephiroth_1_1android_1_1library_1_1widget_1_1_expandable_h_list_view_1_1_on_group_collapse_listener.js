@@ -1,4 +1,0 @@
-var interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_view_1_1_on_group_collapse_listener =
-[
-    [ "onGroupCollapse", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_expandable_h_list_view_1_1_on_group_collapse_listener.html#a46bac6f787a8f8408659984c8e434f0c", null ]
-];

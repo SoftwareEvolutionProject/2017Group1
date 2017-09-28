@@ -1,7 +1,0 @@
-<map id="it.sephiroth.android.library.widget.HListView" name="it.sephiroth.android.library.widget.HListView">
-<area shape="rect" id="node2" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view.html" title="it.sephiroth.android.library.widget.\lAbsHListView" alt="" coords="673,384,889,425"/>
-<area shape="rect" id="node3" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view.html" title="it.sephiroth.android.library.widget.\lAdapterView\&lt; ListAdapter \&gt;" alt="" coords="277,5,493,47"/>
-<area shape="rect" id="node13" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_recycle_bin.html" title="it.sephiroth.android.library.widget.\lAbsHListView.RecycleBin" alt="" coords="277,797,493,839"/>
-<area shape="rect" id="node14" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_adapter_data_set_observer.html" title="it.sephiroth.android.library.widget.\lAbsHListView.AdapterDataSetObserver" alt="" coords="260,188,511,229"/>
-<area shape="rect" id="node17" href="$classit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_abs_h_list_view_1_1_position_scroller.html" title="it.sephiroth.android.library.widget.\lAbsHListView.PositionScroller" alt="" coords="277,384,493,425"/>
-</map>

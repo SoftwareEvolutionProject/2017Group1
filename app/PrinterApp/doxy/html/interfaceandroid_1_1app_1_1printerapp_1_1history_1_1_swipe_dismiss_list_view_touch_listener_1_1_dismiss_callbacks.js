@@ -1,5 +1,0 @@
-var interfaceandroid_1_1app_1_1printerapp_1_1history_1_1_swipe_dismiss_list_view_touch_listener_1_1_dismiss_callbacks =
-[
-    [ "canDismiss", "interfaceandroid_1_1app_1_1printerapp_1_1history_1_1_swipe_dismiss_list_view_touch_listener_1_1_dismiss_callbacks.html#ad55266031ea96f33b86ad54efc93645a", null ],
-    [ "onDismiss", "interfaceandroid_1_1app_1_1printerapp_1_1history_1_1_swipe_dismiss_list_view_touch_listener_1_1_dismiss_callbacks.html#a8a4657354a9b07d66103806d51a91ec0", null ]
-];

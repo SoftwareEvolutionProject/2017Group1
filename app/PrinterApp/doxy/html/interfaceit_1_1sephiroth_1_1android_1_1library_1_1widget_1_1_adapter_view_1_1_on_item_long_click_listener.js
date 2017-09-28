@@ -1,4 +1,0 @@
-var interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_long_click_listener =
-[
-    [ "onItemLongClick", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1widget_1_1_adapter_view_1_1_on_item_long_click_listener.html#ac083e946ac60a3e58519bace00cd61e5", null ]
-];

@@ -1,4 +1,0 @@
-var dir_c24bb2656c47884b5182cae3b89f3b6d =
-[
-    [ "android", "dir_d4885f54350fb80f53d82862884f373d.html", "dir_d4885f54350fb80f53d82862884f373d" ]
-];

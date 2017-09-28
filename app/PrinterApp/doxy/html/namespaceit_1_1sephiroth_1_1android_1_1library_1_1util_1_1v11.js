@@ -1,5 +1,0 @@
-var namespaceit_1_1sephiroth_1_1android_1_1library_1_1util_1_1v11 =
-[
-    [ "MultiChoiceModeListener", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1util_1_1v11_1_1_multi_choice_mode_listener.html", "interfaceit_1_1sephiroth_1_1android_1_1library_1_1util_1_1v11_1_1_multi_choice_mode_listener" ],
-    [ "MultiChoiceModeWrapper", "classit_1_1sephiroth_1_1android_1_1library_1_1util_1_1v11_1_1_multi_choice_mode_wrapper.html", "classit_1_1sephiroth_1_1android_1_1library_1_1util_1_1v11_1_1_multi_choice_mode_wrapper" ]
-];
