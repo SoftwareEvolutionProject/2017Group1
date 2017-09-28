@@ -10,15 +10,14 @@
 - Johan Andersson
 - Mikael Lönn
 
-##Development
-###Frontend
+## Development
+### Frontend
  `cd frontend\web`
  `ng serve`
  browse to `localhost:4200`
 
- ##Dependencies
+ ## Dependencies
  JDK 9
  node 6.9.x
  npm 3.x.x
  Angular CLI
- 
