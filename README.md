@@ -9,3 +9,9 @@
 - Jimmy Berlin
 - Johan Andersson
 - Mikael Lönn
+
+##Development
+###Frontend
+ `cd frontend\web`
+ `ng serve`
+ browse to `localhost:4200`
