@@ -12,8 +12,14 @@ export class StlViewerComponent implements OnInit {
 
   ngOnInit() {
     const canvas = document.getElementById('stl');
-    const viewer = new JSC3D.Viewer(canvas);
+    const parameters = {
+      SceneUrl: 'https://cors-anywhere.herokuapp.com/jberlin.se/stl/top.stl'
+    };
+    const viewer = new JSC3D.Viewer(canvas, parameters);
+    viewer.setParameter('Renderer', 'webgl');
+    viewer.enableDefaultInputHandler(true);
     viewer.init();
+    console.log(viewer);
   }
 
 }
