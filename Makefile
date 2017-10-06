@@ -1,11 +1,11 @@
 install:
-	cd /usr/src/app && mvn clean install
+	cd /usr/src/app && mvn clean install && cd /usr/src/app/frontend/web && npm install
 
 server: install
 	cd /usr/src/app/backend && mvn package && cd /usr/src/app/backend/target && java -jar backend-1-jar-with-dependencies.jar
 
 client:
-	cd /usr/src/app/frontend/src/main/frontend && npm start
+	cd /usr/src/app/frontend/web && npm start
 
 test:
 	mvn test

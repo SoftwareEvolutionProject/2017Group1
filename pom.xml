@@ -18,6 +18,5 @@
 
 	<modules>
 		<module>backend</module>
-        <module>frontend/web</module>
     </modules>
 </project>
