@@ -29,7 +29,7 @@
         <configuration>
           <nodeVersion>v6.9.1</nodeVersion>o
           <npmVersion>4.0.3</npmVersion>
-          <workingDirectory>src/main/frontend</workingDirectory>
+          <workingDirectory>npm</workingDirectory>
         </configuration>
 
         <executions>
