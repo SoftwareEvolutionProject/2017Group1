@@ -7,6 +7,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update
 RUN apt-get install -y -q --no-install-recommends make vim postgresql-client
 RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
+RUN  export PHANTOMJS_BIN=/usr/local/lib/node_modules/karma-phantomjs-launcher/node_modules/phantomjs/lib/phantom/bin/phantomjs
+
 
 #Install node and npm
 ENV NVM_DIR /usr/local/nvm
