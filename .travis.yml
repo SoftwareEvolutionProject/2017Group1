@@ -11,6 +11,14 @@ env:
 services:
   - docker
 
+addons:
+  sonarcloud:
+    organization: "dat265"
+    token:
+      secure: $sonar
+    github_token:
+      secure: $github
+
 # travis-cli apparently has nvm, so we can use that
 before_install:
   #NVM
@@ -35,6 +43,7 @@ script:
   # - sudo dpkg -i google-chrome*.deb
 
   # Show current version of docker-compose
+  - sonar-scanner
   - docker-compose pull
   - docker-compose build
   - docker ps -a
