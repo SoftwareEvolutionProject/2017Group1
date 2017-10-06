@@ -11,6 +11,18 @@
 - Mikael Lönn
 
 ## Development
+Set up docker container with backend/fronted/postgres
+> docker-compose up -d --build
+
+Get into the container:
+> docker exec -it sverea bash
+
+Rum make commands:
+> make db-init
+> make install
+> make client
+> make backend
+
 ### Frontend
  `cd frontend\web`  
  `ng serve`  
