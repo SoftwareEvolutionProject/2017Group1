@@ -12,6 +12,9 @@ public interface WebInterface {
     //List<Order> getOrdersFromCustomer(int customerID);
     //List<OrderedPart> getOrderedPartsFromOrder(int orderID);
     DigitalPart getDigitalPart(int digitalPartID);
+    List<DigitalPart> getDigitalParts();
+
+
 
 
 
