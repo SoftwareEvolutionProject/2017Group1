@@ -33,13 +33,7 @@ before_install:
   #NVM
   - nvm install $NODE_VERSION
   - node --version
-  # Show current version of docker-compose
-  - docker-compose pull
-  - docker-compose build
-  - docker ps -a
-  - docker-compose up -d
  
-
 script:
 
   # - export CHROME_BIN=chromium-browser
