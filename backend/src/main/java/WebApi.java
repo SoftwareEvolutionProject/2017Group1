@@ -13,6 +13,8 @@ public class WebApi {
         get("/hello", (req, res) -> "Hello World");
         get("/dummy/:id", (req, res) -> webInterface.dummy(req.params("id")));
         get("/digitalPart/:digitalPartID", (req, res) -> webInterface.getDigitalPart(Integer.parseInt(req.params("digitalPartID"))), gson::toJson);
+
+        System.out.println("SERVER RUNNING!");
     }
 
 }
