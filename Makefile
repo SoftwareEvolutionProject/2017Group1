@@ -5,7 +5,7 @@ server: install
 	cd /usr/src/app/backend && mvn package && cd /usr/src/app/backend/target && java -jar backend-1-jar-with-dependencies.jar
 
 client:
-	cd /usr/src/app/frontend/web && npm start
+	cd /usr/src/app/frontend/web && npm run startdocker
 
 test:
 	mvn test
