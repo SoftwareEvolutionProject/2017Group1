@@ -33,6 +33,7 @@ before_install:
  
 
 script:
+  - sonar-scanner
   - docker exec sverea bash -c "cd /usr/src/app/ && mvn test -B"
 
   # - export CHROME_BIN=chromium-browser
@@ -43,7 +44,6 @@ script:
   # - sudo dpkg -i google-chrome*.deb
 
   # Show current version of docker-compose
-  - sonar-scanner
   - docker-compose pull
   - docker-compose build
   - docker ps -a

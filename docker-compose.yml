@@ -23,4 +23,4 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=sharedev
+      - POSTGRES_DB=sverea
