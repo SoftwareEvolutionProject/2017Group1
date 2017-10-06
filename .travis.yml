@@ -29,6 +29,8 @@ cache:
   directories:
     - "frontend/web/node_modules"
     - '$HOME/.sonar/cache'
+    - '$HOME/.m2'
+
 
 # travis-cli apparently has nvm, so we can use that
 before_install:
