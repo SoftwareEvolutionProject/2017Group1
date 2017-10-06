@@ -5,7 +5,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 #Install make
 RUN apt-get update
-RUN apt-get install -y -q --no-install-recommends make vim postgresql-client 
+RUN apt-get install -y -q --no-install-recommends make vim postgresql-client
+RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
 #Install node and npm
 ENV NVM_DIR /usr/local/nvm

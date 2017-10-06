@@ -25,7 +25,7 @@ before_install:
  
 
 script:
-  - docker exec sharedev bash -c "cd /usr/src/app/ && mvn test -B"
+  - docker exec sverea bash -c "cd /usr/src/app/ && mvn test -B"
 
   # - export CHROME_BIN=chromium-browser
   # - export DISPLAY=:99.0
