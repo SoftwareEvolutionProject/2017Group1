@@ -1,4 +1,4 @@
-FROM maven:3.5-jdk-9
+FROM maven:3.5.0-jdk-8
 
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
