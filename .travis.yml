@@ -21,10 +21,6 @@ addons:
     branches:
       - master
       - develop
-
-script:
-  - sonar-scanner
-
 cache:
   directories:
     - "frontend/web/node_modules"
@@ -46,6 +42,7 @@ before_install:
  
 
 script:
+  - sonar-scanner
   - docker exec sverea bash -c "cd /usr/src/app/ && mvn test -B"
 
   # - export CHROME_BIN=chromium-browser
