@@ -55,7 +55,7 @@ script:
   - docker ps -a
   - docker-compose up -d
 
-  - docker exec sverea bash -c "make db-init && make install"
+  - docker exec sverea bash -c "make db-init && make install && make test"
 
   # run sonar
   - sonar-scanner

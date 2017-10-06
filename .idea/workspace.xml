@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cc50502-f0c9-40e3-bda8-08d470860100" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sonar-project.properties" afterPath="$PROJECT_DIR$/sonar-project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,17 +18,17 @@
     <splitter split-orientation="vertical" split-proportion="0.77387196">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="false">
+          <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/.travis.yml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1288">
-                  <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+                <state relative-caret-position="1126">
+                  <caret line="57" column="74" lean-forward="true" selection-start-line="57" selection-start-column="74" selection-end-line="57" selection-end-column="74" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="sonar-project.properties" pinned="false" current-in-tab="true">
+          <file leaf-file-name="sonar-project.properties" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sonar-project.properties">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="189">
@@ -91,8 +91,8 @@
           <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Makefile">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="189">
-                  <caret line="7" column="44" lean-forward="false" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+                <state relative-caret-position="594">
+                  <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -170,11 +170,11 @@
         <option value="$PROJECT_DIR$/frontend/web/karma.conf.js" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/frontend/web/pom.xml" />
-        <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/frontend/web/package.json" />
         <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/sonar-project.properties" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -323,12 +323,12 @@
       <option name="presentableId" value="Default" />
       <updated>1507275233893</updated>
       <workItem from="1507275254398" duration="955000" />
-      <workItem from="1507277138295" duration="19326000" />
+      <workItem from="1507277138295" duration="19734000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20281000" />
+    <option name="totallyTimeSpent" value="20689000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1909" y="0" width="1920" height="2048" extended-state="0" />
@@ -547,14 +547,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1288">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="864">
@@ -611,18 +603,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="44" lean-forward="false" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sonar-project.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="7" column="42" lean-forward="true" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1126">
+          <caret line="57" column="74" lean-forward="true" selection-start-line="57" selection-start-column="74" selection-end-line="57" selection-end-column="74" />
           <folding />
         </state>
       </provider>
