@@ -51,7 +51,7 @@ script:
 
   # run sonar
   - sonar-scanner
-  
+
   # Show current version of docker-compose
   - docker-compose pull
   - docker-compose build
