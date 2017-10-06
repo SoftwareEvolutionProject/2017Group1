@@ -49,6 +49,9 @@ script:
   # - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   # - sudo dpkg -i google-chrome*.deb
 
+  # run sonar
+  - sonar-scanner
+  
   # Show current version of docker-compose
   - docker-compose pull
   - docker-compose build
@@ -57,6 +60,4 @@ script:
 
   - docker exec sverea bash -c "make db-init && make install && make test"
 
-  # run sonar
-  - sonar-scanner
 
