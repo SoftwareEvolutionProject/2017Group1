@@ -36,3 +36,11 @@ Rum make commands, for example:
  node 6.9.x  
  npm 3.x.x  
  Angular CLI  
+ 
+ ## CI
+ ### Travis
+ https://travis-ci.org/SoftwareEvolutionProject/2017Group1/
+ 
+ ### SonarCloud
+ Travis automatically runs sonarcube and pushes to SonarCloud on the develop and master branches. See the results here: 
+ https://sonarcloud.io/organizations/dat265/projects
