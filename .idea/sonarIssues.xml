@@ -28,6 +28,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/backend/src/main/java/WebApi.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/database/clear.sql">
           <value>
             <set />
@@ -54,6 +59,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/docker-compose.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/web/karma.conf.js">
           <value>
             <set />
           </value>

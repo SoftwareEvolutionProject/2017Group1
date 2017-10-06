@@ -10,6 +10,7 @@ public class WebApi {
         get("/hello", (req, res) -> "Hello World");
 
         get("/stl/:stlID", (req, res) -> webInterface.getAllPrintsForStl(req.params("stlID")));
+        System.out.println("SERVER RUNNING!");
     }
 
 }
