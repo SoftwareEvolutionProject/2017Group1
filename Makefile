@@ -9,7 +9,7 @@ client:
 
 test:
 	mvn test
-	cd /usr/src/app && mvn test -B && cd /usr/src/app/frontend/src/main/frontend && npm test
+	cd /usr/src/app && mvn test -B && cd /usr/src/app/frontend/web && npm test
 
 init-file: 
 	rm -f ./database/init.sql
