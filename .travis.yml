@@ -55,7 +55,6 @@ script:
   - docker ps -a
   - docker-compose up -d
 
-script:
   - docker exec sverea bash -c "make db-init"
   # run sonar builds and runs with coverage
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
