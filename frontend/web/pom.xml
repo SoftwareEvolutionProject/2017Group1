@@ -14,8 +14,12 @@
   <name>frontend-web</name>
   <description>frontend web project</description>
 
-
+  <properties>
+    <src.dir>src</src.dir>
+  </properties>
+  
   <build>
+    <sourceDirectory>${src.dir}</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>com.github.eirslett</groupId>
