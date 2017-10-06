@@ -17,10 +17,13 @@ Set up docker container with backend/fronted/postgres
 Get into the container:
 > docker exec -it sverea bash
 
-Rum make commands:
+Rum make commands, for example:
 > make db-init
+
 > make install
+
 > make client
+
 > make backend
 
 ### Frontend
