@@ -54,4 +54,7 @@ script:
 
   #docker exec -it sverea bash
 
-  - docker exec sverea bash -c "make db-init && make install && make test"
+  - docker exec sverea bash -c "make install"
+  - docker exec sverea bash -c "make db-init"
+  - docker exec sverea bash -c "make test"
+
