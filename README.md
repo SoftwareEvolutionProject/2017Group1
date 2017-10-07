@@ -37,7 +37,7 @@ Here you can do whatever you want, but to aid you there is a makefile with some 
 
 > make psql      (direct database access)
 
-# DevOps
+## DevOps
 
 Travis builds on each push to the repository. If it is to master or develop it further runs sonarqube and pushes it to sonarcloud. Unfortunately _there is an issue scanning typescript files currently_.  Travis further examines every Pull Request.
 
