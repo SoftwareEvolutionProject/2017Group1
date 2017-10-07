@@ -11,20 +11,22 @@
 - Mikael Lönn
 
 ## Development
-Set up docker container with backend/fronted/postgres
+It is setup using docker. Set up docker container with backend/fronted/postgres:
 > docker-compose up -d --build
 
 Get into the container:
 > docker exec -it sverea bash
 
-Rum make commands, for example:
-> make db-init
+Here you can do whatever you want, but to aid you there is a makefile with some commands, for example:
+> make db-init   (initzialises the database)
 
-> make install
+> make install   (installs frontend + backend)
 
-> make client
+> make client    (runs the frontend web application)
 
-> make backend
+> make backend   (runs the backend)
+
+> make test      (runs karma frontend test, backend tests to be configured)
 
 ### Frontend
  `cd frontend\web`  
