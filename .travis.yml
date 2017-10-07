@@ -50,7 +50,7 @@ script:
   - docker-compose pull
   - docker-compose build
   - docker ps -a
-  - docker-compose up -d
+  - docker-compose up -d --build
 
   #docker exec -it sverea bash
 
