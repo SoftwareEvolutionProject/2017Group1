@@ -1,7 +1,7 @@
 install:
 	cd /usr/src/app && mvn clean install && cd /usr/src/app/frontend/web && npm install
 
-server: install
+server:
 	cd /usr/src/app/backend && mvn package && cd /usr/src/app/backend/target && java -jar backend-1-jar-with-dependencies.jar
 
 client:
