@@ -21,7 +21,7 @@ addons:
     branches:
       - master
       - develop
-      
+
 cache:
   directories:
     - "frontend/web/node_modules"
