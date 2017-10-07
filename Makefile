@@ -16,7 +16,7 @@ init-file:
 	cat database/clear.sql database/schema.sql database/views.sql database/functions.sql database/fixtures.sql >> database/init.sql
 
 db-init: init-file
-	PGPASSWORD=${POSTGRES_PASSWORD} psql -U admin -h db -p 5432 -d sverea -f database/init.sql
+	PGPASSWORD=${POSTGRES_PASSWORD} psql -U admin -h db -p 5432 -d svereadb -f database/init.sql
 
 psql:
-	PGPASSWORD=${POSTGRES_PASSWORD} psql -U admin -h db -p 5432 -d sverea
+	PGPASSWORD=${POSTGRES_PASSWORD} psql -U admin -h db -p 5432 -d svereadb

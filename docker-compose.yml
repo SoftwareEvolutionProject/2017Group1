@@ -7,6 +7,7 @@ services:
       - "8080:8080"
       - "4200:4200"
       - "4567:4567"
+      - "6000:5432"
     volumes:
       - .:/usr/src/app
     links:
@@ -16,7 +17,7 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=sverea
+      - POSTGRES_DB=svereadb
   db:
     image: postgres:9.4
     ports:
@@ -24,4 +25,4 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=sverea
+      - POSTGRES_DB=svereadb

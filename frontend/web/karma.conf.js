@@ -1,8 +1,20 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+const isDocker = require('is-docker')();
 
 module.exports = function (config) {
+
   config.set({
+
+    customLaunchers: {
+      ChromeCustom: {
+        base: 'ChromeHeadless',
+        // We must disable the Chrome sandbox when running Chrome inside Docker (Chrome's sandbox needs
+        // more permissions than Docker allows by default)
+        flags: isDocker ? ['--no-sandbox'] : []
+      }
+    },
+
     basePath: '',
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
@@ -39,7 +51,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers:['PhantomJS'],
+    browsers:['ChromeHeadless'],
     singleRun: true,
     browserNoActivityTimeout: 1000000,
     captureTimeout: 100000

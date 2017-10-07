@@ -21,6 +21,7 @@ addons:
     branches:
       - master
       - develop
+      - *
 cache:
   directories:
     - "frontend/web/node_modules"
@@ -33,7 +34,7 @@ before_install:
   #NVM
   - nvm install $NODE_VERSION
   - node --version
- 
+
 script:
 
   # - export CHROME_BIN=chromium-browser
@@ -52,6 +53,6 @@ script:
   - docker ps -a
   - docker-compose up -d
 
+  #docker exec -it sverea bash
+
   - docker exec sverea bash -c "make db-init && make install && make test"
-
-
