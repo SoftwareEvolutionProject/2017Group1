@@ -17,6 +17,9 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=svereadb
+    cap_add:
+      - SYS_ADMIN
+
   db:
     image: postgres:9.4
     ports:
