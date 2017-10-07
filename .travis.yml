@@ -25,7 +25,6 @@ addons:
 cache:
   directories:
     - "frontend/web/node_modules"
-    - '$HOME/.sonar/cache'
     - '$HOME/.m2'
 
 
