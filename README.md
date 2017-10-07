@@ -28,21 +28,18 @@ Here you can do whatever you want, but to aid you there is a makefile with some 
 
 > make test      (runs karma frontend test, backend tests to be configured)
 
-### Frontend
- `cd frontend\web`  
- `ng serve`  
- browse to `localhost:4200`  
+
+ 
+ ### CI
+ #### Travis
+ https://travis-ci.org/SoftwareEvolutionProject/2017Group1/
+ 
+ #### SonarCloud
+ Travis automatically runs sonarcube and pushes to SonarCloud on the develop and master branches. See the results here: 
+ https://sonarcloud.io/organizations/dat265/projects
 
  ## Dependencies
  JDK 9  
  node 6.9.x  
  npm 3.x.x  
  Angular CLI  
- 
- ## CI
- ### Travis
- https://travis-ci.org/SoftwareEvolutionProject/2017Group1/
- 
- ### SonarCloud
- Travis automatically runs sonarcube and pushes to SonarCloud on the develop and master branches. See the results here: 
- https://sonarcloud.io/organizations/dat265/projects
