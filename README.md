@@ -10,12 +10,21 @@
 - Johan Andersson
 - Mikael Lönn
 
-## Development
+# Development
 It is setup using docker. Set up docker container with backend/fronted/postgres:
 > docker-compose up -d --build
 
 Get into the container:
 > docker exec -it sverea bash
+
+Run whatever you want, use the makefile for aid
+
+## Docker Setup Details
+Configured based on two files:
+- **docker-compose.yml** configures 2 containers, one for the DB and one for the backend and frontend to run in that has access to the DB. 
+- **Dockerfile** specifies the docker image, and derives from the image maven:3.5.0-jdk-8, so maven and java 8 is installed. It further installs make, node and npm.
+
+To help the setup a makefile exists with commands to be run in or out of the container for installing, testing, running and so on. Set up the container by `docker-compose up -d --build`. Skip the build option if not needed to save time. Get into a bash shell in the container by `docker exec -it sverea bash`.
 
 Here you can do whatever you want, but to aid you there is a makefile with some commands, for example:
 > make db-init   (initzialises the database)
@@ -26,17 +35,16 @@ Here you can do whatever you want, but to aid you there is a makefile with some 
 
 > make backend   (runs the backend)
 
-> make test      (runs karma frontend test, backend tests to be configured)
+> make psql      (direct database access)
+
+## DevOps
+
+Travis builds on each push to the repository. If it is to master or develop it further runs sonarqube and pushes it to sonarcloud. Unfortunately _there is an issue scanning typescript files currently_.  Travis further examines every Pull Request.
+
+- Travis https://travis-ci.org/SoftwareEvolutionProject/2017Group1 
+- SonarCloud https://sonarcloud.io/organizations/dat265/projects
 
 
- 
- ### CI
- #### Travis
- https://travis-ci.org/SoftwareEvolutionProject/2017Group1/
- 
- #### SonarCloud
- Travis automatically runs sonarcube and pushes to SonarCloud on the develop and master branches. See the results here: 
- https://sonarcloud.io/organizations/dat265/projects
 
  ## Dependencies
  JDK 9  
