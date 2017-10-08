@@ -78,6 +78,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/frontend/web/.gitignore">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/web/coverage/lcov.info">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/web/coverage/report/base.css">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/frontend/web/karma.conf.js">
           <value>
             <set />
