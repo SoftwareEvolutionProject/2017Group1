@@ -28,6 +28,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/backend/sonar-project.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/backend/src/main/java/WebApi.java">
           <value>
             <set />
@@ -58,6 +63,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/database/sonar-project.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/database/views.sql">
           <value>
             <set />
@@ -83,7 +93,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/frontend/web/sonar-project.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/frontend/web/src/app/app.component.spec.ts">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/web/src/assets/lib/jsc3d/sonar-project.properties">
           <value>
             <set />
           </value>
