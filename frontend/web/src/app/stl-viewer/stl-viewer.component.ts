@@ -19,7 +19,6 @@ export class StlViewerComponent implements OnInit {
     viewer.setParameter('Renderer', 'webgl');
     viewer.enableDefaultInputHandler(true);
     viewer.init();
-    console.log(viewer);
   }
 
 }

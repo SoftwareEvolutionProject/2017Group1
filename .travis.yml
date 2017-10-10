@@ -34,6 +34,9 @@ before_install:
   - nvm install $NODE_VERSION
   - node --version
 
+notifications:
+  slack: sofep:EBn4N1xq1uVROwfHNQK2leYr
+
 script:
 
   # - export CHROME_BIN=chromium-browser
