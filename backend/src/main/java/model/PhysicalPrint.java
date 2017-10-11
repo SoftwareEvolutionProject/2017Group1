@@ -4,7 +4,6 @@ public class PhysicalPrint {
     private int id;
     private int digitalPrintID;
     private String slmPath;
-    private PostPrintData postPrintData;
 
     public int getId() {
         return id;
@@ -18,7 +17,4 @@ public class PhysicalPrint {
         return slmPath;
     }
 
-    public PostPrintData getPostPrintData() {
-        return postPrintData;
-    }
 }

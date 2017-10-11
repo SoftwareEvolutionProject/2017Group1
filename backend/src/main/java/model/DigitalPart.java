@@ -2,6 +2,8 @@ package model;
 
 public class DigitalPart {
     private int id;
+    private int customerID;
+    private String name;
     private String stlPath;
     private String cadPath;
 
@@ -25,5 +27,13 @@ public class DigitalPart {
 
     public String getCadPath() {
         return cadPath;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCustomerID() {
+        return customerID;
     }
 }
