@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {StlViewerComponent} from "./stl-viewer/stl-viewer.component";
+import {StlViewerComponent} from "./components/stl-viewer/stl-viewer.component";
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
