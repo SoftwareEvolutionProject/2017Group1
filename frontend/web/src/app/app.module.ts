@@ -53,6 +53,7 @@ import { DigitalPartListComponent } from './components/digital-part-list/digital
       },
     ]),
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })
