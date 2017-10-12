@@ -13,6 +13,7 @@ import {AlertModule, ModalModule} from "ngx-bootstrap";
 import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
+import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {HttpModule} from "@angular/http";
     HomeComponent,
     CustomerListComponent,
     CustomerDetailComponent,
+    DigitalPartListComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -45,8 +47,13 @@ import {HttpModule} from "@angular/http";
         path: 'customers/:id',
         component: CustomerDetailComponent,
       },
+      {
+        path: 'digital-parts',
+        component: DigitalPartListComponent,
+      },
     ]),
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })
