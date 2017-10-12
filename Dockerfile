@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y google-chrome-stable
 
 #Install node and npm
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 6.10.1
+ENV NODE_VERSION 7.8.0
 
 # Install nvm with node and npm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash \

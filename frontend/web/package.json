@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "startdocker": "ng serve --host 0.0.0.0",
+    "startdocker": "ng serve --host 0.0.0.0 --poll",
     "build": "ng build",
     "test": "ng test  --code-coverage",
     "lint": "ng lint",
@@ -22,8 +22,13 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-table": "^1.11.2",
     "core-js": "^2.4.1",
+    "jquery": "^3.2.1",
+    "ng-sidebar": "^6.0.4",
     "rxjs": "^5.4.2",
+    "tether": "^1.4.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -32,6 +37,7 @@
     "@angular/language-service": "^4.2.4",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
+    "@types/jquery": "^3.2.13",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.1.1",
     "is-docker": "^1.1.0",

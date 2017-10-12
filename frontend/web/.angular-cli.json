@@ -21,9 +21,16 @@
       "styles": [
         "styles.scss"
       ],
-      "scripts": ["assets/lib/jsc3d/jsc3d.js",
-                  "assets/lib/jsc3d/jsc3d.touch.js",
-                  "assets/lib/jsc3d/jsc3d.webgl.js"
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/tether/dist/js/tether.js",
+        "../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
+        "../node_modules/bootstrap-table/dist/bootstrap-table.js",
+        "../node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js",
+        "../node_modules/bootstrap-table/dist/locale/bootstrap-table-sv-SE.js",
+        "assets/lib/jsc3d/jsc3d.js",
+        "assets/lib/jsc3d/jsc3d.touch.js",
+        "assets/lib/jsc3d/jsc3d.webgl.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
