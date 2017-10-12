@@ -49,9 +49,6 @@ script:
   # run sonar
   - sonar-scanner
 
-  # free port, should not be needed
-  - kill $(lsof -t -i:5432)
-
   # Show current version of docker-compose
   - docker-compose pull
   - docker-compose build
