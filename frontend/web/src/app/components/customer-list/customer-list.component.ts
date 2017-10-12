@@ -1,16 +1,16 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Customer} from "../../model/customer";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {CustomerMockService} from "../../services/customer/customer-mock.service";
 import {ErrorService} from "../../services/error.service";
 import {Router} from "@angular/router";
+import {CustomerService} from "../../services/customer/customer.service";
 declare var $: any;
 
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.scss'],
-  providers: [CustomerMockService, ErrorService]
+  providers: [CustomerService, ErrorService]
 })
 export class CustomerListComponent implements OnInit, AfterViewInit {
   private table;
@@ -20,7 +20,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
 
-  constructor(private customerMockService: CustomerMockService,
+  constructor(private customerService: CustomerService,
               private errorService : ErrorService,
               private router: Router,
               private modalService: BsModalService) {
@@ -36,7 +36,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
 
   loadAndPopulate() {
     /* get users */
-    this.customerMockService.getCustomers().subscribe(
+    this.customerService.getCustomers().subscribe(
       customers => {
         this.customers = customers;
 
@@ -130,7 +130,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
 
   private confirmDelete() {
     if (this.toBeDeleted) {
-      this.customerMockService.delete(this.toBeDeleted).subscribe(res => {
+      this.customerService.deleteCustomer(this.toBeDeleted).subscribe(res => {
           this.toBeDeleted = null;
           this.modalRef.hide();
           this.loadAndPopulate();

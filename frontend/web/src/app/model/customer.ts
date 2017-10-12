@@ -2,6 +2,7 @@ export class Customer {
 
   public id: number;
   public name: string;
+  public eMail: string;
 
   constructor(values: Object = {}) {
     if (!values)
@@ -9,7 +10,7 @@ export class Customer {
     Object.assign(this, values);
   }
 
-  static createCustomer(json: any) {
+  static create(json: any) {
     if (json)
       return new Customer(json);
     else

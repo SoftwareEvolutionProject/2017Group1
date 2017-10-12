@@ -15,6 +15,12 @@
           <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
             <input class="form-control" formControlName="name" value="{{customer.name}}">
           </div>
+
+
+          <label>Email</label>
+          <div [ngClass]="{'has-error': !requiredFieldsForm.get('eMail').valid}">
+            <input class="form-control" formControlName="eMail" value="{{customer.eMail}}">
+          </div>
         </form>
       </div>
 

@@ -5,12 +5,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {ErrorService} from "../../services/error.service";
 import {Location} from '@angular/common';
+import {CustomerService} from "../../services/customer/customer.service";
 
 @Component({
   selector: 'app-customer-detail',
   templateUrl: './customer-detail.component.html',
   styleUrls: ['./customer-detail.component.scss'],
-  providers: [CustomerMockService, ErrorService]
+  providers: [CustomerService, ErrorService]
 })
 export class CustomerDetailComponent implements OnInit {
   private loaded : boolean = false;
@@ -24,7 +25,7 @@ export class CustomerDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private customerService : CustomerMockService,
+    private customerService : CustomerService,
     private formBuilder: FormBuilder,
     private errorService : ErrorService,
     private _location: Location) { }
@@ -49,7 +50,7 @@ export class CustomerDetailComponent implements OnInit {
 
   /* get the product */
   getData(id){
-    this.customerService.getUser(id).subscribe(
+    this.customerService.getCustomer(id).subscribe(
       customer => {
         this.customer = customer;
         this.populate();
@@ -67,6 +68,8 @@ export class CustomerDetailComponent implements OnInit {
     let fields = {
       name: [this.customer && this.customer.name?this.customer.name:'',
       Validators.compose([Validators.required])],
+      eMail: [this.customer && this.customer.eMail?this.customer.eMail:'',
+        Validators.compose([Validators.required])],
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
@@ -77,14 +80,15 @@ export class CustomerDetailComponent implements OnInit {
   /* save product instance */
   save() {
     /* convert relevant fields */
-    this.requiredFieldsForm.value.role_id = parseInt(this.requiredFieldsForm.value.role_id);
 
     let id = this.customer.id;
     let customer: Customer = new Customer(this.requiredFieldsForm.value);
-    customer.id = id;
+    this.creating?delete customer["id"]:customer.id = id;
+
+    console.log(customer);
 
     if(this.creating) { // a new product
-      this.customerService.add(customer).subscribe(
+      this.customerService.createCustomer(customer).subscribe(
         data => {
           this.back();
         }, error => {
@@ -93,7 +97,7 @@ export class CustomerDetailComponent implements OnInit {
         }
       );
     } else {
-      this.customerService.edit(customer).subscribe(
+      this.customerService.updateCustomer(customer).subscribe(
         data => {
           this.back();
         }, error => {

@@ -5,6 +5,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {BsModalService, ModalModule} from "ngx-bootstrap";
 import {ErrorService} from "../../services/error.service";
 import {CustomerMockService} from "../../services/customer/customer-mock.service";
+import {CustomerService} from "../../services/customer/customer.service";
 
 describe('CustomerListComponent', () => {
   let component: CustomerListComponent;
@@ -18,7 +19,7 @@ describe('CustomerListComponent', () => {
     TestBed.overrideComponent(CustomerListComponent, {
       set: {
         providers: [
-          {provide: CustomerMockService, useClass: CustomerMockService},
+          {provide: CustomerService, useClass: CustomerMockService},
           {provide: ErrorService, useClass: ErrorService},
           BsModalService,
         ]
