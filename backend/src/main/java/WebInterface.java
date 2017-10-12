@@ -1,6 +1,4 @@
-import model.DigitalPart;
-import model.Order;
-import model.OrderedPart;
+import model.*;
 
 import java.util.List;
 
@@ -8,14 +6,19 @@ import java.util.List;
  * Created by danie on 2017-09-28.
  */
 public interface WebInterface {
-    String dummy(String text);
-    //List<Order> getOrdersFromCustomer(int customerID);
-    //List<OrderedPart> getOrderedPartsFromOrder(int orderID);
-    DigitalPart getDigitalPart(int digitalPartID);
-    List<DigitalPart> getDigitalParts();
 
+    List<Customer> getAllCustomers();
 
+    Customer getCustomer(String customerID);
 
+    List<DigitalPart> getDigitalPartsFromCustomer(String customerID);
 
+    List<PhysicalPart> getPhysicalPartsFromCustomer(String customerID);
+
+    Customer createNewCustomer(Customer customer);
+
+    Customer updateCustomer(Customer customer);
+
+    List<Order> getOrdersFromCustomer(String customerID);
 
 }

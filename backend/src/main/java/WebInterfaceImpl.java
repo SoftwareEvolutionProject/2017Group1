@@ -1,5 +1,10 @@
+import model.Customer;
 import model.DigitalPart;
-import storage.DatabaseConnector;
+import model.Order;
+import model.PhysicalPart;
+import storage.Persistance;
+import storage.TemporaryJVMStorage;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -7,21 +12,40 @@ import java.util.List;
  * Created by danie on 2017-09-28.
  */
 public class WebInterfaceImpl implements WebInterface {
-    DatabaseConnector dbConnector;
+    Persistance dbConnector = new TemporaryJVMStorage();
 
     @Override
-    public String dummy(String id) {
-        return "Fuck yes! You gave me the ID " + id + ".";
+    public List<Customer> getAllCustomers() {
+        return dbConnector.getAllCustomers();
     }
 
     @Override
-    public DigitalPart getDigitalPart(int digitalPartID) {
-        //TODO implement this properly
-        return new DigitalPart(digitalPartID, "stuff/path/" + digitalPartID + ".stl", null);
+    public Customer getCustomer(String customerID) {
+        throw new NotImplementedException();
     }
 
     @Override
-    public List<DigitalPart> getDigitalParts() {
-        return dbConnector.getDigitalParts();
+    public List<DigitalPart> getDigitalPartsFromCustomer(String customerID) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public List<PhysicalPart> getPhysicalPartsFromCustomer(String customerID) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Customer createNewCustomer(Customer customer) {
+        return dbConnector.createNewCustomer(customer);
+    }
+
+    @Override
+    public Customer updateCustomer(Customer customer) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public List<Order> getOrdersFromCustomer(String customerID) {
+        throw new NotImplementedException();
     }
 }
