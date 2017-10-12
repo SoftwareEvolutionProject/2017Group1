@@ -4,7 +4,7 @@ declare var JSC3D: any;
 @Component({
   selector: 'app-stl-viewer',
   templateUrl: './stl-viewer.component.html',
-  styleUrls: ['./stl-viewer.component.css']
+  styleUrls: ['./stl-viewer.component.scss']
 })
 export class StlViewerComponent implements OnInit {
 
