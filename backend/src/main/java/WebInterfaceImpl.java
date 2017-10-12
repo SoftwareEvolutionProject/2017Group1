@@ -36,7 +36,7 @@ public class WebInterfaceImpl implements WebInterface {
     }
 
     @Override
-    public Customer createNewCustomer(Customer customer) {
+    public int createNewCustomer(Customer customer) {
         return dbConnector.createNewCustomer(customer);
     }
 
@@ -44,6 +44,9 @@ public class WebInterfaceImpl implements WebInterface {
     public Customer updateCustomer(Customer customer) {
         throw new NotImplementedException();
     }
+
+    @Override
+    public int deleteCustomer(String customerID) {return dbConnector.deleteCustomer(customerID);}
 
     @Override
     public List<Order> getOrdersFromCustomer(String customerID) {

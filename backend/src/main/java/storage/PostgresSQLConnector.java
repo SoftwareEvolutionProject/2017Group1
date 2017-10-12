@@ -50,7 +50,7 @@ public class PostgresSQLConnector implements storage.Persistance {
     }
 
     @Override
-    public Customer createNewCustomer(Customer temp) {
+    public int createNewCustomer(Customer temp) {
 
         PreparedStatement  stmt = null;
         String query = "INSERT INTO CUSTOMERS(NAME, EMAIL) Values(?,?)";
@@ -66,13 +66,32 @@ public class PostgresSQLConnector implements storage.Persistance {
             rs.next();
             int id = rs.getInt(1);
 
-            temp = new Customer(id, temp.getName(), temp.geteMail());
-            return temp;
-
+            return id;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return -1;
+    }
+
+    @Override
+    public int deleteCustomer(String customerID) {
+        PreparedStatement  stmt = null;
+        String query = "DELETE FROM CUSTOMERS where ID = ?";
+
+        try {
+            System.out.println(customerID);
+            int id = Integer.parseInt(customerID);
+            System.out.println("Deleting "+id);
+
+            stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+            return id;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     private void getConnection() throws SQLException {

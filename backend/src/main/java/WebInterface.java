@@ -15,9 +15,11 @@ public interface WebInterface {
 
     List<PhysicalPart> getPhysicalPartsFromCustomer(String customerID);
 
-    Customer createNewCustomer(Customer customer);
+    int createNewCustomer(Customer customer);
 
     Customer updateCustomer(Customer customer);
+
+    int deleteCustomer(String customerID);
 
     List<Order> getOrdersFromCustomer(String customerID);
 
