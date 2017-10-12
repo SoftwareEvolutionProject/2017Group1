@@ -1,4 +1,3 @@
-
 <div id="wrapper">
 
   <!-- Sidebar -->
@@ -16,18 +15,30 @@
         <a routerLink="customers" class="nav-link" href="#" routerLinkActive="active">Customers</a>
       </li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parts <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parts
+          <span class="caret"></span>
+        </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Parts</a></li>
-          <li><a href="#">Digital Parts</a></li>
+          <li>
+            <a href="#">Parts</a>
+          </li>
+          <li>
+            <a routerLink="digital-parts" routerLinkActive="active" href="#">Digital Parts</a>
+          </li>
         </ul>
       </li>
 
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prints <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prints
+          <span class="caret"></span>
+        </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Prints</a></li>
-          <li><a href="#">Digital Prints</a></li>
+          <li>
+            <a href="#">Prints</a>
+          </li>
+          <li>
+            <a href="#">Digital Prints</a>
+          </li>
         </ul>
       </li>
       <li>
@@ -38,13 +49,13 @@
   <!-- /#sidebar-wrapper -->
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" >
+  <div id="page-content-wrapper">
     <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
       <span class="hamb-top"></span>
       <span class="hamb-middle"></span>
       <span class="hamb-bottom"></span>
     </button>
-        <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
   <!-- /#page-content-wrapper -->
 

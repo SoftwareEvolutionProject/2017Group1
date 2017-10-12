@@ -10,6 +10,7 @@ import {RouterModule} from "@angular/router";
 import { HomeComponent } from './components/home/home.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import {AlertModule, ModalModule} from "ngx-bootstrap";
+import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {AlertModule, ModalModule} from "ngx-bootstrap";
     SidemenuComponent,
     HomeComponent,
     CustomerListComponent,
+    DigitalPartListComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -33,6 +35,10 @@ import {AlertModule, ModalModule} from "ngx-bootstrap";
       {
         path: 'customers',
         component: CustomerListComponent,
+      },
+      {
+        path: 'digital-parts',
+        component: DigitalPartListComponent,
       },
     ]),
   ],
