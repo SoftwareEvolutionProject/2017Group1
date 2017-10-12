@@ -9,7 +9,7 @@ export class Customer {
     Object.assign(this, values);
   }
 
-  static createUser(json: any) {
+  static createCustomer(json: any) {
     if (json)
       return new Customer(json);
     else

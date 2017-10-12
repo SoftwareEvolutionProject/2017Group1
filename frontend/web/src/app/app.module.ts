@@ -10,6 +10,9 @@ import {RouterModule} from "@angular/router";
 import { HomeComponent } from './components/home/home.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import {AlertModule, ModalModule} from "ngx-bootstrap";
+import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -18,12 +21,16 @@ import {AlertModule, ModalModule} from "ngx-bootstrap";
     SidemenuComponent,
     HomeComponent,
     CustomerListComponent,
+    CustomerDetailComponent,
   ],
   imports: [
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     BrowserModule,
     SidebarModule.forRoot(),
+    ReactiveFormsModule,
+    FormsModule,
+    HttpModule,
 
     RouterModule.forRoot([
       {
@@ -34,9 +41,18 @@ import {AlertModule, ModalModule} from "ngx-bootstrap";
         path: 'customers',
         component: CustomerListComponent,
       },
+      {
+        path: 'customers/:id',
+        component: CustomerDetailComponent,
+      },
     ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+
+
