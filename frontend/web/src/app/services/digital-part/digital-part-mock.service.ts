@@ -18,7 +18,7 @@ export class DigitalPartMockService {
   constructor() {
   }
 
-  getCustomers(): Observable<DigitalPart[]> {
+  getDigitalParts(): Observable<DigitalPart[]> {
     return Observable.of(this.digtialParts)
   }
 

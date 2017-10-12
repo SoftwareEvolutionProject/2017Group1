@@ -36,7 +36,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
 
   loadAndPopulate() {
     /* get users */
-    this.digitalPartMockService.getCustomers().subscribe(
+    this.digitalPartMockService.getDigitalParts().subscribe(
       customers => {
         this.digitalParts = customers;
 
