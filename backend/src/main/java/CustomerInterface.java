@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by danie on 2017-09-28.
  */
-public interface WebInterface {
+public interface CustomerInterface {
 
     List<Customer> getAllCustomers();
 

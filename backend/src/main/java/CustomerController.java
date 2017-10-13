@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by danie on 2017-09-28.
  */
-public class WebInterfaceImpl implements WebInterface {
+public class CustomerController implements CustomerInterface {
     Persistance dbConnector = new TemporaryJVMStorage();
 
     @Override
