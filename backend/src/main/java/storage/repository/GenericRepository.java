@@ -92,17 +92,7 @@ public class GenericRepository <T extends DataModel> {
         }
         query.append(")");
 
-        try {
-            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject, query); //maps model data to the query
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            int id = rs.getInt(1);
-            return this.getObject(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return execute(jsonObject, query);
     }
 
     /***
@@ -125,8 +115,12 @@ public class GenericRepository <T extends DataModel> {
         query.append(" = ? ");
         query.append( " WHERE id="+object.getId());
 
+        return execute(jsonObject, query);
+    }
+
+    private T execute(JsonObject jsonObject2, StringBuilder query2) {
         try {
-            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject, query); //maps model data to the query
+            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject2, query2); //maps model data to the query
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
