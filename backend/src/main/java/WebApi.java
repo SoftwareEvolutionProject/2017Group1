@@ -1,3 +1,7 @@
+import api.customer.CustomerController;
+import api.MaterialInterface;
+import api.PrintingInterface;
+import api.customer.CustomerAPI;
 import com.google.gson.Gson;
 import model.Customer;
 import model.Order;
@@ -9,7 +13,7 @@ import static spark.Spark.*;
  * Starts a restapi att localhost:4567
  */
 public class WebApi {
-    private static CustomerInterface ci = new CustomerController();
+    private static CustomerAPI ci = new CustomerController();
     private static MaterialInterface mi;
     private static PrintingInterface pi;
 

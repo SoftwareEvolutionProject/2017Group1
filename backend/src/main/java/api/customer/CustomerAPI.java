@@ -1,3 +1,5 @@
+package api.customer;
+
 import com.sun.org.apache.xpath.internal.operations.Or;
 import model.*;
 
@@ -6,7 +8,7 @@ import java.util.List;
 /**
  * Created by danie on 2017-09-28.
  */
-public interface CustomerInterface {
+public interface CustomerAPI {
 
     List<Customer> getAllCustomers();
 

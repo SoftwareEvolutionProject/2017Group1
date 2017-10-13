@@ -1,3 +1,5 @@
+package api.customer;
+
 import model.*;
 import storage.DBInterface;
 import storage.PostgresSQLConnector;
@@ -9,7 +11,7 @@ import java.util.List;
 /**
  * Created by danie on 2017-09-28.
  */
-public class CustomerController implements CustomerInterface {
+public class CustomerController implements CustomerAPI {
     DBInterface dbConnector = new PostgresSQLConnector();
     GenericRepository<Customer> customerRepository = new GenericRepository<Customer>(Customer.class,dbConnector);
 
