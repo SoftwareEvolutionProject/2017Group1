@@ -7,7 +7,7 @@ import { PickInfo } from "./PickInfo";
 import { LoaderSelector } from "./LoaderSelector";
 import { Math3D } from "./Math3D"
 
-namespace JSC3D {
+//namespace JSC3D {
     /**
         @class Viewer
 
@@ -25,7 +25,7 @@ namespace JSC3D {
         at runtime.<br />
     */
 
-    class Viewer {
+    export class Viewer {
         canvas = null;
         ctx2d = null;
         canvasData = null;
@@ -580,11 +580,13 @@ namespace JSC3D {
 
             var self = this;
             var img = new Image;
-
+/*
+TODO: This should do something
             img.onload() {
                 self.bkgImage = this;
                 self.generateBackground();
             };
+*/
 
             img.crossOrigin = 'anonymous'; // explicitly enable cross-domain image
             img.src = encodeURI(backgroundImageUrl);
@@ -605,11 +607,13 @@ namespace JSC3D {
 
             var self = this;
             var newMap = new Texture(null, null);
-
+/*
+TODO: This needs to do something
             newMap.onready() {
                 self.sphereMap = newMap;
                 self.update();
             };
+*/
 
             newMap.createFromUrl(this.sphereMapUrl, null);
         };
@@ -1155,8 +1159,9 @@ namespace JSC3D {
 
             this.update();
 
-            if(this.sceneUrl == '')
+            if(this.sceneUrl == '') {
                 return false;
+            }
 
 
             /*
@@ -1183,14 +1188,17 @@ namespace JSC3D {
             }
 
             var self = this;
-
+/*
+TODO: This needs to do something!!
             loader.onload(this.scene) {
                 self.abortUnfinishedLoadingFn = null;
                 self.setupScene(this.scene);
                 if(self.onloadingcomplete && (typeof self.onloadingcomplete) == 'function')
                     self.onloadingcomplete();
             };
-
+*/
+/*
+TODO: Make sure these functions actually do somehting!!! And the right thing.
             //var errorMsg;
             loader.onerror(errorMsg) {
                 self.scene = null;
@@ -1215,7 +1223,9 @@ namespace JSC3D {
                     resource.generateMipmaps();
                 self.update();
             };
-
+*/
+/*
+TODO: This really needs to do something!!!
             this.abortUnfinishedLoadingFn() {
                 loader.abort();
                 self.abortUnfinishedLoadingFn = null;
@@ -1223,6 +1233,7 @@ namespace JSC3D {
                 if(self.onloadingaborted && (typeof self.onloadingaborted) == 'function')
                     self.onloadingaborted();
             };
+            */
 
             loader.loadFromUrl(this.sceneUrl);
 
@@ -1448,9 +1459,10 @@ namespace JSC3D {
         /**
             Do fill the background color buffer with a loaded image.
             @private
+            TODO: This function have some reference to old JSC3D Texture class. FIX!!!!
         */
         fillBackgroundWithImage() {
-            var w = this.frameWidth;
+/*            var w = this.frameWidth;
             var h = this.frameHeight;
             if(this.bkgImage.width <= 0 || this.bkgImage.height <= 0)
                 return;
@@ -1492,7 +1504,7 @@ namespace JSC3D {
             var alpha = this.isBackgroundOn ? 0xff000000 : 0;
             for(var i=0, j=0; i<size; i++, j+=4) {
                 pixels[i] = alpha | data[j] << 16 | data[j+1] << 8 | data[j+2];
-            }
+            }*/
         };
 
         /**
@@ -3556,4 +3568,4 @@ namespace JSC3D {
         };
 
     }
-}
+//}

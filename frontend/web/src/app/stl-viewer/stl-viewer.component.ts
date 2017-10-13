@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Viewer } from "./classes/Viewer"
 declare var JSC3D: any;
 
 @Component({
@@ -15,10 +16,14 @@ export class StlViewerComponent implements OnInit {
     const parameters = {
       SceneUrl: 'https://cors-anywhere.herokuapp.com/jberlin.se/stl/top.stl'
     };
-    const viewer = new JSC3D.Viewer(canvas, parameters);
+    /*const viewer = new JSC3D.Viewer(canvas, parameters);
     viewer.setParameter('Renderer', 'webgl');
     viewer.enableDefaultInputHandler(true);
+    viewer.init();*/
+
+    const viewer = new Viewer(canvas, parameters);
     viewer.init();
+    console.log(viewer);
   }
 
 }
