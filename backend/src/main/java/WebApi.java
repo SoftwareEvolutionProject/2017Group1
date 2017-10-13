@@ -15,8 +15,6 @@ public class WebApi {
     private static Gson gson = new Gson();
 
     public static void main(String[] args) {
-
-
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*","*","*");
