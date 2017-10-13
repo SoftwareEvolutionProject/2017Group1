@@ -1188,8 +1188,8 @@ TODO: This needs to do something
             }
 
             var fileExtName = fileName.substring(lastDotAt + 1);
-            var loader = new LoaderSelector().getLoader(fileExtName);
-            if(!loader) {
+            //var loader = new LoaderSelector().getLoader(fileExtName); We already have the loader
+            if(!this.loader) {
                 return false;
             }
 
@@ -1241,7 +1241,7 @@ TODO: This really needs to do something!!!
             };
             */
 
-            loader.loadFromUrl(this.sceneUrl);
+            this.loader.loadFromUrl(this.sceneUrl);
 
             if(this.onloadingstarted && (typeof this.onloadingstarted) == 'function')
                 this.onloadingstarted();
