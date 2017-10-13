@@ -1,7 +1,4 @@
-import model.Customer;
-import model.DigitalPart;
-import model.Order;
-import model.PhysicalPart;
+import model.*;
 import storage.DBInterface;
 import storage.PostgresSQLConnector;
 import storage.repository.GenericRepository;
@@ -14,16 +11,16 @@ import java.util.List;
  */
 public class CustomerController implements CustomerInterface {
     DBInterface dbConnector = new PostgresSQLConnector();
-    GenericRepository<Customer> customerGenericRepository = new GenericRepository<Customer>(Customer.class,dbConnector);
+    GenericRepository<Customer> customerRepository = new GenericRepository<Customer>(Customer.class,dbConnector);
 
     @Override
     public List<Customer> getAllCustomers() {
-        return customerGenericRepository.getObjects();
+        return customerRepository.getObjects();
     }
 
     @Override
     public Customer getCustomer(String customerID) {
-        return customerGenericRepository.getObject(Integer.parseInt(customerID));
+        return customerRepository.getObject(Integer.parseInt(customerID));
     }
 
     @Override
@@ -37,13 +34,13 @@ public class CustomerController implements CustomerInterface {
     }
 
     @Override
-    public int createNewCustomer(Customer customer) {
-        return customerGenericRepository.postObject(customer).getId();
+    public Customer createNewCustomer(Customer customer) {
+        return customerRepository.postObject(customer);
     }
 
     @Override
     public Customer updateCustomer(Customer customer) {
-        return customerGenericRepository.updateObject(customer);
+        return customerRepository.updateObject(customer);
     }
 
     @Override
@@ -66,6 +63,26 @@ public class CustomerController implements CustomerInterface {
 
     @Override
     public Order createNewOrder(Order order) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public List<OrderedPart> getOrderedParts(String orderID) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Order updateOrder(String orderID, Order order) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public OrderedPart createNewOrderDetail(String orderID, OrderedPart orderedPart) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public OrderedPart updateOrderDetail(String orderID, String orderedPartID, OrderedPart orderedPart) {
         throw new NotImplementedException();
     }
 }

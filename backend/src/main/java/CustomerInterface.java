@@ -16,7 +16,7 @@ public interface CustomerInterface {
 
     List<PhysicalPart> getPhysicalPartsFromCustomer(String customerID);
 
-    int createNewCustomer(Customer customer);
+    Customer createNewCustomer(Customer customer);
 
     Customer updateCustomer(Customer customer);
 
@@ -29,4 +29,12 @@ public interface CustomerInterface {
     Order getOrder(String orderID);
 
     Order createNewOrder(Order order);
+
+    List<OrderedPart> getOrderedParts(String orderID);
+
+    Order updateOrder(String orderID, Order order);
+
+    OrderedPart createNewOrderDetail(String orderID, OrderedPart orderedPart);
+
+    OrderedPart updateOrderDetail(String orderID, String orderedPartID, OrderedPart orderedPart);
 }

@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 import model.Customer;
 import model.Order;
+import model.OrderedPart;
 
 import static spark.Spark.*;
 
@@ -35,14 +36,17 @@ public class WebApi {
         get("/customers/:customerID/digitalparts,", ((request, response) -> ci.getDigitalPartsFromCustomer(request.params(":customerID"))), gson::toJson);
         get("/customers/:customerID/physicalparts,", ((request, response) -> ci.getPhysicalPartsFromCustomer(request.params(":customerID"))), gson::toJson);
         post("/customers", ((request, response) -> ci.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
-        put("/customers", ((request, response) -> ci.updateCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
+        put("/customers/:customerID/", ((request, response) -> ci.updateCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
         delete("/customers/:customerID", ((request, response) -> ci.deleteCustomer(request.params(":customerID"))), gson::toJson);
 
         //Orders
         get("/orders", (request, response) -> ci.getAllOrders(), gson::toJson);
         get("/orders/:orderID", (request, response) -> ci.getOrder(request.params("orderID")), gson::toJson);
+        get("/orders/:orderID/parts", (request, response) -> ci.getOrderedParts(request.params("orderID")), gson::toJson);
         post("/orders", ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))),gson::toJson);
-
+        put("/orders/:orderID", ((request, response) -> ci.updateOrder(request.params("orderID"), gson.fromJson(request.body(), Order.class))),gson::toJson);
+        post("/orders/:orderID/parts", ((request, response) -> ci.createNewOrderDetail(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
+        put("/orders/:orderID/parts/:orderedPartID", ((request, response) -> ci.updateOrderDetail(request.params("orderID"), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
     }
 
 
