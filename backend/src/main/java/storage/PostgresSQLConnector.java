@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class PostgresSQLConnector implements DBInterface {
 
-    private static final String CONNECTION_URL = "jdbc:postgresql://localhost:5432/svereadb";
+    private static final String CONNECTION_URL = "jdbc:postgresql://db:5432/svereadb";
     private static final String USERNAME = "admin";
     private static final String PWD = "1234";
     final Properties connectionProperties = new Properties();
