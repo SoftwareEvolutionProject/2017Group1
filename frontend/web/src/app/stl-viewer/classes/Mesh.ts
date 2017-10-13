@@ -1,5 +1,5 @@
 import { AABB } from "./AABB"
-import { Math3D } from "./Math3d"
+import { Math3D } from "./Math3D"
 
 /**
 	@class Mesh

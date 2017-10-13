@@ -53,12 +53,12 @@ export class StlLoader {
                         if (isIE10Compatible) {
                             // asynchronously decode blob to binary string
                             var blobReader = new FileReader;
-                            blobReader.onload = function (event) {
+/* TODO: HERE AND BELOW                            blobReader.onload = function (event) {
                                 var scene = new Scene(null);
                                 scene.srcUrl = urlName;
                                 self.parseStl(scene, event.target.result);
                                 self.onload(scene);
-                            };
+                            };*/
                             blobReader.readAsText(this.response, 'x-user-defined');
                         }
                         else if (isIE) {
@@ -67,7 +67,7 @@ export class StlLoader {
                             var scene = new Scene(null);
                             scene.srcUrl = urlName;
                             try {
-                                self.parseStl(scene, new Util().ieXHRResponseBodyToString(this.responseBody));
+//                                self.parseStl(scene, new Util().ieXHRResponseBodyToString(this.responseBody));
                             } catch (e) { }
                             self.onload(scene);
                         }
@@ -90,7 +90,8 @@ export class StlLoader {
         if (this.onprogress) {
             this.onprogress('Loading STL file ...', 0);
             xhr.onprogress = function (event) {
-                self.onprogress('Loading STL file ...', event.position / event.totalSize);
+                // TODO: This displays the loading stripe. How to fix?
+                //self.onprogress('Loading STL file ...', event.position / event.totalSize);
             };
         }
 
