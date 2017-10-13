@@ -14,11 +14,11 @@
       <li>
         <a routerLink="orders" class="nav-link" href="#" routerLinkActive="active">Orders</a>
       </li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parts
-          <span class="caret"></span>
+      <li>
+        <a href="#parts" class="collapsed" data-toggle="collapse">Parts
+          <i class="glyphicon glyphicon-menu-down"></i>
         </a>
-        <ul class="dropdown-menu" role="menu">
+        <ul id="parts" class="sub-menu collapse" role="menu">
           <li>
             <a routerLink="digital-parts" routerLinkActive="active" href="#">Digital Parts</a>
           </li>
@@ -28,11 +28,11 @@
         </ul>
       </li>
 
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prints
-          <span class="caret"></span>
+      <li>
+        <a href="#prints" class="collapsed" data-toggle="collapse">Prints
+          <i class="glyphicon glyphicon-menu-down"></i>
         </a>
-        <ul class="dropdown-menu" role="menu">
+        <ul id="prints" class="sub-menu collapse" role="menu">
           <li>
             <a routerLink="digital-prints" routerLinkActive="active" href="#">Digital Prints</a>
           </li>
