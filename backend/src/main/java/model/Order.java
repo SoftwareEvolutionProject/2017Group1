@@ -3,7 +3,7 @@ package model;
 
 import java.time.Instant;
 
-public class Order {
+public class Order implements DataModel{
 
     private int id;
     private int customerID;
