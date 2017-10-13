@@ -1,0 +1,10 @@
+.DS_Store
+.sonar/
+node/
+.sonarlint/
+.scannerwork/
+.idea/
+node_modules/
+coverage/
+lib/
+yarn-error.log

@@ -1,0 +1,63 @@
+<div id="wrapper">
+
+  <!-- Sidebar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+    <ul class="nav sidebar-nav">
+      <li class="sidebar-brand">
+        <a routerLink="home" href="#">
+          Swerea
+        </a>
+      </li>
+      <li>
+        <a routerLink="customers" class="nav-link" href="#" routerLinkActive="active">Customers</a>
+      </li>
+      <li>
+        <a routerLink="orders" class="nav-link" href="#" routerLinkActive="active">Orders</a>
+      </li>
+      <li>
+        <a href="#parts" class="collapsed" data-toggle="collapse">Parts
+          <i class="glyphicon glyphicon-menu-down"></i>
+        </a>
+        <ul id="parts" class="sub-menu collapse" role="menu">
+          <li>
+            <a routerLink="digital-parts" routerLinkActive="active" href="#">Digital Parts</a>
+          </li>
+          <li>
+            <a routerLink="physical-parts" routerLinkActive="active" href="#">Physical Parts</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#prints" class="collapsed" data-toggle="collapse">Prints
+          <i class="glyphicon glyphicon-menu-down"></i>
+        </a>
+        <ul id="prints" class="sub-menu collapse" role="menu">
+          <li>
+            <a routerLink="digital-prints" routerLinkActive="active" href="#">Digital Prints</a>
+          </li>
+          <li>
+            <a routerLink="physical-prints" routerLinkActive="active" href="#">Physical Prints</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a routerLink="materials" class="nav-link" href="#" routerLinkActive="active">Materials</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+      <span class="hamb-top"></span>
+      <span class="hamb-middle"></span>
+      <span class="hamb-bottom"></span>
+    </button>
+    <router-outlet></router-outlet>
+  </div>
+  <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->

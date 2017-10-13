@@ -1,0 +1,31 @@
+version: "2" 
+services: 
+  dev: 
+    build: .
+    container_name: sverea
+    ports: 
+      - "8080:8080"
+      - "4200:4200"
+      - "4567:4567"
+    volumes:
+      - .:/usr/src/app
+    links:
+      - db
+    stdin_open: true
+    tty: true
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=svereadb
+    cap_add:
+      - SYS_ADMIN
+
+  db:
+    image: postgres:9.4
+    container_name: database
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=svereadb
