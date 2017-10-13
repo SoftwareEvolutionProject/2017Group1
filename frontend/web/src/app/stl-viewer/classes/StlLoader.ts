@@ -1,7 +1,8 @@
 import { Scene } from "./Scene";
 import { PlatformInfo } from "./PlatformInfo";
 import { Util } from "./Utilities";
-import { Mesh } from "./Mesh"
+import { Mesh } from "./Mesh";
+import { BinaryStream } from "./BinaryStream";
 
 /**
 	@class StlLoader
@@ -134,7 +135,7 @@ export class StlLoader {
         mesh.faceNormalBuffer = [];
 
         var isBinary = false;
-        var reader = new BinaryStream(data);
+        var reader = new BinaryStream(data, false);
 
         // Detect whether this is an ASCII STL stream or a binary STL stream by checking a snippet of contents.
         reader.skip(HEADER_BYTES + FACE_COUNT_BYTES);
@@ -169,7 +170,7 @@ export class StlLoader {
 
                 // reset regexp for vertex extraction
                 faceRegExp.lastIndex = 0;
-                faceRegExp.global = false;
+                //faceRegExp.global = false;        // TODO: NOTE: false is default.
 
                 // read faces
                 for (var r = faceRegExp.exec(data); r != null; r = faceRegExp.exec(data)) {
@@ -209,7 +210,7 @@ export class StlLoader {
             reader.skip(HEADER_BYTES);
 
             // read face count
-            var numOfFaces = reader.readUInt32();
+            var numOfFaces: any = reader.readUInt32();
 
             // calculate the expected length of the stream
             var expectedLen = HEADER_BYTES + FACE_COUNT_BYTES +
