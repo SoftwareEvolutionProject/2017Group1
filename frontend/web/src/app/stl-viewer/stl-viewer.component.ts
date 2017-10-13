@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Viewer } from "./classes/Viewer"
+import { Viewer } from "./classes/Viewer";
+import { StlLoader } from "./classes/StlLoader";
+import { LoaderSelector } from "./classes/LoaderSelector";
 declare var JSC3D: any;
 
 @Component({
@@ -21,6 +23,15 @@ export class StlViewerComponent implements OnInit {
     viewer.enableDefaultInputHandler(true);
     viewer.init();*/
 
+
+    //========================================================================
+    var stlLoader = new StlLoader(null, null, null, null);
+    stlLoader.setDecimalPrecision(3);
+    var loaderSelector = new LoaderSelector();
+    loaderSelector.registerLoader('stl', stlLoader);
+
+
+    //=========================================================================
     const viewer = new Viewer(canvas, parameters);
     viewer.init();
     console.log(viewer);

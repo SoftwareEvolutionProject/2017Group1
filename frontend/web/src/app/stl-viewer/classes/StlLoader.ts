@@ -6,7 +6,7 @@ import { PlatformInfo } from "./PlatformInfo"
 
 	This class implements a scene loader from an STL file. Both binary and ASCII STL files are supported.
  */
-class StlLoader {
+export class StlLoader {
     onload;
     onerror;
     onprogress;
@@ -29,7 +29,7 @@ class StlLoader {
      */
     loadFromUrl(urlName) {
         var self = this;
-        var isIE = PlatformInfo.browser == 'ie';
+        var isIE = new PlatformInfo().browser == 'ie';
         //TODO: current blob implementation seems do not work correctly on IE10. Repair it or turn to an arraybuffer implementation.
         var isIE10Compatible = false;//(isIE && parseInt(JSC3D.PlatformInfo.version) >= 10);
         var xhr = new XMLHttpRequest;
