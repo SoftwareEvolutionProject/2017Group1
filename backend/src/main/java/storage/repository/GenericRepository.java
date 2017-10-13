@@ -35,30 +35,44 @@ public class GenericRepository <T extends DataModel> {
         this.type = type;
     }
 
+    /***
+     * gets all objects matching given type
+     * @return
+     */
     public List<T> getObjects() {
         String query = "SELECT * FROM "+ type.getSimpleName();
         System.out.println("Running query: "+query);
         ResultSet rs =  this.dbInterface.executeQuerry(query);
         try {
-            return this.getMatchJSON(rs);
+            return this.getMatchJSON(rs); //converts resulting set to model instance
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    /***
+     * Gets specific instance of model
+     * @param id
+     * @return
+     */
     public T getObject(int id) {
         String query = "SELECT * FROM "+ type.getSimpleName() +" WHERE id="+id;
         System.out.println("Running query: "+query);
         ResultSet rs =  this.dbInterface.executeQuerry(query);
         try {
-            return this.getMatchJSON(rs).iterator().next();
+            return this.getMatchJSON(rs).iterator().next(); //converts resulting set to model instance
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    /***
+     * Creates an given instance om model
+     * @param object
+     * @return
+     */
     public T postObject(T object) {
         JsonObject jsonObject = this.gson.toJsonTree(object).getAsJsonObject();
         StringBuilder query = new StringBuilder("INSERT INTO "+ type.getSimpleName() +" (");
@@ -79,33 +93,7 @@ public class GenericRepository <T extends DataModel> {
         query.append(")");
 
         try {
-            System.out.println("Preparing query: "+query.toString());
-            PreparedStatement ps = this.dbInterface.getConnection().prepareStatement(
-                    query.toString(),
-                    Statement.RETURN_GENERATED_KEYS
-            );
-
-            int i = 1;
-            for (String key : jsonObject.keySet()){
-                if(Objects.equals(key, "id"))continue; //skip ID
-                JsonElement valWrapper = jsonObject.get(key);
-                JsonPrimitive val = null;
-
-                if(valWrapper.isJsonPrimitive()){
-                    val = valWrapper.getAsJsonPrimitive();
-                } else {
-                    throw new IllegalArgumentException("Invalid Object");
-                }
-
-                if (val.isNumber()){
-                    ps.setInt(i, val.getAsInt());
-                } else if (val.isString()){
-                    ps.setString(i, val.getAsString());
-                } else if (val.isBoolean()){
-                    ps.setBoolean(i, val.getAsBoolean());
-                }
-                i++;
-            }
+            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject, query); //maps model data to the query
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
@@ -117,6 +105,11 @@ public class GenericRepository <T extends DataModel> {
         }
     }
 
+    /***
+     * Updates a model already in the system, currently updates ALL fields no matter how many are set (probably)
+     * @param object
+     * @return
+     */
     public T updateObject(T object) {
         JsonObject jsonObject = this.gson.toJsonTree(object).getAsJsonObject();
         StringBuilder query = new StringBuilder("UPDATE "+ type.getSimpleName()+" SET");
@@ -133,33 +126,7 @@ public class GenericRepository <T extends DataModel> {
         query.append( " WHERE id="+object.getId());
 
         try {
-            System.out.println("Preparing query: "+query.toString());
-            PreparedStatement ps = this.dbInterface.getConnection().prepareStatement(
-                    query.toString(),
-                    Statement.RETURN_GENERATED_KEYS
-            );
-
-            int i = 1;
-            for (String key : jsonObject.keySet()){
-                if(Objects.equals(key, "id"))continue; //skip ID
-                JsonElement valWrapper = jsonObject.get(key);
-                JsonPrimitive val = null;
-
-                if(valWrapper.isJsonPrimitive()){
-                    val = valWrapper.getAsJsonPrimitive();
-                } else {
-                    throw new IllegalArgumentException("Invalid Object");
-                }
-
-                if (val.isNumber()){
-                    ps.setInt(i, val.getAsInt());
-                } else if (val.isString()){
-                    ps.setString(i, val.getAsString());
-                } else if (val.isBoolean()){
-                    ps.setBoolean(i, val.getAsBoolean());
-                }
-                i++;
-            }
+            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject, query); //maps model data to the query
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
@@ -171,6 +138,11 @@ public class GenericRepository <T extends DataModel> {
         }
     }
 
+    /***
+     * Deletes a specific model instance
+     * @param id
+     * @return
+     */
     public T deleteObject(int id) {
         String query = "DELETE * FROM "+ type.getSimpleName() +" WHERE id="+id;
         System.out.println("Running query: "+query);
@@ -226,4 +198,43 @@ public class GenericRepository <T extends DataModel> {
         }
         return results;
     }
+
+    /***
+     * Maps a JSON objects field values to a prepared statement
+     * @param jsonObject
+     * @param query
+     * @return
+     * @throws SQLException
+     */
+    private PreparedStatement getPreparedStatementFromJSON(JsonObject jsonObject, StringBuilder query) throws SQLException {
+        System.out.println("Preparing query: "+query.toString());
+        PreparedStatement ps = this.dbInterface.getConnection().prepareStatement(
+                query.toString(),
+                Statement.RETURN_GENERATED_KEYS
+        );
+
+        int i = 1;
+        for (String key : jsonObject.keySet()){
+            if(Objects.equals(key, "id"))continue; //skip ID
+            JsonElement valWrapper = jsonObject.get(key);
+            JsonPrimitive val = null;
+
+            if(valWrapper.isJsonPrimitive()){
+                val = valWrapper.getAsJsonPrimitive();
+            } else {
+                throw new IllegalArgumentException("Invalid Object");
+            }
+
+            if (val.isNumber()){
+                ps.setInt(i, val.getAsInt());
+            } else if (val.isString()){
+                ps.setString(i, val.getAsString());
+            } else if (val.isBoolean()){
+                ps.setBoolean(i, val.getAsBoolean());
+            }
+            i++;
+        }
+        return ps;
+    }
+
 }
