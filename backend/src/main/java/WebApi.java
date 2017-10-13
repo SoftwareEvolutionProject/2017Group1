@@ -1,3 +1,7 @@
+import api.customer.CustomerController;
+import api.MaterialInterface;
+import api.PrintingInterface;
+import api.customer.CustomerAPI;
 import com.google.gson.Gson;
 import model.Customer;
 
@@ -7,7 +11,11 @@ import static spark.Spark.*;
  * Starts a restapi att localhost:4567
  */
 public class WebApi {
-    private static WebInterface webInterface = new WebInterfaceImpl();
+    private static CustomerAPI ci = new CustomerController();
+    private static MaterialInterface mi;
+    private static PrintingInterface pi;
+
+    private static Gson gson = new Gson();
 
     public static void main(String[] args) {
         WebApi.enableCORS("*","*","*");
