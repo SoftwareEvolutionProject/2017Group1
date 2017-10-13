@@ -26,9 +26,6 @@ namespace JSC3D {
     */
 
     class Viewer {
-
-
-
         canvas = null;
         ctx2d = null;
         canvasData = null;
@@ -381,11 +378,12 @@ namespace JSC3D {
             this.releaseLocalBuffers = this.params['LocalBuffers'].toLowerCase() == 'release';
 
             // Create WebGL render back-end if it is assigned to.
-            if(this.useWebGL && this.platformInfo.supportWebGL && JSC3D.WebGLRenderBackend) {
+            // TODO: Make sure we can use webGL
+/*            if(this.useWebGL && this.platformInfo.supportWebGL && JSC3D.WebGLRenderBackend) {
                 try {
                     this.webglBackend = new JSC3D.WebGLRenderBackend(this.canvas, this.releaseLocalBuffers);
                 } catch(e){}
-            }
+            }*/
 
             // Fall back to software rendering when WebGL is not assigned or unavailable.
             if(!this.webglBackend) {
@@ -1193,6 +1191,7 @@ namespace JSC3D {
                     self.onloadingcomplete();
             };
 
+            //var errorMsg;
             loader.onerror(errorMsg) {
                 self.scene = null;
                 self.isLoaded = false;
@@ -1212,7 +1211,7 @@ namespace JSC3D {
             };
 
             loader.onresource(resource) {
-                if((resource instanceof JSC3D.Texture) && self.isMipMappingOn && !resource.hasMipmap())
+                if((resource instanceof Texture) && self.isMipMappingOn && !resource.hasMipmap())
                     resource.generateMipmaps();
                 self.update();
             };
