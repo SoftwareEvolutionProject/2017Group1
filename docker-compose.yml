@@ -22,6 +22,7 @@ services:
 
   db:
     image: postgres:9.4
+    container_name: database
     ports:
       - 5432
     environment:
