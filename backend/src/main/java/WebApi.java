@@ -10,7 +10,6 @@ public class WebApi {
     private static WebInterface webInterface = new WebInterfaceImpl();
 
     public static void main(String[] args) {
-        port(4444);
         WebApi.enableCORS("*","*","*");
 
         Gson gson = new Gson();
