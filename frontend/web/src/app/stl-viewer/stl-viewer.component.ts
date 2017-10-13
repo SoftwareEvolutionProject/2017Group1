@@ -27,11 +27,10 @@ export class StlViewerComponent implements OnInit {
     //========================================================================
     var stlLoader = new StlLoader(null, null, null, null);
     stlLoader.setDecimalPrecision(3);
-    var loaderSelector = new LoaderSelector();
-    loaderSelector.registerLoader('stl', stlLoader);
 
     //=========================================================================
     const viewer = new Viewer(canvas, parameters);
+    viewer.setLoader(stlLoader);
     viewer.init();
     console.log(viewer);
   }

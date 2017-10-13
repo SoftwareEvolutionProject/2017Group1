@@ -50,27 +50,28 @@ export class StlLoader {
                     if (self.onload) {
                         if (self.onprogress)
                             self.onprogress('Loading STL file ...', 1);
-                        if (isIE10Compatible) {
-                            // asynchronously decode blob to binary string
-                            var blobReader = new FileReader;
-/* TODO: HERE AND BELOW                            blobReader.onload = function (event) {
-                                var scene = new Scene(null);
-                                scene.srcUrl = urlName;
-                                self.parseStl(scene, event.target.result);
-                                self.onload(scene);
-                            };*/
-                            blobReader.readAsText(this.response, 'x-user-defined');
-                        }
-                        else if (isIE) {
-                            // decode data from XHR's responseBody into a binary string, since it cannot be accessed directly from javascript.
-                            // this would work on IE6~IE9
-                            var scene = new Scene(null);
-                            scene.srcUrl = urlName;
-                            try {
-//                                self.parseStl(scene, new Util().ieXHRResponseBodyToString(this.responseBody));
-                            } catch (e) { }
-                            self.onload(scene);
-                        }
+// Comments below is for Internet explorer.
+//                         if (isIE10Compatible) {
+//                             // asynchronously decode blob to binary string
+//                             var blobReader = new FileReader;
+// /* TODO: HERE AND BELOW                            blobReader.onload = function (event) {
+//                                 var scene = new Scene(null);
+//                                 scene.srcUrl = urlName;
+//                                 self.parseStl(scene, event.target.result);
+//                                 self.onload(scene);
+//                             };*/
+//                             blobReader.readAsText(this.response, 'x-user-defined');
+//                         }
+//                         else if (isIE) {
+//                             // decode data from XHR's responseBody into a binary string, since it cannot be accessed directly from javascript.
+//                             // this would work on IE6~IE9
+//                             var scene = new Scene(null);
+//                             scene.srcUrl = urlName;
+//                             try {
+// //                                self.parseStl(scene, new Util().ieXHRResponseBodyToString(this.responseBody));
+//                             } catch (e) { }
+//                             self.onload(scene);
+//                         }
                         else {
                             var scene = new Scene(null);
                             scene.srcUrl = urlName;
@@ -89,10 +90,10 @@ export class StlLoader {
 
         if (this.onprogress) {
             this.onprogress('Loading STL file ...', 0);
-            xhr.onprogress = function (event) {
+            //xhr.onprogress = function (event) {
                 // TODO: This displays the loading stripe. How to fix?
                 //self.onprogress('Loading STL file ...', event.position / event.totalSize);
-            };
+            //};
         }
 
         this.request = xhr;

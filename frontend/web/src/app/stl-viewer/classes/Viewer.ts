@@ -26,6 +26,8 @@ import { Math3D } from "./Math3D"
     */
 
     export class Viewer {
+        loader = null;
+
         canvas = null;
         ctx2d = null;
         canvasData = null;
@@ -353,6 +355,10 @@ import { Math3D } from "./Math3D"
         setParameter(name, value) {
             this.params[name] = value;
         };
+
+        setLoader(loader) {
+            this.loader = loader;
+        }
 
         /**
             Initialize viewer for rendering and interactions.
