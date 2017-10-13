@@ -1,6 +1,6 @@
 package model;
 
-public class DigitalPart {
+public class DigitalPart   implements DataModel {
     private int id;
     private int customerID;
     private String name;
