@@ -1,14 +1,11 @@
 package model;
 
-public class OrderedPart {
+public class OrderedPart  implements DataModel{
 
-    private int partID;
+    private int id;
     private int orderID;
     private int amountOrdererd;
 
-    public int getPartID() {
-        return partID;
-    }
 
     public int getOrderID() {
         return orderID;
@@ -16,5 +13,10 @@ public class OrderedPart {
 
     public int getAmountOrdererd() {
         return amountOrdererd;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 }

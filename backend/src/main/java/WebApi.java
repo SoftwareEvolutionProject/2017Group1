@@ -10,6 +10,7 @@ public class WebApi {
     private static WebInterface webInterface = new WebInterfaceImpl();
 
     public static void main(String[] args) {
+        port(4444);
         WebApi.enableCORS("*","*","*");
 
         Gson gson = new Gson();
@@ -17,13 +18,13 @@ public class WebApi {
 
         // Customers
         get("/customers", (request, response) -> webInterface.getAllCustomers(), gson::toJson);
-        get("/customers/:customerID,", ((request, response) -> webInterface.getCustomer(request.params(":customerID"))), gson::toJson);
+        get("/customers/:customerID", ((request, response) -> webInterface.getCustomer(request.params(":customerID"))), gson::toJson);
         get("/customers/:customerID/orders,", ((request, response) -> webInterface.getOrdersFromCustomer(request.params(":customerID"))), gson::toJson);
         get("/customers/:customerID/digitalparts,", ((request, response) -> webInterface.getDigitalPartsFromCustomer(request.params(":customerID"))), gson::toJson);
         get("/customers/:customerID/physicalparts,", ((request, response) -> webInterface.getPhysicalPartsFromCustomer(request.params(":customerID"))), gson::toJson);
         post("/customers", ((request, response) -> webInterface.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
         put("/customers", ((request, response) -> webInterface.updateCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
-        delete("/customers/:customerID,", ((request, response) -> webInterface.deleteCustomer(request.params(":customerID"))), gson::toJson);
+        delete("/customers/:customerID", ((request, response) -> webInterface.deleteCustomer(request.params(":customerID"))), gson::toJson);
 
         //get("/digitalPart/:digitalPartID", (req, res) -> webInterface.getDigitalPart(req.params("digitalPartID")), gson::toJson);
 

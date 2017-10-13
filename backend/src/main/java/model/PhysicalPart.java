@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class PhysicalPart {
+public class PhysicalPart implements DataModel {
     private int id;
     private int physicalPrintID;
     private int orderedPartID;

@@ -2,9 +2,9 @@ import model.Customer;
 import model.DigitalPart;
 import model.Order;
 import model.PhysicalPart;
-import storage.Persistance;
+import storage.DBInterface;
 import storage.PostgresSQLConnector;
-import storage.TemporaryJVMStorage;
+import storage.repository.GenericRepository;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
@@ -13,16 +13,17 @@ import java.util.List;
  * Created by danie on 2017-09-28.
  */
 public class WebInterfaceImpl implements WebInterface {
-    Persistance dbConnector = new PostgresSQLConnector();
+    DBInterface dbConnector = new PostgresSQLConnector();
+    GenericRepository<Customer> customerGenericRepository = new GenericRepository<Customer>(Customer.class,dbConnector);
 
     @Override
     public List<Customer> getAllCustomers() {
-        return dbConnector.getAllCustomers();
+        return customerGenericRepository.getObjects();
     }
 
     @Override
     public Customer getCustomer(String customerID) {
-        throw new NotImplementedException();
+        return customerGenericRepository.getObject(Integer.parseInt(customerID));
     }
 
     @Override
@@ -37,16 +38,16 @@ public class WebInterfaceImpl implements WebInterface {
 
     @Override
     public int createNewCustomer(Customer customer) {
-        return dbConnector.createNewCustomer(customer);
+        return customerGenericRepository.postObject(customer).getId();
     }
 
     @Override
     public Customer updateCustomer(Customer customer) {
-        throw new NotImplementedException();
+        return customerGenericRepository.updateObject(customer);
     }
 
     @Override
-    public int deleteCustomer(String customerID) {return dbConnector.deleteCustomer(customerID);}
+    public int deleteCustomer(String customerID) {throw new NotImplementedException();}
 
     @Override
     public List<Order> getOrdersFromCustomer(String customerID) {
