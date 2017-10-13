@@ -1,3 +1,4 @@
+import com.sun.org.apache.xpath.internal.operations.Or;
 import model.*;
 
 import java.util.List;
@@ -5,7 +6,7 @@ import java.util.List;
 /**
  * Created by danie on 2017-09-28.
  */
-public interface WebInterface {
+public interface CustomerInterface {
 
     List<Customer> getAllCustomers();
 
@@ -23,4 +24,9 @@ public interface WebInterface {
 
     List<Order> getOrdersFromCustomer(String customerID);
 
+    List<Order> getAllOrders();
+
+    Order getOrder(String orderID);
+
+    Order createNewOrder(Order order);
 }

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by danie on 2017-09-28.
  */
-public class WebInterfaceImpl implements WebInterface {
+public class CustomerController implements CustomerInterface {
     Persistance dbConnector = new PostgresSQLConnector();
 
     @Override
@@ -50,6 +50,21 @@ public class WebInterfaceImpl implements WebInterface {
 
     @Override
     public List<Order> getOrdersFromCustomer(String customerID) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Order getOrder(String orderID) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Order createNewOrder(Order order) {
         throw new NotImplementedException();
     }
 }

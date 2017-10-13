@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import model.Customer;
+import model.Order;
 
 import static spark.Spark.*;
 
@@ -7,27 +8,42 @@ import static spark.Spark.*;
  * Starts a restapi att localhost:4567
  */
 public class WebApi {
-    private static WebInterface webInterface = new WebInterfaceImpl();
+    private static CustomerInterface ci = new CustomerController();
+    private static MaterialInterface mi;
+    private static PrintingInterface pi;
+
+    private static Gson gson = new Gson();
 
     public static void main(String[] args) {
+
+
+        long start = System.currentTimeMillis();
+        System.out.println("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*","*","*");
 
-        Gson gson = new Gson();
         get("/hello", (req, res) -> "Hello World");
 
-        // Customers
-        get("/customers", (request, response) -> webInterface.getAllCustomers(), gson::toJson);
-        get("/customers/:customerID,", ((request, response) -> webInterface.getCustomer(request.params(":customerID"))), gson::toJson);
-        get("/customers/:customerID/orders,", ((request, response) -> webInterface.getOrdersFromCustomer(request.params(":customerID"))), gson::toJson);
-        get("/customers/:customerID/digitalparts,", ((request, response) -> webInterface.getDigitalPartsFromCustomer(request.params(":customerID"))), gson::toJson);
-        get("/customers/:customerID/physicalparts,", ((request, response) -> webInterface.getPhysicalPartsFromCustomer(request.params(":customerID"))), gson::toJson);
-        post("/customers", ((request, response) -> webInterface.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
-        put("/customers", ((request, response) -> webInterface.updateCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
-        delete("/customers/:customerID,", ((request, response) -> webInterface.deleteCustomer(request.params(":customerID"))), gson::toJson);
+        setupCustomerInterface();
 
-        //get("/digitalPart/:digitalPartID", (req, res) -> webInterface.getDigitalPart(req.params("digitalPartID")), gson::toJson);
-
+        System.out.println("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis()-start) + " ms");
         System.out.println("SERVER RUNNING!");
+    }
+
+    private static void setupCustomerInterface() {
+        // Customers
+        get("/customers", (request, response) -> ci.getAllCustomers(), gson::toJson);
+        get("/customers/:customerID,", ((request, response) -> ci.getCustomer(request.params("customerID"))), gson::toJson);
+        get("/customers/:customerID/orders,", ((request, response) -> ci.getOrdersFromCustomer(request.params("customerID"))), gson::toJson);
+        get("/customers/:customerID/digitalparts,", ((request, response) -> ci.getDigitalPartsFromCustomer(request.params("customerID"))), gson::toJson);
+        get("/customers/:customerID/physicalparts,", ((request, response) -> ci.getPhysicalPartsFromCustomer(request.params("customerID"))), gson::toJson);
+        post("/customers", ((request, response) -> ci.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
+        put("/customers", ((request, response) -> ci.updateCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
+
+        //Orders
+        get("/orders", (request, response) -> ci.getAllOrders(), gson::toJson);
+        get("/orders/:orderID", (request, response) -> ci.getOrder(request.params("orderID")), gson::toJson);
+        post("/orders", ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))),gson::toJson);
+
     }
 
 
