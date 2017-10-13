@@ -14,6 +14,16 @@ import { CustomerDetailComponent } from './components/customer-detail/customer-d
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
+import { DigitalPrintListComponent } from './components/digital-print-list/digital-print-list.component';
+import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
+import { PhysicalPrintDetailComponent } from './components/physical-print-detail/physical-print-detail.component';
+import { PhysicalPrintListComponent } from './components/physical-print-list/physical-print-list.component';
+import { PhysicalPartDetailComponent } from './components/physical-part-detail/physical-part-detail.component';
+import { PhysicalPartListComponent } from './components/physical-part-list/physical-part-list.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
+import { MaterialListComponent } from './components/material-list/material-list.component';
+import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +34,16 @@ import { DigitalPartListComponent } from './components/digital-part-list/digital
     CustomerListComponent,
     CustomerDetailComponent,
     DigitalPartListComponent,
+    DigitalPrintListComponent,
+    DigitalPrintDetailComponent,
+    PhysicalPrintDetailComponent,
+    PhysicalPrintListComponent,
+    PhysicalPartDetailComponent,
+    PhysicalPartListComponent,
+    OrderDetailComponent,
+    OrderListComponent,
+    MaterialListComponent,
+    MaterialDetailComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -48,8 +68,48 @@ import { DigitalPartListComponent } from './components/digital-part-list/digital
         component: CustomerDetailComponent,
       },
       {
+        path: 'orders',
+        component: OrderListComponent,
+      },
+      {
+        path: 'orders/:id',
+        component: OrderDetailComponent,
+      },
+      {
         path: 'digital-parts',
         component: DigitalPartListComponent,
+      },
+      {
+        path: 'physical-parts',
+        component: PhysicalPartListComponent,
+      },
+      {
+        path: 'physical-parts/:id',
+        component: PhysicalPartDetailComponent,
+      },
+      {
+        path: 'digital-prints',
+        component: DigitalPrintListComponent,
+      },
+      {
+        path: 'digital-prints/:id',
+        component: DigitalPrintDetailComponent,
+      },
+      {
+        path: 'physical-prints',
+        component: PhysicalPrintListComponent,
+      },
+      {
+        path: 'physical-prints/:id',
+        component: PhysicalPrintDetailComponent,
+      },
+      {
+        path: 'materials',
+        component: MaterialListComponent,
+      },
+      {
+        path: 'materials/:id',
+        component: MaterialDetailComponent,
       },
     ]),
   ],
