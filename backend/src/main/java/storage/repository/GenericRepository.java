@@ -16,7 +16,12 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by ciff on 13/10/2017.
+ * Basic repository class that can take any model.
+ *
+ * Several things are presumed:
+ * - The model must have a default constructor
+ * - The model must set default values
+ * - The model must only use int, boolean or string (currently)
  */
 public class GenericRepository <T extends DataModel> {
 
