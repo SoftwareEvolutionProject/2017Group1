@@ -79,33 +79,7 @@ public class GenericRepository <T extends DataModel> {
         query.append(")");
 
         try {
-            System.out.println("Preparing query: "+query.toString());
-            PreparedStatement ps = this.dbInterface.getConnection().prepareStatement(
-                    query.toString(),
-                    Statement.RETURN_GENERATED_KEYS
-            );
-
-            int i = 1;
-            for (String key : jsonObject.keySet()){
-                if(Objects.equals(key, "id"))continue; //skip ID
-                JsonElement valWrapper = jsonObject.get(key);
-                JsonPrimitive val = null;
-
-                if(valWrapper.isJsonPrimitive()){
-                    val = valWrapper.getAsJsonPrimitive();
-                } else {
-                    throw new IllegalArgumentException("Invalid Object");
-                }
-
-                if (val.isNumber()){
-                    ps.setInt(i, val.getAsInt());
-                } else if (val.isString()){
-                    ps.setString(i, val.getAsString());
-                } else if (val.isBoolean()){
-                    ps.setBoolean(i, val.getAsBoolean());
-                }
-                i++;
-            }
+            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject, query);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
@@ -133,33 +107,7 @@ public class GenericRepository <T extends DataModel> {
         query.append( " WHERE id="+object.getId());
 
         try {
-            System.out.println("Preparing query: "+query.toString());
-            PreparedStatement ps = this.dbInterface.getConnection().prepareStatement(
-                    query.toString(),
-                    Statement.RETURN_GENERATED_KEYS
-            );
-
-            int i = 1;
-            for (String key : jsonObject.keySet()){
-                if(Objects.equals(key, "id"))continue; //skip ID
-                JsonElement valWrapper = jsonObject.get(key);
-                JsonPrimitive val = null;
-
-                if(valWrapper.isJsonPrimitive()){
-                    val = valWrapper.getAsJsonPrimitive();
-                } else {
-                    throw new IllegalArgumentException("Invalid Object");
-                }
-
-                if (val.isNumber()){
-                    ps.setInt(i, val.getAsInt());
-                } else if (val.isString()){
-                    ps.setString(i, val.getAsString());
-                } else if (val.isBoolean()){
-                    ps.setBoolean(i, val.getAsBoolean());
-                }
-                i++;
-            }
+            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject, query);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
@@ -169,6 +117,37 @@ public class GenericRepository <T extends DataModel> {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private PreparedStatement getPreparedStatementFromJSON(JsonObject jsonObject, StringBuilder query) throws SQLException {
+        System.out.println("Preparing query: "+query.toString());
+        PreparedStatement ps = this.dbInterface.getConnection().prepareStatement(
+                query.toString(),
+                Statement.RETURN_GENERATED_KEYS
+        );
+
+        int i = 1;
+        for (String key : jsonObject.keySet()){
+            if(Objects.equals(key, "id"))continue; //skip ID
+            JsonElement valWrapper = jsonObject.get(key);
+            JsonPrimitive val = null;
+
+            if(valWrapper.isJsonPrimitive()){
+                val = valWrapper.getAsJsonPrimitive();
+            } else {
+                throw new IllegalArgumentException("Invalid Object");
+            }
+
+            if (val.isNumber()){
+                ps.setInt(i, val.getAsInt());
+            } else if (val.isString()){
+                ps.setString(i, val.getAsString());
+            } else if (val.isBoolean()){
+                ps.setBoolean(i, val.getAsBoolean());
+            }
+            i++;
+        }
+        return ps;
     }
 
     public T deleteObject(int id) {
