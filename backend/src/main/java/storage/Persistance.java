@@ -1,7 +1,6 @@
 package storage;
 
 import model.Customer;
-import model.DigitalPart;
 
 import java.util.List;
 
@@ -10,5 +9,7 @@ public interface Persistance {
 
     List<Customer> getAllCustomers();
 
-    Customer createNewCustomer(Customer customer);
+    int createNewCustomer(Customer customer);
+
+    int deleteCustomer(String customerID);
 }

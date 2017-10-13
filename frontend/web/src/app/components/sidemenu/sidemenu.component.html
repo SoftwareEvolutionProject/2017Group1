@@ -11,6 +11,9 @@
       <li>
         <a routerLink="customers" class="nav-link" href="#" routerLinkActive="active">Customers</a>
       </li>
+      <li>
+        <a routerLink="orders" class="nav-link" href="#" routerLinkActive="active">Orders</a>
+      </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parts
           <span class="caret"></span>
@@ -31,12 +34,15 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li>
-            <a href="#">Digital Prints</a>
+            <a routerLink="digital-prints" routerLinkActive="active"  href="#">Digital Prints</a>
           </li>
           <li>
-            <a href="#">Physical Prints</a>
+            <a  routerLink="physical-prints" routerLinkActive="active" href="#">Physical Prints</a>
           </li>
         </ul>
+      </li>
+      <li>
+        <a routerLink="materials" class="nav-link" href="#" routerLinkActive="active">Materials</a>
       </li>
     </ul>
   </nav>

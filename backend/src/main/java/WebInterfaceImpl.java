@@ -3,6 +3,7 @@ import model.DigitalPart;
 import model.Order;
 import model.PhysicalPart;
 import storage.Persistance;
+import storage.PostgresSQLConnector;
 import storage.TemporaryJVMStorage;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by danie on 2017-09-28.
  */
 public class WebInterfaceImpl implements WebInterface {
-    Persistance dbConnector = new TemporaryJVMStorage();
+    Persistance dbConnector = new PostgresSQLConnector();
 
     @Override
     public List<Customer> getAllCustomers() {
@@ -35,7 +36,7 @@ public class WebInterfaceImpl implements WebInterface {
     }
 
     @Override
-    public Customer createNewCustomer(Customer customer) {
+    public int createNewCustomer(Customer customer) {
         return dbConnector.createNewCustomer(customer);
     }
 
@@ -43,6 +44,9 @@ public class WebInterfaceImpl implements WebInterface {
     public Customer updateCustomer(Customer customer) {
         throw new NotImplementedException();
     }
+
+    @Override
+    public int deleteCustomer(String customerID) {return dbConnector.deleteCustomer(customerID);}
 
     @Override
     public List<Order> getOrdersFromCustomer(String customerID) {
