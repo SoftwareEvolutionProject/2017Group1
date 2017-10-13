@@ -1,5 +1,7 @@
-import { Scene } from "./Scene"
-import { PlatformInfo } from "./PlatformInfo"
+import { Scene } from "./Scene";
+import { PlatformInfo } from "./PlatformInfo";
+import { Util } from "./Utilities";
+import { Mesh } from "./Mesh"
 
 /**
 	@class StlLoader
@@ -126,7 +128,7 @@ export class StlLoader {
         var VERTEX_BYTES = 12;
         var ATTRIB_BYTE_COUNT_BYTES = 2;
 
-        var mesh = new Mesh();
+        var mesh = new Mesh(null, null, null, null, null, null, null, null, null, null, null);
         mesh.vertexBuffer = [];
         mesh.indexBuffer = [];
         mesh.faceNormalBuffer = [];
