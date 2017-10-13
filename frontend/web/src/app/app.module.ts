@@ -14,6 +14,7 @@ import { CustomerDetailComponent } from './components/customer-detail/customer-d
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
+import { DigitalPartDetailComponent } from './components/digital-part-detail/digital-part-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DigitalPartListComponent } from './components/digital-part-list/digital
     CustomerListComponent,
     CustomerDetailComponent,
     DigitalPartListComponent,
+    DigitalPartDetailComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -51,6 +53,10 @@ import { DigitalPartListComponent } from './components/digital-part-list/digital
         path: 'digital-parts',
         component: DigitalPartListComponent,
       },
+      {
+        path: 'digital-parts/:id',
+        component: DigitalPartDetailComponent,
+      }
     ]),
   ],
   
