@@ -586,13 +586,11 @@ import { Math3D } from "./Math3D"
 
             var self = this;
             var img = new Image;
-/*
-TODO: This should do something
-            img.onload() {
+
+            img.onload = function() {
                 self.bkgImage = this;
                 self.generateBackground();
             };
-*/
 
             img.crossOrigin = 'anonymous'; // explicitly enable cross-domain image
             img.src = encodeURI(backgroundImageUrl);
@@ -613,13 +611,11 @@ TODO: This should do something
 
             var self = this;
             var newMap = new Texture(null, null);
-/*
-TODO: This needs to do something
-            newMap.onready() {
+
+            newMap.onready = function() {
                 self.sphereMap = newMap;
                 self.update();
             };
-*/
 
             newMap.createFromUrl(this.sphereMapUrl, null);
         };
@@ -1194,19 +1190,18 @@ TODO: This needs to do something
             }
 
             var self = this;
-/*
-TODO: This needs to do something!!
-            loader.onload(this.scene) {
+
+            this.loader.onload = function(scene) {
                 self.abortUnfinishedLoadingFn = null;
-                self.setupScene(this.scene);
+                self.setupScene(scene);
                 if(self.onloadingcomplete && (typeof self.onloadingcomplete) == 'function')
                     self.onloadingcomplete();
             };
-*/
-/*
-TODO: Make sure these functions actually do somehting!!! And the right thing.
+
+
+            // TODO: These can probably be extracted out from here into loader.
             //var errorMsg;
-            loader.onerror(errorMsg) {
+            this.loader.onerror = function(errorMsg) {
                 self.scene = null;
                 self.isLoaded = false;
                 self.isFailed = true;
@@ -1217,29 +1212,26 @@ TODO: Make sure these functions actually do somehting!!! And the right thing.
                     self.onloadingerror(errorMsg);
             };
 
-            loader.onprogress(task, prog) {
+            this.loader.onprogress = function(task, prog) {
                 if(self.showProgressBar)
                     self.reportProgress(task, prog);
                 if(self.onloadingprogress && (typeof self.onloadingprogress) == 'function')
                     self.onloadingprogress(task, prog);
             };
 
-            loader.onresource(resource) {
+            this.loader.onresource = function(resource) {
                 if((resource instanceof Texture) && self.isMipMappingOn && !resource.hasMipmap())
                     resource.generateMipmaps();
                 self.update();
             };
-*/
-/*
-TODO: This really needs to do something!!!
-            this.abortUnfinishedLoadingFn() {
-                loader.abort();
+
+            this.abortUnfinishedLoadingFn = function() {
+                this.loader.abort();
                 self.abortUnfinishedLoadingFn = null;
                 self.hideProgress();
                 if(self.onloadingaborted && (typeof self.onloadingaborted) == 'function')
                     self.onloadingaborted();
             };
-            */
 
             this.loader.loadFromUrl(this.sceneUrl);
 
