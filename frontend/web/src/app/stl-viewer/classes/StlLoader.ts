@@ -47,11 +47,15 @@ export class StlLoader {
             xhr.overrideMimeType('text/plain; charset=x-user-defined');
 
         xhr.onreadystatechange = function () {
+            console.log("Is this ever run??!!");
+            console.log(this.readyState);
             if (this.readyState == 4) {
+                console.log("We should now be here");
                 if (this.status == 200 || this.status == 0) {
                     if (self.onload) {
                         if (self.onprogress)
                             self.onprogress('Loading STL file ...', 1);
+                            console.log("LOADING LOADING LOADING");
 // Comments below is for Internet explorer.
 //                         if (isIE10Compatible) {
 //                             // asynchronously decode blob to binary string
