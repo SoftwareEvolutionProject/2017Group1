@@ -5,7 +5,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {ErrorService} from "../../services/error.service";
 import {Location} from '@angular/common';
-import {DigitalPartService} from "../../services/digital-part/digital-part.service";
 
 @Component({
   selector: 'app-digital-part-detail',
