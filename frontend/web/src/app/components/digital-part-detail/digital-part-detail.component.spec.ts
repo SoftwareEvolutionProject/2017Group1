@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DigitalPartDetailComponent } from './digital-part-detail.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {RouterTestingModule} from "@angular/router/testing";
+import {BsModalService} from "ngx-bootstrap";
+import {ErrorService} from "../../services/error.service";
+import {StlViewerComponent} from "../stl-viewer/stl-viewer.component"
 
 describe('DigitalPartDetailComponent', () => {
   let component: DigitalPartDetailComponent;
@@ -8,7 +13,8 @@ describe('DigitalPartDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DigitalPartDetailComponent ]
+      declarations: [ DigitalPartDetailComponent, StlViewerComponent],
+      imports: [ReactiveFormsModule, RouterTestingModule]
     })
     .compileComponents();
   }));
