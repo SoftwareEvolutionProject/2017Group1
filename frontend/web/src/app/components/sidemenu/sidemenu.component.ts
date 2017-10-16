@@ -28,8 +28,12 @@ export class SidemenuComponent implements OnInit, AfterViewInit {
     $('[data-toggle="offcanvas"]').click(function () {
       $('#wrapper').toggleClass('toggled');
     });
-  }
 
+    $('[data-toggle="collapse"]').click(function(){
+      $(this).find('i').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-up');
+    });
+  }
+  
 
   hamburger_cross() {
 
