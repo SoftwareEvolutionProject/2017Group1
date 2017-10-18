@@ -14,6 +14,7 @@ import { CustomerDetailComponent } from './components/customer-detail/customer-d
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
+import { DigitalPartDetailComponent } from './components/digital-part-detail/digital-part-detail.component';
 import { DigitalPrintListComponent } from './components/digital-print-list/digital-print-list.component';
 import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
 import { PhysicalPrintDetailComponent } from './components/physical-print-detail/physical-print-detail.component';
@@ -34,6 +35,7 @@ import { MaterialDetailComponent } from './components/material-detail/material-d
     CustomerListComponent,
     CustomerDetailComponent,
     DigitalPartListComponent,
+    DigitalPartDetailComponent,
     DigitalPrintListComponent,
     DigitalPrintDetailComponent,
     PhysicalPrintDetailComponent,
@@ -78,6 +80,10 @@ import { MaterialDetailComponent } from './components/material-detail/material-d
       {
         path: 'digital-parts',
         component: DigitalPartListComponent,
+      },
+      {
+        path: 'digital-parts/:id',
+        component: DigitalPartDetailComponent,
       },
       {
         path: 'physical-parts',
