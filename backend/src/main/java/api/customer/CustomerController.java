@@ -12,8 +12,13 @@ import java.util.List;
  * Created by danie on 2017-09-28.
  */
 public class CustomerController implements CustomerAPI {
-    DBInterface dbConnector = new PostgresSQLConnector();
-    GenericRepository<Customer> customerRepository = new GenericRepository<Customer>(Customer.class,dbConnector);
+    DBInterface dbConnector;
+    GenericRepository<Customer> customerRepository;
+
+    public CustomerController(boolean debug) {
+        this.dbConnector = new PostgresSQLConnector(debug);
+        customerRepository = new GenericRepository<Customer>(Customer.class,dbConnector);
+    }
 
     @Override
     public List<Customer> getAllCustomers() {

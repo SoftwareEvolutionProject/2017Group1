@@ -1,7 +1,7 @@
-import api.customer.CustomerController;
 import api.MaterialInterface;
 import api.PrintingInterface;
 import api.customer.CustomerAPI;
+import api.customer.CustomerController;
 import com.google.gson.Gson;
 import model.Customer;
 import model.Order;
@@ -13,18 +13,19 @@ import static spark.Spark.*;
  * Starts a restapi att localhost:4567
  */
 public class WebApi {
-    private static CustomerAPI ci = new CustomerController();
+    private static CustomerAPI ci;
     private static MaterialInterface mi;
     private static PrintingInterface pi;
 
     private static Gson gson = new Gson();
 
     public static void main(String[] args) {
-        checkRunArguments(args);
-
+        boolean debug = prepareDebug(args);
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*","*","*");
+
+        ci = new CustomerController(debug);
 
         get("/hello", (req, res) -> "Hello World");
 
@@ -82,9 +83,11 @@ public class WebApi {
         });
     }
 
-    private static void checkRunArguments(String[] arguments) {
+    private static boolean prepareDebug(String[] arguments) {
         if (arguments[0].equalsIgnoreCase("debug")) {
             port(1337);
+            return true;
         }
+        return false;
     }
 }
