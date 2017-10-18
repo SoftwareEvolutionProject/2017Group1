@@ -20,7 +20,7 @@ public interface CustomerAPI {
 
     Customer createNewCustomer(Customer customer);
 
-    Customer updateCustomer(Customer customer);
+    Customer updateCustomer(String customerID, Customer customer);
 
     int deleteCustomer(String customerID);
 

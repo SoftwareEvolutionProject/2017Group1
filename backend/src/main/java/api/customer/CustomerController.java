@@ -1,23 +1,31 @@
 package api.customer;
 
+import api.ApiController;
 import model.*;
 import storage.DBInterface;
 import storage.PostgresSQLConnector;
 import storage.repository.GenericRepository;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 /**
  * Created by danie on 2017-09-28.
  */
-public class CustomerController implements CustomerAPI {
+public class CustomerController extends ApiController implements CustomerAPI {
     DBInterface dbConnector;
     GenericRepository<Customer> customerRepository;
+    GenericRepository<Order> orderRepository;
+    GenericRepository<OrderedPart> orderedPartRepository;
+    GenericRepository<DigitalPart> digitalPartRepository;
 
     public CustomerController(boolean debug) {
         this.dbConnector = new PostgresSQLConnector(debug);
-        customerRepository = new GenericRepository<Customer>(Customer.class,dbConnector);
+        customerRepository = new GenericRepository<>(Customer.class, dbConnector);
+        orderRepository = new GenericRepository<>(Order.class, dbConnector);
+        orderedPartRepository = new GenericRepository<>(OrderedPart.class, dbConnector);
+        digitalPartRepository = new GenericRepository<>(DigitalPart.class, dbConnector);
     }
 
     @Override
@@ -32,7 +40,9 @@ public class CustomerController implements CustomerAPI {
 
     @Override
     public List<DigitalPart> getDigitalPartsFromCustomer(String customerID) {
-        throw new NotImplementedException();
+
+        //TODO needs testing
+        return digitalPartRepository.getObjects("customerID=" + customerID);
     }
 
     @Override
@@ -46,31 +56,35 @@ public class CustomerController implements CustomerAPI {
     }
 
     @Override
-    public Customer updateCustomer(Customer customer) {
+    public Customer updateCustomer(String customerID, Customer customer) {
+        checkIDs(customerID, customer);
         return customerRepository.updateObject(customer);
     }
 
     @Override
-    public int deleteCustomer(String customerID) {throw new NotImplementedException();}
+    public int deleteCustomer(String customerID) {
+        throw new NotImplementedException();
+    }
 
     @Override
     public List<Order> getOrdersFromCustomer(String customerID) {
-        throw new NotImplementedException();
+        return orderRepository.getObjects("customerID=" + customerID);
     }
 
     @Override
     public List<Order> getAllOrders() {
-        throw new NotImplementedException();
+        return orderRepository.getObjects();
+
     }
 
     @Override
     public Order getOrder(String orderID) {
-        throw new NotImplementedException();
+        return orderRepository.getObject(Integer.parseInt(orderID));
     }
 
     @Override
     public Order createNewOrder(Order order) {
-        throw new NotImplementedException();
+        return orderRepository.postObject(order);
     }
 
     @Override
@@ -80,7 +94,8 @@ public class CustomerController implements CustomerAPI {
 
     @Override
     public Order updateOrder(String orderID, Order order) {
-        throw new NotImplementedException();
+        checkIDs(orderID, order);
+        return orderRepository.updateObject(order);
     }
 
     @Override
