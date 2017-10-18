@@ -8,7 +8,7 @@ VALUES
   ('cate','cate@yahoo.com','cate'),
   ('steve','steve@yahoo.com','steve');
 
-INSERT INTO tokens(token, userid)
+INSERT INTO token(token, userid)
 values('testtoken',(select id from "users" where username = 'lee' LIMIT 1));
 
 INSERT INTO customer (name, email) VALUES ('test', 'test');
