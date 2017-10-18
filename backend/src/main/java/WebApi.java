@@ -20,6 +20,8 @@ public class WebApi {
     private static Gson gson = new Gson();
 
     public static void main(String[] args) {
+        checkRunArguments(args);
+
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*","*","*");
@@ -78,5 +80,11 @@ public class WebApi {
             // Note: this may or may not be necessary in your particular application
             response.type("application/json");
         });
+    }
+
+    private static void checkRunArguments(String[] arguments) {
+        if (arguments[0].equalsIgnoreCase("debug")) {
+            port(1337);
+        }
     }
 }
