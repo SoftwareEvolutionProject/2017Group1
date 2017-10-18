@@ -52,7 +52,7 @@ public class WebApi {
         get("/orders/:orderID/parts", (request, response) -> ci.getOrderedParts(request.params("orderID")), gson::toJson);
         post("/orders", ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))),gson::toJson);
         put("/orders/:orderID", ((request, response) -> ci.updateOrder(request.params("orderID"), gson.fromJson(request.body(), Order.class))),gson::toJson);
-        post("/orders/:orderID/parts", ((request, response) -> ci.createNewOrderDetail(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
+        post("/orders/:orderID/parts", ((request, response) -> ci.createNewOrderedPart(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
         put("/orders/:orderID/parts/:orderedPartID", ((request, response) -> ci.updateOrderDetail(request.params("orderID"), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
     }
 

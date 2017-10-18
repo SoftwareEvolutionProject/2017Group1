@@ -36,7 +36,7 @@ public interface CustomerAPI {
 
     Order updateOrder(String orderID, Order order);
 
-    OrderedPart createNewOrderDetail(String orderID, OrderedPart orderedPart);
+    OrderedPart createNewOrderedPart(String orderID, OrderedPart orderedPart);
 
     OrderedPart updateOrderDetail(String orderID, String orderedPartID, OrderedPart orderedPart);
 }
