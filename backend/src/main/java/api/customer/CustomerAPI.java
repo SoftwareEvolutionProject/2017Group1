@@ -22,7 +22,7 @@ public interface CustomerAPI {
 
     Customer updateCustomer(String customerID, Customer customer);
 
-    int deleteCustomer(String customerID);
+    String deleteCustomer(String customerID);
 
     List<Order> getOrdersFromCustomer(String customerID);
 

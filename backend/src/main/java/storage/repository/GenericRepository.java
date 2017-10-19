@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import model.DataModel;
+import org.postgresql.util.PSQLException;
 import storage.DBInterface;
 
 import java.sql.PreparedStatement;
@@ -159,16 +160,11 @@ public class GenericRepository <T extends DataModel> {
      * @param id
      * @return
      */
-    public T deleteObject(int id) {
-        String query = "DELETE * FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
+    public void deleteObject(int id) {
+        String query = "DELETE FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
         System.out.println("Running query: "+query);
-        ResultSet rs =  this.dbInterface.executeQuerry(query);
-        try {
-            return this.getMatchJSON(rs).iterator().next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        this.dbInterface.executeQuerry(query);
+
     }
 
     /***

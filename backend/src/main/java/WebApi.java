@@ -43,7 +43,7 @@ public class WebApi {
         get("/customers/:customerID/digitalparts", ((request, response) -> ci.getDigitalPartsFromCustomer(request.params("customerID"))), gson::toJson);
         get("/customers/:customerID/physicalparts", ((request, response) -> ci.getPhysicalPartsFromCustomer(request.params("customerID"))), gson::toJson);
         post("/customers", ((request, response) -> ci.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
-        put("/customers/:customerID/", ((request, response) -> ci.updateCustomer(request.params("customerID"), gson.fromJson(request.body(), Customer.class))), gson::toJson);
+        put("/customers/:customerID", ((request, response) -> ci.updateCustomer(request.params("customerID"), gson.fromJson(request.body(), Customer.class))), gson::toJson);
         delete("/customers/:customerID", ((request, response) -> ci.deleteCustomer(request.params("customerID"))), gson::toJson);
 
         //Orders

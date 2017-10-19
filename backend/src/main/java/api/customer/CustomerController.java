@@ -46,8 +46,9 @@ public class CustomerController extends ApiController implements CustomerAPI {
     }
 
     @Override
-    public int deleteCustomer(String customerID) {
-        return customerRepository.deleteObject(Integer.parseInt(customerID)).getId();
+    public String deleteCustomer(String customerID) {
+        customerRepository.deleteObject(Integer.parseInt(customerID));
+        return customerID;
     }
 
     @Override
