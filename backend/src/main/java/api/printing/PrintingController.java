@@ -2,14 +2,12 @@ package api.printing;
 
 import api.ApiController;
 import model.DataModel;
+import model.DigitalPart;
 import model.DigitalPrint;
 import storage.repository.GenericRepository;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PrintingController extends ApiController implements PrintingInterface {
     private GenericRepository<DigitalPrintEntity> digitalPrintRepository;
@@ -41,18 +39,38 @@ public class PrintingController extends ApiController implements PrintingInterfa
 
     @Override
     public DigitalPrint createDigitalPrint(DigitalPrint digitalPrint) {
-        throw new NotImplementedException();
-        //return digitalPrintRepository.postObject(digitalPrint);
+        DigitalPrintEntity dpe = extractDigitalPrintEntity(digitalPrint);
+        List<MagicsPairingEntity> mpeList = extractMagicsPairingEntity(digitalPrint);
+
+        DigitalPrintEntity returnDpe = digitalPrintRepository.postObject(dpe);
+        List<MagicsPairingEntity> returnMpeList = new LinkedList<>();
+
+        for (MagicsPairingEntity mpe : mpeList) {
+            returnMpeList.add(magicsPairingRepository.postObject(mpe));
+        }
+
+        return combine(returnDpe, returnMpeList);
     }
 
     @Override
     public DigitalPrint updateDigitalPrint(String id, DigitalPrint digitalPrint) {
         throw new NotImplementedException();
-        //checkIDs(id, digitalPrint);
-        //return digitalPrintRepository.updateObject(digitalPrint);
+        //TODO Implementation below does not support updates of labels
+//
+//        DigitalPrintEntity dpe = extractDigitalPrintEntity(digitalPrint);
+//        List<MagicsPairingEntity> mpeList = extractMagicsPairingEntity(digitalPrint);
+//
+//        DigitalPrintEntity returnDpe = digitalPrintRepository.updateObject(dpe);
+//        List<MagicsPairingEntity> returnMpeList = new LinkedList<>();
+//
+//        for (MagicsPairingEntity mpe : mpeList) {
+//            returnMpeList.add(magicsPairingRepository.updateObject(mpe));
+//        }
+//
+//        return combine(returnDpe, returnMpeList);
     }
 
-    private DigitalPrint getPairings(DigitalPrintEntity dpe){
+    private DigitalPrint getPairings(DigitalPrintEntity dpe) {
         List<MagicsPairingEntity> mpeList = magicsPairingRepository.getObjects("digitalPrintID=" + dpe.id);
         return combine(dpe, mpeList);
     }
@@ -67,9 +85,30 @@ public class PrintingController extends ApiController implements PrintingInterfa
         return new DigitalPrint(dp.id, dp.magicsPath, magicsPartPairing);
     }
 
+    private List<MagicsPairingEntity> extractMagicsPairingEntity(DigitalPrint digitalPrint) {
+        List<MagicsPairingEntity> mpeList = new LinkedList<>();
+        Set<String> labels = digitalPrint.getMagicsPartPairing().keySet();
+        for (String label : labels) {
+            mpeList.add(new MagicsPairingEntity(-1, digitalPrint.getId(), digitalPrint.getMagicsPartPairing().get(label), label));
+        }
+        return mpeList;
+
+    }
+
+    private DigitalPrintEntity extractDigitalPrintEntity(DigitalPrint digitalPrint) {
+        return new DigitalPrintEntity(digitalPrint.getId(), digitalPrint.getMagicsPath());
+    }
+
     private class MagicsPairingEntity implements DataModel {
         int id, digitalPrintID, digitalPartID;
         String label;
+
+        public MagicsPairingEntity(int id, int digitalPrintID, int digitalPartID, String label) {
+            this.id = id;
+            this.digitalPrintID = digitalPrintID;
+            this.digitalPartID = digitalPartID;
+            this.label = label;
+        }
 
         @Override
         public int getId() {
@@ -78,6 +117,17 @@ public class PrintingController extends ApiController implements PrintingInterfa
     }
 
     private class DigitalPrintEntity implements DataModel {
+
+        public DigitalPrintEntity(int id, String magicsPath) {
+            this.id = id;
+            this.magicsPath = magicsPath;
+        }
+
+        public DigitalPrintEntity(String magicsPath) {
+            this.magicsPath = magicsPath;
+            this.id = -1;
+        }
+
         int id;
         String magicsPath;
 
