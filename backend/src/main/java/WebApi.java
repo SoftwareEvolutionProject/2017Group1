@@ -1,9 +1,11 @@
 import api.MaterialInterface;
-import api.PrintingInterface;
+import api.printing.PrintingController;
+import api.printing.PrintingInterface;
 import api.customer.CustomerAPI;
 import api.customer.CustomerController;
 import com.google.gson.Gson;
 import model.Customer;
+import model.DigitalPrint;
 import model.Order;
 import model.OrderedPart;
 
@@ -18,24 +20,36 @@ public class WebApi {
     private static PrintingInterface pi;
 
     private static Gson gson = new Gson();
+    private static boolean debug;
 
     public static void main(String[] args) {
-        boolean debug = prepareDebug(args);
+        debug = prepareDebug(args);
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
-        WebApi.enableCORS("*","*","*");
+        WebApi.enableCORS("*", "*", "*");
 
-        ci = new CustomerController(debug);
 
         get("/hello", (req, res) -> "Hello World");
 
         setupCustomerInterface();
+        setupPrintingInterface();
 
-        System.out.println("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis()-start) + " ms");
+        System.out.println("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         System.out.println("SERVER RUNNING!");
     }
 
+    private static void setupPrintingInterface() {
+        pi = new PrintingController(debug);
+        get("/digitalPrint", (request, response) -> pi.getAllDigitalPrints(), gson::toJson);
+        get("/digitalPrint/:id", (request, response) -> pi.getDigitalPrint(request.params("id")), gson::toJson);
+        get("/digitalPrint/:id", (request, response) -> pi.getDigitalPrint(request.params("id")), gson::toJson);
+        post("/digitalPrint", ((request, response) -> pi.createDigitalPrint(gson.fromJson(request.body(), DigitalPrint.class))), gson::toJson);
+        put("/digitalPrint/:id", ((request, response) -> pi.updateDigitalPrint(request.params("id"), gson.fromJson(request.body(), DigitalPrint.class))), gson::toJson);
+    }
+
     private static void setupCustomerInterface() {
+        ci = new CustomerController(debug);
+
         // Customers
         get("/customers", (request, response) -> ci.getAllCustomers(), gson::toJson);
         get("/customers/:customerID", ((request, response) -> ci.getCustomer(request.params("customerID"))), gson::toJson);
@@ -50,10 +64,10 @@ public class WebApi {
         get("/orders", (request, response) -> ci.getAllOrders(), gson::toJson);
         get("/orders/:orderID", (request, response) -> ci.getOrder(request.params("orderID")), gson::toJson);
         get("/orders/:orderID/parts", (request, response) -> ci.getOrderedParts(request.params("orderID")), gson::toJson);
-        post("/orders", ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))),gson::toJson);
-        put("/orders/:orderID", ((request, response) -> ci.updateOrder(request.params("orderID"), gson.fromJson(request.body(), Order.class))),gson::toJson);
-        post("/orders/:orderID/parts", ((request, response) -> ci.createNewOrderedPart(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
-        put("/orders/:orderID/parts/:orderedPartID", ((request, response) -> ci.updateOrderDetail(request.params("orderID"), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
+        post("/orders", ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))), gson::toJson);
+        put("/orders/:orderID", ((request, response) -> ci.updateOrder(request.params("orderID"), gson.fromJson(request.body(), Order.class))), gson::toJson);
+        post("/orders/:orderID/parts", ((request, response) -> ci.createNewOrderedPart(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
+        put("/orders/:orderID/parts/:orderedPartID", ((request, response) -> ci.updateOrderDetail(request.params("orderID"), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.
@@ -84,7 +98,7 @@ public class WebApi {
     }
 
     private static boolean prepareDebug(String[] arguments) {
-        if (arguments[0].equalsIgnoreCase("debug")) {
+        if (arguments.length > 0 && arguments[0].equalsIgnoreCase("debug")) {
             port(1337);
             return true;
         }
