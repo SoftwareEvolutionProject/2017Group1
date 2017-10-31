@@ -1,6 +1,5 @@
 package api.customer;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import model.*;
 
 import java.util.List;
