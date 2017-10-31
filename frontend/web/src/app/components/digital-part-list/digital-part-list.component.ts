@@ -95,10 +95,10 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   }
 
   private prepareTriggers() {
-    /*let _self = this;
+    let _self = this;
     (<any>this.table).on('click-row.bs.table', function (row, $element) {
       _self.router.navigate([_self.router.url, $element.id]);
-    })*/
+    })
   }
 
   private amountFormatter(value, row, index) {

@@ -1,6 +1,5 @@
 package api.customer;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import model.*;
 
 import java.util.List;
@@ -20,9 +19,9 @@ public interface CustomerAPI {
 
     Customer createNewCustomer(Customer customer);
 
-    Customer updateCustomer(Customer customer);
+    Customer updateCustomer(String customerID, Customer customer);
 
-    int deleteCustomer(String customerID);
+    String deleteCustomer(String customerID);
 
     List<Order> getOrdersFromCustomer(String customerID);
 
@@ -36,7 +35,7 @@ public interface CustomerAPI {
 
     Order updateOrder(String orderID, Order order);
 
-    OrderedPart createNewOrderDetail(String orderID, OrderedPart orderedPart);
+    OrderedPart createNewOrderedPart(String orderID, OrderedPart orderedPart);
 
     OrderedPart updateOrderDetail(String orderID, String orderedPartID, OrderedPart orderedPart);
 }

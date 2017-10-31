@@ -1,9 +1,7 @@
 package api.digitalpart;
 
+import api.ApiController;
 import model.DigitalPart;
-import storage.DBInterface;
-import storage.PostgresSQLConnector;
-import storage.repository.GenericRepository;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
@@ -11,9 +9,11 @@ import java.util.List;
 /**
  * Created by Mikae on 2017-10-16.
  */
-public class DigitalPartController implements DigitalPartAPI {
-    DBInterface dbConnector = new PostgresSQLConnector();
-    GenericRepository<DigitalPart> digitalPartRepository = new GenericRepository<>(DigitalPart.class, dbConnector);
+public class DigitalPartController extends ApiController implements DigitalPartAPI {
+
+    public DigitalPartController(boolean debug) {
+        super(debug);
+    }
 
     @Override
     public List<DigitalPart> getAllDigitalParts() {
