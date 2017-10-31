@@ -7,8 +7,9 @@ public class DigitalPart   implements DataModel {
     private String stlPath;
     private String cadPath;
 
-    public DigitalPart(int id, String stlPath, String cadPath) {
+    public DigitalPart(int id, String name,String stlPath, String cadPath) {
         this.id = id;
+        this.name = name;
         this.stlPath = stlPath;
         this.cadPath = cadPath;
     }

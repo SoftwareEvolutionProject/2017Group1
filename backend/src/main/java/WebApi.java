@@ -2,8 +2,11 @@ import api.customer.CustomerController;
 import api.MaterialInterface;
 import api.PrintingInterface;
 import api.customer.CustomerAPI;
+import api.digitalpart.DigitalPartAPI;
+import api.digitalpart.DigitalPartController;
 import com.google.gson.Gson;
 import model.Customer;
+import model.DigitalPart;
 import model.Order;
 import model.OrderedPart;
 
@@ -14,6 +17,7 @@ import static spark.Spark.*;
  */
 public class WebApi {
     private static CustomerAPI ci = new CustomerController();
+    private static DigitalPartAPI dpi = new DigitalPartController();
     private static MaterialInterface mi;
     private static PrintingInterface pi;
 
@@ -22,13 +26,15 @@ public class WebApi {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
-        WebApi.enableCORS("*","*","*");
+        WebApi.enableCORS("*", "*", "*");
 
         get("/hello", (req, res) -> "Hello World");
 
         setupCustomerInterface();
+        setupOrderInterface();
+        setupDigitalPartsInterface();
 
-        System.out.println("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis()-start) + " ms");
+        System.out.println("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         System.out.println("SERVER RUNNING!");
     }
 
@@ -42,15 +48,25 @@ public class WebApi {
         post("/customers", ((request, response) -> ci.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
         put("/customers/:customerID/", ((request, response) -> ci.updateCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
         delete("/customers/:customerID", ((request, response) -> ci.deleteCustomer(request.params(":customerID"))), gson::toJson);
+    }
 
+    private static void setupDigitalPartsInterface() {
+        //DigitalParts
+        get("/digital-parts", (request, response) -> dpi.getAllDigitalParts(), gson::toJson);
+        get("/digital-parts/:digitalPartID", (request, response) -> dpi.getDigitalPart(request.params("digitalPartID")), gson::toJson);
+        post("/digital-parts", (request, response) ->  dpi.createNewDigitalPart(gson.fromJson(request.body(), DigitalPart.class)),gson::toJson);
+        put("/digital-parts/:digitalPartID",(request, response) -> dpi.updateDigitalPart(gson.fromJson(request.body(),DigitalPart.class)),gson::toJson);
+    }
+
+    private static void setupOrderInterface() {
         //Orders
         get("/orders", (request, response) -> ci.getAllOrders(), gson::toJson);
         get("/orders/:orderID", (request, response) -> ci.getOrder(request.params("orderID")), gson::toJson);
         get("/orders/:orderID/parts", (request, response) -> ci.getOrderedParts(request.params("orderID")), gson::toJson);
-        post("/orders", ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))),gson::toJson);
-        put("/orders/:orderID", ((request, response) -> ci.updateOrder(request.params("orderID"), gson.fromJson(request.body(), Order.class))),gson::toJson);
-        post("/orders/:orderID/parts", ((request, response) -> ci.createNewOrderDetail(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
-        put("/orders/:orderID/parts/:orderedPartID", ((request, response) -> ci.updateOrderDetail(request.params("orderID"), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
+        post("/orders", ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))), gson::toJson);
+        put("/orders/:orderID", ((request, response) -> ci.updateOrder(request.params("orderID"), gson.fromJson(request.body(), Order.class))), gson::toJson);
+        post("/orders/:orderID/parts", ((request, response) -> ci.createNewOrderDetail(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
+        put("/orders/:orderID/parts/:orderedPartID", ((request, response) -> ci.updateOrderDetail(request.params("orderID"), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.
