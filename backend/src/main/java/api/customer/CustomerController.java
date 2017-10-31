@@ -1,19 +1,18 @@
 package api.customer;
 
+import api.ApiController;
 import model.*;
-import storage.DBInterface;
-import storage.PostgresSQLConnector;
-import storage.repository.GenericRepository;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.List;
 
 /**
  * Created by danie on 2017-09-28.
  */
-public class CustomerController implements CustomerAPI {
-    DBInterface dbConnector = new PostgresSQLConnector();
-    GenericRepository<Customer> customerRepository = new GenericRepository<Customer>(Customer.class,dbConnector);
+public class CustomerController extends ApiController implements CustomerAPI {
+
+
+    public CustomerController(boolean debug) {
+        super(debug);
+    }
 
     @Override
     public List<Customer> getAllCustomers() {
@@ -27,12 +26,12 @@ public class CustomerController implements CustomerAPI {
 
     @Override
     public List<DigitalPart> getDigitalPartsFromCustomer(String customerID) {
-        throw new NotImplementedException();
+        return digitalPartRepository.getObjects("customerID=" + customerID);
     }
 
     @Override
     public List<PhysicalPart> getPhysicalPartsFromCustomer(String customerID) {
-        throw new NotImplementedException();
+        return physicalPartRepository.getObjects("customerID= " + customerID);
     }
 
     @Override
@@ -41,50 +40,57 @@ public class CustomerController implements CustomerAPI {
     }
 
     @Override
-    public Customer updateCustomer(Customer customer) {
+    public Customer updateCustomer(String customerID, Customer customer) {
+        checkIDs(customerID, customer);
         return customerRepository.updateObject(customer);
     }
 
     @Override
-    public int deleteCustomer(String customerID) {throw new NotImplementedException();}
+    public String deleteCustomer(String customerID) {
+        customerRepository.deleteObject(Integer.parseInt(customerID));
+        return customerID;
+    }
 
     @Override
     public List<Order> getOrdersFromCustomer(String customerID) {
-        throw new NotImplementedException();
+        return orderRepository.getObjects("customerID=" + customerID);
     }
 
     @Override
     public List<Order> getAllOrders() {
-        throw new NotImplementedException();
+        return orderRepository.getObjects();
+
     }
 
     @Override
     public Order getOrder(String orderID) {
-        throw new NotImplementedException();
+        return orderRepository.getObject(Integer.parseInt(orderID));
     }
 
     @Override
     public Order createNewOrder(Order order) {
-        throw new NotImplementedException();
+        return orderRepository.postObject(order);
     }
 
     @Override
     public List<OrderedPart> getOrderedParts(String orderID) {
-        throw new NotImplementedException();
+        return orderedPartRepository.getObjects("orderID="+orderID);
     }
 
     @Override
     public Order updateOrder(String orderID, Order order) {
-        throw new NotImplementedException();
+        checkIDs(orderID, order);
+        return orderRepository.updateObject(order);
     }
 
     @Override
-    public OrderedPart createNewOrderDetail(String orderID, OrderedPart orderedPart) {
-        throw new NotImplementedException();
+    public OrderedPart createNewOrderedPart(String orderID, OrderedPart orderedPart) {
+        return orderedPartRepository.postObject(orderedPart);
     }
 
     @Override
     public OrderedPart updateOrderDetail(String orderID, String orderedPartID, OrderedPart orderedPart) {
-        throw new NotImplementedException();
+        checkIDs(orderedPartID,orderedPart);
+        return orderedPartRepository.updateObject(orderedPart);
     }
 }

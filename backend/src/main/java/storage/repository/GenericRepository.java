@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import model.DataModel;
+import org.postgresql.util.PSQLException;
 import storage.DBInterface;
 
 import java.sql.PreparedStatement;
@@ -40,9 +41,31 @@ public class GenericRepository <T extends DataModel> {
      * @return
      */
     public List<T> getObjects() {
-        String query = "SELECT * FROM "+ type.getSimpleName();
+        String query = "SELECT * FROM \""+ type.getSimpleName().toLowerCase()+ "\"";
         System.out.println("Running query: "+query);
         ResultSet rs =  this.dbInterface.executeQuerry(query);
+        try {
+            return this.getMatchJSON(rs); //converts resulting set to model instance
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<T> getObjects(String sqlConditions, Class ... tables){
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM \"");
+        sb.append(type.getSimpleName().toLowerCase());
+        sb.append("\"");
+        for(Class table : tables){
+            sb.append(",\"");
+            sb.append(table.getSimpleName());
+            sb.append("\"");
+        }
+        sb.append(" WHERE ");
+        sb.append(sqlConditions);
+
+        ResultSet rs =  this.dbInterface.executeQuerry(sb.toString());
         try {
             return this.getMatchJSON(rs); //converts resulting set to model instance
         } catch (SQLException e) {
@@ -57,7 +80,7 @@ public class GenericRepository <T extends DataModel> {
      * @return
      */
     public T getObject(int id) {
-        String query = "SELECT * FROM "+ type.getSimpleName() +" WHERE id="+id;
+        String query = "SELECT * FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
         System.out.println("Running query: "+query);
         ResultSet rs =  this.dbInterface.executeQuerry(query);
         try {
@@ -75,7 +98,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public T postObject(T object) {
         JsonObject jsonObject = this.gson.toJsonTree(object).getAsJsonObject();
-        StringBuilder query = new StringBuilder("INSERT INTO "+ type.getSimpleName() +" (");
+        StringBuilder query = new StringBuilder("INSERT INTO \""+ type.getSimpleName().toLowerCase() +"\" (");
 
         for (String key : jsonObject.keySet()){
             if(Objects.equals(key, "id"))continue; //skip ID
@@ -102,7 +125,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public T updateObject(T object) {
         JsonObject jsonObject = this.gson.toJsonTree(object).getAsJsonObject();
-        StringBuilder query = new StringBuilder("UPDATE "+ type.getSimpleName()+" SET");
+        StringBuilder query = new StringBuilder("UPDATE \""+ type.getSimpleName().toLowerCase()+"\" SET");
 
         for (String key : jsonObject.keySet()){
             if(Objects.equals(key, "id"))continue; //skip id
@@ -137,16 +160,11 @@ public class GenericRepository <T extends DataModel> {
      * @param id
      * @return
      */
-    public T deleteObject(int id) {
-        String query = "DELETE * FROM "+ type.getSimpleName() +" WHERE id="+id;
+    public void deleteObject(int id) {
+        String query = "DELETE FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
         System.out.println("Running query: "+query);
-        ResultSet rs =  this.dbInterface.executeQuerry(query);
-        try {
-            return this.getMatchJSON(rs).iterator().next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        this.dbInterface.executeQuerry(query);
+
     }
 
     /***

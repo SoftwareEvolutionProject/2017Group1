@@ -1,19 +1,22 @@
 package storage;
 
 
-
 import java.sql.*;
 import java.util.Properties;
 
 public class PostgresSQLConnector implements DBInterface {
 
-    private static final String CONNECTION_URL = "jdbc:postgresql://db:5432/svereadb";
+    private static final String CONNECTION_URL_DOCKER = "jdbc:postgresql://db:5432/svereadb";
+    private static final String CONNECTION_URL_DEBUG = "jdbc:postgresql://localhost:5432/svereadb";
     private static final String USERNAME = "admin";
     private static final String PWD = "1234";
+
+    private static String CONNECTION_URL;
     final Properties connectionProperties = new Properties();
     Connection conn = null;
 
-    public PostgresSQLConnector() {
+    public PostgresSQLConnector(boolean debug) {
+        CONNECTION_URL = debug ? CONNECTION_URL_DEBUG : CONNECTION_URL_DOCKER;
         try {
             this.establishConnection();
         } catch (SQLException e) {
@@ -36,7 +39,7 @@ public class PostgresSQLConnector implements DBInterface {
 
     @Override
     public ResultSet executeQuerry(String query) {
-        PreparedStatement  stmt = null;
+        PreparedStatement stmt = null;
 
         try {
             stmt = this.conn.prepareStatement(query);
