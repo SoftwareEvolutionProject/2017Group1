@@ -9,10 +9,10 @@ RUN apt-get install -y -q --no-install-recommends make vim postgresql-client
 RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
 RUN  export PHANTOMJS_BIN=/usr/local/lib/node_modules/karma-phantomjs-launcher/node_modules/phantomjs/lib/phantom/bin/phantomjs
 
-# Install Chrome
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -y google-chrome-stable
+# Install Chromium
+RUN apt-get update \
+    && apt-get install -y chromium
+ENV CHROME_BIN=chromium
 
 #Install node and npm
 ENV NVM_DIR /usr/local/nvm
