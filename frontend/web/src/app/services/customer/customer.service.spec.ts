@@ -5,12 +5,14 @@ import {MockConnection} from "@angular/http/testing";
 import {Http} from "@angular/http";
 import {BaseRequestOptions, Response, ResponseOptions} from "@angular/http";
 import {Customer} from "../../model/customer";
+import {HttpClientService} from "../http/http-client.service";
 
 describe('CustomerService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         CustomerService,
+        HttpClientService,
         MockBackend,
         BaseRequestOptions,
         {
