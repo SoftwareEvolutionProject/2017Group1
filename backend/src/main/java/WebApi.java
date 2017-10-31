@@ -44,7 +44,6 @@ public class WebApi {
         get("/digitalPrint/:id", (request, response) -> pi.getDigitalPrint(request.params("id")), gson::toJson);
         get("/digitalPrint/:id", (request, response) -> pi.getDigitalPrint(request.params("id")), gson::toJson);
         post("/digitalPrint", ((request, response) -> pi.createDigitalPrint(gson.fromJson(request.body(), DigitalPrint.class))), gson::toJson);
-        put("/digitalPrint/:id", ((request, response) -> pi.updateDigitalPrint(request.params("id"), gson.fromJson(request.body(), DigitalPrint.class))), gson::toJson);
     }
 
     private static void setupCustomerInterface() {

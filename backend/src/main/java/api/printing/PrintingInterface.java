@@ -11,5 +11,4 @@ public interface PrintingInterface {
 
     DigitalPrint createDigitalPrint(DigitalPrint digitalPrint);
 
-    DigitalPrint updateDigitalPrint(String id, DigitalPrint digitalPrint);
 }

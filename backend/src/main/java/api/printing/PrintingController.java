@@ -52,24 +52,6 @@ public class PrintingController extends ApiController implements PrintingInterfa
         return combine(returnDpe, returnMpeList);
     }
 
-    @Override
-    public DigitalPrint updateDigitalPrint(String id, DigitalPrint digitalPrint) {
-        throw new NotImplementedException();
-        //TODO Implementation below does not support updates of labels
-//
-//        DigitalPrintEntity dpe = extractDigitalPrintEntity(digitalPrint);
-//        List<MagicsPairingEntity> mpeList = extractMagicsPairingEntity(digitalPrint);
-//
-//        DigitalPrintEntity returnDpe = digitalPrintRepository.updateObject(dpe);
-//        List<MagicsPairingEntity> returnMpeList = new LinkedList<>();
-//
-//        for (MagicsPairingEntity mpe : mpeList) {
-//            returnMpeList.add(magicsPairingRepository.updateObject(mpe));
-//        }
-//
-//        return combine(returnDpe, returnMpeList);
-    }
-
     private DigitalPrint getPairings(DigitalPrintEntity dpe) {
         List<MagicsPairingEntity> mpeList = magicsPairingRepository.getObjects("digitalPrintID=" + dpe.id);
         return combine(dpe, mpeList);
