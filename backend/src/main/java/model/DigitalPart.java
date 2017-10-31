@@ -7,7 +7,6 @@ public class DigitalPart implements DataModel {
     private String stlPath;
     private String cadPath;
 
-
     public DigitalPart() {
         this.id = -1;
         this.customerID = -1;

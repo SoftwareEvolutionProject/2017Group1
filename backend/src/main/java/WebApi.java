@@ -1,9 +1,12 @@
 import api.MaterialInterface;
 import api.PrintingInterface;
 import api.customer.CustomerAPI;
+import api.digitalpart.DigitalPartAPI;
+import api.digitalpart.DigitalPartController;
 import api.customer.CustomerController;
 import com.google.gson.Gson;
 import model.Customer;
+import model.DigitalPart;
 import model.Order;
 import model.OrderedPart;
 
@@ -13,7 +16,8 @@ import static spark.Spark.*;
  * Starts a restapi att localhost:4567
  */
 public class WebApi {
-    private static CustomerAPI ci;
+    private static CustomerAPI ci = new CustomerController(true);
+    private static DigitalPartAPI dpi = new DigitalPartController(true);
     private static MaterialInterface mi;
     private static PrintingInterface pi;
     private static final String CUSTOMERS = "/customers";
@@ -26,15 +30,17 @@ public class WebApi {
         boolean debug = prepareDebug(args);
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
-        WebApi.enableCORS("*","*","*");
+        WebApi.enableCORS("*", "*", "*");
 
         ci = new CustomerController(debug);
 
         get("/hello", (req, res) -> "Hello World");
 
         setupCustomerInterface();
+        setupOrderInterface();
+        setupDigitalPartsInterface();
 
-        System.out.println("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis()-start) + " ms");
+        System.out.println("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         System.out.println("SERVER RUNNING!");
     }
 
@@ -48,7 +54,17 @@ public class WebApi {
         post(CUSTOMERS, ((request, response) -> ci.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
         put(CUSTOMERS + CUSOMTER_ID, ((request, response) -> ci.updateCustomer(request.params("customerID"), gson.fromJson(request.body(), Customer.class))), gson::toJson);
         delete(CUSTOMERS + CUSOMTER_ID, ((request, response) -> ci.deleteCustomer(request.params("customerID"))), gson::toJson);
+    }
 
+    private static void setupDigitalPartsInterface() {
+        //DigitalParts
+        get("/digital-parts", (request, response) -> dpi.getAllDigitalParts(), gson::toJson);
+        get("/digital-parts/:digitalPartID", (request, response) -> dpi.getDigitalPart(request.params("digitalPartID")), gson::toJson);
+        post("/digital-parts", (request, response) ->  dpi.createNewDigitalPart(gson.fromJson(request.body(), DigitalPart.class)),gson::toJson);
+        put("/digital-parts/:digitalPartID",(request, response) -> dpi.updateDigitalPart(gson.fromJson(request.body(),DigitalPart.class)),gson::toJson);
+    }
+
+    private static void setupOrderInterface() {
         //Orders
         get(ORDERS, (request, response) -> ci.getAllOrders(), gson::toJson);
         get(ORDERS + ORDER_ID, (request, response) -> ci.getOrder(request.params("orderID")), gson::toJson);
