@@ -7,11 +7,9 @@ module.exports = function (config) {
   config.set({
 
     customLaunchers: {
-      ChromeCustom: {
+      Chrome_without_sandbox: {
         base: 'ChromeHeadless',
-        // We must disable the Chrome sandbox when running Chrome inside Docker (Chrome's sandbox needs
-        // more permissions than Docker allows by default)
-        flags: ['--no-sandbox']//isDocker ? ['--no-sandbox'] : [] //isDocker fails?
+        flags: ['--no-sandbox'] // with sandbox it fails under Docker
       }
     },
 
@@ -23,7 +21,7 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
-      require('@angular/cli/plugins/karma'),
+      require('@angular/cli/plugins/karma')
     ],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
