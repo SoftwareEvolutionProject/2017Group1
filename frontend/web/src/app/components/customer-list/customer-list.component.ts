@@ -19,6 +19,9 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
+  selectedCustomer: Customer = null;
+  private showDetail: boolean = false;
+  private showCreating: boolean = false;
 
   constructor(private customerService: CustomerService,
               private errorService : ErrorService,
@@ -100,10 +103,12 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   }
 
   private prepareTriggers() {
-    /*let _self = this;
+    let _self = this;
     (<any>this.table).on('click-row.bs.table', function (row, $element) {
-      _self.router.navigate([_self.router.url, $element.id]);
-    })*/
+      _self.selectedCustomer =  _self.customers.filter(customer => {if(customer.id ==  $element.id)return customer})[0];
+      _self.showDetail = true;
+      _self.showCreating = false;
+    });
   }
 
   private amountFormatter(value, row, index) {
@@ -114,9 +119,9 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
 
   private operateFormatter(value, row, index) {
     return [
-      '<button class="edit btn btn-xs btn-primary" href="javascript:void(0)" title="Edit">',
+      /*'<button class="edit btn btn-xs btn-primary" href="javascript:void(0)" title="Edit">',
       '<i class="glyphicon glyphicon-pencil"></i>',
-      '</button>  ',
+      '</button>  ',*/
       '<button  class="delete btn btn-xs btn-danger" href="javascript:void(0)" title="Delete">',
       '<i class="glyphicon glyphicon-trash"></i>',
       '</button>'
@@ -156,7 +161,17 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private create() {
-    this.router.navigate([this.router.url + "/create"]);
+  private detailPanelChange(){
+    this.selectedCustomer = null;
+    this.loadAndPopulate();
+    this.showCreating = false;
+    this.showDetail = false;
+  }
+
+  private create() {/*
+    this.router.navigate([this.router.url + "/create"]);*/
+    this.selectedCustomer = null;
+    this.showCreating = true;
+    this.showDetail = false;
   }
 }

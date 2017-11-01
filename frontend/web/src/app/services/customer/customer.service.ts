@@ -36,10 +36,10 @@ export class CustomerService {
           return data;
       })
   }
-  updateCustomer(customer: Customer) : Observable<boolean> {
+  updateCustomer(customer: Customer) : Observable<Customer> {
     return this.client.put(this.endpoint + "/" + customer.id, JSON.stringify(customer))
       .map((data) => {
-        return true;
+        return data;
       })
   }
 

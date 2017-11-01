@@ -1,20 +1,41 @@
 <div class="container">
-  <h2>Customers</h2>
-  <table id="table"
-         data-search="true"
-         data-pagination="true"
-         data-page-list="[10, 25, 50, 100, ALL]">
 
-    <thead>
-    <tr>
-    </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <br>
-  <div class="pull-right">
-    <button class="btn btn-primary" style="min-width: 100px" (click)="create()">
-      <span style="margin-right: 5px;" class="glyphicon glyphicon-plus"></span> Add Customer </button>
+  <div class="row">
+    <h2>Customers</h2><hr>
+  </div>
+  <div class="row">
+    <div class="col-md-7" id="list">
+      <table id="table"
+             data-search="true"
+             data-search-align="left"
+             data-pagination="true"
+             data-page-list="[10, 25, 50, 100, ALL]">
+
+        <thead>
+        <tr>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <br>
+    </div>
+    <div class="col-md-5" id="detail">
+        <div style="margin-bottom: 10px; margin-top: 10px">
+          <button class="btn btn-primary" style="min-width: 100px" (click)="create()">
+            <span style="margin-left : 5px" class="glyphicon glyphicon-plus"></span> Add Customer </button>
+        </div>
+
+
+      <div  *ngIf="showCreating">
+        <app-customer-detail *ngIf="showCreating" (changed)="detailPanelChange()" [customer]="selectedCustomer"
+                             [creating]="true">
+        </app-customer-detail>
+      </div>
+
+      <app-customer-detail *ngIf="showDetail" (changed)="detailPanelChange()" [customer]="selectedCustomer"
+        [creating]="false">
+      </app-customer-detail>
+    </div>
   </div>
 </div>
 
@@ -41,3 +62,5 @@
     </div>
   </div>
 </ng-template>
+
+

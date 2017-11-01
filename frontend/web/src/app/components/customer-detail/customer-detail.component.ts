@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges, OnChanges, EventEmitter, Output} from '@angular/core';
 import {Customer} from "../../model/customer";
 import {CustomerMockService} from "../../services/customer/customer-mock.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ErrorService} from "../../services/error.service";
 import {Location} from '@angular/common';
 import {CustomerService} from "../../services/customer/customer.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-customer-detail',
@@ -13,15 +14,14 @@ import {CustomerService} from "../../services/customer/customer.service";
   styleUrls: ['./customer-detail.component.scss'],
   providers: [CustomerService, ErrorService]
 })
-export class CustomerDetailComponent implements OnInit {
+export class CustomerDetailComponent implements OnInit, OnChanges {
+  @Input('customer') customer: Customer;
+  @Input('creating') creating: boolean = false;
+  @Output() changed: EventEmitter<Customer> = new EventEmitter<Customer>();
   private loaded : boolean = false;
-  private creating: boolean = false;
 
   /* forms */
   private requiredFieldsForm: FormGroup = null;
-
-  /* data */
-  private customer: Customer = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,11 +33,8 @@ export class CustomerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let id = params['id'];
-      if(!id || id == "create"){ //new product is being created
-        this.creating = true;
-        /* init with a boilerplate */
-        if(this.creating)this.customer = new Customer({});
-        this.populate();
+      if(id == "create"){ //new product is being created
+        this.create();
       }
       else if(id)
         this.getData(id);
@@ -47,6 +44,19 @@ export class CustomerDetailComponent implements OnInit {
   ngAfterViewInit() {
   }
 
+  create(){
+    /* init with a boilerplate */
+    if(this.creating)this.customer = new Customer({});
+    this.populate();
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(this.creating){
+      this.create();
+    } else if(this.customer){
+      this.populate();
+    }
+  }
 
   /* get the product */
   getData(id){
@@ -90,7 +100,7 @@ export class CustomerDetailComponent implements OnInit {
     if(this.creating) { // a new product
       this.customerService.createCustomer(customer).subscribe(
         data => {
-          this.back();
+          this.changed.emit(data);
         }, error => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
@@ -99,13 +109,17 @@ export class CustomerDetailComponent implements OnInit {
     } else {
       this.customerService.updateCustomer(customer).subscribe(
         data => {
-          this.back();
+          this.changed.emit(data);
         }, error => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
         }
       );
     }
+  }
+
+  cancel(){
+    this.changed.emit(this.customer);
   }
 
   back(){
