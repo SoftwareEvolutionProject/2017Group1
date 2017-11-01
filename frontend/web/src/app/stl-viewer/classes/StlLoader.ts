@@ -37,7 +37,6 @@ export class StlLoader {
         var isIE10Compatible = false;//(isIE && parseInt(JSC3D.PlatformInfo.version) >= 10);
         var xhr = new XMLHttpRequest;
         xhr.open('GET', encodeURI(urlName), true);
-        console.log("Opens file!!!!!!!!!");
 //IE Code below
 /*        if (isIE10Compatible)
             xhr.responseType = 'blob';	// use blob method to deal with STL files for IE >= 10
@@ -47,15 +46,11 @@ export class StlLoader {
             xhr.overrideMimeType('text/plain; charset=x-user-defined');
 
         xhr.onreadystatechange = function () {
-            console.log("Is this ever run??!!");
-            console.log(this.readyState);
             if (this.readyState == 4) {
-                console.log("We should now be here");
                 if (this.status == 200 || this.status == 0) {
                     if (self.onload) {
                         if (self.onprogress)
                             self.onprogress('Loading STL file ...', 1);
-                            console.log("LOADING LOADING LOADING");
 // Comments below is for Internet explorer.
 //                         if (isIE10Compatible) {
 //                             // asynchronously decode blob to binary string
@@ -82,8 +77,6 @@ export class StlLoader {
                         var scene = new Scene(null);
                         scene.srcUrl = urlName;
                         self.parseStl(scene, this.responseText);
-                        console.log("PARSING STL FILE!!!!!!!!!!!!!!!!!!!!!!!!");
-                        console.log(scene);
                         self.onload(scene);
                         //}
                     }

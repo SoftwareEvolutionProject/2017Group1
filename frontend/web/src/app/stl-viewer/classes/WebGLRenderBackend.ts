@@ -450,10 +450,7 @@ export class WebGLRenderBackend {
      * Do render a new frame.
      */
     render(renderList, transformMatrix, normalMatrix, renderMode, defaultMaterial, sphereMap, isCullingDisabled) {
-        console.log("Rendering with WebGL");
-        console.log(renderList);
         var gl = this.gl;
-        console.log(gl);
 
         var transformMat4Flattened = new Float32Array([
             transformMatrix.m00, transformMatrix.m10, transformMatrix.m20, 0, 
@@ -500,7 +497,6 @@ export class WebGLRenderBackend {
 
         // sort render list
         renderList = sortRenderList(renderList);
-        console.log("RenderList", renderList);
 
         // render the color pass
         this.renderColorPass(renderList, transformMat4Flattened, normalMat3Flattened, renderMode, defaultMaterial, sphereMap, isCullingDisabled);

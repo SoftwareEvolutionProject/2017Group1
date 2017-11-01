@@ -33,7 +33,6 @@ export class PlatformInfo {
                 break;
             }
         }*/
-        console.log("Make sure that platformInfo.ts actually get the correct data to the info.");
         
     }
 }
