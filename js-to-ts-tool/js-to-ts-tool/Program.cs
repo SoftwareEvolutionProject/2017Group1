@@ -13,9 +13,9 @@ namespace js_to_ts_tool {
                 return;
             }
 
-            string[] fileText;
+            String fileText;
             try {
-                fileText = File.ReadAllLines(args[0]);
+                fileText = File.ReadAllText(args[0]);
             }
             catch (Exception e) {
                 Console.WriteLine(e.ToString());
