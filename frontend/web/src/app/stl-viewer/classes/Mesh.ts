@@ -214,8 +214,8 @@ export class Mesh {
 		var minX = Infinity;
 		var minY = Infinity;
 		var minZ = Infinity;
-		var maxX = Infinity;
-		var maxY = Infinity;
+		var maxX = -Infinity;
+		var maxY = -Infinity;
 		var maxZ = -Infinity;
 
 		var vbuf = this.vertexBuffer;
