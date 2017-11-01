@@ -1,6 +1,5 @@
 package storage;
 
-
 import java.sql.*;
 import java.util.Properties;
 
@@ -29,10 +28,7 @@ public class PostgresSQLConnector implements DBInterface {
         this.connectionProperties.put("user", USERNAME);
         this.connectionProperties.put("password", PWD);
 
-
-        this.conn = DriverManager.getConnection(
-                this.CONNECTION_URL,
-                connectionProperties);
+        this.conn = DriverManager.getConnection(this.CONNECTION_URL, connectionProperties);
 
         System.out.println("Connected to database");
     }
@@ -46,6 +42,8 @@ public class PostgresSQLConnector implements DBInterface {
             return stmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("Execute Querry failed");
         }
         return null;
     }
