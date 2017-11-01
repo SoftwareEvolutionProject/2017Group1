@@ -14,8 +14,8 @@ import static spark.Spark.*;
  * Starts a restapi att localhost:4567
  */
 public class WebApi {
-    private static CustomerAPI ci = new CustomerController(true);
-    private static DigitalPartAPI dpi = new DigitalPartController(true);
+    private static CustomerAPI ci;
+    private static DigitalPartAPI dpi;
     private static MaterialInterface mi;
     private static PrintingInterface pi;
     private static final String CUSTOMERS = "/customers";
@@ -30,11 +30,12 @@ public class WebApi {
     private static boolean debug;
 
     public static void main(String[] args) {
-        debug = prepareDebug(args);
+        boolean debug = prepareDebug(args);
+        ci = new CustomerController(debug);
+        dpi = new DigitalPartController(debug);
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*", "*", "*");
-
 
         get("/hello", (req, res) -> "Hello World");
 
