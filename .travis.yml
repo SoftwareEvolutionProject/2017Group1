@@ -21,6 +21,7 @@ addons:
     branches:
       - master
       - develop
+      - bugfix/sonarqube-ts-fix
 
 cache:
   directories:
