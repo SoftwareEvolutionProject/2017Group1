@@ -30,8 +30,6 @@ namespace js_to_ts_tool {
             fetchAllClassnames();
             cleanUpClasses();
             printToFile();
-
-
             return true;
         }
         
@@ -50,6 +48,7 @@ namespace js_to_ts_tool {
                 using (StreamWriter sw = File.CreateText(path)) {
                     sw.Write(classes[i]);
                     sw.WriteLine(classes[i + 1]);
+                    sw.Close();
                 }
             }
 
