@@ -45,6 +45,11 @@ Travis builds on each push to the repository. If it is to master or develop it f
 - SonarCloud https://sonarcloud.io/organizations/dat265/projects
 
 
+## Troubleshooting
+
+Sass might break, fix by running
+> npm rebuild node-sass
+
 
  ## Dependencies
  JDK 9  

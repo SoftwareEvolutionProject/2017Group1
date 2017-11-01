@@ -1,0 +1,36 @@
+<div *ngIf="loaded" class="container" style="margin: 20px">
+  <div class="container">
+    <div class="row">
+      <br>
+      <div class="col-sm-2">
+        <button type="button" class="btn btn-primary "
+                (click)="back()">
+          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+          Back</button>
+      </div>
+
+      <div class="col-sm-10">
+        <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
+          <label>Name</label>
+          <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
+            <input class="form-control" formControlName="name" value="{{customer.name}}">
+          </div>
+
+
+          <label>Email</label>
+          <div [ngClass]="{'has-error': !requiredFieldsForm.get('eMail').valid}">
+            <input class="form-control" formControlName="eMail" value="{{customer.eMail}}">
+          </div>
+        </form>
+      </div>
+
+      <div class="pull-right" style="margin-top: 20px">
+        <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
+                style="min-width: 100px" (click)="save()">Save</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+  </div>
+</div>

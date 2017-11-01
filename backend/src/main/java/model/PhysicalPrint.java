@@ -1,6 +1,6 @@
 package model;
 
-public class PhysicalPrint {
+public class PhysicalPrint implements DataModel {
     private int id;
     private int digitalPrintID;
     private String slmPath;

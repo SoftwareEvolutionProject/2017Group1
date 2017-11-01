@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Viewer } from "./classes/Viewer";
-import { StlLoader } from "./classes/StlLoader";
-import { LoaderSelector } from "./classes/LoaderSelector";
+import { Viewer } from "../../stl-viewer/classes/Viewer";
+import { StlLoader } from "../../stl-viewer/classes/StlLoader";
+import { LoaderSelector } from "../../stl-viewer/classes/LoaderSelector";
 declare var JSC3D: any;
 
 @Component({

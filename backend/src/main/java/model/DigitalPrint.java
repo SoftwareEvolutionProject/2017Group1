@@ -2,7 +2,7 @@ package model;
 
 import java.util.Map;
 
-public class DigitalPrint {
+public class DigitalPrint  implements DataModel {
     private int id;
     private String magicsPath;
 

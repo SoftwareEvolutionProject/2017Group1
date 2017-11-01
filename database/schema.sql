@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
   password varchar(255) not null
 );
 
-CREATE TABLE IF NOT EXISTS tokens(
+CREATE TABLE IF NOT EXISTS token(
   id serial primary key,
   token varchar(255) not null UNIQUE,
   userid INTEGER not null REFERENCES users(id) ON DELETE CASCADE,
@@ -16,57 +16,52 @@ CREATE TABLE IF NOT EXISTS tokens(
   expiresat TIMESTAMP  WITHOUT TIME ZONE DEFAULT now() + INTERVAL '1 hour'
 );
 
-CREATE TABLE IF NOT EXISTS customers(
+CREATE TABLE IF NOT EXISTS customer(
   id serial PRIMARY KEY,
   name VARCHAR(100),
   email VARCHAR(100)
 );
 
-CREATE TABLE IF NOT EXISTS orders(
+CREATE TABLE IF NOT EXISTS "order"(
   id serial PRIMARY KEY,
-  customerID INTEGER,
-  date DATE,
-  FOREIGN KEY (customerID) REFERENCES customers.id
+  customerID INTEGER REFERENCES customer(id),
+  date DATE
 );
 
-CREATE TABLE IF NOT EXISTS digitalparts(
+CREATE TABLE IF NOT EXISTS digitalpart(
   id serial PRIMARY KEY,
-  customerID INTEGER,
+  customerID INTEGER REFERENCES customer(id),
   name VARCHAR(100),
   stlPath VARCHAR(300),
-  cadPath VARCHAR(300),
-  FOREIGN KEY (customerID) REFERENCES customers.id
+  cadPath VARCHAR(300)
 );
 
-CREATE TABLE IF NOT EXISTS orderedparts(
-  orderID INTEGER,
-  digitalPartID INTEGER,
-  amount INTEGER,
-  PRIMARY KEY (digitalPartID, orderID),
-  FOREIGN KEY (digitalPartID) REFERENCES digitalparts.id,
-  FOREIGN KEY (orderID) REFERENCES orders.id
-);
-
-CREATE TABLE IF NOT EXISTS digitalprints(
+CREATE TABLE IF NOT EXISTS orderedpart(
   id serial PRIMARY KEY,
-  magicsPath VARCHAR(300),
-  FOREIGN KEY (customerID) REFERENCES customers.id
+  orderID INTEGER REFERENCES "order"(id),
+  digitalPartID INTEGER REFERENCES digitalpart(id),
+  amount INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS magicspairings(
+CREATE TABLE IF NOT EXISTS digitalprint(
+  id serial PRIMARY KEY,
+  magicsPath VARCHAR(300)
+);
+
+CREATE TABLE IF NOT EXISTS magicspairing(
   id SERIAL PRIMARY KEY,
   digitalPrintID INTEGER,
   digitalPartID INTEGER,
   label VARCHAR(200),
-  FOREIGN KEY (digitalPartID) REFERENCES digitalparts.id,
-  FOREIGN KEY (digitalPrintID) REFERENCES digitalprints.id
+  FOREIGN KEY (digitalPartID) REFERENCES digitalpart(id),
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprint(id)
 );
 
 CREATE TABLE IF NOT EXISTS physicalprint(
   id SERIAL PRIMARY KEY,
   digitalPrintID INTEGER,
   slmPath VARCHAR(300),
-  FOREIGN KEY (digitalPrintID) REFERENCES digitalprints.id
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprint(id)
 );
 
 CREATE TABLE IF NOT EXISTS physicalpart(
@@ -74,9 +69,9 @@ CREATE TABLE IF NOT EXISTS physicalpart(
   physicalPrintID INTEGER,
   orderedPartID INTEGER,
   magicsPartPairingID INTEGER,
-  FOREIGN KEY (physicalPrintID) REFERENCES physicalprint.id,
-  FOREIGN KEY (orderedPartID) REFERENCES orderedparts.id,
-  FOREIGN KEY (magicsPartPairingID) REFERENCES magicspairings.id
+  FOREIGN KEY (physicalPrintID) REFERENCES physicalprint(id),
+  FOREIGN KEY (orderedPartID) REFERENCES orderedpart(id),
+  FOREIGN KEY (magicsPartPairingID) REFERENCES magicspairing(id)
 );
 
 
