@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import model.DataModel;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.postgresql.util.PSQLException;
 import storage.DBInterface;
 
@@ -25,7 +27,7 @@ import java.util.Objects;
  * - The model must only use int, boolean or string (currently)
  */
 public class GenericRepository <T extends DataModel> {
-
+    private Log log = LogFactory.getLog(GenericRepository.class);
     private final Gson gson;
     private final Class<T> type;
     private DBInterface dbInterface;
@@ -47,7 +49,7 @@ public class GenericRepository <T extends DataModel> {
         try {
             return this.getMatchJSON(rs); //converts resulting set to model instance
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("getObjects",e);
             return null;
         }
     }
@@ -69,7 +71,7 @@ public class GenericRepository <T extends DataModel> {
         try {
             return this.getMatchJSON(rs); //converts resulting set to model instance
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("getObjects", e);
             return null;
         }
     }
@@ -86,7 +88,7 @@ public class GenericRepository <T extends DataModel> {
         try {
             return this.getMatchJSON(rs).iterator().next(); //converts resulting set to model instance
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("getObject", e);
             return null;
         }
     }
@@ -150,7 +152,7 @@ public class GenericRepository <T extends DataModel> {
             int id = rs.getInt(1);
             return this.getObject(id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("execute", e);
             return null;
         } finally {
             System.out.println("Failed to execute");
@@ -184,9 +186,9 @@ public class GenericRepository <T extends DataModel> {
             try {
                 result = type.newInstance();
             } catch (InstantiationException e) {
-                e.printStackTrace();
+                log.error("getMatchJSON",e);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                log.error("getMatchJSON",e);
             }
 
             JsonObject jsonModel = this.gson.toJsonTree(result).getAsJsonObject();

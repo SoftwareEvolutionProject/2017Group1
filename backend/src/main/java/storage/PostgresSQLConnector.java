@@ -2,9 +2,10 @@ package storage;
 
 import java.sql.*;
 import java.util.Properties;
+import org.apache.commons.logging.*;
 
 public class PostgresSQLConnector implements DBInterface {
-
+    private Log log = LogFactory.getLog(PostgresSQLConnector.class);
     private static final String CONNECTION_URL_DOCKER = "jdbc:postgresql://db:5432/svereadb";
     private static final String CONNECTION_URL_DEBUG = "jdbc:postgresql://localhost:5432/svereadb";
     private static final String USERNAME = "admin";
@@ -19,6 +20,7 @@ public class PostgresSQLConnector implements DBInterface {
         try {
             this.establishConnection();
         } catch (SQLException e) {
+            log.error("Constructor", e);
             e.printStackTrace();
         }
     }
@@ -41,7 +43,7 @@ public class PostgresSQLConnector implements DBInterface {
             stmt = this.conn.prepareStatement(query);
             return stmt.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("executeQuerry", e);
         } finally {
             System.out.println("Execute Querry failed");
         }
