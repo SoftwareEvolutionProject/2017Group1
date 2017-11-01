@@ -81,21 +81,6 @@ export class Scene {
     }
 
     /**
-        Traverse meshes in the scene, calling a given function on each of them.
-        @param {Function} operator a function that will be called on each mesh.
-    */
-    //TODO: How to send in function as parameter?
-/*    forEachChild = function(operator) {
-        if((typeof operator) != 'function')
-            return;
-
-        for(var i=0; i<this.children.length; i++) {
-            if(operator.call(null, this.children[i]))
-                break;
-        }
-    }*/
-
-    /**
 	Calculate AABB of the scene.
 	@private
     */

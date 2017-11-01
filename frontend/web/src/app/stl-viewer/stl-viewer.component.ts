@@ -18,11 +18,6 @@ export class StlViewerComponent implements OnInit {
     const parameters = {
       SceneUrl: 'https://rawgit.com/SoftwareEvolutionProject/2017Group1/feature/host-stl-file/top.stl'
     };
-    /*const viewer = new JSC3D.Viewer(canvas, parameters);
-    viewer.setParameter('Renderer', 'webgl');
-    viewer.enableDefaultInputHandler(true);
-    viewer.init();*/
-
 
     //========================================================================
     var stlLoader = new StlLoader(null, null, null, null);
@@ -33,7 +28,6 @@ export class StlViewerComponent implements OnInit {
     viewer.setLoader(stlLoader);
     viewer.setParameter('Renderer', 'webgl');
     viewer.init();
-    console.log(viewer);
   }
 
 }

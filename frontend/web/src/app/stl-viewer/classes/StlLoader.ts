@@ -37,13 +37,8 @@ export class StlLoader {
         var isIE10Compatible = false;//(isIE && parseInt(JSC3D.PlatformInfo.version) >= 10);
         var xhr = new XMLHttpRequest;
         xhr.open('GET', encodeURI(urlName), true);
-//IE Code below
-/*        if (isIE10Compatible)
-            xhr.responseType = 'blob';	// use blob method to deal with STL files for IE >= 10
-        else if (isIE)
-            xhr.setRequestHeader("Accept-Charset", "x-user-defined");
-        else*/
-            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+
+        xhr.overrideMimeType('text/plain; charset=x-user-defined');
 
         xhr.onreadystatechange = function () {
             if (this.readyState == 4) {
@@ -51,34 +46,11 @@ export class StlLoader {
                     if (self.onload) {
                         if (self.onprogress)
                             self.onprogress('Loading STL file ...', 1);
-// Comments below is for Internet explorer.
-//                         if (isIE10Compatible) {
-//                             // asynchronously decode blob to binary string
-//                             var blobReader = new FileReader;
-// /* TODO: HERE AND BELOW                            blobReader.onload = function (event) {
-//                                 var scene = new Scene(null);
-//                                 scene.srcUrl = urlName;
-//                                 self.parseStl(scene, event.target.result);
-//                                 self.onload(scene);
-//                             };*/
-//                             blobReader.readAsText(this.response, 'x-user-defined');
-//                         }
-//                         else if (isIE) {
-//                             // decode data from XHR's responseBody into a binary string, since it cannot be accessed directly from javascript.
-//                             // this would work on IE6~IE9
-//                             var scene = new Scene(null);
-//                             scene.srcUrl = urlName;
-//                             try {
-// //                                self.parseStl(scene, new Util().ieXHRResponseBodyToString(this.responseBody));
-//                             } catch (e) { }
-//                             self.onload(scene);
-//                         }
-                        //else {
+
                         var scene = new Scene(null);
                         scene.srcUrl = urlName;
                         self.parseStl(scene, this.responseText);
                         self.onload(scene);
-                        //}
                     }
                 }
                 else {
