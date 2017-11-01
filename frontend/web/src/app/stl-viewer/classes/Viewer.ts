@@ -770,6 +770,7 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
                     this.beforeupdate();
 
                 if(this.scene) {
+                    console.log("We are actually rendering a frame!!!!");
                     /*
                     * Render a new frame or just redraw last frame.
                     */
@@ -799,8 +800,9 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             @private
         */
         paint() {
-            if(this.webglBackend || !this.ctx2d)
+            if(this.webglBackend || !this.ctx2d) {
                 return;
+            }
 
             this.ctx2d.putImageData(this.canvasData, 0, 0);
         };
@@ -1532,8 +1534,10 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
         beginScene() {
             if(this.webglBackend) {
                 this.webglBackend.beginFrame(this.definition, this.isBackgroundOn);
+                console.log("This happened!!! which is good!!!");
                 return;
             }
+            console.log("!!!!! This should never happen!!!!!!!");
 
             var cbuf = this.colorBuffer;
             var zbuf = this.zBuffer;
@@ -1556,8 +1560,11 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
         endScene() {
             if(this.webglBackend) {
                 this.webglBackend.endFrame();
+                console.log("This also happened!!!");
                 return;
             }
+
+            console.log("But this did not happen!!!! If this happened, you probably have your fault here!!!!");
 
             var data = this.canvasData.data;
             var width = this.canvas.width;
