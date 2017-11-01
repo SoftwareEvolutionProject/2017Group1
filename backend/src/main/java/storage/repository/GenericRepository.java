@@ -152,6 +152,9 @@ public class GenericRepository <T extends DataModel> {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        } finally {
+            System.out.println("Failed to execute");
+            return null;
         }
     }
 
