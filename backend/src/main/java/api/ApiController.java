@@ -7,7 +7,7 @@ import storage.repository.GenericRepository;
 
 public class ApiController {
 
-    DBInterface dbConnector;
+    protected DBInterface dbConnector;
     protected GenericRepository<Customer> customerRepository;
     protected GenericRepository<Order> orderRepository;
     protected GenericRepository<OrderedPart> orderedPartRepository;
