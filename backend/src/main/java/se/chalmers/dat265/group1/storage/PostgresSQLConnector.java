@@ -1,4 +1,4 @@
-package storage;
+package se.chalmers.dat265.group1.storage;
 
 import java.sql.*;
 import java.util.Properties;

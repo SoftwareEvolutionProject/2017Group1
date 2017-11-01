@@ -1,15 +1,17 @@
-import api.MaterialInterface;
-import api.printing.PrintingController;
-import api.printing.PrintingInterface;
-import api.customer.CustomerAPI;
-import api.digitalpart.DigitalPartAPI;
-import api.digitalpart.DigitalPartController;
-import api.customer.CustomerController;
+package se.chalmers.dat265.group1;
+
+import se.chalmers.dat265.group1.api.MaterialInterface;
+import se.chalmers.dat265.group1.api.printing.PrintingController;
+import se.chalmers.dat265.group1.api.printing.PrintingInterface;
+import se.chalmers.dat265.group1.api.customer.CustomerAPI;
+import se.chalmers.dat265.group1.api.digitalpart.DigitalPartAPI;
+import se.chalmers.dat265.group1.api.digitalpart.DigitalPartController;
+import se.chalmers.dat265.group1.api.customer.CustomerController;
 import com.google.gson.Gson;
-import model.*;
+import se.chalmers.dat265.group1.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import storage.repository.GenericRepository;
+import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import static spark.Spark.*;
 

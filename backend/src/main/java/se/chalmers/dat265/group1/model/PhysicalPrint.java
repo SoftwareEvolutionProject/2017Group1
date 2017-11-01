@@ -1,4 +1,4 @@
-package model;
+package se.chalmers.dat265.group1.model;
 
 public class PhysicalPrint implements DataModel {
     private int id;

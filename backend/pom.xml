@@ -85,7 +85,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>WebApi</mainClass>
+                            <mainClass>se.chalmers.dat265.group1.WebApi</mainClass>
                         </manifest>
 
                     </archive>

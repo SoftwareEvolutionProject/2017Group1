@@ -1,9 +1,9 @@
-package api;
+package se.chalmers.dat265.group1.api;
 
-import model.*;
-import storage.DBInterface;
-import storage.PostgresSQLConnector;
-import storage.repository.GenericRepository;
+import se.chalmers.dat265.group1.model.*;
+import se.chalmers.dat265.group1.storage.DBInterface;
+import se.chalmers.dat265.group1.storage.PostgresSQLConnector;
+import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 public class ApiController {
 

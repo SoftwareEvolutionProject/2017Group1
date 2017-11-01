@@ -1,6 +1,6 @@
-package api.printing;
+package se.chalmers.dat265.group1.api.printing;
 
-import model.DigitalPrint;
+import se.chalmers.dat265.group1.model.DigitalPrint;
 
 import java.util.List;
 

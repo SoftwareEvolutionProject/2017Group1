@@ -1,6 +1,6 @@
-package api.digitalpart;
+package se.chalmers.dat265.group1.api.digitalpart;
 
-import model.DigitalPart;
+import se.chalmers.dat265.group1.model.DigitalPart;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package api.customer;
+package se.chalmers.dat265.group1.api.customer;
 
-import model.*;
+import se.chalmers.dat265.group1.model.*;
 
 import java.util.List;
 
