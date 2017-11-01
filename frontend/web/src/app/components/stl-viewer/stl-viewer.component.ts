@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Viewer } from "../../stl-viewer/classes/Viewer";
+import { StlLoader } from "../../stl-viewer/classes/StlLoader";
+import { LoaderSelector } from "../../stl-viewer/classes/LoaderSelector";
 declare var JSC3D: any;
 
 @Component({
@@ -13,11 +16,17 @@ export class StlViewerComponent implements OnInit {
   ngOnInit() {
     const canvas = document.getElementById('stl');
     const parameters = {
-      SceneUrl: 'https://cors-anywhere.herokuapp.com/jberlin.se/stl/top.stl'
+      SceneUrl: 'https://rawgit.com/SoftwareEvolutionProject/2017Group1/feature/host-stl-file/top.stl'
     };
-    const viewer = new JSC3D.Viewer(canvas, parameters);
+
+    //========================================================================
+    var stlLoader = new StlLoader(null, null, null, null);
+    stlLoader.setDecimalPrecision(3);
+
+    //=========================================================================
+    const viewer = new Viewer(canvas, parameters);
+    viewer.setLoader(stlLoader);
     viewer.setParameter('Renderer', 'webgl');
-    viewer.enableDefaultInputHandler(true);
     viewer.init();
   }
 
