@@ -49,12 +49,7 @@ script:
 
   # run sonar
 
-  - cd backend
   - sonar-scanner
-  - cd ..
-  - cd database
-  - sonar-scanner
-  - cd ..
   - cd frontend/web
   - sonar-scanner
   - cd ..
