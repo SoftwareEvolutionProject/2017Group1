@@ -25,6 +25,7 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { MaterialListComponent } from './components/material-list/material-list.component';
 import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
+import {HttpClientService} from "./services/http/http-client.service";
 
 @NgModule({
   declarations: [
@@ -119,8 +120,8 @@ import { MaterialDetailComponent } from './components/material-detail/material-d
       },
     ]),
   ],
-  
-  providers: [],
+
+  providers: [HttpClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

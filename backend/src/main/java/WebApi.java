@@ -36,7 +36,7 @@ public class WebApi {
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*", "*", "*");
-      
+
         get("/hello", (req, res) -> "Hello World");
 
         setupCustomerInterface();
