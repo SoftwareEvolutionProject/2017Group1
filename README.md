@@ -1,4 +1,4 @@
-# 2017Group1
+# 2017Group1 [![Build Status](https://travis-ci.org/SoftwareEvolutionProject/2017Group1.svg?branch=develop)](https://travis-ci.org/SoftwareEvolutionProject/2017Group1)
 ## Course
 - Course Name: Software Evolution Project
 - Course Code: DAT265
