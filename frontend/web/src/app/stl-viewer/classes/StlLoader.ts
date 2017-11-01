@@ -83,6 +83,7 @@ export class StlLoader {
                         scene.srcUrl = urlName;
                         self.parseStl(scene, this.responseText);
                         console.log("PARSING STL FILE!!!!!!!!!!!!!!!!!!!!!!!!");
+                        console.log(scene);
                         self.onload(scene);
                         //}
                     }

@@ -5,7 +5,8 @@ import { Material } from "./Material";
 import { Texture } from "./Texture";
 import { PickInfo } from "./PickInfo";
 import { LoaderSelector } from "./LoaderSelector";
-import { Math3D } from "./Math3D"
+import { Math3D } from "./Math3D";
+import { WebGLRenderBackend } from "./WebGLRenderBackend";
 
 //namespace JSC3D {
     /**
@@ -385,17 +386,19 @@ import { Math3D } from "./Math3D"
 
             // Create WebGL render back-end if it is assigned to.
             // TODO: Make sure we can use webGL
-/*            if(this.useWebGL && this.platformInfo.supportWebGL && JSC3D.WebGLRenderBackend) {
+            if(this.useWebGL && this.platformInfo.supportWebGL) {
                 try {
-                    this.webglBackend = new JSC3D.WebGLRenderBackend(this.canvas, this.releaseLocalBuffers);
+                    this.webglBackend = new WebGLRenderBackend(this.canvas, this.releaseLocalBuffers);
+                    console.log("This is where we set the webglbackend variable to the actual webglrenderbackend");
                 } catch(e){}
-            }*/
+            }
 
             // Fall back to software rendering when WebGL is not assigned or unavailable.
             if(!this.webglBackend) {
                 try {
                     this.ctx2d = this.canvas.getContext('2d');
                     this.canvasData = this.ctx2d.getImageData(0, 0, this.canvas.width, this.canvas.height);
+                    console.log("We are now running WebGL");
                 }
                 catch(e) {
                     this.ctx2d = null;
@@ -439,6 +442,7 @@ import { Math3D } from "./Math3D"
 
             // allocate memory storage for frame buffers
             if(!this.webglBackend) {
+                console.log("This should not be run when we are using WebGL");
                 this.colorBuffer = new Array(this.frameWidth * this.frameHeight);
                 this.zBuffer = new Array(this.frameWidth * this.frameHeight);
                 this.selectionBuffer = new Array(this.frameWidth * this.frameHeight);
@@ -1184,6 +1188,8 @@ import { Math3D } from "./Math3D"
             }
 
             var fileExtName = fileName.substring(lastDotAt + 1);
+            console.log("Loader:");
+            console.log(this.loader);
             //var loader = new LoaderSelector().getLoader(fileExtName); We already have the loader
             if(!this.loader) {
                 return false;

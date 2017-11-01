@@ -31,6 +31,7 @@ export class StlViewerComponent implements OnInit {
     //=========================================================================
     const viewer = new Viewer(canvas, parameters);
     viewer.setLoader(stlLoader);
+    viewer.setParameter('Renderer', 'webgl');
     viewer.init();
     console.log(viewer);
   }
