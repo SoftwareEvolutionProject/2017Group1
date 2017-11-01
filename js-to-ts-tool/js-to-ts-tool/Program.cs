@@ -23,7 +23,14 @@ namespace js_to_ts_tool {
             }
 
             TransformAndRefactor tr = new TransformAndRefactor(fileText);
-            tr.run();
+
+            if (tr.run()) {
+                Console.WriteLine("Your file was successfully refactored and transformed.");
+                Console.WriteLine("Further work is still required though!");
+            } else {
+                Console.WriteLine("There was an error with the format of your file.");
+                Console.WriteLine("The file could not be refactored and transformed.");
+            }
         }
     }
 }
