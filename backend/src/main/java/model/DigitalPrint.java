@@ -6,6 +6,12 @@ public class DigitalPrint  implements DataModel {
     private int id;
     private String magicsPath;
 
+    public DigitalPrint(int id, String magicsPath, Map<String, Integer> magicsPartPairing) {
+        this.id = id;
+        this.magicsPath = magicsPath;
+        this.magicsPartPairing = magicsPartPairing;
+    }
+
     /** Map from <Name tag within Magics file, DigitalPartID>*/
     private Map<String, Integer> magicsPartPairing;
 
