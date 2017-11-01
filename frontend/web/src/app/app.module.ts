@@ -26,6 +26,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { MaterialListComponent } from './components/material-list/material-list.component';
 import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
 import {HttpClientService} from "./services/http/http-client.service";
+import { CustomerDetailPanelComponent } from './components/customer-detail-panel/customer-detail-panel.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {HttpClientService} from "./services/http/http-client.service";
     OrderListComponent,
     MaterialListComponent,
     MaterialDetailComponent,
+    CustomerDetailPanelComponent,
   ],
   imports: [
     AlertModule.forRoot(),
