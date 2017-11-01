@@ -48,6 +48,7 @@ script:
   # - sudo dpkg -i google-chrome*.deb
 
   # run sonar
+
   - cd backend
   - sonar-scanner
   - cd ..
