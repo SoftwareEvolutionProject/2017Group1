@@ -76,72 +76,16 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
         isTouchHeld = false;
         baseZoomFactor = 1;
         suppressDraggingRotation = false;
-        // onloadingstarted = null;
-        // onloadingcomplete = null;
-        // onloadingprogress = null;
-        // onloadingaborted = null;
-        // onloadingerror = null;
-        // onmousedown = null;
-        // onmouseup = null;
-        // onmousemove = null;
-        // onmousewheel = null;
-        // onmouseclick = null;
-        // beforeupdate = null;
-        // afterupdate = null;
-        // mouseUsage = 'default';
-        // isDefaultInputHandlerEnabled = true;
         progressFrame = null;
         progressRectangle = null;
         messagePanel = null;
         webglBackend = null;
         platformInfo = new PlatformInfo();
 
-//////
         useWebGL = null;
         releaseLocalBuffers = null;
-
-//////
-
-
         params = null;
-//        canvas = null;
-//        ctx2d = null;
-//        canvasData = null;
-//        bkgColorBuffer = null;
-        // colorBuffer = null;
-        // zBuffer = null;
-        // selectionBuffer = null;
-        // frameWidth = 0;
-        // frameHeight = 0;
-        // scene = null;
-        // defaultMaterial = null;
-        // sphereMap = null;
-        // isLoaded = false;
-        // isFailed = false;
-        // needUpdate = false;
-        // needRepaint = false;
-        // initRotX = 0;
-        // initRotY = 0;
-        // initRotZ = 0;
-        // zoomFactor = 1;
-        // panning = [0, 0];
-        // rotMatrix = null;
-        // transformMatrix = null;
-        // sceneUrl = '';
-        // modelColor = 0xcaa618;
-        // bkgColor1 = 0xffffff;
-        // bkgColor2 = 0xffff80;
-        // renderMode = 'flat';
-        // definition = 'standard';
-        // isCullingDisabled = false;
-        // isMipMappingOn = false;
-        // creaseAngle = -180;
-        // sphereMapUrl = '';
-        // showProgressBar = true;
-        // buttonStates = null;
-        // keyStates = null;
-        // mouseX = 0;
-        // mouseY = 0;
+
         /**
          * {Function} A callback function that will be invoked as soon as a new loading is started.
          */
@@ -319,10 +263,7 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
                                             function(e){self.mouseWheelHandler(e);}, false);
                 document.addEventListener('keydown', function(e){self.keyDownHandler(e);}, false);
                 document.addEventListener('keyup', function(e){self.keyUpHandler(e);}, false);
-            }/*
-            else if(JSC3D.Hammer) {
-                JSC3D.Hammer(this.canvas).on('touch release hold drag pinch transformend', function(e){self.gestureHandler(e);});
-            }*/
+            }
             else {
                 this.canvas.addEventListener('touchstart', function(e){self.touchStartHandler(e);}, false);
                 this.canvas.addEventListener('touchend', function(e){self.touchEndHandler(e);}, false);
@@ -385,26 +326,9 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             this.releaseLocalBuffers = this.params['LocalBuffers'].toLowerCase() == 'release';
 
             // Create WebGL render back-end if it is assigned to.
-            // TODO: Make sure we can use webGL
-            if(this.useWebGL && this.platformInfo.supportWebGL) {
-                try {
-                    this.webglBackend = new WebGLRenderBackend(this.canvas, this.releaseLocalBuffers);
-                    console.log("This is where we set the webglbackend variable to the actual webglrenderbackend");
-                } catch(e){}
-            }
-
-            // Fall back to software rendering when WebGL is not assigned or unavailable.
-            if(!this.webglBackend) {
-                try {
-                    this.ctx2d = this.canvas.getContext('2d');
-                    this.canvasData = this.ctx2d.getImageData(0, 0, this.canvas.width, this.canvas.height);
-                    console.log("We are now running WebGL");
-                }
-                catch(e) {
-                    this.ctx2d = null;
-                    this.canvasData = null;
-                }
-            }
+            try {
+                this.webglBackend = new WebGLRenderBackend(this.canvas, this.releaseLocalBuffers);
+            } catch(e){}
 
             if(this.canvas.width <= 2 || this.canvas.height <= 2)
                 this.definition = 'standard';
@@ -439,15 +363,6 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
 
             // create a default material to render meshes that don't have one
             this.defaultMaterial = new Material('default', undefined, this.modelColor, 0, true);
-
-            // allocate memory storage for frame buffers
-            if(!this.webglBackend) {
-                console.log("This should not be run when we are using WebGL");
-                this.colorBuffer = new Array(this.frameWidth * this.frameHeight);
-                this.zBuffer = new Array(this.frameWidth * this.frameHeight);
-                this.selectionBuffer = new Array(this.frameWidth * this.frameHeight);
-                this.bkgColorBuffer = new Array(this.frameWidth * this.frameHeight);
-            }
 
             // apply background
             this.generateBackground();
@@ -555,24 +470,6 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             // likewise, panning should also be adjusted to avoid abrupt jump on next frame
             this.panning[0] *= ratio;
             this.panning[1] *= ratio;
-
-            if(this.webglBackend)
-                return;
-
-            /*
-                Reallocate frame buffers using the dimensions of current definition.
-            */
-            var newSize = this.frameWidth * this.frameHeight;
-            if(this.colorBuffer.length < newSize)
-                this.colorBuffer = new Array(newSize);
-            if(this.zBuffer.length < newSize)
-                this.zBuffer = new Array(newSize);
-            if(this.selectionBuffer.length < newSize)
-                this.selectionBuffer = new Array(newSize);
-            if(this.bkgColorBuffer.length < newSize)
-                this.bkgColorBuffer = new Array(newSize);
-
-            this.generateBackground();
         };
 
         /**
@@ -718,34 +615,7 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             pickInfo.canvasY = canvasY;
 
             var pickedId = 0;
-            if(this.webglBackend) {
-                pickedId = this.webglBackend.pick(canvasX, canvasY);
-            }
-            else {
-                var frameX = canvasX;
-                var frameY = canvasY;
-                if( this.selectionBuffer != null &&
-                    canvasX >= 0 && canvasX < this.canvas.width &&
-                    canvasY >= 0 && canvasY < this.canvas.height ) {
-                    switch(this.definition) {
-                    case 'low':
-                        frameX = ~~(frameX / 2);
-                        frameY = ~~(frameY / 2);
-                        break;
-                    case 'high':
-                        frameX *= 2;
-                        frameY *= 2;
-                        break;
-                    case 'standard':
-                    default:
-                        break;
-                    }
-
-                    pickedId  = this.selectionBuffer[frameY * this.frameWidth + frameX];
-                    if(pickedId > 0)
-                        pickInfo.depth = this.zBuffer[frameY * this.frameWidth + frameX];
-                }
-            }
+            pickedId = this.webglBackend.pick(canvasX, canvasY);
 
             if(pickedId > 0) {
                 var meshes = this.scene.getChildren();
@@ -770,7 +640,6 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
                     this.beforeupdate();
 
                 if(this.scene) {
-                    console.log("We are actually rendering a frame!!!!");
                     /*
                     * Render a new frame or just redraw last frame.
                     */
@@ -800,11 +669,7 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             @private
         */
         paint() {
-            if(this.webglBackend || !this.ctx2d) {
-                return;
-            }
-
-            this.ctx2d.putImageData(this.canvasData, 0, 0);
+            return;
         };
 
         /**
@@ -1190,9 +1055,7 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             }
 
             var fileExtName = fileName.substring(lastDotAt + 1);
-            console.log("Loader:");
-            console.log(this.loader);
-            //var loader = new LoaderSelector().getLoader(fileExtName); We already have the loader
+
             if(!this.loader) {
                 return false;
             }
@@ -1418,18 +1281,10 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             @private
         */
         generateBackground() {
-            if(this.webglBackend) {
-                if(this.bkgImage)
-                    this.webglBackend.setBackgroundImage(this.bkgImage);
-                else
-                    this.webglBackend.setBackgroundColors(this.bkgColor1, this.bkgColor2);
-                return;
-            }
-
             if(this.bkgImage)
-                this.fillBackgroundWithImage();
+                this.webglBackend.setBackgroundImage(this.bkgImage);
             else
-                this.fillGradientBackground();
+                this.webglBackend.setBackgroundColors(this.bkgColor1, this.bkgColor2);
         };
 
         /**
@@ -1518,9 +1373,6 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             @private
         */
         drawBackground() {
-            if(!this.webglBackend && !this.ctx2d)
-                return;
-
             this.beginScene();
             this.endScene();
 
@@ -1532,25 +1384,8 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             @private
         */
         beginScene() {
-            if(this.webglBackend) {
-                this.webglBackend.beginFrame(this.definition, this.isBackgroundOn);
-                console.log("This happened!!! which is good!!!");
-                return;
-            }
-            console.log("!!!!! This should never happen!!!!!!!");
-
-            var cbuf = this.colorBuffer;
-            var zbuf = this.zBuffer;
-            var sbuf = this.selectionBuffer;
-            var bbuf = this.bkgColorBuffer;
-            var size = this.frameWidth * this.frameHeight;
-            var MIN_Z = -Infinity;
-
-            for(var i=0; i<size; i++) {
-                cbuf[i] = bbuf[i];
-                zbuf[i] = MIN_Z;
-                sbuf[i] = 0;
-            }
+            this.webglBackend.beginFrame(this.definition, this.isBackgroundOn);
+            return;
         };
 
         /**
@@ -1558,69 +1393,7 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             @private
         */
         endScene() {
-            if(this.webglBackend) {
-                this.webglBackend.endFrame();
-                console.log("This also happened!!!");
-                return;
-            }
-
-            console.log("But this did not happen!!!! If this happened, you probably have your fault here!!!!");
-
-            var data = this.canvasData.data;
-            var width = this.canvas.width;
-            var height = this.canvas.height;
-            var cbuf = this.colorBuffer;
-            var cwidth = this.frameWidth;
-            var cheight = this.frameHeight;
-            var csize = cwidth * cheight;
-
-            switch(this.definition) {
-            case 'low':
-                var halfWidth = width >> 1;
-                var surplus = cwidth - halfWidth;
-                var src = 0, dest = 0;
-                for(var i=0; i<height; i++) {
-                    for(var j=0; j<width; j++) {
-                        var color = cbuf[src];
-                        data[dest    ] = (color & 0xff0000) >> 16;
-                        data[dest + 1] = (color & 0xff00) >> 8;
-                        data[dest + 2] = color & 0xff;
-                        data[dest + 3] = color >>> 24;
-                        src += (j & 1);
-                        dest += 4;
-                    }
-                    src += (i & 1) ? surplus : -halfWidth;
-                }
-                break;
-            case 'high':
-                var src = 0, dest = 0;
-                for(var i=0; i<height; i++) {
-                    for(var j=0; j<width; j++) {
-                        var color0 = cbuf[src];
-                        var color1 = cbuf[src + 1];
-                        var color2 = cbuf[src + cwidth];
-                        var color3 = cbuf[src + cwidth + 1];
-                        data[dest    ] = ((color0 & 0xff0000) + (color1 & 0xff0000) + (color2 & 0xff0000) + (color3 & 0xff0000)) >> 18;
-                        data[dest + 1] = ((color0 & 0xff00) + (color1 & 0xff00) + (color2 & 0xff00) + (color3 & 0xff00)) >> 10;
-                        data[dest + 2] = ((color0 & 0xff) + (color1 & 0xff) + (color2 & 0xff) + (color3 & 0xff)) >> 2;
-                        data[dest + 3] = color0 >>> 24;
-                        src += 2;
-                        dest += 4;
-                    }
-                    src += cwidth;
-                }
-                break;
-            case 'standard':
-            default:
-                for(var src=0, dest=0; src<csize; src++, dest+=4) {
-                    var color = cbuf[src];
-                    data[dest    ] = (color & 0xff0000) >> 16;
-                    data[dest + 1] = (color & 0xff00) >> 8;
-                    data[dest + 2] = color & 0xff;
-                    data[dest + 3] = color >>> 24;
-                }
-                break;
-            }
+            this.webglBackend.endFrame();
         };
 
         /**
@@ -1634,82 +1407,21 @@ import { WebGLRenderBackend } from "./WebGLRenderBackend";
             var aabb = this.scene.aabb;
 
             // calculate transformation matrix
-            if(this.webglBackend) {
-                var w = this.frameWidth;
-                var h = this.frameHeight;
-                var d = aabb.lengthOfDiagonal();
+            var w = this.frameWidth;
+            var h = this.frameHeight;
+            var d = aabb.lengthOfDiagonal();
 
-                this.transformMatrix.identity();
-                this.transformMatrix.translate(-0.5*(aabb.minX+aabb.maxX), -0.5*(aabb.minY+aabb.maxY), -0.5*(aabb.minZ+aabb.maxZ));
-                this.transformMatrix.multiply(this.rotMatrix);
-                this.transformMatrix.scale(2*this.zoomFactor/w, 2*this.zoomFactor/h, -2/d);
-                this.transformMatrix.translate(2*this.panning[0]/w, -2*this.panning[1]/h, 0);
-            }
-            else {
-                this.transformMatrix.identity();
-                this.transformMatrix.translate(-0.5*(aabb.minX+aabb.maxX), -0.5*(aabb.minY+aabb.maxY), -0.5*(aabb.minZ+aabb.maxZ));
-                this.transformMatrix.multiply(this.rotMatrix);
-                this.transformMatrix.scale(this.zoomFactor, -this.zoomFactor, this.zoomFactor);
-                this.transformMatrix.translate(0.5*this.frameWidth+this.panning[0], 0.5*this.frameHeight+this.panning[1], 0);
-            }
+            this.transformMatrix.identity();
+            this.transformMatrix.translate(-0.5*(aabb.minX+aabb.maxX), -0.5*(aabb.minY+aabb.maxY), -0.5*(aabb.minZ+aabb.maxZ));
+            this.transformMatrix.multiply(this.rotMatrix);
+            this.transformMatrix.scale(2*this.zoomFactor/w, 2*this.zoomFactor/h, -2/d);
+            this.transformMatrix.translate(2*this.panning[0]/w, -2*this.panning[1]/h, 0);
 
             // sort meshes into a render list
             var renderList = this.sortScene(this.transformMatrix);
 
             // delegate to WebGL backend to do the rendering
-            if(this.webglBackend) {
-                this.webglBackend.render(this.scene.getChildren(), this.transformMatrix, this.rotMatrix, this.renderMode, this.defaultMaterial, this.sphereMap, this.isCullingDisabled);
-                return;
-            }
-
-            // transform and render meshes inside the scene
-            for(var i=0; i<renderList.length; i++) {
-                var mesh = renderList[i];
-
-                if(!mesh.isTrivial()) {
-                    new Math3D().transformVectors(this.transformMatrix, mesh.vertexBuffer, mesh.transformedVertexBuffer);
-
-                    if(mesh.visible) {
-                        switch(mesh.renderMode || this.renderMode) {
-                        case 'point':
-                            this.renderPoint(mesh);
-                            break;
-                        case 'wireframe':
-                            this.renderWireframe(mesh);
-                            break;
-                        case 'flat':
-                            this.renderSolidFlat(mesh);
-                            break;
-                        case 'smooth':
-                            this.renderSolidSmooth(mesh);
-                            break;
-                        case 'texture':
-                            if(mesh.hasTexture())
-                                this.renderSolidTexture(mesh);
-                            else
-                                this.renderSolidFlat(mesh);
-                            break;
-                        case 'textureflat':
-                            if(mesh.hasTexture())
-                                this.renderTextureFlat(mesh);
-                            else
-                                this.renderSolidFlat(mesh);
-                            break;
-                        case 'texturesmooth':
-                            if(mesh.isEnvironmentCast && this.sphereMap != null && this.sphereMap.hasData())
-                                this.renderSolidSphereMapped(mesh);
-                            else if(mesh.hasTexture())
-                                this.renderTextureSmooth(mesh);
-                            else
-                                this.renderSolidSmooth(mesh);
-                            break;
-                        default:
-                            this.renderSolidFlat(mesh);
-                            break;
-                        }
-                    }
-                }
-            }
+            this.webglBackend.render(this.scene.getChildren(), this.transformMatrix, this.rotMatrix, this.renderMode, this.defaultMaterial, this.sphereMap, this.isCullingDisabled);
         };
 
         /**
