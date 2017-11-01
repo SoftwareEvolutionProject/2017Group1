@@ -1,14 +1,12 @@
 import api.MaterialInterface;
-import api.PrintingInterface;
+import api.printing.PrintingController;
+import api.printing.PrintingInterface;
 import api.customer.CustomerAPI;
 import api.digitalpart.DigitalPartAPI;
 import api.digitalpart.DigitalPartController;
 import api.customer.CustomerController;
 import com.google.gson.Gson;
-import model.Customer;
-import model.DigitalPart;
-import model.Order;
-import model.OrderedPart;
+import model.*;
 
 import static spark.Spark.*;
 
@@ -24,13 +22,17 @@ public class WebApi {
     private static final String CUSOMTER_ID = "/:customerID";
     private static final String ORDERS = "/orders";
     private static final String ORDER_ID = "/:orderID";
+    private static final String DIGITALPRINT = "/digital-print";
+    private static final String DIGITALPRINT_ID = "/:digitalPrint";
+    private static final String DIGITALPART = "/digital-part";
+    private static final String DIGITALPART_ID = "/:digitalPart";
     private static Gson gson = new Gson();
+    private static boolean debug;
 
     public static void main(String[] args) {
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
         dpi = new DigitalPartController(debug);
-
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*", "*", "*");
@@ -38,6 +40,7 @@ public class WebApi {
         get("/hello", (req, res) -> "Hello World");
 
         setupCustomerInterface();
+        setupPrintingInterface();
         setupOrderInterface();
         setupDigitalPartsInterface();
 
@@ -45,7 +48,17 @@ public class WebApi {
         System.out.println("SERVER RUNNING!");
     }
 
+    private static void setupPrintingInterface() {
+        pi = new PrintingController(debug);
+        get(DIGITALPRINT, (request, response) -> pi.getAllDigitalPrints(), gson::toJson);
+        get(DIGITALPRINT + DIGITALPRINT_ID, (request, response) -> pi.getDigitalPrint(request.params("id")), gson::toJson);
+        get(DIGITALPRINT + DIGITALPRINT_ID, (request, response) -> pi.getDigitalPrint(request.params("id")), gson::toJson);
+        post(DIGITALPRINT, ((request, response) -> pi.createDigitalPrint(gson.fromJson(request.body(), DigitalPrint.class))), gson::toJson);
+    }
+
     private static void setupCustomerInterface() {
+        ci = new CustomerController(debug);
+
         // Customers
         get(CUSTOMERS, (request, response) -> ci.getAllCustomers(), gson::toJson);
         get(CUSTOMERS + CUSOMTER_ID, ((request, response) -> ci.getCustomer(request.params("customerID"))), gson::toJson);
@@ -59,10 +72,10 @@ public class WebApi {
 
     private static void setupDigitalPartsInterface() {
         //DigitalParts
-        get("/digital-parts", (request, response) -> dpi.getAllDigitalParts(), gson::toJson);
-        get("/digital-parts/:digitalPartID", (request, response) -> dpi.getDigitalPart(request.params("digitalPartID")), gson::toJson);
-        post("/digital-parts", (request, response) ->  dpi.createNewDigitalPart(gson.fromJson(request.body(), DigitalPart.class)),gson::toJson);
-        put("/digital-parts/:digitalPartID",(request, response) -> dpi.updateDigitalPart(gson.fromJson(request.body(),DigitalPart.class)),gson::toJson);
+        get(DIGITALPART, (request, response) -> dpi.getAllDigitalParts(), gson::toJson);
+        get(DIGITALPART + DIGITALPART_ID, (request, response) -> dpi.getDigitalPart(request.params("digitalPartID")), gson::toJson);
+        post(DIGITALPART, (request, response) -> dpi.createNewDigitalPart(gson.fromJson(request.body(), DigitalPart.class)), gson::toJson);
+        put(DIGITALPART + DIGITALPART_ID, (request, response) -> dpi.updateDigitalPart(gson.fromJson(request.body(), DigitalPart.class)), gson::toJson);
     }
 
     private static void setupOrderInterface() {
@@ -70,10 +83,10 @@ public class WebApi {
         get(ORDERS, (request, response) -> ci.getAllOrders(), gson::toJson);
         get(ORDERS + ORDER_ID, (request, response) -> ci.getOrder(request.params("orderID")), gson::toJson);
         get(ORDERS + ORDER_ID + "/parts", (request, response) -> ci.getOrderedParts(request.params("orderID")), gson::toJson);
-        post(ORDERS, ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))),gson::toJson);
-        put(ORDERS + ORDER_ID, ((request, response) -> ci.updateOrder(request.params("orderID"), gson.fromJson(request.body(), Order.class))),gson::toJson);
-        post(ORDERS + ORDER_ID + "/parts", ((request, response) -> ci.createNewOrderedPart(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
-        put(ORDERS + ORDER_ID + "/parts/:orderedPartID", ((request, response) -> ci.updateOrderDetail(request.params("orderID"), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))),gson::toJson);
+        post(ORDERS, ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))), gson::toJson);
+        put(ORDERS + ORDER_ID, ((request, response) -> ci.updateOrder(request.params("orderID"), gson.fromJson(request.body(), Order.class))), gson::toJson);
+        post(ORDERS + ORDER_ID + "/parts", ((request, response) -> ci.createNewOrderedPart(request.params("orderID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
+        put(ORDERS + ORDER_ID + "/parts/:orderedPartID", ((request, response) -> ci.updateOrderDetail(request.params("orderID"), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.

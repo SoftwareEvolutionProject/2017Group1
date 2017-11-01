@@ -2,8 +2,7 @@ package api.digitalpart;
 
 import api.ApiController;
 import model.DigitalPart;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+import org.apache.commons.lang3.NotImplementedException;
 import java.util.List;
 
 /**
@@ -37,26 +36,26 @@ public class DigitalPartController extends ApiController implements DigitalPartA
 
     @Override
     public int deleteDigitalPart(String digitalPartID) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String getStlPath(String digitalPartID) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String updateStlPath(String digitalPartID) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String getCadPath(String digitalPartID) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String updateCadPath(String digitalPartID) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }
