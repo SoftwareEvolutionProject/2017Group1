@@ -7,6 +7,9 @@ import api.digitalpart.DigitalPartController;
 import api.customer.CustomerController;
 import com.google.gson.Gson;
 import model.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import storage.repository.GenericRepository;
 
 import static spark.Spark.*;
 
@@ -29,12 +32,15 @@ public class WebApi {
     private static Gson gson = new Gson();
     private static boolean debug;
 
+
     public static void main(String[] args) {
+        Log log = LogFactory.getLog(GenericRepository.class);
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
         dpi = new DigitalPartController(debug);
         long start = System.currentTimeMillis();
-        System.out.println("STARTED ENDPIONT SETUP");
+        log.info("STARTED ENDPIONT SETUP");
+        log.info("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*", "*", "*");
 
         get("/hello", (req, res) -> "Hello World");
@@ -44,8 +50,8 @@ public class WebApi {
         setupOrderInterface();
         setupDigitalPartsInterface();
 
-        System.out.println("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
-        System.out.println("SERVER RUNNING!");
+        log.info("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
+        log.info("SERVER RUNNING!");
     }
 
     private static void setupPrintingInterface() {
