@@ -6,6 +6,7 @@ import {BsModalService, ModalModule} from "ngx-bootstrap";
 import {ErrorService} from "../../services/error.service";
 import {CustomerMockService} from "../../services/customer/customer-mock.service";
 import {CustomerService} from "../../services/customer/customer.service";
+import {CustomerDetailPanelComponent} from "../customer-detail-panel/customer-detail-panel.component";
 
 describe('CustomerListComponent', () => {
   let component: CustomerListComponent;
@@ -13,7 +14,7 @@ describe('CustomerListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomerListComponent ],
+      declarations: [ CustomerListComponent, CustomerDetailPanelComponent ],
       imports: [RouterTestingModule, ModalModule.forRoot()]
     });
     TestBed.overrideComponent(CustomerListComponent, {
