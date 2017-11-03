@@ -19,7 +19,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   @Input('nav') nav: boolean = true;
   @Input('creating') creating: boolean = false;
   @Output() changed: EventEmitter<Customer> = new EventEmitter<Customer>();
-  private loaded : boolean = false;
+  private loaded = false;
 
   /* forms */
   private requiredFieldsForm: FormGroup = null;
