@@ -1,7 +1,6 @@
 {
   "extends": [
-    "tslint:recommended",
-    "tslint-sonarts"
+    "tslint:recommended"
   ],
   "rulesDirectory": [
     "node_modules/codelyzer"
