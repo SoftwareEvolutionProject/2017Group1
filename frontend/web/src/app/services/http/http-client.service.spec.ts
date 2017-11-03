@@ -1,9 +1,9 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
+import {BaseRequestOptions, Http, Response, ResponseOptions} from '@angular/http';
+import {MockBackend, MockConnection} from '@angular/http/testing';
 import { HttpClientService } from './http-client.service';
-import {MockBackend, MockConnection} from "@angular/http/testing";
-import {BaseRequestOptions, Http, Response, ResponseOptions} from "@angular/http";
-import {HttpClient} from "./http.client";
+import {HttpClient} from './http.client';
 
 describe('HttpClientService', () => {
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('HttpClientService', () => {
           },
           deps: [MockBackend, BaseRequestOptions],
         },
-      ]
+      ],
     });
   });
 
@@ -34,30 +34,29 @@ describe('HttpClientService', () => {
     backend = mockBackend;
   }));
 
-
-  let mockResponseArrayCustomers = JSON.stringify( [
+  const mockResponseArrayCustomers = JSON.stringify( [
     {
       id: 1,
-      name: "test"
+      name: 'test',
     }, {
       id: 2,
-      name: "test2"
+      name: 'test2',
     }, {
       id: 3,
-      name: "test3"
+      name: 'test3',
     },
   ]);
 
-  let expectedResponseArrayCustomers = JSON.stringify( [
+  const expectedResponseArrayCustomers = JSON.stringify( [
     {
       id: 1,
-      name: "test"
+      name: 'test',
     }, {
       id: 2,
-      name: "test2"
+      name: 'test2',
     }, {
       id: 3,
-      name: "test3"
+      name: 'test3',
     },
   ]);
 
@@ -65,13 +64,13 @@ describe('HttpClientService', () => {
 
     it('should return an array of customers', (done) => {
       backend.connections.subscribe((connection: MockConnection) => {
-        let options = new ResponseOptions({
-          body: JSON.stringify(mockResponseArrayCustomers)
+        const options = new ResponseOptions({
+          body: JSON.stringify(mockResponseArrayCustomers),
         });
         connection.mockRespond(new Response(options));
       });
 
-      httpClientService.get(HttpClient.customerUrl).subscribe(data => {
+      httpClientService.get(HttpClient.customerUrl).subscribe((data) => {
         expect(data).toEqual(expectedResponseArrayCustomers);
         done();
       });

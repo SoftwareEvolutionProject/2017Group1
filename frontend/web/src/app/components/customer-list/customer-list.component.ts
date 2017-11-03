@@ -1,20 +1,20 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Customer} from "../../model/customer";
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {ErrorService} from "../../services/error.service";
-import {Router} from "@angular/router";
-import {CustomerService} from "../../services/customer/customer.service";
+import {Router} from '@angular/router';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {Customer} from '../../model/customer';
+import {CustomerService} from '../../services/customer/customer.service';
+import {ErrorService} from '../../services/error.service';
 declare var $: any;
 
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.scss'],
-  providers: [CustomerService, ErrorService]
+  providers: [CustomerService, ErrorService],
 })
 export class CustomerListComponent implements OnInit, AfterViewInit {
   private table;
-  private customers : Customer [];
+  private customers: Customer [];
 
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
@@ -22,7 +22,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   selectedCustomer: Customer = null;
 
   constructor(private customerService: CustomerService,
-              private errorService : ErrorService,
+              private errorService: ErrorService,
               private router: Router,
               private modalService: BsModalService) {
   }
@@ -38,49 +38,49 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   loadAndPopulate() {
     /* get users */
     this.customerService.getCustomers().subscribe(
-      customers => {
+      (customers) => {
         this.customers = customers;
 
         this.populate();
         this.prepareTriggers();
-      }, error => {
+      }, (error) => {
         alert(error.verbose_message);
-      }
+      },
     );
   }
 
   private populate() {
-    let _self = this;
+    const _self = this;
     /*manually generate columns*/
-    let columns = [{
-      title: "Namn",
-      field: "name",
-      sortable: true
+    const columns = [{
+      title: 'Namn',
+      field: 'name',
+      sortable: true,
     }, {
-      title: "Email",
-      field: "email",
-      sortable: true
+      title: 'Email',
+      field: 'email',
+      sortable: true,
     }, {
-      title: "Kund ID",
-      field: "id",
+      title: 'Kund ID',
+      field: 'id',
       visible: false,
-      sortable: true
+      sortable: true,
     }, {
       field: 'operate',
       title: '<span class="glyphicon glyphicon-cog">',
       align: 'center',
       events: {
-        'click .edit': function (e, value, row, index) {
+        'click .edit': function(e, value, row, index) {
           _self.router.navigate([_self.router.url, row.id]);
         },
-        'click .delete': function (e, value, row, index) {
-          _self.delete(row.id)
-        }
+        'click .delete': function(e, value, row, index) {
+          _self.delete(row.id);
+        },
       },
-      formatter: this.operateFormatter
+      formatter: this.operateFormatter,
     }];
 
-    let data = [];
+    const data = [];
     this.customers.forEach((customer) => {
       data.push({
         name: customer.name,
@@ -89,27 +89,27 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
       });
     });
 
-    (<any>this.table).bootstrapTable('destroy');
-    (<any>this.table).bootstrapTable(
+    (this.table as any).bootstrapTable('destroy');
+    (this.table as any).bootstrapTable(
       {
-        "data": data,
-        "columns": columns,
-        "sortStable": true,
-        "sortName": "name"
-      }
+        data: data,
+        columns: columns,
+        sortStable: true,
+        sortName: 'name',
+      },
     );
   }
 
   private prepareTriggers() {
-    let _self = this;
-    (<any>this.table).on('click-row.bs.table', function (row, $element) {
-      _self.selectedCustomer =  _self.customers.filter(customer => {if(customer.id ===  $element.id)return customer})[0];
+    const _self = this;
+    (this.table as any).on('click-row.bs.table', function(row, $element) {
+      _self.selectedCustomer =  _self.customers.filter((customer) => {if (customer.id ===  $element.id)return customer; })[0];
     });
   }
 
   private amountFormatter(value, row, index) {
     return value > 0 ? '' : {
-      css: {"background-color": "rgba(255, 0, 0, 0.4)"}
+      css: {'background-color': 'rgba(255, 0, 0, 0.4)'},
     };
   }
 
@@ -120,7 +120,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
       '</button>  ',
       '<button  class="delete btn btn-xs btn-danger" href="javascript:void(0)" title="Delete">',
       '<i class="glyphicon glyphicon-trash"></i>',
-      '</button>'
+      '</button>',
     ].join('');
   }
 
@@ -136,21 +136,21 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
 
   private confirmDelete() {
     if (this.toBeDeleted) {
-      this.customerService.deleteCustomer(this.toBeDeleted).subscribe(res => {
+      this.customerService.deleteCustomer(this.toBeDeleted).subscribe((res) => {
           this.toBeDeleted = null;
           this.modalRef.hide();
           this.loadAndPopulate();
-        }, error => {
+        }, (error) => {
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
-        }
+        },
       );
     }
   }
 
   openModal(autoFocusIdWithHashtag: string) {
     this.modalRef = this.modalService.show(this.modalDelete);
-    if (autoFocusIdWithHashtag != null && autoFocusIdWithHashtag != "") {
-      let addInput: any = ($(autoFocusIdWithHashtag) as any);
+    if (autoFocusIdWithHashtag != null && autoFocusIdWithHashtag != '') {
+      const addInput: any = ($(autoFocusIdWithHashtag) as any);
       setTimeout(() => {
         addInput.focus();
       }, 200);
@@ -158,6 +158,6 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   }
 
   private create() {
-    this.router.navigate([this.router.url + "/create"]);
+    this.router.navigate([this.router.url + '/create']);
   }
 }

@@ -4,12 +4,17 @@ export class DigitalPart {
   public stlFile: string;
 
   constructor(values: Object = {}) {
-    if (!values) return null;
+    if (!values) {
+      return null;
+    }
     Object.assign(this, values);
   }
 
   static create(json: any) {
-    if (json) return new DigitalPart(json);
-    else return null;
+    if (json) {
+      return new DigitalPart(json);
+    } else {
+      return null;
+    }
   }
 }
