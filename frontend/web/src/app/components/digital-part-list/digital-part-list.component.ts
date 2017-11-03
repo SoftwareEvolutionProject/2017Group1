@@ -86,8 +86,8 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
     (this.table as any).bootstrapTable('destroy');
     (this.table as any).bootstrapTable(
       {
-        data: data,
-        columns: columns,
+        data,
+        columns,
         sortStable: true,
         sortName: 'name',
       },
