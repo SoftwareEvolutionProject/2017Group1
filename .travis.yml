@@ -47,7 +47,12 @@ script:
   # - sudo dpkg -i google-chrome*.deb
 
   # run sonar
+
   - sonar-scanner
+  - cd frontend/web
+  - sonar-scanner
+  - cd ..
+  - cd ..
 
   # Show current version of docker-compose
   - docker-compose pull
