@@ -1,4 +1,6 @@
 import api.MaterialInterface;
+import api.physical.PhysicalInterface;
+import api.physical.PhysicalsController;
 import api.printing.PrintingController;
 import api.printing.PrintingInterface;
 import api.customer.CustomerAPI;
@@ -18,6 +20,11 @@ public class WebApi {
     private static DigitalPartAPI dpi;
     private static MaterialInterface mi;
     private static PrintingInterface pi;
+    private static PhysicalInterface phi;
+
+
+
+
     private static final String CUSTOMERS = "/customers";
     private static final String CUSOMTER_ID = "/:customerID";
     private static final String ORDERS = "/orders";
@@ -26,6 +33,12 @@ public class WebApi {
     private static final String DIGITALPRINT_ID = "/:digitalPrint";
     private static final String DIGITALPART = "/digital-part";
     private static final String DIGITALPART_ID = "/:digitalPart";
+
+    private static final String PHYSICALPRINT = "/physical-print";
+    private static final String PHYSICALPRINT_ID = "/:physicalPrint";
+    private static final String PHYSICALPART = "/physical-part";
+    private static final String PHYSICALPART_ID = "/:physicalPart";
+
     private static Gson gson = new Gson();
     private static boolean debug;
 
@@ -33,6 +46,7 @@ public class WebApi {
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
         dpi = new DigitalPartController(debug);
+        phi = new PhysicalsController(debug);
         long start = System.currentTimeMillis();
         System.out.println("STARTED ENDPIONT SETUP");
         WebApi.enableCORS("*", "*", "*");
@@ -76,6 +90,20 @@ public class WebApi {
         get(DIGITALPART + DIGITALPART_ID, (request, response) -> dpi.getDigitalPart(request.params("digitalPartID")), gson::toJson);
         post(DIGITALPART, (request, response) -> dpi.createNewDigitalPart(gson.fromJson(request.body(), DigitalPart.class)), gson::toJson);
         put(DIGITALPART + DIGITALPART_ID, (request, response) -> dpi.updateDigitalPart(gson.fromJson(request.body(), DigitalPart.class)), gson::toJson);
+    }
+
+    private static void setupPhysicalInterface() {
+        //PhysicalParts
+        get(PHYSICALPART, (request, response) -> phi.getAllPhysicalParts(), gson::toJson);
+        get(PHYSICALPART + PHYSICALPART_ID, (request, response) -> phi.getPhysicalPart(request.params("physicalPartID")), gson::toJson);
+        post(PHYSICALPART, (request, response) -> phi.createNewPhysicalPart(gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
+        put(PHYSICALPART + PHYSICALPART_ID, (request, response) -> phi.updatePhysicalPart(request.params("physicalPartID"), gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
+
+        //PhysicalPrints
+        get(PHYSICALPRINT, (request, response) -> phi.getAllPhysicalPrints(), gson::toJson);
+        get(PHYSICALPRINT + PHYSICALPRINT_ID, (request, response) -> phi.getPhysicalPrint(request.params("physicalPrintID")), gson::toJson);
+        post(PHYSICALPRINT, (request, response) -> phi.createNewPhysicalPrint(gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
+        put(PHYSICALPRINT + PHYSICALPRINT_ID, (request, response) -> phi.updatePhysicalPrint(request.params("physicalPrintID"), gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
     }
 
     private static void setupOrderInterface() {
