@@ -37,7 +37,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   }
 
   loadAndPopulate() {
-    /* get users */
+    /* get customers */
     this.customerService.getCustomers().subscribe(
       (customers) => {
         this.customers = customers;
