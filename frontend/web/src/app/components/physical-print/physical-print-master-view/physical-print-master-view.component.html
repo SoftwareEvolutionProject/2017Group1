@@ -1,14 +1,14 @@
 <div class="container">
 
     <div class="row">
-      <h2>Physical Print</h2><hr>
+      <h2>Physical Prints</h2><hr>
     </div>
     <div class="row">
       <div class="col-md-7" id="list">
         <app-physical-print-list (selected)="physicalPrintSelected($event)">
         </app-physical-print-list>
       </div>
-      <div *ngIf="selectedPhysicalPrint" class="col-md-5" id="detail" style="margin-top: 54px">
+      <div class="col-md-5" id="detail" style="margin-top: 54px">
         <app-physical-print-details-panel [physicalPrint]="selectedPhysicalPrint">
         </app-physical-print-details-panel>
       </div>
