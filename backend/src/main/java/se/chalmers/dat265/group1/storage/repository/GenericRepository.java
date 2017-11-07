@@ -155,7 +155,6 @@ public class GenericRepository <T extends DataModel> {
             return null;
         } finally {
             System.out.println("Failed to execute");
-            return null;
         }
     }
 
