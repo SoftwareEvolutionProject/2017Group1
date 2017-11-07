@@ -29,6 +29,12 @@
             <version>3.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
     </dependencies>
 
     <parent>
@@ -79,7 +85,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>WebApi</mainClass>
+                            <mainClass>se.chalmers.dat265.group1.WebApi</mainClass>
                         </manifest>
 
                     </archive>

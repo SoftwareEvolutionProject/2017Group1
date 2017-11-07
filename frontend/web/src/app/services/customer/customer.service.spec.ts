@@ -1,11 +1,11 @@
-import { TestBed, inject } from '@angular/core/testing';
-import {CustomerService} from "./customer.service";
-import {MockBackend} from "@angular/http/testing";
-import {MockConnection} from "@angular/http/testing";
-import {Http} from "@angular/http";
-import {BaseRequestOptions, Response, ResponseOptions} from "@angular/http";
-import {Customer} from "../../model/customer";
-import {HttpClientService} from "../http/http-client.service";
+import { inject, TestBed } from '@angular/core/testing';
+import {Http} from '@angular/http';
+import {BaseRequestOptions, Response, ResponseOptions} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
+import {MockConnection} from '@angular/http/testing';
+import {Customer} from '../../model/customer';
+import {HttpClientService} from '../http/http-client.service';
+import {CustomerService} from './customer.service';
 
 describe('CustomerService', () => {
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('CustomerService', () => {
           },
           deps: [MockBackend, BaseRequestOptions],
         },
-      ]
+      ],
     });
   });
 
@@ -37,36 +37,35 @@ describe('CustomerService', () => {
     backend = mockBackend;
   }));
 
-
-  let mockResponseArrayCustomers = [
+  const mockResponseArrayCustomers = [
     {
       id: 1,
-      name: "test"
+      name: 'test',
     }, {
       id: 2,
-      name: "test2"
+      name: 'test2',
     }, {
       id: 3,
-      name: "test3"
+      name: 'test3',
     },
   ];
 
-  let expectedResponseArrayCustomers: Customer [] = [];
+  const expectedResponseArrayCustomers: Customer [] = [];
   mockResponseArrayCustomers.forEach((item, index) => {
-    expectedResponseArrayCustomers.push(new Customer(item))
+    expectedResponseArrayCustomers.push(new Customer(item));
   });
 
   describe('getCustomers()', () => {
 
     it('should return an array of customers', (done) => {
       backend.connections.subscribe((connection: MockConnection) => {
-        let options = new ResponseOptions({
-          body: JSON.stringify(mockResponseArrayCustomers)
+        const options = new ResponseOptions({
+          body: JSON.stringify(mockResponseArrayCustomers),
         });
         connection.mockRespond(new Response(options));
       });
 
-      userService.getCustomers().subscribe(data => {
+      userService.getCustomers().subscribe((data) => {
         expect(data).toEqual(expectedResponseArrayCustomers);
         done();
       });

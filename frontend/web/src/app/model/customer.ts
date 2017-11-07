@@ -5,15 +5,17 @@ export class Customer {
   public eMail: string;
 
   constructor(values: Object = {}) {
-    if (!values)
+    if (!values) {
       return null;
+    }
     Object.assign(this, values);
   }
 
   static create(json: any) {
-    if (json)
+    if (json) {
       return new Customer(json);
-    else
+    } else {
       return null;
+    }
   }
 }

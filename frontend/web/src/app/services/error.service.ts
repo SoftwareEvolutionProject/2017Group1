@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 @Injectable()
 export class ErrorService {
   constructor(){
@@ -6,6 +6,6 @@ export class ErrorService {
   }
 
   showAlert(title, message) {
-    alert(title+"\n\n"+message)
+    alert(title + '\n\n' + message);
   }
 }
