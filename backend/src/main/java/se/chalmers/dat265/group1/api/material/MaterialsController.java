@@ -1,15 +1,13 @@
 package se.chalmers.dat265.group1.api.material;
 
+import org.apache.commons.lang3.NotImplementedException;
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DataModel;
 import se.chalmers.dat265.group1.model.Material;
 import se.chalmers.dat265.group1.model.MaterialGrade;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MaterialsController extends ApiController implements MaterialAPI {
     private GenericRepository<MaterialProperty> propertyRepository;
@@ -64,17 +62,28 @@ public class MaterialsController extends ApiController implements MaterialAPI {
 
     @Override
     public Material createNewMaterial(Material material) {
-        return null;
+        int id = materialRepository.postObject(material).getId();
+
+        for (MaterialGrade grade : material.getMaterialGrades()) {
+            grade.setMaterialID(id);
+            materialGradeRepository.postObject(grade);
+        }
+
+        for (String key : material.getMaterialProperties().keySet()) {
+            propertyRepository.postObject(new MaterialProperty(-1, key, material.getMaterialProperties().get(key), id));
+        }
+
+        return getMaterial(id + "");
     }
 
     @Override
     public Material decreaseLevelAmount(int materialID, int materialGrade, double amount) {
-        return null;
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Material increaseLevelAmount(int materialID, int materialGrade, double amount) {
-        return null;
+        throw new NotImplementedException("TODO");
     }
 
     private class MaterialProperty implements DataModel {

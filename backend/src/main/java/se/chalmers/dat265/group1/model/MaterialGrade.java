@@ -2,6 +2,7 @@ package se.chalmers.dat265.group1.model;
 
 public class MaterialGrade implements DataModel {
     private int id;
+    private int materialID;
     private int reusedTimes;
     private double amount;
 
@@ -22,5 +23,13 @@ public class MaterialGrade implements DataModel {
 
     public double getAmount() {
         return amount;
+    }
+
+    public void setMaterialID(int materialID) {
+        this.materialID = materialID;
+    }
+
+    public int getMaterialID() {
+        return materialID;
     }
 }
