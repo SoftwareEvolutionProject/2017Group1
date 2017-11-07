@@ -1,6 +1,6 @@
 package se.chalmers.dat265.group1;
 
-import se.chalmers.dat265.group1.api.MaterialInterface;
+import se.chalmers.dat265.group1.api.material.MaterialApi;
 import se.chalmers.dat265.group1.api.printing.PrintingController;
 import se.chalmers.dat265.group1.api.printing.PrintingInterface;
 import se.chalmers.dat265.group1.api.customer.CustomerAPI;
@@ -23,7 +23,7 @@ public class WebApi {
 
     private static CustomerAPI ci;
     private static DigitalPartAPI dpi;
-    private static MaterialInterface mi;
+    private static MaterialApi mi;
     private static PrintingInterface pi;
     private static final String PARTS_URL = "/parts";
     private static final String ORDEREDPART_ID_URL = "/:orderedPartID";
@@ -39,6 +39,9 @@ public class WebApi {
     private static final String DIGITALPART_ID_URL = "/:digitalPart";
     private static final String DIGITALPART_ID_PARAM = "digitalPartID";
     private static final String PHYSICALPARTS_URL = "/physical-parts";
+    private static final String MATERIALS_URL = "/materials";
+    private static final String MATERIAL_ID_URL = "/:materialID";
+    private static final String MATERIAL_ID = "materialID";
     private static Gson gson = new Gson();
     private static boolean debug;
 
@@ -59,6 +62,7 @@ public class WebApi {
         setupPrintingInterface();
         setupOrderInterface();
         setupDigitalPartsInterface();
+        setupMaterialInterface();
 
         log.info("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         log.info("SERVER RUNNING!");
@@ -103,6 +107,22 @@ public class WebApi {
         put(ORDERS_URL + ORDER_ID_URL, ((request, response) -> ci.updateOrder(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), Order.class))), gson::toJson);
         post(ORDERS_URL + ORDER_ID_URL + PARTS_URL, ((request, response) -> ci.createNewOrderedPart(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
         put(ORDERS_URL + ORDER_ID_URL + PARTS_URL + ORDEREDPART_ID_URL, ((request, response) -> ci.updateOrderDetail(request.params(ORDER_ID_PARAM), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
+    }
+
+    private static void setupMaterialInterface() {
+
+        get(MATERIALS_URL, (request, response) -> mi.getAllMaterials(), gson::toJson);
+        get(MATERIALS_URL + MATERIAL_ID_URL, ((request, response) -> mi.getMaterial(request.params(MATERIAL_ID))), gson::toJson);
+        post(MATERIALS_URL, ((request, response) -> mi.createNewMaterial(gson.fromJson(request.body(), Material.class))), gson::toJson);
+        put(MATERIALS_URL + MATERIAL_ID_URL + "/:gradeLevel/decrease/:amount", (request, response) -> mi.decreaseLevelAmount(
+                Integer.valueOf(request.params(MATERIAL_ID)),
+                Integer.valueOf(request.params("gradeLevel")),
+                Double.valueOf(request.params("amount"))), gson::toJson);
+
+        put(MATERIALS_URL + MATERIAL_ID_URL + "/:gradeLevel/increase/:amount", (request, response) -> mi.increaseLevelAmount(
+                Integer.valueOf(request.params(MATERIAL_ID)),
+                Integer.valueOf(request.params("gradeLevel")),
+                Double.valueOf(request.params("amount"))), gson::toJson);
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.

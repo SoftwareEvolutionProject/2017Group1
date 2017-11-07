@@ -3,6 +3,7 @@ package se.chalmers.dat265.group1.model;
 public class PhysicalPrint implements DataModel {
     private int id;
     private int digitalPrintID;
+    private int detailedMaterialId;
     private String slmPath;
 
     public int getId() {
@@ -17,4 +18,7 @@ public class PhysicalPrint implements DataModel {
         return slmPath;
     }
 
+    public int getDetailedMaterialId() {
+        return detailedMaterialId;
+    }
 }
