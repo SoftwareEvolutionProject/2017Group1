@@ -1,19 +1,20 @@
-export class DigitalPart {
+export class Order {
+
   public id: number;
-  public name: string;
-  public stlFile: string;
+  public customer: number;
 
   constructor(values: Object = {}) {
-    if (!values) {
+    if (!values){
       return null;
     }
     Object.assign(this, values);
   }
 
   static create(json: any) {
-    if (json) {
-      return new DigitalPart(json);
-    } else {
+    if (json){
+      return new Order(json);
+    }
+    else{
       return null;
     }
   }

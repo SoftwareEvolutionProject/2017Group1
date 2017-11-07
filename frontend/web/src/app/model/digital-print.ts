@@ -1,7 +1,6 @@
-export class DigitalPart {
+export class DigitalPrint {
   public id: number;
   public name: string;
-  public stlFile: string;
 
   constructor(values: Object = {}) {
     if (!values) {
@@ -12,7 +11,7 @@ export class DigitalPart {
 
   static create(json: any) {
     if (json) {
-      return new DigitalPart(json);
+      return new DigitalPrint(json);
     } else {
       return null;
     }

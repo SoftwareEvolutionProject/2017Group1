@@ -49,7 +49,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers:[ isDocker ? 'ChromeHeadless' : 'Chrome'],
+    browsers:[ isDocker ? 'Chrome_without_sandbox' : 'Chrome'],
     singleRun: isDocker,
     browserNoActivityTimeout: 1000000,
     captureTimeout: 100000

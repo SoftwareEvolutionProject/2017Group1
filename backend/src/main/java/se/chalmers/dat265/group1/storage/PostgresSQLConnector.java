@@ -7,7 +7,7 @@ import org.apache.commons.logging.*;
 public class PostgresSQLConnector implements DBInterface {
     private Log log = LogFactory.getLog(PostgresSQLConnector.class);
     private static final String CONNECTION_URL_DOCKER = "jdbc:postgresql://db:5432/svereadb";
-    private static final String CONNECTION_URL_DEBUG = "jdbc:postgresql://localhost:5432/svereadb";
+    private static final String CONNECTION_URL_DEBUG = "jdbc:postgresql://localhost:5433/svereadb";
     private static final String USERNAME = "admin";
     private static final String PWD = "1234";
 
