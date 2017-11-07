@@ -1,11 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import {RouterTestingModule} from '@angular/router/testing';
+import {BsModalService, ModalModule} from 'ngx-bootstrap';
+import {CustomerMockService} from '../../services/customer/customer-mock.service';
+import {CustomerService} from '../../services/customer/customer.service';
+import {ErrorService} from '../../services/error.service';
+import {CustomerDetailPanelComponent} from '../customer-detail-panel/customer-detail-panel.component';
 import { CustomerListComponent } from './customer-list.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import {BsModalService, ModalModule} from "ngx-bootstrap";
-import {ErrorService} from "../../services/error.service";
-import {CustomerMockService} from "../../services/customer/customer-mock.service";
-import {CustomerService} from "../../services/customer/customer.service";
 
 describe('CustomerListComponent', () => {
   let component: CustomerListComponent;
@@ -13,8 +14,8 @@ describe('CustomerListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomerListComponent ],
-      imports: [RouterTestingModule, ModalModule.forRoot()]
+      declarations: [ CustomerListComponent, CustomerDetailPanelComponent ],
+      imports: [RouterTestingModule, ModalModule.forRoot()],
     });
     TestBed.overrideComponent(CustomerListComponent, {
       set: {
@@ -22,8 +23,8 @@ describe('CustomerListComponent', () => {
           {provide: CustomerService, useClass: CustomerMockService},
           {provide: ErrorService, useClass: ErrorService},
           BsModalService,
-        ]
-      }
+        ],
+      },
     })
     .compileComponents();
   }));

@@ -4,28 +4,27 @@ declare var $: any;
 @Component({
   selector: 'app-sidemenu',
   templateUrl: './sidemenu.component.html',
-  styleUrls: ['./sidemenu.component.scss']
+  styleUrls: ['./sidemenu.component.scss'],
 })
 export class SidemenuComponent implements OnInit, AfterViewInit {
 
   private trigger;
-  private isClosed : boolean = false;
+  private isClosed = false;
 
   constructor() { }
 
   ngOnInit() {  }
 
-
   ngAfterViewInit(): void {
 
     this.trigger = $('.hamburger');
 
-    let _self = this;
-    this.trigger.click(function () {
+    const _self = this;
+    this.trigger.click(function() {
       _self.hamburger_cross();
     });
 
-    $('[data-toggle="offcanvas"]').click(function () {
+    $('[data-toggle="offcanvas"]').click(function() {
       $('#wrapper').toggleClass('toggled');
     });
 
@@ -33,7 +32,6 @@ export class SidemenuComponent implements OnInit, AfterViewInit {
       $(this).find('i').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-up');
     });
   }
-  
 
   hamburger_cross() {
 

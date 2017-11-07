@@ -1,8 +1,8 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {StlViewerComponent} from "./components/stl-viewer/stl-viewer.component";
-import {SidemenuComponent} from "./components/sidemenu/sidemenu.component";
-import {RouterTestingModule} from "@angular/router/testing";
+import {SidemenuComponent} from './components/sidemenu/sidemenu.component';
+import {StlViewerComponent} from './components/stl-viewer/stl-viewer.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,9 +11,9 @@ describe('AppComponent', () => {
         AppComponent,
         StlViewerComponent,
         SidemenuComponent,
-      ],imports: [
-        RouterTestingModule
-      ]
+      ], imports: [
+        RouterTestingModule,
+      ],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
