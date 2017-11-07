@@ -11,7 +11,7 @@ RUN  export PHANTOMJS_BIN=/usr/local/lib/node_modules/karma-phantomjs-launcher/n
 
 # Install Chromium
 RUN apt-get update \
-    && apt-get install -y chromium
+    && apt-get install -y chromium --no-sandbox 
 ENV CHROME_BIN=chromium
 
 #Install node and npm
