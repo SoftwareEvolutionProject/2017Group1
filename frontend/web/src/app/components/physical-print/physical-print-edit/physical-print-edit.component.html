@@ -12,9 +12,18 @@
         <div class="panel-body" style="padding-right: 30px">
 
             <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
-              <label>Name</label>
-              <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
-                <input class="form-control" formControlName="name" value="{{customer.name}}">
+              <label>ID:</label>
+              <span *ngIf="!creating">{{physicalPrint.id}} </span>
+              <span *ngIf="creating">Auto Generated </span>
+              <br>
+
+              <label>Digital Part</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrint').valid}">
+                <input class="form-control" formControlName="digitalPrint" value="{{physicalPrint.digitalPrint}}">
+              </div>
+              <label>SLM File</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('slmpath').valid}">
+                <input class="form-control" formControlName="slmpath" value="{{physicalPrint.slmpath}}">
               </div>
             </form>
 

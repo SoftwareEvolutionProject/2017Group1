@@ -78,7 +78,9 @@ export class PhysicalPrintEditComponent implements OnInit {
   /* init forms */
   private constructForms() {
     const fields = {
-      name: [this.physicalPrint && this.physicalPrint.name ? this.physicalPrint.name : '',
+      slmpath: [this.physicalPrint && this.physicalPrint.slmpath ? this.physicalPrint.slmpath : '',
+        Validators.compose([Validators.required])],
+      digitalPrint: [this.physicalPrint && this.physicalPrint.digitalPrint ? this.physicalPrint.digitalPrint : '',
         Validators.compose([Validators.required])],
     };
 

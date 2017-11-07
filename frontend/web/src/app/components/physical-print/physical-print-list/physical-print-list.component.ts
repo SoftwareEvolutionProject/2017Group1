@@ -53,14 +53,17 @@ export class PhysicalPrintListComponent implements OnInit {
   private populate() {
     const _self = this;
     /*manually generate columns*/
-    const columns = [{
-      title: 'Namn',
-      field: 'name',
-      sortable: true,
-    }, {
-      title: 'Kund ID',
+    const columns = [ {
+      title: 'ID',
       field: 'id',
-      visible: false,
+      sortable: true,
+    },{
+      title: 'Digital Print',
+      field: 'digitalPrintId',
+      sortable: true,
+    },{
+      title: 'SLM File',
+      field: 'slmPath',
       sortable: true,
     }, {
       field: 'operate',
@@ -80,8 +83,9 @@ export class PhysicalPrintListComponent implements OnInit {
     const data = [];
     this.physicalPrints.forEach((physicalPrint) => {
       data.push({
-        name: physicalPrint.name,
+        slmPath: physicalPrint.slmpath,
         id: physicalPrint.id,
+        digitalPrintId : physicalPrint.digitalPrint
       });
     });
 
