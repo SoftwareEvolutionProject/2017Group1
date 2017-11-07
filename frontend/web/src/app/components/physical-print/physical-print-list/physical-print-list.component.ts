@@ -2,8 +2,7 @@ import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild
 import {Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PhysicalPrint} from '../../../model/physical-print';
-//import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
-import {PhysicalPrintMockService as PhysicalPrintService} from '../../../services/physical-print/physical-print-mock.service';
+import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 import {ErrorService} from '../../../services/error.service';
 declare var $: any;
 
@@ -39,7 +38,7 @@ export class PhysicalPrintListComponent implements OnInit {
 
   loadAndPopulate() {
     /* get users */
-    this.physicalPrintService.getAll().subscribe(
+    this.physicalPrintService.getAllPhysicalPrint().subscribe(
       (physicalPrints) => {
         this.physicalPrints = physicalPrints;
 
@@ -133,7 +132,7 @@ export class PhysicalPrintListComponent implements OnInit {
 
   private confirmDelete() {
     if (this.toBeDeleted) {
-      this.physicalPrintService.delete(this.toBeDeleted).subscribe((res) => {
+      this.physicalPrintService.deletePhysicalPrint(this.toBeDeleted).subscribe((res) => {
           this.toBeDeleted = null;
           this.modalRef.hide();
           this.loadAndPopulate();
