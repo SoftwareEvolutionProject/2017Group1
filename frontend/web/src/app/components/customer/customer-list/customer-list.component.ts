@@ -13,9 +13,10 @@ declare var $: any;
   providers: [CustomerService, ErrorService],
 })
 export class CustomerListComponent implements OnInit, AfterViewInit {
-  modalDelete: any;
-  toBeDeleted: any;
-  modalRef: any;
+  private modalRef: BsModalRef;
+  @ViewChild('modalDelete') modalDelete;
+  private toBeDeleted: number = null;
+
   private table;
   @Input('customers') customers: Customer [];
   @Output() selected: EventEmitter<Customer> = new EventEmitter<Customer>();
