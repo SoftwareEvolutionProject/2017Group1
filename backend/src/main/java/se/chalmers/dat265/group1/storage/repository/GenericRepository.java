@@ -1,12 +1,13 @@
-package storage.repository;
+package se.chalmers.dat265.group1.storage.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import model.DataModel;
-import org.postgresql.util.PSQLException;
-import storage.DBInterface;
+import se.chalmers.dat265.group1.model.DataModel;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import se.chalmers.dat265.group1.storage.DBInterface;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,15 +18,15 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Basic repository class that can take any model.
+ * Basic repository class that can take any se.chalmers.dat265.group1.model.
  *
  * Several things are presumed:
- * - The model must have a default constructor
- * - The model must set default values
- * - The model must only use int, boolean or string (currently)
+ * - The se.chalmers.dat265.group1.model must have a default constructor
+ * - The se.chalmers.dat265.group1.model must set default values
+ * - The se.chalmers.dat265.group1.model must only use int, boolean or string (currently)
  */
 public class GenericRepository <T extends DataModel> {
-
+    private Log log = LogFactory.getLog(GenericRepository.class);
     private final Gson gson;
     private final Class<T> type;
     private DBInterface dbInterface;
@@ -45,9 +46,9 @@ public class GenericRepository <T extends DataModel> {
         System.out.println("Running query: "+query);
         ResultSet rs =  this.dbInterface.executeQuerry(query);
         try {
-            return this.getMatchJSON(rs); //converts resulting set to model instance
+            return this.getMatchJSON(rs); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("getObjects",e);
             return null;
         }
     }
@@ -67,15 +68,15 @@ public class GenericRepository <T extends DataModel> {
 
         ResultSet rs =  this.dbInterface.executeQuerry(sb.toString());
         try {
-            return this.getMatchJSON(rs); //converts resulting set to model instance
+            return this.getMatchJSON(rs); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("getObjects", e);
             return null;
         }
     }
 
     /***
-     * Gets specific instance of model
+     * Gets specific instance of se.chalmers.dat265.group1.model
      * @param id
      * @return
      */
@@ -84,15 +85,15 @@ public class GenericRepository <T extends DataModel> {
         System.out.println("Running query: "+query);
         ResultSet rs =  this.dbInterface.executeQuerry(query);
         try {
-            return this.getMatchJSON(rs).iterator().next(); //converts resulting set to model instance
+            return this.getMatchJSON(rs).iterator().next(); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("getObject", e);
             return null;
         }
     }
 
     /***
-     * Creates an given instance om model
+     * Creates an given instance om se.chalmers.dat265.group1.model
      * @param object
      * @return
      */
@@ -119,7 +120,7 @@ public class GenericRepository <T extends DataModel> {
     }
 
     /***
-     * Updates a model already in the system, currently updates ALL fields no matter how many are set (probably)
+     * Updates a se.chalmers.dat265.group1.model already in the system, currently updates ALL fields no matter how many are set (probably)
      * @param object
      * @return
      */
@@ -143,20 +144,23 @@ public class GenericRepository <T extends DataModel> {
 
     private T execute(JsonObject jsonObject2, StringBuilder query2) {
         try {
-            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject2, query2); //maps model data to the query
+            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject2, query2); //maps se.chalmers.dat265.group1.model data to the query
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
             int id = rs.getInt(1);
             return this.getObject(id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("execute", e);
+            return null;
+        } finally {
+            System.out.println("Failed to execute");
             return null;
         }
     }
 
     /***
-     * Deletes a specific model instance
+     * Deletes a specific se.chalmers.dat265.group1.model instance
      * @param id
      * @return
      */
@@ -168,7 +172,7 @@ public class GenericRepository <T extends DataModel> {
     }
 
     /***
-     * Attempts to convert result set to a model instance
+     * Attempts to convert result set to a se.chalmers.dat265.group1.model instance
      * @param rs the result set from a querry
      * @return An Object instance of given generic type
      * @throws SQLException if error with result set
@@ -181,9 +185,9 @@ public class GenericRepository <T extends DataModel> {
             try {
                 result = type.newInstance();
             } catch (InstantiationException e) {
-                e.printStackTrace();
+                log.error("getMatchJSON",e);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                log.error("getMatchJSON",e);
             }
 
             JsonObject jsonModel = this.gson.toJsonTree(result).getAsJsonObject();

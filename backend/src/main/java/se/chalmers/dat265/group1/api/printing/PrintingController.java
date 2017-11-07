@@ -1,11 +1,9 @@
-package api.printing;
+package se.chalmers.dat265.group1.api.printing;
 
-import api.ApiController;
-import model.DataModel;
-import model.DigitalPart;
-import model.DigitalPrint;
-import storage.repository.GenericRepository;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import se.chalmers.dat265.group1.api.ApiController;
+import se.chalmers.dat265.group1.model.DataModel;
+import se.chalmers.dat265.group1.model.DigitalPrint;
+import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import java.util.*;
 

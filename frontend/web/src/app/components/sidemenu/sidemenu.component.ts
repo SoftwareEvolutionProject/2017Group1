@@ -29,7 +29,7 @@ export class SidemenuComponent implements OnInit, AfterViewInit {
     });
 
     $('[data-toggle="collapse"]').click(function(){
-      $(this).find('i').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-up');
+      $(this).find('em').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-up');
     });
   }
 

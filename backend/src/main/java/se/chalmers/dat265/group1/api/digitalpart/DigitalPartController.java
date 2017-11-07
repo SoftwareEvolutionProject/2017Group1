@@ -1,7 +1,7 @@
-package api.digitalpart;
+package se.chalmers.dat265.group1.api.digitalpart;
 
-import api.ApiController;
-import model.DigitalPart;
+import se.chalmers.dat265.group1.api.ApiController;
+import se.chalmers.dat265.group1.model.DigitalPart;
 import org.apache.commons.lang3.NotImplementedException;
 import java.util.List;
 

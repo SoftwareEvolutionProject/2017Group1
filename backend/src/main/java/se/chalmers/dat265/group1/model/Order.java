@@ -1,4 +1,4 @@
-package model;
+package se.chalmers.dat265.group1.model;
 
 
 import java.time.Instant;
