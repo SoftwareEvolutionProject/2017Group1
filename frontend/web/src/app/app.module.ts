@@ -23,11 +23,14 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { PhysicalPartDetailComponent } from './components/physical-part-detail/physical-part-detail.component';
 import { PhysicalPartListComponent } from './components/physical-part-list/physical-part-list.component';
-import { PhysicalPrintDetailComponent } from './components/physical-print-detail/physical-print-detail.component';
-import { PhysicalPrintListComponent } from './components/physical-print-list/physical-print-list.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
 import { CustomerMasterViewComponent } from './components/customer/customer-master-view/customer-master-view.component';
+import { PhysicalPrintMasterViewComponent } from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
+import { PhysicalPrintDetailsPanelComponent } from './components/physical-print/physical-print-details-panel/physical-print-details-panel.component';
+import { PhysicalPrintEditComponent } from './components/physical-print/physical-print-edit/physical-print-edit.component';
+import { PhysicalPrintListComponent } from './components/physical-print/physical-print-list/physical-print-list.component';
+
 
 @NgModule({
   declarations: [
@@ -41,8 +44,6 @@ import { CustomerMasterViewComponent } from './components/customer/customer-mast
     DigitalPartDetailComponent,
     DigitalPrintListComponent,
     DigitalPrintDetailComponent,
-    PhysicalPrintDetailComponent,
-    PhysicalPrintListComponent,
     PhysicalPartDetailComponent,
     PhysicalPartListComponent,
     OrderDetailComponent,
@@ -51,6 +52,10 @@ import { CustomerMasterViewComponent } from './components/customer/customer-mast
     MaterialDetailComponent,
     CustomerDetailPanelComponent,
     CustomerMasterViewComponent,
+    PhysicalPrintMasterViewComponent,
+    PhysicalPrintDetailsPanelComponent,
+    PhysicalPrintEditComponent,
+    PhysicalPrintListComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -108,11 +113,11 @@ import { CustomerMasterViewComponent } from './components/customer/customer-mast
       },
       {
         path: 'physical-prints',
-        component: PhysicalPrintListComponent,
+        component: PhysicalPrintMasterViewComponent,
       },
       {
         path: 'physical-prints/:id',
-        component: PhysicalPrintDetailComponent,
+        component: PhysicalPrintEditComponent,
       },
       {
         path: 'materials',
