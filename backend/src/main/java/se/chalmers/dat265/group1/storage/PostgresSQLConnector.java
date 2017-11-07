@@ -21,7 +21,6 @@ public class PostgresSQLConnector implements DBInterface {
             this.establishConnection();
         } catch (SQLException e) {
             log.error("Constructor", e);
-            e.printStackTrace();
         }
     }
 
@@ -32,7 +31,7 @@ public class PostgresSQLConnector implements DBInterface {
 
         this.conn = DriverManager.getConnection(this.CONNECTION_URL, connectionProperties);
 
-        System.out.println("Connected to database");
+        log.info("Connected to database");
     }
 
     @Override
@@ -45,7 +44,7 @@ public class PostgresSQLConnector implements DBInterface {
         } catch (SQLException e) {
             log.error("executeQuerry", e);
         } finally {
-            System.out.println("Execute Querry failed");
+            log.error("Execute Querry failed");
         }
         return null;
     }
