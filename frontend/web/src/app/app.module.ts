@@ -21,8 +21,6 @@ import { MaterialDetailComponent } from './components/material-detail/material-d
 import { MaterialListComponent } from './components/material-list/material-list.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
-import { PhysicalPartDetailComponent } from './components/physical-part-detail/physical-part-detail.component';
-import { PhysicalPartListComponent } from './components/physical-part-list/physical-part-list.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
 import { CustomerMasterViewComponent } from './components/customer/customer-master-view/customer-master-view.component';
@@ -44,8 +42,6 @@ import { PhysicalPrintListComponent } from './components/physical-print/physical
     DigitalPartDetailComponent,
     DigitalPrintListComponent,
     DigitalPrintDetailComponent,
-    PhysicalPartDetailComponent,
-    PhysicalPartListComponent,
     OrderDetailComponent,
     OrderListComponent,
     MaterialListComponent,
@@ -97,11 +93,11 @@ import { PhysicalPrintListComponent } from './components/physical-print/physical
       },
       {
         path: 'physical-parts',
-        component: PhysicalPartListComponent,
+        component: HomeComponent,
       },
       {
         path: 'physical-parts/:id',
-        component: PhysicalPartDetailComponent,
+        component: HomeComponent,
       },
       {
         path: 'digital-prints',

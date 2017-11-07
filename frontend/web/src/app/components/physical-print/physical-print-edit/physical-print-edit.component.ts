@@ -3,7 +3,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {isNullOrUndefined} from 'util';
-import {PhysicalPrintMockService as PhysicalPrintService} from '../../../services/physical-print/physical-print-mock.service';
+import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 import {PhysicalPrint} from '../../../model/physical-print';
 import {ErrorService} from '../../../services/error.service';
 
@@ -61,7 +61,7 @@ export class PhysicalPrintEditComponent implements OnInit {
 
   /* get the product */
   getData(id) {
-    this.physicalPrintService.get(id).subscribe(
+    this.physicalPrintService.getPhysicalPrint(id).subscribe(
       (physicalPrint) => {
         this.physicalPrint = physicalPrint;
         this.populate();
@@ -96,7 +96,11 @@ export class PhysicalPrintEditComponent implements OnInit {
     console.log(physicalPrint);
 
     if (this.creating) { // a new product
+<<<<<<< HEAD
       this.physicalPrint.createPhysicalPrint(physicalPrint).subscribe(
+=======
+      this.physicalPrintService.createPhysicalPrint(physicalPrint).subscribe(
+>>>>>>> 12d7b4b8afb6e139a07e8cb62415ee57f2638be5
         (data) => {
           if (this.nav) this.back();
           this.changed.emit(data);
@@ -106,7 +110,11 @@ export class PhysicalPrintEditComponent implements OnInit {
         },
       );
     } else {
+<<<<<<< HEAD
       this.physicalPrint.updatePhysicalPrint(physicalPrint).subscribe(
+=======
+      this.physicalPrintService.createPhysicalPrint(physicalPrint).subscribe(
+>>>>>>> 12d7b4b8afb6e139a07e8cb62415ee57f2638be5
         (data) => {
           if (this.nav) this.back();
           this.changed.emit(data);

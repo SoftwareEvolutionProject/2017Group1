@@ -35,7 +35,7 @@ describe('CustomerListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should CustomerListComponent', () => {
     expect(component).toBeTruthy();
   });
 });

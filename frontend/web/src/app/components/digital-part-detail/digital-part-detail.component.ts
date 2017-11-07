@@ -46,7 +46,7 @@ export class DigitalPartDetailComponent implements OnInit {
   ngAfterViewInit() {
   }
 
-  /* get the product */
+  /* getPhysicalPrint the product */
   getData(id){
     this.digitalPartMockService.getDigialPart(id).subscribe(
       (digitalPart) => {
