@@ -9,9 +9,9 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import { SidebarModule } from 'ng-sidebar';
 import {AlertModule, ModalModule} from 'ngx-bootstrap';
-import { CustomerDetailPanelComponent } from './components/customer-detail-panel/customer-detail-panel.component';
-import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
-import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { CustomerDetailPanelComponent } from './components/customer/customer-detail-panel/customer-detail-panel.component';
+import { CustomerDetailComponent } from './components/customer/customer-detail/customer-detail.component';
+import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
 import { DigitalPartDetailComponent } from './components/digital-part-detail/digital-part-detail.component';
 import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
 import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
@@ -27,6 +27,7 @@ import { PhysicalPrintDetailComponent } from './components/physical-print-detail
 import { PhysicalPrintListComponent } from './components/physical-print-list/physical-print-list.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
+import { CustomerMasterViewComponent } from './components/customer/customer-master-view/customer-master-view.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {HttpClientService} from './services/http/http-client.service';
     MaterialListComponent,
     MaterialDetailComponent,
     CustomerDetailPanelComponent,
+    CustomerMasterViewComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -66,7 +68,7 @@ import {HttpClientService} from './services/http/http-client.service';
       },
       {
         path: 'customers',
-        component: CustomerListComponent,
+        component: CustomerMasterViewComponent,
       },
       {
         path: 'customers/:id',
@@ -127,4 +129,4 @@ import {HttpClientService} from './services/http/http-client.service';
   bootstrap: [AppComponent],
 })
 export class AppModule { }
-
+

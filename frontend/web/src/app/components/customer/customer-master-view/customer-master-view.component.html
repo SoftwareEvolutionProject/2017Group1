@@ -5,23 +5,8 @@
   </div>
   <div class="row">
     <div class="col-md-7" id="list">
-      <table id="table"
-             data-search="true"
-             data-search-align="right"
-             data-pagination="true"
-             data-page-list="[10, 25, 50, 100, ALL]">
-
-        <thead>
-        <tr>
-        </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <br>
-      <div>
-        <button class="btn btn-primary pull-right" style="min-width: 100px" (click)="create()">
-          <span style="margin-left : 5px" class="glyphicon glyphicon-plus"></span> Add Customer </button>
-      </div>
+      <app-customer-list (selected)="customerSelected($event)">
+      </app-customer-list>
     </div>
     <div class="col-md-5" id="detail" style="margin-top: 54px">
       <app-customer-detail-panel [customer]="selectedCustomer">
