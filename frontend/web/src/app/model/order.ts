@@ -1,4 +1,4 @@
-export class Customer {
+export class Order {
 
   public id: number;
   public customer: number;
