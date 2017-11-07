@@ -5,6 +5,12 @@ public class PhysicalPrint extends DataModel {
     private int digitalPrintID;
     private String slmPath;
 
+    public PhysicalPrint() {
+        id = -1;
+        digitalPrintID = -1;
+        slmPath = "";
+    }
+
     public int getId() {
         return id;
     }

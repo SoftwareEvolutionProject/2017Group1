@@ -60,11 +60,13 @@ public class GenericRepository <T extends DataModel> {
         sb.append("\"");
         for(Class table : tables){
             sb.append(",\"");
-            sb.append(table.getSimpleName());
+            sb.append(table.getSimpleName().toLowerCase());
             sb.append("\"");
         }
         sb.append(" WHERE ");
         sb.append(sqlConditions);
+
+        log.info("Running query: "+sb.toString());
 
         ResultSet rs =  this.dbInterface.executeQuerry(sb.toString());
         try {

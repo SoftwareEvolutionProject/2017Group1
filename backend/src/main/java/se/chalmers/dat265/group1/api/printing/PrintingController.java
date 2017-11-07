@@ -3,6 +3,8 @@ package se.chalmers.dat265.group1.api.printing;
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DataModel;
 import se.chalmers.dat265.group1.model.DigitalPrint;
+import se.chalmers.dat265.group1.model.dbEntities.DigitalPrintData;
+import se.chalmers.dat265.group1.model.dbEntities.MagicsPairing;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import java.util.*;
@@ -10,7 +12,6 @@ import java.util.*;
 public class PrintingController extends ApiController implements PrintingAPI {
     private GenericRepository<DigitalPrintData> digitalPrintRepository;
     private GenericRepository<MagicsPairing> magicsPairingRepository;
-
 
     public PrintingController(boolean debug) {
         super(debug);
@@ -23,6 +24,7 @@ public class PrintingController extends ApiController implements PrintingAPI {
         List<DigitalPrint> resultList = new LinkedList<>();
         List<DigitalPrintData> dpeList = digitalPrintRepository.getObjects();
         for (DigitalPrintData dpe : dpeList) {
+            System.out.println("Getting stuff for "+ dpe.getId());
             resultList.add(getPairings(dpe));
         }
 
@@ -51,7 +53,8 @@ public class PrintingController extends ApiController implements PrintingAPI {
     }
 
     private DigitalPrint getPairings(DigitalPrintData dpe) {
-        List<MagicsPairing> mpeList = magicsPairingRepository.getObjects("digitalPrintID=" + dpe.id);
+        List<MagicsPairing> mpeList = magicsPairingRepository.getObjects("digitalPrintID = " + dpe.getId());
+        System.out.println("Found "+ mpeList.size() +  " number of pairings");
         return combine(dpe, mpeList);
     }
 
@@ -59,10 +62,11 @@ public class PrintingController extends ApiController implements PrintingAPI {
         Map<String, Integer> magicsPartPairing = new HashMap<>();
 
         for (MagicsPairing mpe : mpList) {
-            magicsPartPairing.put(mpe.label, mpe.digitalPartID);
+            System.out.println("Label: "+ mpe.getLabel());
+            magicsPartPairing.put(mpe.getLabel(), mpe.getDigitalPartID());
         }
 
-        return new DigitalPrint(dp.id, dp.magicsPath, magicsPartPairing);
+        return new DigitalPrint(dp.getId(), dp.getMagicsPath(), magicsPartPairing);
     }
 
     private List<MagicsPairing> extractMagicsPairingEntity(DigitalPrint digitalPrint) {
@@ -79,40 +83,4 @@ public class PrintingController extends ApiController implements PrintingAPI {
         return new DigitalPrintData(digitalPrint.getId(), digitalPrint.getMagicsPath());
     }
 
-    private class MagicsPairing extends DataModel {
-        int id, digitalPrintID, digitalPartID;
-        String label;
-
-        public MagicsPairing(int id, int digitalPrintID, int digitalPartID, String label) {
-            super();
-            this.id = id;
-            this.digitalPrintID = digitalPrintID;
-            this.digitalPartID = digitalPartID;
-            this.label = label;
-        }
-
-        public int getId() {
-            return id;
-        }
-    }
-
-    private class DigitalPrintData extends DataModel {
-
-        public DigitalPrintData(int id, String magicsPath) {
-            super();
-            this.id = id;
-            this.magicsPath = magicsPath;
-        }
-
-        public DigitalPrintData(String magicsPath) {
-            this(-1, magicsPath);
-        }
-
-        int id;
-        String magicsPath;
-
-        public int getId() {
-            return id;
-        }
-    }
 }
