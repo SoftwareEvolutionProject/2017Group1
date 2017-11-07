@@ -28,6 +28,8 @@ import { PhysicalPrintMasterViewComponent } from './components/physical-print/ph
 import { PhysicalPrintDetailsPanelComponent } from './components/physical-print/physical-print-details-panel/physical-print-details-panel.component';
 import { PhysicalPrintEditComponent } from './components/physical-print/physical-print-edit/physical-print-edit.component';
 import { PhysicalPrintListComponent } from './components/physical-print/physical-print-list/physical-print-list.component';
+import {Error500Component} from "./components/errors/500-error/500-error.component";
+import {Error404Component} from "./components/errors/404-error/404-error.component";
 
 
 @NgModule({
@@ -52,6 +54,8 @@ import { PhysicalPrintListComponent } from './components/physical-print/physical
     PhysicalPrintDetailsPanelComponent,
     PhysicalPrintEditComponent,
     PhysicalPrintListComponent,
+    Error404Component,
+    Error500Component
   ],
   imports: [
     AlertModule.forRoot(),
@@ -122,6 +126,14 @@ import { PhysicalPrintListComponent } from './components/physical-print/physical
       {
         path: 'materials/:id',
         component: MaterialDetailComponent,
+      },
+      {
+        path: '500',
+        component: Error500Component
+      },
+      {
+        path: '404',
+        component: Error404Component
       },
     ]),
   ],
