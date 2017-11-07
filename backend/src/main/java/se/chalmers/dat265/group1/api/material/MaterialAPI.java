@@ -4,7 +4,7 @@ import se.chalmers.dat265.group1.model.Material;
 
 import java.util.List;
 
-public interface MaterialApi {
+public interface MaterialAPI {
     List<Material> getAllMaterials();
 
     Material getMaterial(String id);
