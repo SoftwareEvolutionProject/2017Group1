@@ -19,7 +19,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should createPhysicalPrint', () => {
     expect(component).toBeTruthy();
   });
 });

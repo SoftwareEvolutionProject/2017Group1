@@ -1,6 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomerMasterViewComponent } from './customer-master-view.component';
+import {CustomerListComponent} from "../customer-list/customer-list.component";
+import {CustomerDetailPanelComponent} from "../customer-detail-panel/customer-detail-panel.component";
+import {ErrorService} from "../../../services/error.service";
+import {CustomerService} from "../../../services/customer/customer.service";
+import {HttpModule} from "@angular/http";
+import {HttpClientService} from "../../../services/http/http-client.service";
+import {RouterTestingModule} from "@angular/router/testing";
+import {ModalModule} from "ngx-bootstrap";
 
 describe('CustomerMasterViewComponent', () => {
   let component: CustomerMasterViewComponent;
@@ -8,7 +16,17 @@ describe('CustomerMasterViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomerMasterViewComponent ]
+      imports: [HttpModule, RouterTestingModule, ModalModule.forRoot()],
+      providers: [HttpClientService],
+      declarations: [ CustomerMasterViewComponent, CustomerListComponent, CustomerDetailPanelComponent ]
+    });
+    TestBed.overrideComponent(CustomerListComponent, {
+      set: {
+        providers: [
+          {provide: CustomerService, useClass: CustomerService},
+          {provide: ErrorService, useClass: ErrorService}
+        ],
+      },
     })
     .compileComponents();
   }));
@@ -19,7 +37,7 @@ describe('CustomerMasterViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create CustomerMasterViewComponent', () => {
     expect(component).toBeTruthy();
   });
 });

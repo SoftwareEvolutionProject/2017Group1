@@ -35,7 +35,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   }
 
   loadAndPopulate() {
-    /* get users */
+    /* getPhysicalPrint users */
     this.digitalPartMockService.getDigitalParts().subscribe(
       (customers) => {
         this.digitalParts = customers;
@@ -152,6 +152,6 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   }
 
   private create() {
-    this.router.navigate([this.router.url + '/create']);
+    this.router.navigate([this.router.url + '/createPhysicalPrint']);
   }
 }

@@ -4,7 +4,7 @@ import { Math3D } from "./Math3D"
 /**
  * @class WebGLRenderBackend
  *
- * This class implements an optional WebGL render back-end for {JSC3D.Viewer}. If enabled, it takes 
+ * This class implements an optional WebGL render back-end for {JSC3D.Viewer}. If enabled, it takes
  * place of {JSC3D.Viewer}'s default software rendering module and provides high performance rendering.
  */
 export class WebGLRenderBackend {
@@ -34,12 +34,12 @@ export class WebGLRenderBackend {
 
     constructor(canvas, releaseLocalBuffers) {
         this.canvas = canvas;
-        // IE11 only has a partial implementation of WebGL API, thus some special treatments are required 
+        // IE11 only has a partial implementation of WebGL API, thus some special treatments are required
         // to avoid usage of unsupported methods and properties.
         this.isIE11 = false; //(JSC3D.PlatformInfo.browser == 'ie') && (parseInt(JSC3D.PlatformInfo.version) >= 11);
         this.gl = canvas.getContext('experimental-webgl', {/*antialias: false,*/ preserveDrawingBuffer: true/*this is necessary since we need to read back pixels for picking*/}) || canvas.getContext('webgl');
         if(!this.gl)
-            throw 'JSC3D.WebGLRenderBackend constructor failed: Cannot get WebGL context!';
+            throw 'JSC3D.WebGLRenderBackend constructor failed: Cannot getPhysicalPrint WebGL context!';
         this.definition = 'standard';
         this.bkgColors = [0, 0];
         this.bkgTexture = null;
@@ -48,137 +48,137 @@ export class WebGLRenderBackend {
         this.pickingResult = new Uint8Array(4);
         this.releaseLocalBuffers = releaseLocalBuffers || false;
 
-        this.screen_vs =	'#ifdef GL_ES \n' + 
-                            '	precision mediump float; \n' + 
-                            '#endif	\n' + 
-                            '\n' + 
-                            'attribute vec2 a_position; \n' + 
-                            'varying vec2 v_texCoord; \n' + 
-                            '\n' + 
-                            'void main(void) { \n' + 
-                            '	v_texCoord = vec2(0.5, 0.5) * a_position + vec2(0.5, 0.5); \n' + 
-                            '	gl_Position = vec4(a_position, 1.0, 1.0); \n' + 
+        this.screen_vs =	'#ifdef GL_ES \n' +
+                            '	precision mediump float; \n' +
+                            '#endif	\n' +
+                            '\n' +
+                            'attribute vec2 a_position; \n' +
+                            'varying vec2 v_texCoord; \n' +
+                            '\n' +
+                            'void main(void) { \n' +
+                            '	v_texCoord = vec2(0.5, 0.5) * a_position + vec2(0.5, 0.5); \n' +
+                            '	gl_Position = vec4(a_position, 1.0, 1.0); \n' +
                             '}';
-        this.screen_fs =	'#ifdef GL_ES \n' + 
-                            '	precision mediump float; \n' + 
-                            '#endif	\n' + 
-                            '\n' + 
-                            'uniform sampler2D s_screenTexture; \n' + 
-                            'varying vec2 v_texCoord; \n' + 
-                            '\n' + 
-                            'void main(void) { \n' + 
-                            '	gl_FragColor = texture2D(s_screenTexture, v_texCoord); \n' + 
+        this.screen_fs =	'#ifdef GL_ES \n' +
+                            '	precision mediump float; \n' +
+                            '#endif	\n' +
+                            '\n' +
+                            'uniform sampler2D s_screenTexture; \n' +
+                            'varying vec2 v_texCoord; \n' +
+                            '\n' +
+                            'void main(void) { \n' +
+                            '	gl_FragColor = texture2D(s_screenTexture, v_texCoord); \n' +
                             '}';
-        this.gradient_background_vs =	'#ifdef GL_ES \n' + 
-                                        '	precision mediump float; \n' + 
-                                        '#endif	\n' + 
-                                        '\n' + 
-                                        'uniform vec3 u_color1; \n' + 
-                                        'uniform vec3 u_color2; \n' + 
-                                        'attribute vec2 a_position; \n' + 
-                                        'varying vec4 v_color; \n' + 
-                                        '\n' + 
-                                        'void main(void) { \n' + 
-                                        '	v_color = vec4(a_position.y > 0.0 ? u_color1 : u_color2, 1.0); \n' + 
-                                        '	gl_Position = vec4(a_position, 1.0, 1.0); \n' + 
+        this.gradient_background_vs =	'#ifdef GL_ES \n' +
+                                        '	precision mediump float; \n' +
+                                        '#endif	\n' +
+                                        '\n' +
+                                        'uniform vec3 u_color1; \n' +
+                                        'uniform vec3 u_color2; \n' +
+                                        'attribute vec2 a_position; \n' +
+                                        'varying vec4 v_color; \n' +
+                                        '\n' +
+                                        'void main(void) { \n' +
+                                        '	v_color = vec4(a_position.y > 0.0 ? u_color1 : u_color2, 1.0); \n' +
+                                        '	gl_Position = vec4(a_position, 1.0, 1.0); \n' +
                                         '}';
-        this.gradient_background_fs =	'#ifdef GL_ES \n' + 
-                                        '	precision mediump float; \n' + 
-                                        '#endif	\n' + 
-                                        '\n' + 
-                                        'varying vec4 v_color; \n' + 
-                                        '\n' + 
-                                        'void main(void) { \n' + 
-                                        '	gl_FragColor = v_color;' + 
+        this.gradient_background_fs =	'#ifdef GL_ES \n' +
+                                        '	precision mediump float; \n' +
+                                        '#endif	\n' +
+                                        '\n' +
+                                        'varying vec4 v_color; \n' +
+                                        '\n' +
+                                        'void main(void) { \n' +
+                                        '	gl_FragColor = v_color;' +
                                         '}';
-        this.frame_vs =	'#ifdef GL_ES \n' + 
-                        '	precision mediump float; \n' + 
-                        '#endif	\n' + 
-                        '\n' + 
-                        'uniform bool u_isPoint; \n' + 
-                        'uniform mat4 u_transformMatrix; \n' + 
-                        'attribute vec3 a_position; \n' + 
-                        '\n' + 
-                        'void main(void) { \n' + 
-                        '	if(u_isPoint) { \n' + 
-                        '		gl_PointSize = 2.0; \n' + 
-                        '	} \n' + 
-                        '	gl_Position = u_transformMatrix * vec4(a_position, 1.0); \n' + 
+        this.frame_vs =	'#ifdef GL_ES \n' +
+                        '	precision mediump float; \n' +
+                        '#endif	\n' +
+                        '\n' +
+                        'uniform bool u_isPoint; \n' +
+                        'uniform mat4 u_transformMatrix; \n' +
+                        'attribute vec3 a_position; \n' +
+                        '\n' +
+                        'void main(void) { \n' +
+                        '	if(u_isPoint) { \n' +
+                        '		gl_PointSize = 2.0; \n' +
+                        '	} \n' +
+                        '	gl_Position = u_transformMatrix * vec4(a_position, 1.0); \n' +
                         '}';
-        this.frame_fs =	'#ifdef GL_ES \n' + 
-                        '	precision mediump float; \n' + 
-                        '#endif	\n' + 
-                        '\n' + 
-                        'uniform vec3 u_materialColor; \n' + 
-                        '\n' + 
-                        'void main(void) { \n' + 
-                        '	gl_FragColor = vec4(u_materialColor, 1.0); \n' + 
+        this.frame_fs =	'#ifdef GL_ES \n' +
+                        '	precision mediump float; \n' +
+                        '#endif	\n' +
+                        '\n' +
+                        'uniform vec3 u_materialColor; \n' +
+                        '\n' +
+                        'void main(void) { \n' +
+                        '	gl_FragColor = vec4(u_materialColor, 1.0); \n' +
                         '}';
-        this.solid_vs = '#ifdef GL_ES \n' + 
-                        '	precision mediump float; \n' + 
-                        '#endif	\n' + 
-                        '\n' + 
-                        'uniform bool u_isLit; \n' + 
-                        'uniform bool u_isCast; \n' + 
-                        'uniform bool u_hasTexture; \n' + 
-                        'uniform mat3 u_rotationMatrix; \n' + 
-                        'uniform mat4 u_transformMatrix; \n' + 
-                        'attribute vec3 a_position; \n' + 
-                        'attribute vec3 a_normal; \n' + 
-                        'attribute vec2 a_texCoord; \n' + 
-                        'varying vec3 v_normal; \n' + 
-                        'varying vec2 v_texCoord; \n' + 
-                        '\n' + 
-                        'void main(void) { \n' + 
-                        '	if(u_isLit) { \n' + 
-                        '		v_normal = u_rotationMatrix * a_normal; \n' + 
-                        '	} \n' + 
-                        '	if(u_hasTexture) { \n' + 
-                        '		v_texCoord = a_texCoord; \n' + 
-                        '	} \n' + 
-                        '	gl_Position = u_transformMatrix * vec4(a_position, 1.0); \n' + 
+        this.solid_vs = '#ifdef GL_ES \n' +
+                        '	precision mediump float; \n' +
+                        '#endif	\n' +
+                        '\n' +
+                        'uniform bool u_isLit; \n' +
+                        'uniform bool u_isCast; \n' +
+                        'uniform bool u_hasTexture; \n' +
+                        'uniform mat3 u_rotationMatrix; \n' +
+                        'uniform mat4 u_transformMatrix; \n' +
+                        'attribute vec3 a_position; \n' +
+                        'attribute vec3 a_normal; \n' +
+                        'attribute vec2 a_texCoord; \n' +
+                        'varying vec3 v_normal; \n' +
+                        'varying vec2 v_texCoord; \n' +
+                        '\n' +
+                        'void main(void) { \n' +
+                        '	if(u_isLit) { \n' +
+                        '		v_normal = u_rotationMatrix * a_normal; \n' +
+                        '	} \n' +
+                        '	if(u_hasTexture) { \n' +
+                        '		v_texCoord = a_texCoord; \n' +
+                        '	} \n' +
+                        '	gl_Position = u_transformMatrix * vec4(a_position, 1.0); \n' +
                         '}';
-        this.solid_fs = '#ifdef GL_ES \n' + 
-                        '	precision mediump float; \n' + 
-                        '#endif	\n' + 
-                        '\n' + 
-                        'uniform bool  u_isLit; \n' + 
-                        'uniform bool  u_isCast; \n' + 
-                        'uniform bool  u_hasTexture; \n' + 
-                        'uniform float u_opacity; \n' + 
-                        'uniform sampler2D s_palette; \n' + 
-                        'uniform sampler2D s_texture; \n' + 
-                        'uniform sampler2D s_sphereTexture; \n' + 
-                        'varying vec3 v_normal; \n' + 
-                        'varying vec2 v_texCoord; \n' + 
-                        '\n' + 
-                        'void main(void) { \n' + 
-                        '	vec4 materialColor = u_isLit ? vec4(texture2D(s_palette, vec2(abs(v_normal.z), 0.0)).rgb, u_opacity) : vec4(1.0, 1.0, 1.0, u_opacity); \n' + 
-                        '	if(u_isCast) { \n' + 
-                        '		gl_FragColor = materialColor * texture2D(s_sphereTexture, vec2(0.5, -0.5) * v_normal.xy + vec2(0.5, 0.5)); \n' + 
-                        '	} \n' + 
-                        '	else { \n' + 
-                        '		gl_FragColor = u_hasTexture ? (materialColor * texture2D(s_texture, v_texCoord)) : materialColor; \n' + 
-                        '	} \n' + 
+        this.solid_fs = '#ifdef GL_ES \n' +
+                        '	precision mediump float; \n' +
+                        '#endif	\n' +
+                        '\n' +
+                        'uniform bool  u_isLit; \n' +
+                        'uniform bool  u_isCast; \n' +
+                        'uniform bool  u_hasTexture; \n' +
+                        'uniform float u_opacity; \n' +
+                        'uniform sampler2D s_palette; \n' +
+                        'uniform sampler2D s_texture; \n' +
+                        'uniform sampler2D s_sphereTexture; \n' +
+                        'varying vec3 v_normal; \n' +
+                        'varying vec2 v_texCoord; \n' +
+                        '\n' +
+                        'void main(void) { \n' +
+                        '	vec4 materialColor = u_isLit ? vec4(texture2D(s_palette, vec2(abs(v_normal.z), 0.0)).rgb, u_opacity) : vec4(1.0, 1.0, 1.0, u_opacity); \n' +
+                        '	if(u_isCast) { \n' +
+                        '		gl_FragColor = materialColor * texture2D(s_sphereTexture, vec2(0.5, -0.5) * v_normal.xy + vec2(0.5, 0.5)); \n' +
+                        '	} \n' +
+                        '	else { \n' +
+                        '		gl_FragColor = u_hasTexture ? (materialColor * texture2D(s_texture, v_texCoord)) : materialColor; \n' +
+                        '	} \n' +
                         '}';
-        this.picking_vs =	'#ifdef GL_ES \n' + 
-                            '	precision mediump float; \n' + 
-                            '#endif	\n' + 
-                            '\n' + 
-                            'uniform mat4 u_transformMatrix; \n' + 
-                            'attribute vec3 a_position; \n' + 
-                            '\n' + 
-                            'void main(void) { \n' + 
-                            '	gl_Position = u_transformMatrix * vec4(a_position, 1.0); \n' + 
-                            '}'; 
-        this.picking_fs =	'#ifdef GL_ES \n' + 
-                            '	precision mediump float; \n' + 
-                            '#endif	\n' + 
-                            '\n' + 
-                            'uniform vec3 u_pickingId; \n' + 
-                            '\n' + 
-                            'void main(void) { \n' + 
-                            '	gl_FragColor = vec4(u_pickingId, 1.0); \n' + 
+        this.picking_vs =	'#ifdef GL_ES \n' +
+                            '	precision mediump float; \n' +
+                            '#endif	\n' +
+                            '\n' +
+                            'uniform mat4 u_transformMatrix; \n' +
+                            'attribute vec3 a_position; \n' +
+                            '\n' +
+                            'void main(void) { \n' +
+                            '	gl_Position = u_transformMatrix * vec4(a_position, 1.0); \n' +
+                            '}';
+        this.picking_fs =	'#ifdef GL_ES \n' +
+                            '	precision mediump float; \n' +
+                            '#endif	\n' +
+                            '\n' +
+                            'uniform vec3 u_pickingId; \n' +
+                            '\n' +
+                            'void main(void) { \n' +
+                            '	gl_FragColor = vec4(u_pickingId, 1.0); \n' +
                             '}';
 
         function createProgram(gl, vSrc, fSrc) {
@@ -222,10 +222,10 @@ export class WebGLRenderBackend {
         }
 
         this.programs = {
-            screen: createProgram(this.gl, this.screen_vs, this.screen_fs), 
-            gradient_background: createProgram(this.gl, this.gradient_background_vs, this.gradient_background_fs), 
-            frame: createProgram(this.gl, this.frame_vs, this.frame_fs), 
-            solid: createProgram(this.gl, this.solid_vs, this.solid_fs), 
+            screen: createProgram(this.gl, this.screen_vs, this.screen_fs),
+            gradient_background: createProgram(this.gl, this.gradient_background_vs, this.gradient_background_fs),
+            frame: createProgram(this.gl, this.frame_vs, this.frame_fs),
+            solid: createProgram(this.gl, this.solid_vs, this.solid_fs),
             picking: createProgram(this.gl, this.picking_vs, this.picking_fs)
         };
 
@@ -271,14 +271,14 @@ export class WebGLRenderBackend {
         function prepareFB(gl, fbo, w, h) {
             gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
 
-            // create a render buffer object and set it as the depth attachment of the fbo
+            // createPhysicalPrint a render buffer object and set it as the depth attachment of the fbo
             var depthAttachment = gl.createRenderbuffer();
             gl.bindRenderbuffer(gl.RENDERBUFFER, depthAttachment);
             gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, w, h);
             gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthAttachment);
             gl.bindRenderbuffer(gl.RENDERBUFFER, null);
 
-            // create a texture object and set it as the color attachment of the fbo
+            // createPhysicalPrint a texture object and set it as the color attachment of the fbo
             var colorAttachment = gl.createTexture();
             //gl.activeTexture(gl.TEXTURE0);
             gl.bindTexture(gl.TEXTURE_2D, colorAttachment);
@@ -302,7 +302,7 @@ export class WebGLRenderBackend {
             gl.deleteFramebuffer(fbo);
         }
 
-        // create the picking frame-buffer
+        // createPhysicalPrint the picking frame-buffer
         if(!this.pickingFB) {
             this.pickingFB = gl.createFramebuffer();
             prepareFB(gl, this.pickingFB, this.canvas.width, this.canvas.height);
@@ -331,7 +331,7 @@ export class WebGLRenderBackend {
         */
         if(frameWidth != this.canvas.width) {
             if(!this.backFB) {
-                // create the back frame-buffer and bind it as render target
+                // createPhysicalPrint the back frame-buffer and bind it as render target
                 this.backFB = gl.createFramebuffer();
                 prepareFB(gl, this.backFB, frameWidth, frameHeight);
             }
@@ -453,15 +453,15 @@ export class WebGLRenderBackend {
         var gl = this.gl;
 
         var transformMat4Flattened = new Float32Array([
-            transformMatrix.m00, transformMatrix.m10, transformMatrix.m20, 0, 
-            transformMatrix.m01, transformMatrix.m11, transformMatrix.m21, 0, 
-            transformMatrix.m02, transformMatrix.m12, transformMatrix.m22, 0, 
+            transformMatrix.m00, transformMatrix.m10, transformMatrix.m20, 0,
+            transformMatrix.m01, transformMatrix.m11, transformMatrix.m21, 0,
+            transformMatrix.m02, transformMatrix.m12, transformMatrix.m22, 0,
             transformMatrix.m03, transformMatrix.m13, transformMatrix.m23, 1
         ]);
 
         var normalMat3Flattened = new Float32Array([
-            normalMatrix.m00, normalMatrix.m10, normalMatrix.m20, 
-            normalMatrix.m01, normalMatrix.m11, normalMatrix.m21, 
+            normalMatrix.m00, normalMatrix.m10, normalMatrix.m20,
+            normalMatrix.m01, normalMatrix.m11, normalMatrix.m21,
             normalMatrix.m02, normalMatrix.m12, normalMatrix.m22
         ]);
 
@@ -926,7 +926,7 @@ export class WebGLRenderBackend {
                         normals[j    ] = normals[j + 3] = normals[j + 6] = fnbuf[n0    ];
                         normals[j + 1] = normals[j + 4] = normals[j + 7] = fnbuf[n0 + 1];
                         normals[j + 2] = normals[j + 5] = normals[j + 8] = fnbuf[n0 + 2];
-                        
+
                     }
                     else {
                         n0 = nibuf[i    ] * 3;
@@ -1020,7 +1020,7 @@ export class WebGLRenderBackend {
         }
         else {
             /*
-            * Do not need to rebuild, just update normal data.
+            * Do not need to rebuild, just updatePhysicalPrint normal data.
             */
 
             var isFlat = (mesh.compiled.remderMode == 'flat') || (mesh.compiled.remderMode == 'textureflat');
@@ -1035,7 +1035,7 @@ export class WebGLRenderBackend {
                             normals[j    ] = normals[j + 3] = normals[j + 6] = fnbuf[n0    ];
                             normals[j + 1] = normals[j + 4] = normals[j + 7] = fnbuf[n0 + 1];
                             normals[j + 2] = normals[j + 5] = normals[j + 8] = fnbuf[n0 + 2];
-                            
+
                         }
                         else {
                             n0 = nibuf[i    ] * 3;
@@ -1077,7 +1077,7 @@ export class WebGLRenderBackend {
                 }
 
                 if(this.isIE11) {
-                    // IE11 does not support bufferSubData() for buffer content update. So the normal VBO has to be reallocated for the new data.
+                    // IE11 does not support bufferSubData() for buffer content updatePhysicalPrint. So the normal VBO has to be reallocated for the new data.
                     gl.deleteBuffer(mesh.compiled.normals);
                     mesh.compiled.normals = gl.createBuffer();
                     gl.bindBuffer(gl.ARRAY_BUFFER, mesh.compiled.normals);
@@ -1156,8 +1156,8 @@ export class WebGLRenderBackend {
         var gl = this.gl;
 
         texture.compiled = {
-            width:  texture.width, 
-            height: texture.height, 
+            width:  texture.width,
+            height: texture.height,
             hasMipmap: genMipmap
         };
 

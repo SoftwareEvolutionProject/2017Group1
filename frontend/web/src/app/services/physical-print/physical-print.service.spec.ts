@@ -5,13 +5,14 @@ import {MockBackend} from '@angular/http/testing';
 import {MockConnection} from '@angular/http/testing';
 import {Customer} from '../../model/customer';
 import {HttpClientService} from '../http/http-client.service';
-import {CustomerService} from './customer.service';
+import {PhysicalPrintService} from './physical-print.service';
+import {PhysicalPrint} from "../../model/physical-print";
 
 describe('PhysicalPrintService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        CustomerService,
+        PhysicalPrintService,
         HttpClientService,
         MockBackend,
         BaseRequestOptions,
@@ -26,18 +27,18 @@ describe('PhysicalPrintService', () => {
     });
   });
 
-  it('should be created', inject([CustomerService], (service: CustomerService) => {
+  it('should be created', inject([PhysicalPrintService], (service: PhysicalPrintService) => {
     expect(service).toBeTruthy();
   }));
-  let userService: CustomerService = null;
+  let physicalPartService: PhysicalPrintService = null;
   let backend: MockBackend = null;
 
-  beforeEach(inject([CustomerService, MockBackend], (userServiceMock: CustomerService, mockBackend: MockBackend) => {
-    userService = userServiceMock;
+  beforeEach(inject([PhysicalPrintService, MockBackend], (physicalPartServiceMock: PhysicalPrintService, mockBackend: MockBackend) => {
+    physicalPartService = physicalPartServiceMock;
     backend = mockBackend;
   }));
 
-  const mockResponseArrayCustomers = [
+  const mockResponseArray = [
     {
       id: 1,
       name: 'test',
@@ -50,9 +51,9 @@ describe('PhysicalPrintService', () => {
     },
   ];
 
-  const expectedResponseArrayCustomers: Customer [] = [];
-  mockResponseArrayCustomers.forEach((item, index) => {
-    expectedResponseArrayCustomers.push(new Customer(item));
+  const expectedResponseArray: PhysicalPrint [] = [];
+  mockResponseArray.forEach((item, index) => {
+    expectedResponseArray.push(new PhysicalPrint(item));
   });
 
   describe('getAllPhysicalPrint()', () => {
@@ -60,13 +61,13 @@ describe('PhysicalPrintService', () => {
     it('should return an array of customers', (done) => {
       backend.connections.subscribe((connection: MockConnection) => {
         const options = new ResponseOptions({
-          body: JSON.stringify(mockResponseArrayCustomers),
+          body: JSON.stringify(mockResponseArray),
         });
         connection.mockRespond(new Response(options));
       });
 
-      userService.getCustomers().subscribe((data) => {
-        expect(data).toEqual(expectedResponseArrayCustomers);
+      physicalPartService.getAllPhysicalPrint().subscribe((data) => {
+        expect(data).toEqual(expectedResponseArray);
         done();
       });
 

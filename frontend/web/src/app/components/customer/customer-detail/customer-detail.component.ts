@@ -59,7 +59,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     }
   }
 
-  /* get the product */
+  /* getPhysicalPrint the product */
   getData(id) {
     this.customerService.getCustomer(id).subscribe(
       (customer) => {

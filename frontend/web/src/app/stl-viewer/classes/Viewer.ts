@@ -126,11 +126,11 @@ export class Viewer {
      */
     onmouseclick = null;
     /**
-     * {Function} A callback function that will be invoked before each update.
+     * {Function} A callback function that will be invoked before each updatePhysicalPrint.
      */
     beforeupdate = null;
     /**
-     * {Function} A callback function that will be invoked after each update.
+     * {Function} A callback function that will be invoked after each updatePhysicalPrint.
      */
     afterupdate = null;
     mouseUsage = 'default';
@@ -248,8 +248,8 @@ export class Viewer {
         this.progressRectangle = null;
         this.messagePanel = null;
         this.webglBackend = null;
-        
-        
+
+
 
         // setup input handlers.
         // compatibility for touch devices is taken into account
@@ -360,14 +360,14 @@ export class Viewer {
         this.needRepaint = false;
         this.scene = null;
 
-        // create a default material to render meshes that don't have one
+        // createPhysicalPrint a default material to render meshes that don't have one
         this.defaultMaterial = new Material('default', undefined, this.modelColor, 0, true);
 
         // apply background
         this.generateBackground();
         this.drawBackground();
 
-        // wake up update routine per 30 milliseconds
+        // wake up updatePhysicalPrint routine per 30 milliseconds
         var self = this;
         (function tick() {
             self.doUpdate();
@@ -1037,7 +1037,7 @@ export class Viewer {
 
 
         /*
-        * Discard the query part of the URL string, if any, to get the correct file name.
+        * Discard the query part of the URL string, if any, to getPhysicalPrint the correct file name.
         * By negatif@gmail.com
         */
         var questionMarkAt = this.sceneUrl.indexOf('?');
@@ -1472,7 +1472,7 @@ export class Viewer {
                     cbuf[pix] = color;
                     sbuf[pix] = id;
                 }
-            }   
+            }
         }
     };
 

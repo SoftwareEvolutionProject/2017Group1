@@ -37,7 +37,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   }
 
   loadAndPopulate() {
-    /* get customers */
+    /* getPhysicalPrint customers */
     this.customerService.getCustomers().subscribe(
       (customers) => {
         this.customers = customers;
@@ -159,6 +159,6 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   }
 
   private create() {
-    this.router.navigate([this.router.url + '/create']);
+    this.router.navigate([this.router.url + '/createPhysicalPrint']);
   }
 }
