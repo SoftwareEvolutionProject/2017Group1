@@ -43,7 +43,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public List<T> getObjects() {
         String query = "SELECT * FROM \""+ type.getSimpleName().toLowerCase()+ "\"";
-        System.out.println("Running query: "+query);
+        log.info("Running query: "+query);
         ResultSet rs =  this.dbInterface.executeQuerry(query);
         try {
             return this.getMatchJSON(rs); //converts resulting set to se.chalmers.dat265.group1.model instance
@@ -82,7 +82,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public T getObject(int id) {
         String query = "SELECT * FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
-        System.out.println("Running query: "+query);
+        log.info("Running query: "+query);
         ResultSet rs =  this.dbInterface.executeQuerry(query);
         try {
             return this.getMatchJSON(rs).iterator().next(); //converts resulting set to se.chalmers.dat265.group1.model instance
@@ -143,19 +143,19 @@ public class GenericRepository <T extends DataModel> {
     }
 
     private T execute(JsonObject jsonObject2, StringBuilder query2) {
-        try {
-            PreparedStatement ps = getPreparedStatementFromJSON(jsonObject2, query2); //maps se.chalmers.dat265.group1.model data to the query
+
+        try (PreparedStatement ps = getPreparedStatementFromJSON(jsonObject2, query2);){
+             //maps se.chalmers.dat265.group1.model data to the query
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            int id = rs.getInt(1);
-            return this.getObject(id);
+            try (ResultSet rs = ps.getGeneratedKeys();){
+                rs.next();
+                int id = rs.getInt(1);
+                return this.getObject(id);
+            }
         } catch (SQLException e) {
             log.error("execute", e);
             return null;
-        } finally {
-            System.out.println("Failed to execute");
-        }
+        } 
     }
 
     /***
@@ -165,7 +165,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public void deleteObject(int id) {
         String query = "DELETE FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
-        System.out.println("Running query: "+query);
+        log.info("Running query: "+query);
         this.dbInterface.executeQuerry(query);
 
     }
@@ -222,7 +222,7 @@ public class GenericRepository <T extends DataModel> {
      * @throws SQLException
      */
     private PreparedStatement getPreparedStatementFromJSON(JsonObject jsonObject, StringBuilder query) throws SQLException {
-        System.out.println("Preparing query: "+query.toString());
+        log.info("Preparing query: "+query.toString());
         PreparedStatement ps = this.dbInterface.getConnection().prepareStatement(
                 query.toString(),
                 Statement.RETURN_GENERATED_KEYS
