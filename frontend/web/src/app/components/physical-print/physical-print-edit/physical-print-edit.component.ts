@@ -9,6 +9,7 @@ import {ErrorService} from '../../../services/error.service';
 
 @Component({
   selector: 'app-physical-print-edit',
+  providers: [PhysicalPrintService, ErrorService],
   templateUrl: './physical-print-edit.component.html',
   styleUrls: ['./physical-print-edit.component.scss']
 })
