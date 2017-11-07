@@ -12,7 +12,7 @@ export class Order {
 
   static create(json: any) {
     if (json){
-      return new Customer(json);
+      return new Order(json);
     }
     else{
       return null;
