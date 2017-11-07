@@ -29,7 +29,7 @@ public class WebApi {
     private static final String ORDEREDPART_ID_URL = "/:orderedPartID";
     private static final String CUSTOMERS_URL = "/customers";
     private static final String CUSTOMER_ID_URL = "/:customerID";
-    private static final String CUSTOMER_PARAM = "cusomterID";
+    private static final String CUSTOMER_PARAM = "customerID";
     private static final String ORDERS_URL = "/orders";
     private static final String ORDER_ID_URL = "/:orderID";
     private static final String ORDER_ID_PARAM = "orderID";
