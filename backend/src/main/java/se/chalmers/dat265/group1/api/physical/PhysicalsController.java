@@ -6,7 +6,7 @@ import se.chalmers.dat265.group1.model.PhysicalPrint;
 
 import java.util.List;
 
-public class PhysicalsController extends ApiController implements PhysicalInterface {
+public class PhysicalsController extends ApiController implements PhysicalAPI {
     public PhysicalsController(boolean debug) {
         super(debug);
     }
