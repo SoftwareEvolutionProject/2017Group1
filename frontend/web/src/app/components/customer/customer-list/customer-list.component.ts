@@ -159,6 +159,6 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   }
 
   private create() {
-    this.router.navigate([this.router.url + '/createPhysicalPrint']);
+    this.router.navigate([this.router.url + '/create']);
   }
 }
