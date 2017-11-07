@@ -4,7 +4,7 @@ import se.chalmers.dat265.group1.model.DigitalPrint;
 
 import java.util.List;
 
-public interface PrintingInterface {
+public interface PrintingAPI {
     List<DigitalPrint> getAllDigitalPrints();
 
     DigitalPrint getDigitalPrint(String id);

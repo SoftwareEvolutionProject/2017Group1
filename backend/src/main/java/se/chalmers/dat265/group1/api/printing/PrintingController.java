@@ -7,7 +7,7 @@ import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import java.util.*;
 
-public class PrintingController extends ApiController implements PrintingInterface {
+public class PrintingController extends ApiController implements PrintingAPI {
     private GenericRepository<DigitalPrintEntity> digitalPrintRepository;
     private GenericRepository<MagicsPairingEntity> magicsPairingRepository;
 

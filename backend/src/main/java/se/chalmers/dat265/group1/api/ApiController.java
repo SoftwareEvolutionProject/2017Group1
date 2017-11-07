@@ -13,6 +13,7 @@ public class ApiController {
     protected GenericRepository<OrderedPart> orderedPartRepository;
     protected GenericRepository<DigitalPart> digitalPartRepository;
     protected GenericRepository<PhysicalPart> physicalPartRepository;
+    protected GenericRepository<PhysicalPrint> physicalPrintRepository;
 
     public ApiController(boolean debug) {
         this.dbConnector = new PostgresSQLConnector(debug);
@@ -21,6 +22,7 @@ public class ApiController {
         orderedPartRepository = new GenericRepository<>(OrderedPart.class, dbConnector);
         digitalPartRepository = new GenericRepository<>(DigitalPart.class, dbConnector);
         physicalPartRepository = new GenericRepository<>(PhysicalPart.class, dbConnector);
+        physicalPrintRepository = new GenericRepository<>(PhysicalPrint.class, dbConnector);
     }
 
     protected void checkIDs(String id, DataModel object) {
