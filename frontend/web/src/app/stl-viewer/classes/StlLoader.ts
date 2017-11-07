@@ -26,15 +26,15 @@ export class StlLoader {
     }
 
     /**
-        Load scene from a given STL file.
-        @param {String} urlName a string that specifies where to fetch the STL file.
+     * Load scene from a given STL file.
+     * @param {String} urlName a string that specifies where to fetch the STL file.
      */
     loadFromUrl(urlName) {
         const self = this;
         const isIE = new PlatformInfo().browser === 'ie';
         // TODO: current blob implementation seems do not work correctly on IE10. Repair it or turn to an arraybuffer implementation.
         const isIE10Compatible = false; // (isIE && parseInt(JSC3D.PlatformInfo.version) >= 10);
-        const xhr = new XMLHttpRequest;
+        const xhr = new XMLHttpRequest();
         xhr.open('GET', encodeURI(urlName), true);
 
         xhr.overrideMimeType('text/plain; charset=x-user-defined');
@@ -84,16 +84,17 @@ export class StlLoader {
     }
 
     /**
-        Set decimal precision that defines the threshold to detect and weld vertices that coincide.
-        @param {Number} precision the decimal preciison.
+     *
+     *  Set decimal precision that defines the threshold to detect and weld vertices that coincide.
+     *  @param {Number} precision the decimal preciison.
      */
     setDecimalPrecision(precision) {
         this.decimalPrecision = precision;
     }
 
     /**
-        Parse contents of an STL file and generate the scene.
-        @private
+     * Parse contents of an STL file and generate the scene.
+     * @private
      */
     private parseStl(scene, data) {
         const FACE_VERTICES = 3;
@@ -127,11 +128,15 @@ export class StlLoader {
              * By Triffid Hunter <triffid.hunter@gmail.com>.
              */
 
-            const facePattern = 'facet\\s+normal\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+' +
+            const facePattern = 'facet\\s+normal\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?' +
+                '[0-9]+(?:[eE][-+]? [0 - 9] +)?\\b)\\s+([-+]?\\b(?:[0 - 9] *\\.)?[0- 9]+(?:[eE][-+]? [0 - 9] +)?\\b)\\s + ' +
                 'outer\\s+loop\\s+' +
-                'vertex\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+' +
-                'vertex\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+' +
-                'vertex\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+' +
+                'vertex\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?' +
+                '[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+' +
+                'vertex\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?' +
+                '[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+' +
+                'vertex\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?' +
+                '[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+([-+]?\\b(?:[0-9]*\\.)?[0-9]+(?:[eE][-+]?[0-9]+)?\\b)\\s+' +
                 'endloop\\s+' +
                 'endfacet';
             const faceRegExp = new RegExp(facePattern, 'ig');
@@ -157,7 +162,9 @@ export class StlLoader {
                         const z = parseFloat(r[6 + (i * 3)]);
 
                         // weld vertices by the given decimal precision
-                        const vertKey = x.toFixed(this.decimalPrecision) + '-' + y.toFixed(this.decimalPrecision) + '-' + z.toFixed(this.decimalPrecision);
+                        const vertKey = x.toFixed(this.decimalPrecision) + '-' +
+                            y.toFixed(this.decimalPrecision) + '-' +
+                            z.toFixed(this.decimalPrecision);
                         let vi = v2i[vertKey];
                         if (vi === undefined) {
                             vi = mesh.vertexBuffer.length / 3;
@@ -213,7 +220,9 @@ export class StlLoader {
                     const z = reader.readFloat32();
 
                     // weld vertices by the given decimal precision
-                    const vertKey = x.toFixed(this.decimalPrecision) + '-' + y.toFixed(this.decimalPrecision) + '-' + z.toFixed(this.decimalPrecision);
+                    const vertKey = x.toFixed(this.decimalPrecision) + '-' +
+                        y.toFixed(this.decimalPrecision) + '-' +
+                        z.toFixed(this.decimalPrecision);
                     let vi = v2i[vertKey];
                     if (vi !== undefined) {
                         mesh.indexBuffer.push(vi);
