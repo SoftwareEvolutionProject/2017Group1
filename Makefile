@@ -1,13 +1,23 @@
+.PHONY: backend frontend
+
 install:
 	cd /usr/src/app && mvn clean install && cd /usr/src/app/frontend/web && npm install
 
 install-client:
 	cd /usr/src/app/frontend/web && npm install
 
-server:
+run: backend frontend
+
+backend:
+	cd /usr/src/app/backend && mvn package && cd /usr/src/app/backend/target && java -jar backend-1-jar-with-dependencies.jar &
+
+backend-verbose:
 	cd /usr/src/app/backend && mvn package && cd /usr/src/app/backend/target && java -jar backend-1-jar-with-dependencies.jar
 
-client:
+frontend:
+	cd /usr/src/app/frontend/web && npm run startdocker &
+
+frontend-verbose:
 	cd /usr/src/app/frontend/web && npm run startdocker
 
 test:
