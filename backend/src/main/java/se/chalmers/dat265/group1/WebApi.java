@@ -22,7 +22,6 @@ import static spark.Spark.*;
  */
 public class WebApi {
 
-
     private static CustomerAPI ci;
     private static DigitalPartAPI dpi;
     private static MaterialInterface mi;
@@ -31,21 +30,30 @@ public class WebApi {
 
     private static final String PARTS_URL = "/parts";
     private static final String ORDEREDPART_ID_URL = "/:orderedPartID";
+
     private static final String CUSTOMERS_URL = "/customers";
     private static final String CUSTOMER_ID_URL = "/:customerID";
     private static final String CUSTOMER_PARAM = "customerID";
+
     private static final String ORDERS_URL = "/orders";
     private static final String ORDER_ID_URL = "/:orderID";
     private static final String ORDER_ID_PARAM = "orderID";
+
     private static final String DIGITALPRINT_URL = "/digital-print";
     private static final String DIGITALPRINT_ID_URL = "/:digitalPrint";
+
     private static final String DIGITALPARTS_URL = "/digital-part";
     private static final String DIGITALPART_ID_URL = "/:digitalPart";
     private static final String DIGITALPART_ID_PARAM = "digitalPartID";
-    private static final String PHYSICALPARTS_URL = "/physical-parts";
+
     private static final String PHYSICALPRINTS_URL = "/physical-prints";
-    private static final String PHYSICALPRINT_ID = "/:physicalPrint";
-    private static final String PHYSICALPART_ID = "/:physicalPart";
+    private static final String PHYSICALPRINT_ID_URL = "/:physicalPrint";
+    private static final String PHYSICALPRINT_ID_PARAM = "physicalPrint";
+
+    private static final String PHYSICALPARTS_URL = "/physical-parts";
+    private static final String PHYSICALPART_ID_URL = "/:physicalPart";
+    private static final String PHYSICALPART_ID_PARAM = "physicalPart";
+
     private static Gson gson = new Gson();
     private static boolean debug;
 
@@ -105,15 +113,15 @@ public class WebApi {
         phi = new PhysicalsController(debug);
         //PhysicalParts
         get(PHYSICALPARTS_URL, (request, response) -> phi.getAllPhysicalParts(), gson::toJson);
-        get(PHYSICALPARTS_URL + PHYSICALPART_ID, (request, response) -> phi.getPhysicalPart(request.params("physicalPartID")), gson::toJson);
+        get(PHYSICALPARTS_URL + PHYSICALPART_ID_URL, (request, response) -> phi.getPhysicalPart(request.params(PHYSICALPART_ID_PARAM)), gson::toJson);
         post(PHYSICALPARTS_URL, (request, response) -> phi.createNewPhysicalPart(gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
-        put(PHYSICALPARTS_URL + PHYSICALPART_ID, (request, response) -> phi.updatePhysicalPart(request.params("physicalPartID"), gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
+        put(PHYSICALPARTS_URL + PHYSICALPART_ID_URL, (request, response) -> phi.updatePhysicalPart(request.params(PHYSICALPART_ID_PARAM), gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
 
         //PhysicalPrints
         get(PHYSICALPRINTS_URL, (request, response) -> phi.getAllPhysicalPrints(), gson::toJson);
-        get(PHYSICALPRINTS_URL + PHYSICALPRINT_ID, (request, response) -> phi.getPhysicalPrint(request.params("physicalPrintID")), gson::toJson);
+        get(PHYSICALPRINTS_URL + PHYSICALPRINT_ID_URL, (request, response) -> phi.getPhysicalPrint(request.params(PHYSICALPRINT_ID_PARAM)), gson::toJson);
         post(PHYSICALPRINTS_URL, (request, response) -> phi.createNewPhysicalPrint(gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
-        put(PHYSICALPRINTS_URL + PHYSICALPRINT_ID, (request, response) -> phi.updatePhysicalPrint(request.params("physicalPrintID"), gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
+        put(PHYSICALPRINTS_URL + PHYSICALPRINT_ID_URL, (request, response) -> phi.updatePhysicalPrint(request.params(PHYSICALPRINT_ID_PARAM), gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
     }
 
     private static void setupOrderInterface() {
