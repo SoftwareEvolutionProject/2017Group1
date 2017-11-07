@@ -1,8 +1,10 @@
 package se.chalmers.dat265.group1;
 
 import se.chalmers.dat265.group1.api.MaterialInterface;
+import se.chalmers.dat265.group1.api.physical.PhysicalAPI;
+import se.chalmers.dat265.group1.api.physical.PhysicalsController;
 import se.chalmers.dat265.group1.api.printing.PrintingController;
-import se.chalmers.dat265.group1.api.printing.PrintingInterface;
+import se.chalmers.dat265.group1.api.printing.PrintingAPI;
 import se.chalmers.dat265.group1.api.customer.CustomerAPI;
 import se.chalmers.dat265.group1.api.digitalpart.DigitalPartAPI;
 import se.chalmers.dat265.group1.api.digitalpart.DigitalPartController;
@@ -24,7 +26,9 @@ public class WebApi {
     private static CustomerAPI ci;
     private static DigitalPartAPI dpi;
     private static MaterialInterface mi;
-    private static PrintingInterface pi;
+    private static PrintingAPI pi;
+    private static PhysicalAPI phi;
+
     private static final String PARTS_URL = "/parts";
     private static final String ORDEREDPART_ID_URL = "/:orderedPartID";
     private static final String CUSTOMERS_URL = "/customers";
@@ -39,6 +43,9 @@ public class WebApi {
     private static final String DIGITALPART_ID_URL = "/:digitalPart";
     private static final String DIGITALPART_ID_PARAM = "digitalPartID";
     private static final String PHYSICALPARTS_URL = "/physical-parts";
+    private static final String PHYSICALPRINTS_URL = "/physical-prints";
+    private static final String PHYSICALPRINT_ID = "/:physicalPrint";
+    private static final String PHYSICALPART_ID = "/:physicalPart";
     private static Gson gson = new Gson();
     private static boolean debug;
 
@@ -92,6 +99,21 @@ public class WebApi {
         get(DIGITALPARTS_URL + DIGITALPART_ID_URL, (request, response) -> dpi.getDigitalPart(request.params(DIGITALPART_ID_PARAM)), gson::toJson);
         post(DIGITALPARTS_URL, (request, response) -> dpi.createNewDigitalPart(gson.fromJson(request.body(), DigitalPart.class)), gson::toJson);
         put(DIGITALPARTS_URL + DIGITALPART_ID_URL, (request, response) -> dpi.updateDigitalPart(gson.fromJson(request.body(), DigitalPart.class)), gson::toJson);
+    }
+
+    private static void setupPhysicalInterface() {
+        phi = new PhysicalsController(debug);
+        //PhysicalParts
+        get(PHYSICALPARTS_URL, (request, response) -> phi.getAllPhysicalParts(), gson::toJson);
+        get(PHYSICALPARTS_URL + PHYSICALPART_ID, (request, response) -> phi.getPhysicalPart(request.params("physicalPartID")), gson::toJson);
+        post(PHYSICALPARTS_URL, (request, response) -> phi.createNewPhysicalPart(gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
+        put(PHYSICALPARTS_URL + PHYSICALPART_ID, (request, response) -> phi.updatePhysicalPart(request.params("physicalPartID"), gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
+
+        //PhysicalPrints
+        get(PHYSICALPRINTS_URL, (request, response) -> phi.getAllPhysicalPrints(), gson::toJson);
+        get(PHYSICALPRINTS_URL + PHYSICALPRINT_ID, (request, response) -> phi.getPhysicalPrint(request.params("physicalPrintID")), gson::toJson);
+        post(PHYSICALPRINTS_URL, (request, response) -> phi.createNewPhysicalPrint(gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
+        put(PHYSICALPRINTS_URL + PHYSICALPRINT_ID, (request, response) -> phi.updatePhysicalPrint(request.params("physicalPrintID"), gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
     }
 
     private static void setupOrderInterface() {
