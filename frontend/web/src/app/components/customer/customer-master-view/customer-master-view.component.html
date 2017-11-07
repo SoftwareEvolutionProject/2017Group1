@@ -16,28 +16,3 @@
   </div>
 </div>
 
-
-
-<!-- Modal -->
-<ng-template #modalDelete>
-  <div class="modal-header">
-    <h3 class="modal-title">Delete customer</h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="dismissDelete()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="alert alert-danger">
-      <strong>Warning!</strong>
-      <br/>
-      <p>Are you sure you want to permanently delete the customer?</p>
-    </div>
-    <div class="modal-footer">
-      <button id="deleteFormDismissBtn" type="button" class="btn btn-default" (click)="dismissDelete()">Dismiss
-      </button>
-      <button autofocus type="submit" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
-    </div>
-  </div>
-</ng-template>
-
-
