@@ -45,4 +45,12 @@ public class Material implements DataModel {
     public Map<String, String> getMaterialProperties() {
         return materialProperties;
     }
+
+    public void setMaterialGrades(List<MaterialGrade> materialGrades) {
+        this.materialGrades = materialGrades;
+    }
+
+    public void setMaterialProperties(Map<String, String> materialProperties) {
+        this.materialProperties = materialProperties;
+    }
 }

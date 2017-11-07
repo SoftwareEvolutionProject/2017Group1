@@ -1,6 +1,7 @@
 package se.chalmers.dat265.group1;
 
 import se.chalmers.dat265.group1.api.material.MaterialAPI;
+import se.chalmers.dat265.group1.api.material.MaterialsController;
 import se.chalmers.dat265.group1.api.physical.PhysicalAPI;
 import se.chalmers.dat265.group1.api.physical.PhysicalsController;
 import se.chalmers.dat265.group1.api.printing.PrintingController;
@@ -67,6 +68,7 @@ public class WebApi {
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
         dpi = new DigitalPartController(debug);
+        mi = new MaterialsController(debug);
         long start = System.currentTimeMillis();
         log.info("STARTED ENDPIONT SETUP");
         log.info("STARTED ENDPIONT SETUP");
