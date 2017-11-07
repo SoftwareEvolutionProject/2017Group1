@@ -8,7 +8,7 @@ describe('PhysicalPartListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhysicalPartListComponent ]
+      declarations: [ PhysicalPartListComponent ],
     })
     .compileComponents();
   }));

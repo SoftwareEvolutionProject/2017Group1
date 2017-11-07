@@ -65,10 +65,10 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
       title: '<span class="glyphicon glyphicon-cog">',
       align: 'center',
       events: {
-        'click .edit': function(e, value, row, index) {
+        'click .edit'(e, value, row, index) {
           _self.router.navigate([_self.router.url, row.id]);
         },
-        'click .delete': function(e, value, row, index) {
+        'click .delete'(e, value, row, index) {
           _self.delete(row.id);
         },
       },

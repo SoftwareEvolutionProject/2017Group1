@@ -1,13 +1,12 @@
 // TODO: Lot of crap to do here
 
 export class PlatformInfo {
-	
-    browser: string =	'other';
-    version: string =	'n/a';
-    isTouchDevice: boolean = false; //(document.createTouch != undefined); 		// detect if it is running on touch device
-    supportTypedArrays:	boolean = false; //(window.Uint32Array != undefined);			// see if Typed Arrays are supported
-    supportWebGL: boolean =	true; //(window.WebGLRenderingContext != undefined);	// see if WebGL context is supported
 
+    browser =	'other';
+    version =	'n/a';
+    isTouchDevice = false; //(document.createTouch != undefined); 		// detect if it is running on touch device
+    supportTypedArrays = false; //(window.Uint32Array != undefined);			// see if Typed Arrays are supported
+    supportWebGL =	true; //(window.WebGLRenderingContext != undefined);	// see if WebGL context is supported
 
 	agents = [
 		['firefox', /Firefox[\/\s](\d+(?:\.\d+)*)/],
@@ -20,9 +19,8 @@ export class PlatformInfo {
 		 * For IE11 and above, as the old keyword 'MSIE' no longer exists there.
 		 * By Laurent Piroelle <laurent.piroelle@fabzat.com>.
 		 */
-		['ie',      /Trident\/\d+\.\d+;\s.*rv:(\d+(?:\.\d+)*)/]
+		['ie',      /Trident\/\d+\.\d+;\s.*rv:(\d+(?:\.\d+)*)/],
 	];
-
 
     constructor() {
         /*var matches = null;
@@ -33,6 +31,6 @@ export class PlatformInfo {
                 break;
             }
         }*/
-        
+
     }
 }

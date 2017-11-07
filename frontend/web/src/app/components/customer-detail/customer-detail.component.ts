@@ -36,9 +36,9 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
       const id = params['id'];
       if (id == 'create') { //new product is being created
         this.create();
-      }
-      else if (id)
+      } else if (id) {
         this.getData(id);
+           }
     });
   }
 
@@ -48,7 +48,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   create() {
     /* init with a boilerplate */
     this.creating = true;
-    if (this.creating) this.customer = new Customer({});
+    if (this.creating) { this.customer = new Customer({}); }
     this.populate();
   }
 
@@ -101,7 +101,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     if (this.creating) { // a new product
       this.customerService.createCustomer(customer).subscribe(
         (data) => {
-          if (this.nav) this.back();
+          if (this.nav) { this.back(); }
           this.changed.emit(data);
         }, (error) => {
           console.log(error);
@@ -111,7 +111,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     } else {
       this.customerService.updateCustomer(customer).subscribe(
         (data) => {
-          if (this.nav) this.back();
+          if (this.nav) { this.back(); }
           this.changed.emit(data);
         }, (error) => {
           console.log(error);
@@ -122,7 +122,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   }
 
   cancel() {
-    if (this.nav) this.back();
+    if (this.nav) { this.back(); }
     this.changed.emit(this.customer);
   }
 

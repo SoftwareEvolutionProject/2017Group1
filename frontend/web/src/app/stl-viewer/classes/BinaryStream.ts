@@ -6,13 +6,14 @@ export class BinaryStream {
     data;
     offset;
 
-    constructor (data, isBigEndian) {
-        if(isBigEndian)
-            throw 'JSC3D.BinaryStream constructor failed: Big endian is not supported yet!';
+    constructor(data, isBigEndian) {
+        if (isBigEndian) {
+            throw new Error('JSC3D.BinaryStream constructor failed: Big endian is not supported yet!');
+        }
 
         this.data = data;
         this.offset = 0;
-    };
+    }
 
     /**
         Get the full length (in bytes) of the stream.
@@ -20,7 +21,7 @@ export class BinaryStream {
     */
     size() {
         return this.data.length;
-    };
+    }
 
     /**
         Get current position of the indicator.
@@ -28,7 +29,7 @@ export class BinaryStream {
     */
     tell() {
         return this.offset;
-    };
+    }
 
     /**
         Set the position indicator of the stream to a new position.
@@ -36,31 +37,34 @@ export class BinaryStream {
         @returns {Boolean} true if succeeded; false if the given position is out of range.
     */
     seek(position) {
-        if(position < 0 || position >= this.data.length)
+        if (position < 0 || position >= this.data.length) {
             return false;
+        }
 
         this.offset = position;
 
         return true;
-    };
+    }
 
     /**
         Reset the position indicator to the beginning of the stream.
     */
     reset() {
         this.offset = 0;
-    };
+    }
 
     /**
         Advance the position indicator to skip a given number of bytes.
         @param {Number} bytesToSkip the number of bytes to skip.
     */
     skip(bytesToSkip) {
-        if(this.offset + bytesToSkip > this.data.length)
+        if (this.offset + bytesToSkip > this.data.length) {
             this.offset = this.data.length;
-        else
+        }
+        else {
             this.offset += bytesToSkip;
-    };
+        }
+    }
 
     /**
         Get count of the remaining bytes in the stream.
@@ -68,7 +72,7 @@ export class BinaryStream {
     */
     available() {
         return this.data.length - this.offset;
-    };
+    }
 
     /**
         See if the position indicator is already at the end of the stream.
@@ -76,7 +80,7 @@ export class BinaryStream {
     */
     eof() {
         return !(this.offset < this.data.length);
-    };
+    }
 
     /**
         Read an 8-bits' unsigned int number.
@@ -84,7 +88,7 @@ export class BinaryStream {
     */
     readUInt8() {
         return this.decodeInt(1, false);
-    };
+    }
 
     /**
         Read an 8-bits' signed int number.
@@ -92,7 +96,7 @@ export class BinaryStream {
     */
     readInt8() {
         return this.decodeInt(1, true);
-    };
+    }
 
     /**
         Read a 16-bits' unsigned int number.
@@ -100,7 +104,7 @@ export class BinaryStream {
     */
     readUInt16() {
         return this.decodeInt(2, false);
-    };
+    }
 
     /**
         Read a 16-bits' signed int number.
@@ -108,7 +112,7 @@ export class BinaryStream {
     */
     readInt16() {
         return this.decodeInt(2, true);
-    };
+    }
 
     /**
         Read a 32-bits' unsigned int number.
@@ -116,7 +120,7 @@ export class BinaryStream {
     */
     readUInt32() {
         return this.decodeInt(4, false);
-    };
+    }
 
     /**
         Read a 32-bits' signed int number.
@@ -124,7 +128,7 @@ export class BinaryStream {
     */
     readInt32() {
         return this.decodeInt(4, true);
-    };
+    }
 
     /**
         Read a 32-bits' (IEEE 754) floating point number.
@@ -132,7 +136,7 @@ export class BinaryStream {
     */
     readFloat32() {
         return this.decodeFloat(4, 23);
-    };
+    }
 
     /**
         Read a 64-bits' (IEEE 754) floating point number.
@@ -140,7 +144,7 @@ export class BinaryStream {
     */
     readFloat64() {
         return this.decodeFloat(8, 52);
-    };
+    }
 
     /**
         Read a piece of the stream into a given buffer.
@@ -149,72 +153,74 @@ export class BinaryStream {
         @returns {Number} the total number of bytes that are successfully read.
     */
     readBytes(buffer, bytesToRead) {
-        var bytesRead = bytesToRead;
-        if(this.offset + bytesToRead > this.data.length)
+        let bytesRead = bytesToRead;
+        if (this.offset + bytesToRead > this.data.length) {
             bytesRead = this.data.length - this.offset;
+        }
 
-        for(var i=0; i<bytesRead; i++) {
+        for (let i = 0; i < bytesRead; i++) {
             buffer[i] = this.data[this.offset++].charCodeAt(0) & 0xff;
         }
 
         return bytesRead;
-    };
+    }
 
     /**
         @private
     */
     decodeInt(bytes, isSigned) {
         // are there enough bytes for this integer?
-        if(this.offset + bytes > this.data.length) {
+        if (this.offset + bytes > this.data.length) {
             this.offset = this.data.length;
             return NaN;
         }
 
-        var rv = 0, f = 1;
-        for(var i=0; i<bytes; i++) {
+        let rv = 0, f = 1;
+        for (let i = 0; i < bytes; i++) {
             rv += ((this.data[this.offset++].charCodeAt(0) & 0xff) * f);
             f *= 256;
         }
 
-        if( isSigned && (rv & Math.pow(2, bytes * 8 - 1)) )
+        if ( isSigned && (rv & Math.pow(2, bytes * 8 - 1)) ) {
             rv -= Math.pow(2, bytes * 8);
+        }
 
         return rv;
-    };
+    }
 
     /**
         @private
     */
     decodeFloat(bytes, significandBits) {
         // are there enough bytes for the float?
-        if(this.offset + bytes > this.data.length) {
+        if (this.offset + bytes > this.data.length) {
             this.offset = this.data.length;
             return NaN;
         }
 
-        var mLen = significandBits;
-        var eLen = bytes * 8 - mLen - 1;
-        var eMax = (1 << eLen) - 1;
-        var eBias = eMax >> 1;
+        let mLen = significandBits;
+        let eLen = bytes * 8 - mLen - 1;
+        let eMax = (1 << eLen) - 1;
+        let eBias = eMax >> 1;
 
-        var i = bytes - 1;
-        var d = -1;
-        var s = this.data[this.offset + i].charCodeAt(0) & 0xff;
+        let i = bytes - 1;
+        let d = -1;
+        let s = this.data[this.offset + i].charCodeAt(0) & 0xff;
         i += d;
-        var bits = -7;
-        var e = s & ((1 << (-bits)) - 1);
+        let bits = -7;
+        let e = s & ((1 << (-bits)) - 1);
         s >>= -bits;
         bits += eLen;
-        while(bits > 0) {
+        while (bits > 0) {
             e = e * 256 + (this.data[this.offset + i].charCodeAt(0) & 0xff);
             i += d;
             bits -= 8;
         }
 
-        var m = e & ((1 << (-bits)) - 1);
+        let m = e & ((1 << (-bits)) - 1);
         e >>= -bits;
         bits += mLen;
-        while(bits > 0) {
+        while (bits > 0) {
             m = m * 256 + (this.data[this.offset + i].charCodeAt(0) & 0xff);
             i += d;
             bits -= 8;
@@ -222,7 +228,7 @@ export class BinaryStream {
 
         this.offset += bytes;
 
-        switch(e) {
+        switch (e) {
         case 0:		// 0 or denormalized number
             e = 1 - eBias;
             break;
@@ -235,6 +241,6 @@ export class BinaryStream {
         }
 
         return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
-    };
+    }
 
 }

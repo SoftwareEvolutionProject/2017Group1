@@ -32,14 +32,14 @@ export class DigitalPartDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      if (!id || id == 'create'){ //new product is being created
+      if (!id || id == 'create') { //new product is being created
         this.creating = true;
         /* init with a boilerplate */
-        if (this.creating)this.digitalPart = new DigitalPart({});
+        if (this.creating) { this.digitalPart = new DigitalPart({}); }
         this.populate();
-      }
-      else if (id)
+      } else if (id) {
         this.getData(id);
+           }
     });
   }
 
@@ -47,7 +47,7 @@ export class DigitalPartDetailComponent implements OnInit {
   }
 
   /* get the product */
-  getData(id){
+  getData(id) {
     this.digitalPartMockService.getDigialPart(id).subscribe(
       (digitalPart) => {
         this.digitalPart = digitalPart;
@@ -57,7 +57,7 @@ export class DigitalPartDetailComponent implements OnInit {
   }
 
   /* populate data */
-  private populate(){
+  private populate() {
     this.constructForms();
   }
 
@@ -77,7 +77,7 @@ export class DigitalPartDetailComponent implements OnInit {
     this.loaded = true;
   }
 
-  back(){
+  back() {
     this._location.back();
   }
 

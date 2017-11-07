@@ -44,13 +44,13 @@ export class AABB {
         @returns {Array} center coordinates as an array.
     */
     center(c) {
-        if(c) {
+        if (c) {
             c[0] = 0.5 * (this.minX + this.maxX);
             c[1] = 0.5 * (this.minY + this.maxY);
             c[2] = 0.5 * (this.minZ + this.maxZ);
-        }
-        else
+        } else {
             c = [0.5 * (this.minX + this.maxX), 0.5 * (this.minY + this.maxY), 0.5 * (this.minZ + this.maxZ)];
+        }
         return c;
     }
 
@@ -59,10 +59,10 @@ export class AABB {
         @returns {Number} length of the diagonal.
     */
     lengthOfDiagonal() {
-        var xx = this.maxX - this.minX;
-        var yy = this.maxY - this.minY;
-        var zz = this.maxZ - this.minZ;
+        let xx = this.maxX - this.minX;
+        let yy = this.maxY - this.minY;
+        let zz = this.maxZ - this.minZ;
         return Math.sqrt(xx * xx + yy * yy + zz * zz);
     }
 }
-
+

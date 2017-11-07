@@ -2,7 +2,7 @@
 	@class LoaderSelector
  */
 export class LoaderSelector {
-    loaderTable = {}
+    loaderTable = {};
 
     /**
         Register a scene loader for a specific file format, using the file extesion name for lookup.
@@ -10,7 +10,7 @@ export class LoaderSelector {
         @param {Function} loaderCtor constructor of the loader class.
         */
     registerLoader(fileExtName, loaderCtor) {
-        if((typeof loaderCtor) == 'function') {
+        if ((typeof loaderCtor) == 'function') {
             this.loaderTable[fileExtName] = loaderCtor;
         }
     }
@@ -21,19 +21,19 @@ export class LoaderSelector {
         @returns {Object} loader object for the specific format; null if not found.
         */
     getLoader(fileExtName) {
-        var loaderCtor = this.loaderTable[fileExtName.toLowerCase()];
-        if(!loaderCtor)
+        let loaderCtor = this.loaderTable[fileExtName.toLowerCase()];
+        if (!loaderCtor) {
             return null;
+        }
 
-        var loaderInst;
+        let loaderInst;
         try {
             loaderInst = new loaderCtor();
-        }
-        catch(e) {
+        } catch (e) {
             loaderInst = null;
         }
 
         return loaderInst;
     }
-};
-    
+}
+

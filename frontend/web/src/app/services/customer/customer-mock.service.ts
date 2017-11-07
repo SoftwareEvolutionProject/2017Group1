@@ -23,17 +23,17 @@ export class CustomerMockService {
   }
 
   deleteCustomer(id: number) {
-    this.customers = this.customers.filter((customer) => {if (customer.id != id)return customer; });
+    this.customers = this.customers.filter((customer) => {if (customer.id != id) { return customer; } });
     return Observable.of(true);
   }
 
   getUser(id: number) {
-    return Observable.of( this.customers.filter((customer) => {if (customer.id == id)return customer; })[0]);
+    return Observable.of( this.customers.filter((customer) => {if (customer.id == id) { return customer; } })[0]);
   }
 
   updateCustomer(customer: Customer) {
     this.customers.forEach((c) => {
-      if (c.id == customer.id){
+      if (c.id == customer.id) {
         c = customer;
       }
     });

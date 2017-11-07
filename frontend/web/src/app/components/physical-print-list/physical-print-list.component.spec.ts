@@ -8,7 +8,7 @@ describe('PhysicalPrintListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhysicalPrintListComponent ]
+      declarations: [ PhysicalPrintListComponent ],
     })
     .compileComponents();
   }));

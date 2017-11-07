@@ -28,7 +28,7 @@ export class SidemenuComponent implements OnInit, AfterViewInit {
       $('#wrapper').toggleClass('toggled');
     });
 
-    $('[data-toggle="collapse"]').click(function(){
+    $('[data-toggle="collapse"]').click(function() {
       $(this).find('em').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-up');
     });
   }

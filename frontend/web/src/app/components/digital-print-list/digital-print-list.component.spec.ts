@@ -8,7 +8,7 @@ describe('DigitalPrintListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DigitalPrintListComponent ]
+      declarations: [ DigitalPrintListComponent ],
     })
     .compileComponents();
   }));

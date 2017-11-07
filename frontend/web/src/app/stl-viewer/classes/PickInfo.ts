@@ -21,4 +21,4 @@ export class PickInfo {
 	 * {JSC3D.Mesh} Mesh picked on current position or null if none.
 	 */
 	mesh = null;
-};
+}
