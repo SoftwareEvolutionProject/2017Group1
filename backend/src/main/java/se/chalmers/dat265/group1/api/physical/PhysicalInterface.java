@@ -1,7 +1,7 @@
-package api.physical;
+package se.chalmers.dat265.group1.api.physical;
 
-import model.PhysicalPart;
-import model.PhysicalPrint;
+import se.chalmers.dat265.group1.model.PhysicalPart;
+import se.chalmers.dat265.group1.model.PhysicalPrint;
 
 import java.util.List;
 
