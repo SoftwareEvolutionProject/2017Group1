@@ -79,44 +79,38 @@ public class PrintingController extends ApiController implements PrintingAPI {
         return new DigitalPrintData(digitalPrint.getId(), digitalPrint.getMagicsPath());
     }
 
-    private class MagicsPairing implements DataModel {
+    private class MagicsPairing extends DataModel {
         int id, digitalPrintID, digitalPartID;
         String label;
 
-        public MagicsPairing() {
-        }
-
         public MagicsPairing(int id, int digitalPrintID, int digitalPartID, String label) {
+            super();
             this.id = id;
             this.digitalPrintID = digitalPrintID;
             this.digitalPartID = digitalPartID;
             this.label = label;
         }
 
-        @Override
         public int getId() {
             return id;
         }
     }
 
-    private class DigitalPrintData implements DataModel {
-
-        public DigitalPrintData(){}
+    private class DigitalPrintData extends DataModel {
 
         public DigitalPrintData(int id, String magicsPath) {
+            super();
             this.id = id;
             this.magicsPath = magicsPath;
         }
 
         public DigitalPrintData(String magicsPath) {
-            this.magicsPath = magicsPath;
-            this.id = -1;
+            this(-1, magicsPath);
         }
 
         int id;
         String magicsPath;
 
-        @Override
         public int getId() {
             return id;
         }

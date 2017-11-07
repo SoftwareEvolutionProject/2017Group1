@@ -1,6 +1,6 @@
 package se.chalmers.dat265.group1.model;
 
-public class OrderedPart  implements DataModel{
+public class OrderedPart extends DataModel{
 
     private int id;
     private int orderID;

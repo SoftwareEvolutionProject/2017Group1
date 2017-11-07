@@ -3,7 +3,7 @@ package se.chalmers.dat265.group1.model;
 
 import java.time.Instant;
 
-public class Order implements DataModel{
+public class Order extends DataModel{
 
     private int id;
     private int customerID;

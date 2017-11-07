@@ -2,7 +2,7 @@ package se.chalmers.dat265.group1.model;
 
 import java.util.List;
 
-public class PhysicalPart implements DataModel {
+public class PhysicalPart extends DataModel {
     private int id;
     private int physicalPrintID;
     private int orderedPartID;
