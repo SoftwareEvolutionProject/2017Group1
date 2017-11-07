@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {Customer} from '../../model/customer';
-import {CustomerService} from '../../services/customer/customer.service';
-import {ErrorService} from '../../services/error.service';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Customer } from '../../model/customer';
+import { CustomerService } from '../../services/customer/customer.service';
+import { ErrorService } from '../../services/error.service';
 declare var $: any;
 
 @Component({
@@ -14,7 +14,7 @@ declare var $: any;
 })
 export class CustomerListComponent implements OnInit, AfterViewInit {
   private table;
-  private customers: Customer [];
+  private customers: Customer[];
 
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
@@ -103,13 +103,13 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   private prepareTriggers() {
     const _self = this;
     (this.table as any).on('click-row.bs.table', function(row, $element) {
-      _self.selectedCustomer =  _self.customers.filter((customer) => {if (customer.id ===  $element.id){ return customer; } })[0];
+      _self.selectedCustomer = _self.customers.filter((customer) => { if (customer.id === $element.id) { return customer; } })[0];
     });
   }
 
   private amountFormatter(value, row, index) {
     return value > 0 ? '' : {
-      css: {'background-color': 'rgba(255, 0, 0, 0.4)'},
+      css: { 'background-color': 'rgba(255, 0, 0, 0.4)' },
     };
   }
 
@@ -137,12 +137,12 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   private confirmDelete() {
     if (this.toBeDeleted) {
       this.customerService.deleteCustomer(this.toBeDeleted).subscribe((res) => {
-          this.toBeDeleted = null;
-          this.modalRef.hide();
-          this.loadAndPopulate();
-        }, (error) => {
-          this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
-        },
+        this.toBeDeleted = null;
+        this.modalRef.hide();
+        this.loadAndPopulate();
+      }, (error) => {
+        this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
+      },
       );
     }
   }

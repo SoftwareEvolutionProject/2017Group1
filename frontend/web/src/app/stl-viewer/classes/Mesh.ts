@@ -192,7 +192,7 @@ export class Mesh {
 	calcFaceCount() {
 		this.faceCount = 0;
 
-		let ibuf = this.indexBuffer;
+		const ibuf = this.indexBuffer;
 
 		// add the last -1 if it is omitted
 		if (ibuf[ibuf.length - 1] != -1) {
@@ -218,11 +218,11 @@ export class Mesh {
 		let maxY = -Infinity;
 		let maxZ = -Infinity;
 
-		let vbuf = this.vertexBuffer;
+		const vbuf = this.vertexBuffer;
 		for (let i = 0; i < vbuf.length; i += 3) {
-			let x = vbuf[i    ];
-			let y = vbuf[i + 1];
-			let z = vbuf[i + 2];
+			const x = vbuf[i    ];
+			const y = vbuf[i + 1];
+			const z = vbuf[i + 2];
 
 			if (x < minX) {
 				minX = x;
@@ -257,36 +257,36 @@ export class Mesh {
 		@private
 	*/
 	calcFaceNormals() {
-		let vbuf = this.vertexBuffer;
-		let ibuf = this.indexBuffer;
-		let nbuf = this.faceNormalBuffer;
+		const vbuf = this.vertexBuffer;
+		const ibuf = this.indexBuffer;
+		const nbuf = this.faceNormalBuffer;
 		let i = 0, j = 0;
 		while (i < ibuf.length) {
 			let index = ibuf[i++] * 3;
-			let x0 = vbuf[index    ];
-			let y0 = vbuf[index + 1];
-			let z0 = vbuf[index + 2];
+			const x0 = vbuf[index    ];
+			const y0 = vbuf[index + 1];
+			const z0 = vbuf[index + 2];
 
 			index = ibuf[i++] * 3;
-			let x1 = vbuf[index    ];
-			let y1 = vbuf[index + 1];
-			let z1 = vbuf[index + 2];
+			const x1 = vbuf[index    ];
+			const y1 = vbuf[index + 1];
+			const z1 = vbuf[index + 2];
 
 			index = ibuf[i++] * 3;
-			let x2 = vbuf[index    ];
-			let y2 = vbuf[index + 1];
-			let z2 = vbuf[index + 2];
+			const x2 = vbuf[index    ];
+			const y2 = vbuf[index + 1];
+			const z2 = vbuf[index + 2];
 
-			let dx1 = x1 - x0;
-			let dy1 = y1 - y0;
-			let dz1 = z1 - z0;
-			let dx2 = x2 - x0;
-			let dy2 = y2 - y0;
-			let dz2 = z2 - z0;
+			const dx1 = x1 - x0;
+			const dy1 = y1 - y0;
+			const dz1 = z1 - z0;
+			const dx2 = x2 - x0;
+			const dy2 = y2 - y0;
+			const dz2 = z2 - z0;
 
-			let nx = dy1 * dz2 - dz1 * dy2;
-			let ny = dz1 * dx2 - dx1 * dz2;
-			let nz = dx1 * dy2 - dy1 * dx2;
+			const nx = dy1 * dz2 - dz1 * dy2;
+			const ny = dz1 * dx2 - dx1 * dz2;
+			const nz = dx1 * dy2 - dy1 * dx2;
 
 			nbuf[j++] = nx;
 			nbuf[j++] = ny;
@@ -315,10 +315,10 @@ export class Mesh {
 			this.calcFaceNormals();
 		}
 
-		let vbuf = this.vertexBuffer;
-		let ibuf = this.indexBuffer;
-		let fnbuf = this.faceNormalBuffer;
-		let vnbuf = this.vertexNormalBuffer;
+		const vbuf = this.vertexBuffer;
+		const ibuf = this.indexBuffer;
+		const fnbuf = this.faceNormalBuffer;
+		const vnbuf = this.vertexNormalBuffer;
 		for (let i = 0; i < vnbuf.length; i++) {
 			vnbuf[i] = 0;
 		}
@@ -327,7 +327,7 @@ export class Mesh {
 		// since the vertex index buffer will be used to reference vertex normals
 		this.vertexNormalIndexBuffer = null;
 
-		let numOfVertices = vbuf.length / 3;
+		const numOfVertices = vbuf.length / 3;
 
 		/*
 			Generate vertex normals.
@@ -339,7 +339,7 @@ export class Mesh {
 			if (k == -1) {
 				j += 3;
 			} else {
-				let index = k * 3;
+				const index = k * 3;
 				// add face normal to vertex normal
 				vnbuf[index    ] += fnbuf[j    ];
 				vnbuf[index + 1] += fnbuf[j + 1];
@@ -361,20 +361,20 @@ export class Mesh {
 			this.calcFaceNormals();
 		}
 
-		let ibuf = this.indexBuffer;
-		let numOfVerts = this.vertexBuffer.length / 3;
+		const ibuf = this.indexBuffer;
+		const numOfVerts = this.vertexBuffer.length / 3;
 
 		/*
 			Go through vertices. For each one, record the indices of faces who touch this vertex.
 			The new length of the vertex normal buffer will also be calculated.
 		*/
-		let vertTouchedFaces = new Array(numOfVerts);
+		const vertTouchedFaces = new Array(numOfVerts);
 		let expectedVertNormalBufferLength = 0;
 		for (let i = 0, findex = 0, vindex = 0; i < ibuf.length; i++) {
 			vindex = ibuf[i];
 			if (vindex >= 0) {
 				expectedVertNormalBufferLength += 3;
-				let faces = vertTouchedFaces[vindex];
+				const faces = vertTouchedFaces[vindex];
 				if (!faces) {
 					vertTouchedFaces[vindex] = [findex];
 				} else {
@@ -385,50 +385,50 @@ export class Mesh {
 			}
 		}
 
-		let fnbuf = this.faceNormalBuffer;
+		const fnbuf = this.faceNormalBuffer;
 		// generate normalized face normals which will be used for calculating dot product
-		let nfnbuf = new Array(fnbuf.length);
+		const nfnbuf = new Array(fnbuf.length);
 		new Math3D().normalizeVectors(fnbuf, nfnbuf);
 
 		// realloc and initialize the vertex normal buffer
 		if (!this.vertexNormalBuffer || this.vertexNormalBuffer.length < expectedVertNormalBufferLength) {
 			this.vertexNormalBuffer = new Array(expectedVertNormalBufferLength);
 		}
-		let vnbuf = this.vertexNormalBuffer;
+		const vnbuf = this.vertexNormalBuffer;
 		for (let i = 0; i < vnbuf.length; i++) {
 			vnbuf[i] = 0;
 		}
 
 		// the vertex normal index buffer will be re-calculated
 		this.vertexNormalIndexBuffer = [];
-		let nibuf = this.vertexNormalIndexBuffer;
+		const nibuf = this.vertexNormalIndexBuffer;
 
 		/*
 			Generate vertex normals and normal indices.
 			In this case, There will be a separate normal for each vertex of each face.
 		*/
-		let threshold = Math.cos(this.creaseAngle * Math.PI / 180);
+		const threshold = Math.cos(this.creaseAngle * Math.PI / 180);
 		for (let i = 0, vindex = 0, nindex = 0, findex0 = 0; i < ibuf.length; i++) {
 			vindex = ibuf[i];
 			if (vindex >= 0) {
-				let n = nindex * 3;
-				let f0 = findex0 * 3;
+				const n = nindex * 3;
+				const f0 = findex0 * 3;
 				// add face normal to vertex normal
 				vnbuf[n    ] += fnbuf[f0    ];
 				vnbuf[n + 1] += fnbuf[f0 + 1];
 				vnbuf[n + 2] += fnbuf[f0 + 2];
-				let fnx0 = nfnbuf[f0    ];
-				let fny0 = nfnbuf[f0 + 1];
-				let fnz0 = nfnbuf[f0 + 2];
+				const fnx0 = nfnbuf[f0    ];
+				const fny0 = nfnbuf[f0 + 1];
+				const fnz0 = nfnbuf[f0 + 2];
 				// go through faces around this vertex, accumulating normals
-				let faces = vertTouchedFaces[vindex];
+				const faces = vertTouchedFaces[vindex];
 				for (let j = 0; j < faces.length; j++) {
-					let findex1 = faces[j];
+					const findex1 = faces[j];
 					if (findex0 != findex1) {
-						let f1 = findex1 * 3;
-						let fnx1 = nfnbuf[f1    ];
-						let fny1 = nfnbuf[f1 + 1];
-						let fnz1 = nfnbuf[f1 + 2];
+						const f1 = findex1 * 3;
+						const fnx1 = nfnbuf[f1    ];
+						const fny1 = nfnbuf[f1 + 1];
+						const fnz1 = nfnbuf[f1 + 2];
 						// if the angle between normals of the adjacent faces is less than the crease-angle, the
 						// normal of the other face will be accumulated to the vertex normal of the current face
 						if (fnx0 * fnx1 + fny0 * fny1 + fnz0 * fnz1 > threshold) {

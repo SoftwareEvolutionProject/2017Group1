@@ -182,21 +182,21 @@ export class WebGLRenderBackend {
                             '}';
 
         function createProgram(gl, vSrc, fSrc) {
-            let vShader = gl.createShader(gl.VERTEX_SHADER);
+            const vShader = gl.createShader(gl.VERTEX_SHADER);
             gl.shaderSource(vShader, vSrc);
             gl.compileShader(vShader);
             if (!gl.getShaderParameter(vShader, gl.COMPILE_STATUS)) {
                 return null;
             }
 
-            let fShader = gl.createShader(gl.FRAGMENT_SHADER);
+            const fShader = gl.createShader(gl.FRAGMENT_SHADER);
             gl.shaderSource(fShader, fSrc);
             gl.compileShader(fShader);
             if (!gl.getShaderParameter(fShader, gl.COMPILE_STATUS)) {
                 return null;
             }
 
-            let program = gl.createProgram();
+            const program = gl.createProgram();
             gl.attachShader(program, vShader);
             gl.attachShader(program, fShader);
             gl.linkProgram(program);
@@ -205,16 +205,16 @@ export class WebGLRenderBackend {
             }
 
             program.attributes = {};
-            let numOfAttribs = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
+            const numOfAttribs = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
             for (let i = 0; i < numOfAttribs; i++) {
-                let attrib = gl.getActiveAttrib(program, i);
+                const attrib = gl.getActiveAttrib(program, i);
                 program.attributes[attrib.name] = gl.getAttribLocation(program, attrib.name);
             }
 
             program.uniforms = {};
-            let numOfUniforms = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+            const numOfUniforms = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
             for (let i = 0; i < numOfUniforms; i++) {
-                let uniform = gl.getActiveUniform(program, i);
+                const uniform = gl.getActiveUniform(program, i);
                 program.uniforms[uniform.name] = gl.getUniformLocation(program, uniform.name);
             }
 
@@ -249,7 +249,7 @@ export class WebGLRenderBackend {
      * Set an image to be used as background.
      */
     setBackgroundImage(img) {
-        let gl = this.gl;
+        const gl = this.gl;
 
         this.bkgTexture = gl.createTexture();
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -267,20 +267,20 @@ export class WebGLRenderBackend {
      * Begin to render a new frame.
      */
     beginFrame(definition, hasBackground) {
-        let gl = this.gl;
+        const gl = this.gl;
 
         function prepareFB(gl, fbo, w, h) {
             gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
 
             // create a render buffer object and set it as the depth attachment of the fbo
-            let depthAttachment = gl.createRenderbuffer();
+            const depthAttachment = gl.createRenderbuffer();
             gl.bindRenderbuffer(gl.RENDERBUFFER, depthAttachment);
             gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, w, h);
             gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthAttachment);
             gl.bindRenderbuffer(gl.RENDERBUFFER, null);
 
             // create a texture object and set it as the color attachment of the fbo
-            let colorAttachment = gl.createTexture();
+            const colorAttachment = gl.createTexture();
             //gl.activeTexture(gl.TEXTURE0);
             gl.bindTexture(gl.TEXTURE_2D, colorAttachment);
             gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, colorAttachment, 0);
@@ -398,7 +398,7 @@ export class WebGLRenderBackend {
             /*
             * Clear canvas with a single background color.
             */
-            let color = this.bkgColors[0];
+            const color = this.bkgColors[0];
             gl.clearColor(color[0], color[1], color[2], 1);
             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         }
@@ -408,7 +408,7 @@ export class WebGLRenderBackend {
      * End rendering of a frame.
      */
     endFrame() {
-        let gl = this.gl;
+        const gl = this.gl;
 
         // unbind any additional frame-buffer and redirect latter output to canvas
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -445,27 +445,27 @@ export class WebGLRenderBackend {
      * Do render a new frame.
      */
     render(renderList, transformMatrix, normalMatrix, renderMode, defaultMaterial, sphereMap, isCullingDisabled) {
-        let gl = this.gl;
+        const gl = this.gl;
 
-        let transformMat4Flattened = new Float32Array([
+        const transformMat4Flattened = new Float32Array([
             transformMatrix.m00, transformMatrix.m10, transformMatrix.m20, 0,
             transformMatrix.m01, transformMatrix.m11, transformMatrix.m21, 0,
             transformMatrix.m02, transformMatrix.m12, transformMatrix.m22, 0,
             transformMatrix.m03, transformMatrix.m13, transformMatrix.m23, 1,
         ]);
 
-        let normalMat3Flattened = new Float32Array([
+        const normalMat3Flattened = new Float32Array([
             normalMatrix.m00, normalMatrix.m10, normalMatrix.m20,
             normalMatrix.m01, normalMatrix.m11, normalMatrix.m21,
             normalMatrix.m02, normalMatrix.m12, normalMatrix.m22,
         ]);
 
         function sortRenderList(rlist) {
-            let opaque = [], transparent = [];
+            const opaque = [], transparent = [];
 
             // sort the input meshes into an opaque list and a transparent list
             for (let i = 0; i < rlist.length; i++) {
-                let mesh = rlist[i];
+                const mesh = rlist[i];
                 // is it transparent?
                 if ((mesh.material || defaultMaterial).transparency > 0 || mesh.hasTexture() && mesh.texture.hasTransparency) {
                     // calculate depth of this mesh
@@ -513,7 +513,7 @@ export class WebGLRenderBackend {
             return 0;
         }
 
-        let gl = this.gl;
+        const gl = this.gl;
 
         // read back a point at the given position from the picking buffer
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.pickingFB);
@@ -533,7 +533,7 @@ export class WebGLRenderBackend {
             this.compileTexture(sphereMap, null);
         }
 
-        let gl = this.gl;
+        const gl = this.gl;
 
         gl.disable(gl.BLEND);
         gl.enable(gl.DEPTH_TEST);
@@ -544,15 +544,15 @@ export class WebGLRenderBackend {
         let isBlendEnabled = false;
 
         for (let i = 0; i < renderList.length; i++) {
-            let mesh = renderList[i];
+            const mesh = renderList[i];
             if (mesh.isTrivial() || !mesh.visible) {
                 continue;
             }
 
-            let material = mesh.material || defaultMaterial;
-            let texture = mesh.hasTexture() ? mesh.texture : null;
-            let isTransparent = (material.transparency > 0) || (texture && texture.hasTransparency);
-            let opacity = 1 - material.transparency;
+            const material = mesh.material || defaultMaterial;
+            const texture = mesh.hasTexture() ? mesh.texture : null;
+            const isTransparent = (material.transparency > 0) || (texture && texture.hasTransparency);
+            const opacity = 1 - material.transparency;
 
             if (!material.compiled) {
                 this.compileMaterial(material);
@@ -580,7 +580,7 @@ export class WebGLRenderBackend {
                 isBlendEnabled = isTransparent;
             }
 
-            let isSphereMapped = mesh.isEnvironmentCast && (sphereMap != null);
+            const isSphereMapped = mesh.isEnvironmentCast && (sphereMap != null);
 
             // resolve current render mode and then choose a right program
             let rmode = mesh.renderMode || renderMode;
@@ -751,7 +751,7 @@ export class WebGLRenderBackend {
      * @private
      */
     renderPickingPass(renderList, transformMat4, defaultMaterial, isCullingDisabled) {
-        let gl = this.gl;
+        const gl = this.gl;
 
         gl.disable(gl.BLEND);
         gl.enable(gl.DEPTH_TEST);
@@ -765,13 +765,13 @@ export class WebGLRenderBackend {
         gl.useProgram(this.programs.picking);
 
         for (let i = 0; i < renderList.length; i++) {
-            let mesh = renderList[i];
+            const mesh = renderList[i];
             if (mesh.isTrivial() || !mesh.visible) {
                 continue;
             }
 
             // skip the mesh if it is nearly completely transparent
-            let material = mesh.material || defaultMaterial;
+            const material = mesh.material || defaultMaterial;
             if (material.transparency > 0.99) {
                 continue;
             }
@@ -875,21 +875,21 @@ export class WebGLRenderBackend {
             return edges;
         }
 
-        let gl = this.gl;
+        const gl = this.gl;
 
-        let needFlat = (renderMode == 'flat') || (renderMode == 'textureflat');
+        const needFlat = (renderMode == 'flat') || (renderMode == 'textureflat');
 
-        let hasTrianglesOnly = mesh.indexBuffer.length == 4 * mesh.faceCount;
-        let hasTextureCoords = mesh.texCoordBuffer && mesh.texCoordBuffer.length >= 2;
+        const hasTrianglesOnly = mesh.indexBuffer.length == 4 * mesh.faceCount;
+        const hasTextureCoords = mesh.texCoordBuffer && mesh.texCoordBuffer.length >= 2;
 
-        let ibuf  = mesh.indexBuffer;
-        let vbuf  = mesh.vertexBuffer;
-        let tbuf  = mesh.texCoordBuffer;
-        let tibuf = mesh.texCoordIndexBuffer || ibuf;
-        let nbuf  = mesh.vertexNormalBuffer;
-        let nibuf = mesh.vertexNormalIndexBuffer || ibuf;
-        let fnbuf = mesh.faceNormalBuffer;
-        let numOfFaces = mesh.faceCount;
+        const ibuf  = mesh.indexBuffer;
+        const vbuf  = mesh.vertexBuffer;
+        const tbuf  = mesh.texCoordBuffer;
+        const tibuf = mesh.texCoordIndexBuffer || ibuf;
+        const nbuf  = mesh.vertexNormalBuffer;
+        const nibuf = mesh.vertexNormalIndexBuffer || ibuf;
+        const fnbuf = mesh.faceNormalBuffer;
+        const numOfFaces = mesh.faceCount;
 
         if (!mesh.compiled) {
             /*
@@ -1028,7 +1028,7 @@ export class WebGLRenderBackend {
             * Do not need to rebuild, just update normal data.
             */
 
-            let isFlat = (mesh.compiled.remderMode == 'flat') || (mesh.compiled.remderMode == 'textureflat');
+            const isFlat = (mesh.compiled.remderMode == 'flat') || (mesh.compiled.remderMode == 'textureflat');
             if (isFlat != needFlat) {
                 let normals;
                 if (hasTrianglesOnly) {
@@ -1097,7 +1097,7 @@ export class WebGLRenderBackend {
         * Build wireframe if it is not built yet.
         */
         if (renderMode == 'wireframe' && !mesh.compiled.edges) {
-            let edges = makeWireframe(ibuf, vbuf, numOfFaces, hasTrianglesOnly);
+            const edges = makeWireframe(ibuf, vbuf, numOfFaces, hasTrianglesOnly);
 
             mesh.compiled.edges = gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER, mesh.compiled.edges);
@@ -1117,17 +1117,17 @@ export class WebGLRenderBackend {
      * @private
      */
     compileMaterial(material) {
-        let gl = this.gl;
+        const gl = this.gl;
 
         material.compiled = {
             diffColor: new Float32Array([(material.diffuseColor & 0xff0000) / 16777216, (material.diffuseColor & 0xff00) / 65536, (material.diffuseColor & 0xff) / 256]),
         };
 
-        let rgba = new Uint8Array((new Uint32Array(material.getPalette())).buffer);
+        const rgba = new Uint8Array((new Uint32Array(material.getPalette())).buffer);
         // the sequence should be converted from BGRA to RGBA by swapping each 1st and 3rd components
         //TODO: this only works on Little-Endian platforms. We shall also take into account the case for Big-Endian.
         for (let i = 0; i < rgba.length; i += 4) {
-            let tmp = rgba[i];
+            const tmp = rgba[i];
             rgba[i] = rgba[i + 2];
             rgba[i + 2] = tmp;
         }
@@ -1155,7 +1155,7 @@ export class WebGLRenderBackend {
 
         genMipmap = genMipmap || texture.hasMipmap();
 
-        let gl = this.gl;
+        const gl = this.gl;
 
         texture.compiled = {
             width:  texture.width,
@@ -1163,11 +1163,11 @@ export class WebGLRenderBackend {
             hasMipmap: genMipmap,
         };
 
-        let rgba = new Uint8Array((new Uint32Array(texture.data)).buffer);
+        const rgba = new Uint8Array((new Uint32Array(texture.data)).buffer);
         // convert the sequence from BGRA to RGBA by swapping each 1st and 3rd components
         //TODO: also take into account the case for Big-Endian?
         for (let i = 0; i < rgba.length; i += 4) {
-            let tmp = rgba[i];
+            const tmp = rgba[i];
             rgba[i] = rgba[i + 2];
             rgba[i + 2] = tmp;
         }

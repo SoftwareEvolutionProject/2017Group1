@@ -59,10 +59,9 @@ export class AABB {
         @returns {Number} length of the diagonal.
     */
     lengthOfDiagonal() {
-        let xx = this.maxX - this.minX;
-        let yy = this.maxY - this.minY;
-        let zz = this.maxZ - this.minZ;
+        const xx = this.maxX - this.minX;
+        const yy = this.maxY - this.minY;
+        const zz = this.maxZ - this.minZ;
         return Math.sqrt(xx * xx + yy * yy + zz * zz);
     }
 }
-

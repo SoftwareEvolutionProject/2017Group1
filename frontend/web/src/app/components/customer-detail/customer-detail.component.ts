@@ -1,12 +1,12 @@
-import {Location} from '@angular/common';
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {isNullOrUndefined} from 'util';
-import {Customer} from '../../model/customer';
-import {CustomerMockService} from '../../services/customer/customer-mock.service';
-import {CustomerService} from '../../services/customer/customer.service';
-import {ErrorService} from '../../services/error.service';
+import { Location } from '@angular/common';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { isNullOrUndefined } from 'util';
+import { Customer } from '../../model/customer';
+import { CustomerMockService } from '../../services/customer/customer-mock.service';
+import { CustomerService } from '../../services/customer/customer.service';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-customer-detail',
@@ -34,11 +34,11 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      if (id == 'create') { //new product is being created
+      if (id === 'create') { // new product is being created
         this.create();
       } else if (id) {
         this.getData(id);
-           }
+      }
     });
   }
 
@@ -79,9 +79,9 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   private constructForms() {
     const fields = {
       name: [this.customer && this.customer.name ? this.customer.name : '',
-        Validators.compose([Validators.required])],
+      Validators.compose([Validators.required])],
       eMail: [this.customer && this.customer.eMail ? this.customer.eMail : '',
-        Validators.compose([Validators.required])],
+      Validators.compose([Validators.required])],
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);

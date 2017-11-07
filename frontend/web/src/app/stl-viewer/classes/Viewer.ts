@@ -249,7 +249,7 @@ export class Viewer {
 
         // setup input handlers.
         // compatibility for touch devices is taken into account
-        let self = this;
+        const self = this;
         if (!this.platformInfo.isTouchDevice) {
             this.canvas.addEventListener('mousedown', function(e) {self.mouseDownHandler(e); }, false);
             this.canvas.addEventListener('mouseup', function(e) {self.mouseUpHandler(e); }, false);
@@ -364,7 +364,7 @@ export class Viewer {
         this.drawBackground();
 
         // wake up update routine per 30 milliseconds
-        let self = this;
+        const self = this;
         (function tick() {
             self.doUpdate();
             setTimeout(tick, 30);
@@ -445,7 +445,7 @@ export class Viewer {
         this.params['Definition'] = definition;
         this.definition = definition;
 
-        let oldFrameWidth = this.frameWidth;
+        const oldFrameWidth = this.frameWidth;
 
         switch (this.definition) {
         case 'low':
@@ -463,7 +463,7 @@ export class Viewer {
             break;
         }
 
-        let ratio = this.frameWidth / oldFrameWidth;
+        const ratio = this.frameWidth / oldFrameWidth;
         // zoom factor should be adjusted, otherwise there would be an abrupt zoom-in or zoom-out on next frame
         this.zoomFactor *= ratio;
         // likewise, panning should also be adjusted to avoid abrupt jump on next frame
@@ -484,8 +484,8 @@ export class Viewer {
             return;
         }
 
-        let self = this;
-        let img = new Image;
+        const self = this;
+        const img = new Image;
 
         img.onload = function() {
             self.bkgImage = this;
@@ -509,8 +509,8 @@ export class Viewer {
             return;
         }
 
-        let self = this;
-        let newMap = new Texture(null, null);
+        const self = this;
+        const newMap = new Texture(null, null);
 
         newMap.onready = function() {
             self.sphereMap = newMap;
@@ -580,7 +580,7 @@ export class Viewer {
         Reset the current scene to its initial state.
     */
     resetScene() {
-        let d = (!this.scene || this.scene.isEmpty()) ? 0 : this.scene.aabb.lengthOfDiagonal();
+        const d = (!this.scene || this.scene.isEmpty()) ? 0 : this.scene.aabb.lengthOfDiagonal();
         this.zoomFactor = (d == 0) ? 1 : (this.frameWidth < this.frameHeight ? this.frameWidth : this.frameHeight) / d;
         this.panning = [0, 0];
         this.rotMatrix.identity();
@@ -604,11 +604,11 @@ export class Viewer {
         @returns {JSC3D.PickInfo} a PickInfo object which holds the result.
     */
     pick(clientX, clientY) {
-        let pickInfo = new PickInfo;
+        const pickInfo = new PickInfo;
 
-        let canvasRect = this.canvas.getBoundingClientRect();
-        let canvasX = clientX - canvasRect.left;
-        let canvasY = clientY - canvasRect.top;
+        const canvasRect = this.canvas.getBoundingClientRect();
+        const canvasX = clientX - canvasRect.left;
+        const canvasY = clientY - canvasRect.top;
 
         pickInfo.canvasX = canvasX;
         pickInfo.canvasY = canvasY;
@@ -617,7 +617,7 @@ export class Viewer {
         pickedId = this.webglBackend.pick(canvasX, canvasY);
 
         if (pickedId > 0) {
-            let meshes = this.scene.getChildren();
+            const meshes = this.scene.getChildren();
             for (let i = 0; i < meshes.length; i++) {
                 if (meshes[i].internalId == pickedId) {
                     pickInfo.mesh = meshes[i];
@@ -682,7 +682,7 @@ export class Viewer {
         }
 
         if (this.onmousedown) {
-            let info = this.pick(e.clientX, e.clientY);
+            const info = this.pick(e.clientX, e.clientY);
             this.onmousedown(info.canvasX, info.canvasY, e.button, info.depth, info.mesh);
         }
 
@@ -744,7 +744,7 @@ export class Viewer {
         }
 
         if (this.onmousemove) {
-            let info = this.pick(e.clientX, e.clientY);
+            const info = this.pick(e.clientX, e.clientY);
             this.onmousemove(info.canvasX, info.canvasY, e.button, info.depth, info.mesh);
         }
 
@@ -755,19 +755,19 @@ export class Viewer {
             return;
         }
 
-        let isDragging = this.buttonStates[0] == true;
-        let isShiftDown = this.keyStates[0x10] == true;
-        let isCtrlDown = this.keyStates[0x11] == true;
+        const isDragging = this.buttonStates[0] == true;
+        const isShiftDown = this.keyStates[0x10] == true;
+        const isCtrlDown = this.keyStates[0x11] == true;
         if (isDragging) {
             if ((isShiftDown && this.mouseUsage == 'default') || this.mouseUsage == 'zoom') {
                 this.zoomFactor *= this.mouseY <= e.clientY ? 1.04 : 0.96;
             } else if ((isCtrlDown && this.mouseUsage == 'default') || this.mouseUsage == 'pan') {
-                let ratio = (this.definition == 'low') ? 0.5 : ((this.definition == 'high') ? 2 : 1);
+                const ratio = (this.definition == 'low') ? 0.5 : ((this.definition == 'high') ? 2 : 1);
                 this.panning[0] += ratio * (e.clientX - this.mouseX);
                 this.panning[1] += ratio * (e.clientY - this.mouseY);
             } else if (this.mouseUsage == 'default' || this.mouseUsage == 'rotate') {
-                let rotX = (e.clientY - this.mouseY) * 360 / this.canvas.width;
-                let rotY = (e.clientX - this.mouseX) * 360 / this.canvas.height;
+                const rotX = (e.clientY - this.mouseY) * 360 / this.canvas.width;
+                const rotY = (e.clientX - this.mouseX) * 360 / this.canvas.height;
                 this.rotMatrix.rotateAboutXAxis(rotX);
                 this.rotMatrix.rotateAboutYAxis(rotY);
             }
@@ -785,7 +785,7 @@ export class Viewer {
         }
 
         if (this.onmousewheel) {
-            let info = this.pick(e.clientX, e.clientY);
+            const info = this.pick(e.clientX, e.clientY);
             this.onmousewheel(info.canvasX, info.canvasY, e.button, info.depth, info.mesh);
         }
 
@@ -813,11 +813,11 @@ export class Viewer {
         }
 
         if (e.touches.length > 0) {
-            let clientX = e.touches[0].clientX;
-            let clientY = e.touches[0].clientY;
+            const clientX = e.touches[0].clientX;
+            const clientY = e.touches[0].clientY;
 
             if (this.onmousedown) {
-                let info = this.pick(clientX, clientY);
+                const info = this.pick(clientX, clientY);
                 this.onmousedown(info.canvasX, info.canvasY, 0, info.depth, info.mesh);
             }
 
@@ -880,11 +880,11 @@ export class Viewer {
         }
 
         if (e.touches.length > 0) {
-            let clientX = e.touches[0].clientX;
-            let clientY = e.touches[0].clientY;
+            const clientX = e.touches[0].clientX;
+            const clientY = e.touches[0].clientY;
 
             if (this.onmousemove) {
-                let info = this.pick(clientX, clientY);
+                const info = this.pick(clientX, clientY);
                 this.onmousemove(info.canvasX, info.canvasY, 0, info.depth, info.mesh);
             }
 
@@ -898,12 +898,12 @@ export class Viewer {
             if (this.mouseUsage == 'zoom') {
                 this.zoomFactor *= (this.mouseY <= clientY) ? 1.04 : 0.96;
             } else if (this.mouseUsage == 'pan') {
-                let ratio = (this.definition == 'low') ? 0.5 : ((this.definition == 'high') ? 2 : 1);
+                const ratio = (this.definition == 'low') ? 0.5 : ((this.definition == 'high') ? 2 : 1);
                 this.panning[0] += ratio * (clientX - this.mouseX);
                 this.panning[1] += ratio * (clientY - this.mouseY);
             } else if (this.mouseUsage == 'default' || this.mouseUsage == 'rotate') {
-                let rotX = (clientY - this.mouseY) * 360 / this.canvas.width;
-                let rotY = (clientX - this.mouseX) * 360 / this.canvas.height;
+                const rotX = (clientY - this.mouseY) * 360 / this.canvas.width;
+                const rotY = (clientX - this.mouseX) * 360 / this.canvas.height;
                 this.rotMatrix.rotateAboutXAxis(rotX);
                 this.rotMatrix.rotateAboutYAxis(rotY);
             }
@@ -950,9 +950,9 @@ export class Viewer {
             return;
         }
 
-        let clientX = e.gesture.center.pageX - document.body.scrollLeft;
-        let clientY = e.gesture.center.pageY - document.body.scrollTop;
-        let info = this.pick(clientX, clientY);
+        const clientX = e.gesture.center.pageX - document.body.scrollLeft;
+        const clientY = e.gesture.center.pageY - document.body.scrollTop;
+        const info = this.pick(clientX, clientY);
 
         switch (e.type) {
         case 'touch':
@@ -989,12 +989,12 @@ export class Viewer {
                 break;
             }
             if (this.isTouchHeld) {						// pan
-                let ratio = (this.definition == 'low') ? 0.5 : ((this.definition == 'high') ? 2 : 1);
+                const ratio = (this.definition == 'low') ? 0.5 : ((this.definition == 'high') ? 2 : 1);
                 this.panning[0] += ratio * (clientX - this.mouseX);
                 this.panning[1] += ratio * (clientY - this.mouseY);
             } else if (!this.suppressDraggingRotation) {	// rotate
-                let rotX = (clientY - this.mouseY) * 360 / this.canvas.width;
-                let rotY = (clientX - this.mouseX) * 360 / this.canvas.height;
+                const rotX = (clientY - this.mouseY) * 360 / this.canvas.width;
+                const rotY = (clientX - this.mouseX) * 360 / this.canvas.height;
                 this.rotMatrix.rotateAboutXAxis(rotX);
                 this.rotMatrix.rotateAboutYAxis(rotY);
             }
@@ -1024,7 +1024,7 @@ export class Viewer {
             * while the other still stays on it sliding.
             * By Jeremy Ellis <jeremy.ellis@mpsd.ca>
             */
-            let self = this;
+            const self = this;
             setTimeout(function() {
                 self.suppressDraggingRotation = false;
             }, 250);
@@ -1060,27 +1060,27 @@ export class Viewer {
         * Discard the query part of the URL string, if any, to get the correct file name.
         * By negatif@gmail.com
         */
-        let questionMarkAt = this.sceneUrl.indexOf('?');
-        let sceneUrlNoQuery = questionMarkAt == -1 ? this.sceneUrl : this.sceneUrl.substring(0, questionMarkAt);
+        const questionMarkAt = this.sceneUrl.indexOf('?');
+        const sceneUrlNoQuery = questionMarkAt == -1 ? this.sceneUrl : this.sceneUrl.substring(0, questionMarkAt);
 
         let lastSlashAt = sceneUrlNoQuery.lastIndexOf('/');
         if (lastSlashAt == -1) {
             lastSlashAt = sceneUrlNoQuery.lastIndexOf('\\');
         }
 
-        let fileName = sceneUrlNoQuery.substring(lastSlashAt + 1);
-        let lastDotAt = fileName.lastIndexOf('.');
+        const fileName = sceneUrlNoQuery.substring(lastSlashAt + 1);
+        const lastDotAt = fileName.lastIndexOf('.');
         if (lastDotAt == -1) {
             return false;
         }
 
-        let fileExtName = fileName.substring(lastDotAt + 1);
+        const fileExtName = fileName.substring(lastDotAt + 1);
 
         if (!this.loader) {
             return false;
         }
 
-        let self = this;
+        const self = this;
 
         this.loader.onload = function(scene) {
             self.abortUnfinishedLoadingFn = null;
@@ -1145,7 +1145,7 @@ export class Viewer {
     setupScene(scene) {
         // crease-angle should be applied onto each mesh before their initialization
         if (this.creaseAngle >= 0) {
-            let cAngle = this.creaseAngle;
+            const cAngle = this.creaseAngle;
             scene.forEachChild(function(mesh) {
                 mesh.creaseAngle = cAngle;
             });
@@ -1154,9 +1154,9 @@ export class Viewer {
         scene.init();
 
         if (!scene.isEmpty()) {
-            let d = scene.aabb.lengthOfDiagonal();
-            let w = this.frameWidth;
-            let h = this.frameHeight;
+            const d = scene.aabb.lengthOfDiagonal();
+            const w = this.frameWidth;
+            const h = this.frameHeight;
             this.zoomFactor = (d == 0) ? 1 : (w < h ? w : h) / d;
             this.panning = [0, 0];
         }
@@ -1182,17 +1182,17 @@ export class Viewer {
     */
     reportProgress(task, progress) {
         if (!this.progressFrame) {
-            let canvasRect = this.canvas.getBoundingClientRect();
+            const canvasRect = this.canvas.getBoundingClientRect();
 
-            let r = 255 - ((this.bkgColor1 & 0xff0000) >> 16);
-            let g = 255 - ((this.bkgColor1 & 0xff00) >> 8);
-            let b = 255 - (this.bkgColor1 & 0xff);
-            let color = 'rgb(' + r + ',' + g + ',' + b + ')';
+            const r = 255 - ((this.bkgColor1 & 0xff0000) >> 16);
+            const g = 255 - ((this.bkgColor1 & 0xff00) >> 8);
+            const b = 255 - (this.bkgColor1 & 0xff);
+            const color = 'rgb(' + r + ',' + g + ',' + b + ')';
 
-            let barX = window.pageXOffset + canvasRect.left + 40;
-            let barY = window.pageYOffset + canvasRect.top  + canvasRect.height * 0.38;
-            let barWidth = canvasRect.width - (barX - canvasRect.left) * 2;
-            let barHeight = 20;
+            const barX = window.pageXOffset + canvasRect.left + 40;
+            const barY = window.pageYOffset + canvasRect.top  + canvasRect.height * 0.38;
+            const barWidth = canvasRect.width - (barX - canvasRect.left) * 2;
+            const barHeight = 20;
 
             this.progressFrame = document.createElement('div');
             this.progressFrame.style.position = 'absolute';
@@ -1258,17 +1258,17 @@ export class Viewer {
     */
     reportError(message) {
         if (!this.messagePanel) {
-            let canvasRect = this.canvas.getBoundingClientRect();
+            const canvasRect = this.canvas.getBoundingClientRect();
 
-            let r = 255 - ((this.bkgColor1 & 0xff0000) >> 16);
-            let g = 255 - ((this.bkgColor1 & 0xff00) >> 8);
-            let b = 255 - (this.bkgColor1 & 0xff);
-            let color = 'rgb(' + r + ',' + g + ',' + b + ')';
+            const r = 255 - ((this.bkgColor1 & 0xff0000) >> 16);
+            const g = 255 - ((this.bkgColor1 & 0xff00) >> 8);
+            const b = 255 - (this.bkgColor1 & 0xff);
+            const color = 'rgb(' + r + ',' + g + ',' + b + ')';
 
-            let panelX = window.pageXOffset + canvasRect.left + 40;
-            let panelY = window.pageYOffset + canvasRect.top  + canvasRect.height * 0.38;
-            let panelWidth = canvasRect.width - (panelX - canvasRect.left) * 2;
-            let panelHeight = 14;
+            const panelX = window.pageXOffset + canvasRect.left + 40;
+            const panelY = window.pageYOffset + canvasRect.top  + canvasRect.height * 0.38;
+            const panelWidth = canvasRect.width - (panelX - canvasRect.left) * 2;
+            const panelHeight = 14;
 
             this.messagePanel = document.createElement('div');
             this.messagePanel.style.position = 'absolute';
@@ -1322,24 +1322,24 @@ export class Viewer {
         @private
     */
     fillGradientBackground() {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let pixels = this.bkgColorBuffer;
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const pixels = this.bkgColorBuffer;
 
-        let r1 = (this.bkgColor1 & 0xff0000) >> 16;
-        let g1 = (this.bkgColor1 & 0xff00) >> 8;
-        let b1 = this.bkgColor1 & 0xff;
-        let r2 = (this.bkgColor2 & 0xff0000) >> 16;
-        let g2 = (this.bkgColor2 & 0xff00) >> 8;
-        let b2 = this.bkgColor2 & 0xff;
+        const r1 = (this.bkgColor1 & 0xff0000) >> 16;
+        const g1 = (this.bkgColor1 & 0xff00) >> 8;
+        const b1 = this.bkgColor1 & 0xff;
+        const r2 = (this.bkgColor2 & 0xff0000) >> 16;
+        const g2 = (this.bkgColor2 & 0xff00) >> 8;
+        const b2 = this.bkgColor2 & 0xff;
 
-        let alpha = this.isBackgroundOn ? 0xff000000 : 0;
+        const alpha = this.isBackgroundOn ? 0xff000000 : 0;
 
         let pix = 0;
         for (let i = 0; i < h; i++) {
-            let r = (r1 + i * (r2 - r1) / h) & 0xff;
-            let g = (g1 + i * (g2 - g1) / h) & 0xff;
-            let b = (b1 + i * (b2 - b1) / h) & 0xff;
+            const r = (r1 + i * (r2 - r1) / h) & 0xff;
+            const g = (g1 + i * (g2 - g1) / h) & 0xff;
+            const b = (b1 + i * (b2 - b1) / h) & 0xff;
 
             for (let j = 0; j < w; j++) {
                 pixels[pix++] = alpha | r << 16 | g << 8 | b;
@@ -1393,12 +1393,12 @@ export class Viewer {
             return;
         }
 
-        let aabb = this.scene.aabb;
+        const aabb = this.scene.aabb;
 
         // calculate transformation matrix
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let d = aabb.lengthOfDiagonal();
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const d = aabb.lengthOfDiagonal();
 
         this.transformMatrix.identity();
         this.transformMatrix.translate(-0.5 * (aabb.minX + aabb.maxX), -0.5 * (aabb.minY + aabb.maxY), -0.5 * (aabb.minZ + aabb.maxZ));
@@ -1407,7 +1407,7 @@ export class Viewer {
         this.transformMatrix.translate(2 * this.panning[0] / w, -2 * this.panning[1] / h, 0);
 
         // sort meshes into a render list
-        let renderList = this.sortScene(this.transformMatrix);
+        const renderList = this.sortScene(this.transformMatrix);
 
         // delegate to WebGL backend to do the rendering
         this.webglBackend.render(this.scene.getChildren(), this.transformMatrix, this.rotMatrix, this.renderMode, this.defaultMaterial, this.sphereMap, this.isCullingDisabled);
@@ -1419,16 +1419,16 @@ export class Viewer {
         @private
     */
     sortScene(mat) {
-        let renderList = [];
+        const renderList = [];
 
-        let meshes = this.scene.getChildren();
+        const meshes = this.scene.getChildren();
         for (let i = 0; i < meshes.length; i++) {
-            let mesh = meshes[i];
+            const mesh = meshes[i];
             if (!mesh.isTrivial()) {
                 renderList.push(mesh);
-                let meshCenter = mesh.aabb.center();
+                const meshCenter = mesh.aabb.center();
                 new Math3D().transformVectors(mat, meshCenter, meshCenter);
-                let meshMaterial = mesh.material ? mesh.material : this.defaultMaterial;
+                const meshMaterial = mesh.material ? mesh.material : this.defaultMaterial;
                 mesh.sortKey = {
                     depth: meshCenter[2],
                     isTransparnt: (meshMaterial.transparency > 0) || (mesh.hasTexture() ? mesh.texture.hasTransparency : false),
@@ -1465,23 +1465,23 @@ export class Viewer {
         @private
     */
     renderPoint(mesh) {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let xbound = w - 1;
-        let ybound = h - 1;
-        let ibuf = mesh.indexBuffer;
-        let vbuf = mesh.transformedVertexBuffer;
-        let cbuf = this.colorBuffer;
-        let zbuf = this.zBuffer;
-        let sbuf = this.selectionBuffer;
-        let numOfVertices = vbuf.length / 3;
-        let id = mesh.internalId;
-        let color = 0xff000000 | (mesh.material ? mesh.material.diffuseColor : this.defaultMaterial.diffuseColor);
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const xbound = w - 1;
+        const ybound = h - 1;
+        const ibuf = mesh.indexBuffer;
+        const vbuf = mesh.transformedVertexBuffer;
+        const cbuf = this.colorBuffer;
+        const zbuf = this.zBuffer;
+        const sbuf = this.selectionBuffer;
+        const numOfVertices = vbuf.length / 3;
+        const id = mesh.internalId;
+        const color = 0xff000000 | (mesh.material ? mesh.material.diffuseColor : this.defaultMaterial.diffuseColor);
 
         for (let i = 0, j = 0; i < numOfVertices; i++, j += 3) {
-            let x = ~~(vbuf[j    ] + 0.5);
-            let y = ~~(vbuf[j + 1] + 0.5);
-            let z = vbuf[j + 2];
+            const x = ~~(vbuf[j    ] + 0.5);
+            const y = ~~(vbuf[j + 1] + 0.5);
+            const z = vbuf[j + 2];
             if (x >= 0 && x < xbound && y >= 0 && y < ybound) {
                 let pix = y * w + x;
                 if (z > zbuf[pix]) {
@@ -1516,20 +1516,20 @@ export class Viewer {
         @private
     */
     renderWireframe(mesh) {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let xbound = w - 1;
-        let ybound = h - 1;
-        let ibuf = mesh.indexBuffer;
-        let vbuf = mesh.transformedVertexBuffer;
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const xbound = w - 1;
+        const ybound = h - 1;
+        const ibuf = mesh.indexBuffer;
+        const vbuf = mesh.transformedVertexBuffer;
         let nbuf = mesh.transformedFaceNormalZBuffer;
-        let cbuf = this.colorBuffer;
-        let zbuf = this.zBuffer;
-        let sbuf = this.selectionBuffer;
-        let numOfFaces = mesh.faceCount;
-        let id = mesh.internalId;
-        let color = 0xff000000 | (mesh.material ? mesh.material.diffuseColor : this.defaultMaterial.diffuseColor);
-        let drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
+        const cbuf = this.colorBuffer;
+        const zbuf = this.zBuffer;
+        const sbuf = this.selectionBuffer;
+        const numOfFaces = mesh.faceCount;
+        const id = mesh.internalId;
+        const color = 0xff000000 | (mesh.material ? mesh.material.diffuseColor : this.defaultMaterial.diffuseColor);
+        const drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
 
         if (!nbuf || nbuf.length < numOfFaces) {
             mesh.transformedFaceNormalZBuffer = new Array(numOfFaces);
@@ -1555,16 +1555,16 @@ export class Viewer {
 
                 let isClosed = false;
                 while (!isClosed) {
-                    let x0 = ~~(vbuf[v0    ] + 0.5);
-                    let y0 = ~~(vbuf[v0 + 1] + 0.5);
-                    let z0 = vbuf[v0 + 2];
-                    let x1 = ~~(vbuf[v1    ] + 0.5);
-                    let y1 = ~~(vbuf[v1 + 1] + 0.5);
-                    let z1 = vbuf[v1 + 2];
+                    const x0 = ~~(vbuf[v0    ] + 0.5);
+                    const y0 = ~~(vbuf[v0 + 1] + 0.5);
+                    const z0 = vbuf[v0 + 2];
+                    const x1 = ~~(vbuf[v1    ] + 0.5);
+                    const y1 = ~~(vbuf[v1 + 1] + 0.5);
+                    const z1 = vbuf[v1 + 2];
 
-                    let dx = x1 - x0;
-                    let dy = y1 - y0;
-                    let dz = z1 - z0;
+                    const dx = x1 - x0;
+                    const dy = y1 - y0;
+                    const dz = z1 - z0;
 
                     let dd;
                     let xInc, yInc, zInc;
@@ -1596,7 +1596,7 @@ export class Viewer {
 
                     for (let k = 0; k < dd; k++) {
                         if (x >= 0 && x < xbound && y >= 0 && y < ybound) {
-                            let pix = (~~y) * w + (~~x);
+                            const pix = (~~y) * w + (~~x);
                             if (z > zbuf[pix]) {
                                 zbuf[pix] = z;
                                 cbuf[pix] = color;
@@ -1632,22 +1632,22 @@ export class Viewer {
         @private
     */
     renderSolidFlat(mesh) {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let ibuf = mesh.indexBuffer;
-        let vbuf = mesh.transformedVertexBuffer;
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const ibuf = mesh.indexBuffer;
+        const vbuf = mesh.transformedVertexBuffer;
         let nbuf = mesh.transformedFaceNormalZBuffer;
-        let cbuf = this.colorBuffer;
-        let zbuf = this.zBuffer;
-        let sbuf = this.selectionBuffer;
-        let numOfFaces = mesh.faceCount;
-        let id = mesh.internalId;
-        let material = mesh.material ? mesh.material : this.defaultMaterial;
-        let palette = material.getPalette();
-        let isOpaque = material.transparency == 0;
-        let trans = ~~(material.transparency * 255);
-        let opaci = 255 - trans;
-        let drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
+        const cbuf = this.colorBuffer;
+        const zbuf = this.zBuffer;
+        const sbuf = this.selectionBuffer;
+        const numOfFaces = mesh.faceCount;
+        const id = mesh.internalId;
+        const material = mesh.material ? mesh.material : this.defaultMaterial;
+        const palette = material.getPalette();
+        const isOpaque = material.transparency == 0;
+        const trans = ~~(material.transparency * 255);
+        const opaci = 255 - trans;
+        const drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
 
         // skip this mesh if it is completely transparent
         if (material.transparency == 1) {
@@ -1661,9 +1661,9 @@ export class Viewer {
 
         new Math3D().transformVectorZs(this.rotMatrix, mesh.faceNormalBuffer, nbuf);
 
-        let Xs = new Array(3);
-        let Ys = new Array(3);
-        let Zs = new Array(3);
+        const Xs = new Array(3);
+        const Ys = new Array(3);
+        const Zs = new Array(3);
         let i = 0, j = 0;
         while (i < numOfFaces) {
             let xformedNz = nbuf[i++];
@@ -1674,7 +1674,7 @@ export class Viewer {
                 do {
                 } while (ibuf[j++] != -1);
             } else {
-                let color = 0xff000000 | palette[~~(xformedNz * 255)];
+                const color = 0xff000000 | palette[~~(xformedNz * 255)];
 
                 let v0, v1, v2;
                 v0 = ibuf[j++] * 3;
@@ -1697,29 +1697,29 @@ export class Viewer {
                     high = Ys[high] < Ys[2] ? high : 2;
                     let low = Ys[0] > Ys[1] ? 0 : 1;
                     low = Ys[low] > Ys[2] ? low : 2;
-                    let mid = 3 - low - high;
+                    const mid = 3 - low - high;
 
                     if (high != low) {
                         let x0 = Xs[low];
                         let z0 = Zs[low];
                         let dy0 = Ys[low] - Ys[high];
                         dy0 = dy0 != 0 ? dy0 : 1;
-                        let xStep0 = (Xs[low] - Xs[high]) / dy0;
-                        let zStep0 = (Zs[low] - Zs[high]) / dy0;
+                        const xStep0 = (Xs[low] - Xs[high]) / dy0;
+                        const zStep0 = (Zs[low] - Zs[high]) / dy0;
 
                         let x1 = Xs[low];
                         let z1 = Zs[low];
                         let dy1 = Ys[low] - Ys[mid];
                         dy1 = dy1 != 0 ? dy1 : 1;
-                        let xStep1 = (Xs[low] - Xs[mid]) / dy1;
-                        let zStep1 = (Zs[low] - Zs[mid]) / dy1;
+                        const xStep1 = (Xs[low] - Xs[mid]) / dy1;
+                        const zStep1 = (Zs[low] - Zs[mid]) / dy1;
 
                         let x2 = Xs[mid];
                         let z2 = Zs[mid];
                         let dy2 = Ys[mid] - Ys[high];
                         dy2 = dy2 != 0 ? dy2 : 1;
-                        let xStep2 = (Xs[mid] - Xs[high]) / dy2;
-                        let zStep2 = (Zs[mid] - Zs[high]) / dy2;
+                        const xStep2 = (Xs[mid] - Xs[high]) / dy2;
+                        const zStep2 = (Zs[mid] - Zs[high]) / dy2;
 
                         let linebase = Ys[low] * w;
                         for (let y = Ys[low]; y > Ys[high]; y--) {
@@ -1752,7 +1752,7 @@ export class Viewer {
                                     xRight = w - 1;
                                 }
 
-                                let zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
+                                const zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
                                 let pix = linebase + xLeft;
                                 if (isOpaque) {
                                     for (let x = xLeft, z = zLeft; x <= xRight; x++, z += zInc) {
@@ -1766,12 +1766,12 @@ export class Viewer {
                                 } else {
                                     for (let x = xLeft, z = zLeft; x < xRight; x++, z += zInc) {
                                         if (z > zbuf[pix]) {
-                                            let foreColor = color;
-                                            let backColor = cbuf[pix];
-                                            let rr = ((backColor & 0xff0000) * trans + (foreColor & 0xff0000) * opaci) >> 8;
-                                            let gg = ((backColor & 0xff00) * trans + (foreColor & 0xff00) * opaci) >> 8;
-                                            let bb = ((backColor & 0xff) * trans + (foreColor & 0xff) * opaci) >> 8;
-                                            let aa = (backColor & 0xff000000) | (opaci << 24);
+                                            const foreColor = color;
+                                            const backColor = cbuf[pix];
+                                            const rr = ((backColor & 0xff0000) * trans + (foreColor & 0xff0000) * opaci) >> 8;
+                                            const gg = ((backColor & 0xff00) * trans + (foreColor & 0xff00) * opaci) >> 8;
+                                            const bb = ((backColor & 0xff) * trans + (foreColor & 0xff) * opaci) >> 8;
+                                            const aa = (backColor & 0xff000000) | (opaci << 24);
                                             cbuf[pix] = aa | (rr & 0xff0000) | (gg & 0xff00) | (bb & 0xff);
                                             sbuf[pix] = id;
                                         }
@@ -1808,25 +1808,25 @@ export class Viewer {
         @private
     */
     renderSolidSmooth(mesh) {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let ibuf = mesh.indexBuffer;
-        let vbuf = mesh.transformedVertexBuffer;
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const ibuf = mesh.indexBuffer;
+        const vbuf = mesh.transformedVertexBuffer;
         let vnbuf = mesh.transformedVertexNormalZBuffer;
-        let vnibuf = mesh.vertexNormalIndexBuffer ? mesh.vertexNormalIndexBuffer : mesh.indexBuffer;
+        const vnibuf = mesh.vertexNormalIndexBuffer ? mesh.vertexNormalIndexBuffer : mesh.indexBuffer;
         let fnbuf = mesh.transformedFaceNormalZBuffer;
-        let cbuf = this.colorBuffer;
-        let zbuf = this.zBuffer;
-        let sbuf = this.selectionBuffer;
-        let numOfFaces = mesh.faceCount;
-        let numOfVertices = vbuf.length / 3;
-        let id = mesh.internalId;
-        let material = mesh.material ? mesh.material : this.defaultMaterial;
-        let palette = material.getPalette();
-        let isOpaque = material.transparency == 0;
-        let trans = ~~(material.transparency * 255);
-        let opaci = 255 - trans;
-        let drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
+        const cbuf = this.colorBuffer;
+        const zbuf = this.zBuffer;
+        const sbuf = this.selectionBuffer;
+        const numOfFaces = mesh.faceCount;
+        const numOfVertices = vbuf.length / 3;
+        const id = mesh.internalId;
+        const material = mesh.material ? mesh.material : this.defaultMaterial;
+        const palette = material.getPalette();
+        const isOpaque = material.transparency == 0;
+        const trans = ~~(material.transparency * 255);
+        const opaci = 255 - trans;
+        const drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
 
         // skip this mesh if it is completely transparent
         if (material.transparency == 1) {
@@ -1846,10 +1846,10 @@ export class Viewer {
         new Math3D().transformVectorZs(this.rotMatrix, mesh.vertexNormalBuffer, vnbuf);
         new Math3D().transformVectorZs(this.rotMatrix, mesh.faceNormalBuffer, fnbuf);
 
-        let Xs = new Array(3);
-        let Ys = new Array(3);
-        let Zs = new Array(3);
-        let Ns = new Array(3);
+        const Xs = new Array(3);
+        const Ys = new Array(3);
+        const Zs = new Array(3);
+        const Ns = new Array(3);
         let i = 0, j = 0;
         while (i < numOfFaces) {
             let xformedFNz = fnbuf[i++];
@@ -1907,7 +1907,7 @@ export class Viewer {
                     high = Ys[high] < Ys[2] ? high : 2;
                     let low = Ys[0] > Ys[1] ? 0 : 1;
                     low = Ys[low] > Ys[2] ? low : 2;
-                    let mid = 3 - low - high;
+                    const mid = 3 - low - high;
 
                     if (high != low) {
                         let x0 = Xs[low];
@@ -1915,27 +1915,27 @@ export class Viewer {
                         let n0 = Ns[low] * 255;
                         let dy0 = Ys[low] - Ys[high];
                         dy0 = dy0 != 0 ? dy0 : 1;
-                        let xStep0 = (Xs[low] - Xs[high]) / dy0;
-                        let zStep0 = (Zs[low] - Zs[high]) / dy0;
-                        let nStep0 = (Ns[low] - Ns[high]) * 255 / dy0;
+                        const xStep0 = (Xs[low] - Xs[high]) / dy0;
+                        const zStep0 = (Zs[low] - Zs[high]) / dy0;
+                        const nStep0 = (Ns[low] - Ns[high]) * 255 / dy0;
 
                         let x1 = Xs[low];
                         let z1 = Zs[low];
                         let n1 = Ns[low] * 255;
                         let dy1 = Ys[low] - Ys[mid];
                         dy1 = dy1 != 0 ? dy1 : 1;
-                        let xStep1 = (Xs[low] - Xs[mid]) / dy1;
-                        let zStep1 = (Zs[low] - Zs[mid]) / dy1;
-                        let nStep1 = (Ns[low] - Ns[mid]) * 255 / dy1;
+                        const xStep1 = (Xs[low] - Xs[mid]) / dy1;
+                        const zStep1 = (Zs[low] - Zs[mid]) / dy1;
+                        const nStep1 = (Ns[low] - Ns[mid]) * 255 / dy1;
 
                         let x2 = Xs[mid];
                         let z2 = Zs[mid];
                         let n2 = Ns[mid] * 255;
                         let dy2 = Ys[mid] - Ys[high];
                         dy2 = dy2 != 0 ? dy2 : 1;
-                        let xStep2 = (Xs[mid] - Xs[high]) / dy2;
-                        let zStep2 = (Zs[mid] - Zs[high]) / dy2;
-                        let nStep2 = (Ns[mid] - Ns[high]) * 255 / dy2;
+                        const xStep2 = (Xs[mid] - Xs[high]) / dy2;
+                        const zStep2 = (Zs[mid] - Zs[high]) / dy2;
+                        const nStep2 = (Ns[mid] - Ns[high]) * 255 / dy2;
 
                         let linebase = Ys[low] * w;
                         for (let y = Ys[low]; y > Ys[high]; y--) {
@@ -1967,8 +1967,8 @@ export class Viewer {
                                     nRight = temp;
                                 }
 
-                                let zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
-                                let nInc = (xLeft != xRight) ? ((nRight - nLeft) / (xRight - xLeft)) : 1;
+                                const zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
+                                const nInc = (xLeft != xRight) ? ((nRight - nLeft) / (xRight - xLeft)) : 1;
                                 if (xLeft < 0) {
                                     zLeft -= xLeft * zInc;
                                     nLeft -= xLeft * nInc;
@@ -1990,12 +1990,12 @@ export class Viewer {
                                 } else {
                                     for (let x = xLeft, z = zLeft, n = nLeft; x < xRight; x++, z += zInc, n += nInc) {
                                         if (z > zbuf[pix]) {
-                                            let foreColor = palette[n > 0 ? (~~n) : 0];
-                                            let backColor = cbuf[pix];
-                                            let rr = ((backColor & 0xff0000) * trans + (foreColor & 0xff0000) * opaci) >> 8;
-                                            let gg = ((backColor & 0xff00) * trans + (foreColor & 0xff00) * opaci) >> 8;
-                                            let bb = ((backColor & 0xff) * trans + (foreColor & 0xff) * opaci) >> 8;
-                                            let aa = (backColor & 0xff000000) | (opaci << 24);
+                                            const foreColor = palette[n > 0 ? (~~n) : 0];
+                                            const backColor = cbuf[pix];
+                                            const rr = ((backColor & 0xff0000) * trans + (foreColor & 0xff0000) * opaci) >> 8;
+                                            const gg = ((backColor & 0xff00) * trans + (foreColor & 0xff00) * opaci) >> 8;
+                                            const bb = ((backColor & 0xff) * trans + (foreColor & 0xff) * opaci) >> 8;
+                                            const aa = (backColor & 0xff000000) | (opaci << 24);
                                             cbuf[pix] = aa | (rr & 0xff0000) | (gg & 0xff00) | (bb & 0xff);
                                             sbuf[pix] = id;
                                         }
@@ -2037,26 +2037,26 @@ export class Viewer {
         @private
     */
     renderSolidTexture(mesh) {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let ibuf = mesh.indexBuffer;
-        let vbuf = mesh.transformedVertexBuffer;
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const ibuf = mesh.indexBuffer;
+        const vbuf = mesh.transformedVertexBuffer;
         let nbuf = mesh.transformedFaceNormalZBuffer;
-        let cbuf = this.colorBuffer;
-        let zbuf = this.zBuffer;
-        let sbuf = this.selectionBuffer;
-        let numOfFaces = mesh.faceCount;
-        let id = mesh.internalId;
-        let texture = mesh.texture;
-        let isOpaque = !texture.hasTransparency;
-        let tbuf = mesh.texCoordBuffer;
-        let tibuf = mesh.texCoordIndexBuffer ? mesh.texCoordIndexBuffer : mesh.indexBuffer;
+        const cbuf = this.colorBuffer;
+        const zbuf = this.zBuffer;
+        const sbuf = this.selectionBuffer;
+        const numOfFaces = mesh.faceCount;
+        const id = mesh.internalId;
+        const texture = mesh.texture;
+        const isOpaque = !texture.hasTransparency;
+        const tbuf = mesh.texCoordBuffer;
+        const tibuf = mesh.texCoordIndexBuffer ? mesh.texCoordIndexBuffer : mesh.indexBuffer;
         let tdata = texture.data;
         let tdim = texture.width;
         let tbound = tdim - 1;
-        let mipmaps = texture.hasMipmap() ? texture.mipmaps : null;
-        let mipentries = mipmaps ? texture.mipentries : null;
-        let drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
+        const mipmaps = texture.hasMipmap() ? texture.mipmaps : null;
+        const mipentries = mipmaps ? texture.mipentries : null;
+        const drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
 
         if (!nbuf || nbuf.length < numOfFaces) {
             mesh.transformedFaceNormalZBuffer = new Array(numOfFaces);
@@ -2065,11 +2065,11 @@ export class Viewer {
 
         new Math3D().transformVectorZs(this.rotMatrix, mesh.faceNormalBuffer, nbuf);
 
-        let Xs = new Array(3);
-        let Ys = new Array(3);
-        let Zs = new Array(3);
-        let THs = new Array(3);
-        let TVs = new Array(3);
+        const Xs = new Array(3);
+        const Ys = new Array(3);
+        const Zs = new Array(3);
+        const THs = new Array(3);
+        const TVs = new Array(3);
         let i = 0, j = 0;
         while (i < numOfFaces) {
             let xformedNz = nbuf[i++];
@@ -2120,7 +2120,7 @@ export class Viewer {
                     if (texArea < 0) {
                         texArea = -texArea;
                     }
-                    let mipRatio = texArea / faceArea;
+                    const mipRatio = texArea / faceArea;
 
                     let level = 0;
                     if (mipRatio < mipentries[1]) {
@@ -2165,7 +2165,7 @@ export class Viewer {
                     high = Ys[high] < Ys[2] ? high : 2;
                     let low = Ys[0] > Ys[1] ? 0 : 1;
                     low = Ys[low] > Ys[2] ? low : 2;
-                    let mid = 3 - low - high;
+                    const mid = 3 - low - high;
 
                     if (high != low) {
                         let x0 = Xs[low];
@@ -2174,10 +2174,10 @@ export class Viewer {
                         let tv0 = TVs[low];
                         let dy0 = Ys[low] - Ys[high];
                         dy0 = dy0 != 0 ? dy0 : 1;
-                        let xStep0 = (Xs[low] - Xs[high]) / dy0;
-                        let zStep0 = (Zs[low] - Zs[high]) / dy0;
-                        let thStep0 = (THs[low] - THs[high]) / dy0;
-                        let tvStep0 = (TVs[low] - TVs[high]) / dy0;
+                        const xStep0 = (Xs[low] - Xs[high]) / dy0;
+                        const zStep0 = (Zs[low] - Zs[high]) / dy0;
+                        const thStep0 = (THs[low] - THs[high]) / dy0;
+                        const tvStep0 = (TVs[low] - TVs[high]) / dy0;
 
                         let x1 = Xs[low];
                         let z1 = Zs[low];
@@ -2185,10 +2185,10 @@ export class Viewer {
                         let tv1 = TVs[low];
                         let dy1 = Ys[low] - Ys[mid];
                         dy1 = dy1 != 0 ? dy1 : 1;
-                        let xStep1 = (Xs[low] - Xs[mid]) / dy1;
-                        let zStep1 = (Zs[low] - Zs[mid]) / dy1;
-                        let thStep1 = (THs[low] - THs[mid]) / dy1;
-                        let tvStep1 = (TVs[low] - TVs[mid]) / dy1;
+                        const xStep1 = (Xs[low] - Xs[mid]) / dy1;
+                        const zStep1 = (Zs[low] - Zs[mid]) / dy1;
+                        const thStep1 = (THs[low] - THs[mid]) / dy1;
+                        const tvStep1 = (TVs[low] - TVs[mid]) / dy1;
 
                         let x2 = Xs[mid];
                         let z2 = Zs[mid];
@@ -2196,10 +2196,10 @@ export class Viewer {
                         let tv2 = TVs[mid];
                         let dy2 = Ys[mid] - Ys[high];
                         dy2 = dy2 != 0 ? dy2 : 1;
-                        let xStep2 = (Xs[mid] - Xs[high]) / dy2;
-                        let zStep2 = (Zs[mid] - Zs[high]) / dy2;
-                        let thStep2 = (THs[mid] - THs[high]) / dy2;
-                        let tvStep2 = (TVs[mid] - TVs[high]) / dy2;
+                        const xStep2 = (Xs[mid] - Xs[high]) / dy2;
+                        const zStep2 = (Zs[mid] - Zs[high]) / dy2;
+                        const thStep2 = (THs[mid] - THs[high]) / dy2;
+                        const tvStep2 = (TVs[mid] - TVs[high]) / dy2;
 
                         let linebase = Ys[low] * w;
                         for (let y = Ys[low]; y > Ys[high]; y--) {
@@ -2237,9 +2237,9 @@ export class Viewer {
                                     tvRight = temp;
                                 }
 
-                                let zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
-                                let thInc = (xLeft != xRight) ? ((thRight - thLeft) / (xRight - xLeft)) : 1;
-                                let tvInc = (xLeft != xRight) ? ((tvRight - tvLeft) / (xRight - xLeft)) : 1;
+                                const zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
+                                const thInc = (xLeft != xRight) ? ((thRight - thLeft) / (xRight - xLeft)) : 1;
+                                const tvInc = (xLeft != xRight) ? ((tvRight - tvLeft) / (xRight - xLeft)) : 1;
 
                                 if (xLeft < 0) {
                                     zLeft -= xLeft * zInc;
@@ -2264,14 +2264,14 @@ export class Viewer {
                                 } else {
                                     for (let x = xLeft, z = zLeft, th = thLeft, tv = tvLeft; x < xRight; x++, z += zInc, th += thInc, tv += tvInc) {
                                         if (z > zbuf[pix]) {
-                                            let foreColor = tdata[(tv & tbound) * tdim + (th & tbound)];
-                                            let backColor = cbuf[pix];
-                                            let opaci = (foreColor >> 24) & 0xff;
-                                            let trans = 255 - opaci;
-                                            let rr = ((backColor & 0xff0000) * trans + (foreColor & 0xff0000) * opaci) >> 8;
-                                            let gg = ((backColor & 0xff00) * trans + (foreColor & 0xff00) * opaci) >> 8;
-                                            let bb = ((backColor & 0xff) * trans + (foreColor & 0xff) * opaci) >> 8;
-                                            let aa = (backColor & 0xff000000) | (opaci << 24);
+                                            const foreColor = tdata[(tv & tbound) * tdim + (th & tbound)];
+                                            const backColor = cbuf[pix];
+                                            const opaci = (foreColor >> 24) & 0xff;
+                                            const trans = 255 - opaci;
+                                            const rr = ((backColor & 0xff0000) * trans + (foreColor & 0xff0000) * opaci) >> 8;
+                                            const gg = ((backColor & 0xff00) * trans + (foreColor & 0xff00) * opaci) >> 8;
+                                            const bb = ((backColor & 0xff) * trans + (foreColor & 0xff) * opaci) >> 8;
+                                            const aa = (backColor & 0xff000000) | (opaci << 24);
                                             cbuf[pix] = aa | (rr & 0xff0000) | (gg & 0xff00) | (bb & 0xff);
                                             sbuf[pix] = id;
                                         }
@@ -2315,29 +2315,29 @@ export class Viewer {
         @private
     */
     renderTextureFlat(mesh) {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let ibuf = mesh.indexBuffer;
-        let vbuf = mesh.transformedVertexBuffer;
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const ibuf = mesh.indexBuffer;
+        const vbuf = mesh.transformedVertexBuffer;
         let nbuf = mesh.transformedFaceNormalZBuffer;
-        let cbuf = this.colorBuffer;
-        let zbuf = this.zBuffer;
-        let sbuf = this.selectionBuffer;
-        let numOfFaces = mesh.faceCount;
-        let id = mesh.internalId;
-        let material = mesh.material ? mesh.material : this.defaultMaterial;
-        let palette = material.getPalette();
-        let texture = mesh.texture;
-        let isOpaque = (material.transparency == 0) && !texture.hasTransparency;
-        let matOpacity = ~~((1 - material.transparency) * 255);
-        let tbuf = mesh.texCoordBuffer;
-        let tibuf = mesh.texCoordIndexBuffer ? mesh.texCoordIndexBuffer : mesh.indexBuffer;
+        const cbuf = this.colorBuffer;
+        const zbuf = this.zBuffer;
+        const sbuf = this.selectionBuffer;
+        const numOfFaces = mesh.faceCount;
+        const id = mesh.internalId;
+        const material = mesh.material ? mesh.material : this.defaultMaterial;
+        const palette = material.getPalette();
+        const texture = mesh.texture;
+        const isOpaque = (material.transparency == 0) && !texture.hasTransparency;
+        const matOpacity = ~~((1 - material.transparency) * 255);
+        const tbuf = mesh.texCoordBuffer;
+        const tibuf = mesh.texCoordIndexBuffer ? mesh.texCoordIndexBuffer : mesh.indexBuffer;
         let tdata = texture.data;
         let tdim = texture.width;
         let tbound = tdim - 1;
-        let mipmaps = texture.hasMipmap() ? texture.mipmaps : null;
-        let mipentries = mipmaps ? texture.mipentries : null;
-        let drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
+        const mipmaps = texture.hasMipmap() ? texture.mipmaps : null;
+        const mipentries = mipmaps ? texture.mipentries : null;
+        const drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
 
         // skip this mesh if it is completely transparent
         if (material.transparency == 1) {
@@ -2351,11 +2351,11 @@ export class Viewer {
 
         new Math3D().transformVectorZs(this.rotMatrix, mesh.faceNormalBuffer, nbuf);
 
-        let Xs = new Array(3);
-        let Ys = new Array(3);
-        let Zs = new Array(3);
-        let THs = new Array(3);
-        let TVs = new Array(3);
+        const Xs = new Array(3);
+        const Ys = new Array(3);
+        const Zs = new Array(3);
+        const THs = new Array(3);
+        const TVs = new Array(3);
         let i = 0, j = 0;
         while (i < numOfFaces) {
             let xformedNz = nbuf[i++];
@@ -2366,7 +2366,7 @@ export class Viewer {
                 do {
                 } while (ibuf[j++] != -1);
             } else {
-                let color = 0xff000000 | palette[~~(xformedNz * 255)];
+                const color = 0xff000000 | palette[~~(xformedNz * 255)];
 
                 let v0, v1, v2;
                 let t0, t1, t2;
@@ -2406,7 +2406,7 @@ export class Viewer {
                     if (texArea < 0) {
                         texArea = -texArea;
                     }
-                    let mipRatio = texArea / faceArea;
+                    const mipRatio = texArea / faceArea;
 
                     let level = 0;
                     if (mipRatio < mipentries[1]) {
@@ -2451,7 +2451,7 @@ export class Viewer {
                     high = Ys[high] < Ys[2] ? high : 2;
                     let low = Ys[0] > Ys[1] ? 0 : 1;
                     low = Ys[low] > Ys[2] ? low : 2;
-                    let mid = 3 - low - high;
+                    const mid = 3 - low - high;
 
                     if (high != low) {
                         let x0 = Xs[low];
@@ -2460,10 +2460,10 @@ export class Viewer {
                         let tv0 = TVs[low];
                         let dy0 = Ys[low] - Ys[high];
                         dy0 = dy0 != 0 ? dy0 : 1;
-                        let xStep0 = (Xs[low] - Xs[high]) / dy0;
-                        let zStep0 = (Zs[low] - Zs[high]) / dy0;
-                        let thStep0 = (THs[low] - THs[high]) / dy0;
-                        let tvStep0 = (TVs[low] - TVs[high]) / dy0;
+                        const xStep0 = (Xs[low] - Xs[high]) / dy0;
+                        const zStep0 = (Zs[low] - Zs[high]) / dy0;
+                        const thStep0 = (THs[low] - THs[high]) / dy0;
+                        const tvStep0 = (TVs[low] - TVs[high]) / dy0;
 
                         let x1 = Xs[low];
                         let z1 = Zs[low];
@@ -2471,10 +2471,10 @@ export class Viewer {
                         let tv1 = TVs[low];
                         let dy1 = Ys[low] - Ys[mid];
                         dy1 = dy1 != 0 ? dy1 : 1;
-                        let xStep1 = (Xs[low] - Xs[mid]) / dy1;
-                        let zStep1 = (Zs[low] - Zs[mid]) / dy1;
-                        let thStep1 = (THs[low] - THs[mid]) / dy1;
-                        let tvStep1 = (TVs[low] - TVs[mid]) / dy1;
+                        const xStep1 = (Xs[low] - Xs[mid]) / dy1;
+                        const zStep1 = (Zs[low] - Zs[mid]) / dy1;
+                        const thStep1 = (THs[low] - THs[mid]) / dy1;
+                        const tvStep1 = (TVs[low] - TVs[mid]) / dy1;
 
                         let x2 = Xs[mid];
                         let z2 = Zs[mid];
@@ -2482,10 +2482,10 @@ export class Viewer {
                         let tv2 = TVs[mid];
                         let dy2 = Ys[mid] - Ys[high];
                         dy2 = dy2 != 0 ? dy2 : 1;
-                        let xStep2 = (Xs[mid] - Xs[high]) / dy2;
-                        let zStep2 = (Zs[mid] - Zs[high]) / dy2;
-                        let thStep2 = (THs[mid] - THs[high]) / dy2;
-                        let tvStep2 = (TVs[mid] - TVs[high]) / dy2;
+                        const xStep2 = (Xs[mid] - Xs[high]) / dy2;
+                        const zStep2 = (Zs[mid] - Zs[high]) / dy2;
+                        const thStep2 = (THs[mid] - THs[high]) / dy2;
+                        const tvStep2 = (TVs[mid] - TVs[high]) / dy2;
 
                         let linebase = Ys[low] * w;
                         for (let y = Ys[low]; y > Ys[high]; y--) {
@@ -2523,9 +2523,9 @@ export class Viewer {
                                     tvRight = temp;
                                 }
 
-                                let zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
-                                let thInc = (xLeft != xRight) ? ((thRight - thLeft) / (xRight - xLeft)) : 1;
-                                let tvInc = (xLeft != xRight) ? ((tvRight - tvLeft) / (xRight - xLeft)) : 1;
+                                const zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
+                                const thInc = (xLeft != xRight) ? ((thRight - thLeft) / (xRight - xLeft)) : 1;
+                                const tvInc = (xLeft != xRight) ? ((tvRight - tvLeft) / (xRight - xLeft)) : 1;
 
                                 if (xLeft < 0) {
                                     zLeft -= xLeft * zInc;
@@ -2542,10 +2542,10 @@ export class Viewer {
                                     for (let x = xLeft, z = zLeft, th = thLeft, tv = tvLeft; x <= xRight; x++, z += zInc, th += thInc, tv += tvInc) {
                                         if (z > zbuf[pix]) {
                                             zbuf[pix] = z;
-                                            let texel = tdata[(tv & tbound) * tdim + (th & tbound)];
-                                            let rr = (((color & 0xff0000) >> 16) * ((texel & 0xff0000) >> 8));
-                                            let gg = (((color & 0xff00) >> 8) * ((texel & 0xff00) >> 8));
-                                            let bb = ((color & 0xff) * (texel & 0xff)) >> 8;
+                                            const texel = tdata[(tv & tbound) * tdim + (th & tbound)];
+                                            const rr = (((color & 0xff0000) >> 16) * ((texel & 0xff0000) >> 8));
+                                            const gg = (((color & 0xff00) >> 8) * ((texel & 0xff00) >> 8));
+                                            const bb = ((color & 0xff) * (texel & 0xff)) >> 8;
                                             cbuf[pix] = 0xff000000 | (rr & 0xff0000) | (gg & 0xff00) | (bb & 0xff);
                                             sbuf[pix] = id;
                                         }
@@ -2554,17 +2554,17 @@ export class Viewer {
                                 } else {
                                     for (let x = xLeft, z = zLeft, th = thLeft, tv = tvLeft; x < xRight; x++, z += zInc, th += thInc, tv += tvInc) {
                                         if (z > zbuf[pix]) {
-                                            let foreColor = tdata[(tv & tbound) * tdim + (th & tbound)];
-                                            let backColor = cbuf[pix];
-                                            let opaci = (((foreColor >> 24) & 0xff) * (matOpacity & 0xff)) >> 8;
+                                            const foreColor = tdata[(tv & tbound) * tdim + (th & tbound)];
+                                            const backColor = cbuf[pix];
+                                            const opaci = (((foreColor >> 24) & 0xff) * (matOpacity & 0xff)) >> 8;
                                             let rr = (((color & 0xff0000) >> 16) * ((foreColor & 0xff0000) >> 8));
                                             let gg = (((color & 0xff00) >> 8) * ((foreColor & 0xff00) >> 8));
                                             let bb = ((color & 0xff) * (foreColor & 0xff)) >> 8;
-                                            let aa = (backColor & 0xff000000) | (opaci << 24);
+                                            const aa = (backColor & 0xff000000) | (opaci << 24);
                                             if (opaci > 250) {
                                                 zbuf[pix] = z;
                                             } else {
-                                                let trans = 255 - opaci;
+                                                const trans = 255 - opaci;
                                                 rr = (rr * opaci + (backColor & 0xff0000) * trans) >> 8;
                                                 gg = (gg * opaci + (backColor & 0xff00) * trans) >> 8;
                                                 bb = (bb * opaci + (backColor & 0xff) * trans) >> 8;
@@ -2612,32 +2612,32 @@ export class Viewer {
         @private
     */
     renderTextureSmooth(mesh) {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let ibuf = mesh.indexBuffer;
-        let vbuf = mesh.transformedVertexBuffer;
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const ibuf = mesh.indexBuffer;
+        const vbuf = mesh.transformedVertexBuffer;
         let vnbuf = mesh.transformedVertexNormalZBuffer;
-        let vnibuf = mesh.vertexNormalIndexBuffer ? mesh.vertexNormalIndexBuffer : mesh.indexBuffer;
+        const vnibuf = mesh.vertexNormalIndexBuffer ? mesh.vertexNormalIndexBuffer : mesh.indexBuffer;
         let fnbuf = mesh.transformedFaceNormalZBuffer;
-        let cbuf = this.colorBuffer;
-        let zbuf = this.zBuffer;
-        let sbuf = this.selectionBuffer;
-        let numOfFaces = mesh.faceCount;
-        let id = mesh.internalId;
-        let numOfVertices = vbuf.length / 3;
-        let material = mesh.material ? mesh.material : this.defaultMaterial;
-        let palette = material.getPalette();
-        let texture = mesh.texture;
-        let isOpaque = (material.transparency == 0) && !texture.hasTransparency;
-        let matOpacity = ~~((1 - material.transparency) * 255);
-        let tbuf = mesh.texCoordBuffer;
-        let tibuf = mesh.texCoordIndexBuffer ? mesh.texCoordIndexBuffer : mesh.indexBuffer;
+        const cbuf = this.colorBuffer;
+        const zbuf = this.zBuffer;
+        const sbuf = this.selectionBuffer;
+        const numOfFaces = mesh.faceCount;
+        const id = mesh.internalId;
+        const numOfVertices = vbuf.length / 3;
+        const material = mesh.material ? mesh.material : this.defaultMaterial;
+        const palette = material.getPalette();
+        const texture = mesh.texture;
+        const isOpaque = (material.transparency == 0) && !texture.hasTransparency;
+        const matOpacity = ~~((1 - material.transparency) * 255);
+        const tbuf = mesh.texCoordBuffer;
+        const tibuf = mesh.texCoordIndexBuffer ? mesh.texCoordIndexBuffer : mesh.indexBuffer;
         let tdata = texture.data;
         let tdim = texture.width;
         let tbound = tdim - 1;
-        let mipmaps = texture.hasMipmap() ? texture.mipmaps : null;
-        let mipentries = mipmaps ? texture.mipentries : null;
-        let drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
+        const mipmaps = texture.hasMipmap() ? texture.mipmaps : null;
+        const mipentries = mipmaps ? texture.mipentries : null;
+        const drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
 
         // skip this mesh if it is completely transparent
         if (material.transparency == 1) {
@@ -2657,12 +2657,12 @@ export class Viewer {
         new Math3D().transformVectorZs(this.rotMatrix, mesh.vertexNormalBuffer, vnbuf);
         new Math3D().transformVectorZs(this.rotMatrix, mesh.faceNormalBuffer, fnbuf);
 
-        let Xs = new Array(3);
-        let Ys = new Array(3);
-        let Zs = new Array(3);
-        let Ns = new Array(3);
-        let THs = new Array(3);
-        let TVs = new Array(3);
+        const Xs = new Array(3);
+        const Ys = new Array(3);
+        const Zs = new Array(3);
+        const Ns = new Array(3);
+        const THs = new Array(3);
+        const TVs = new Array(3);
         let i = 0, j = 0;
         while (i < numOfFaces) {
             let xformedFNz = fnbuf[i++];
@@ -2717,7 +2717,7 @@ export class Viewer {
                     if (texArea < 0) {
                         texArea = -texArea;
                     }
-                    let mipRatio = texArea / faceArea;
+                    const mipRatio = texArea / faceArea;
 
                     let level = 0;
                     if (mipRatio < mipentries[1]) {
@@ -2779,7 +2779,7 @@ export class Viewer {
                     high = Ys[high] < Ys[2] ? high : 2;
                     let low = Ys[0] > Ys[1] ? 0 : 1;
                     low = Ys[low] > Ys[2] ? low : 2;
-                    let mid = 3 - low - high;
+                    const mid = 3 - low - high;
 
                     if (high != low) {
                         let x0 = Xs[low];
@@ -2789,11 +2789,11 @@ export class Viewer {
                         let n0 = Ns[low] * 255;
                         let dy0 = Ys[low] - Ys[high];
                         dy0 = dy0 != 0 ? dy0 : 1;
-                        let xStep0 = (Xs[low] - Xs[high]) / dy0;
-                        let zStep0 = (Zs[low] - Zs[high]) / dy0;
-                        let thStep0 = (THs[low] - THs[high]) / dy0;
-                        let tvStep0 = (TVs[low] - TVs[high]) / dy0;
-                        let nStep0 = (Ns[low] - Ns[high]) * 255 / dy0;
+                        const xStep0 = (Xs[low] - Xs[high]) / dy0;
+                        const zStep0 = (Zs[low] - Zs[high]) / dy0;
+                        const thStep0 = (THs[low] - THs[high]) / dy0;
+                        const tvStep0 = (TVs[low] - TVs[high]) / dy0;
+                        const nStep0 = (Ns[low] - Ns[high]) * 255 / dy0;
 
                         let x1 = Xs[low];
                         let z1 = Zs[low];
@@ -2802,11 +2802,11 @@ export class Viewer {
                         let n1 = Ns[low] * 255;
                         let dy1 = Ys[low] - Ys[mid];
                         dy1 = dy1 != 0 ? dy1 : 1;
-                        let xStep1 = (Xs[low] - Xs[mid]) / dy1;
-                        let zStep1 = (Zs[low] - Zs[mid]) / dy1;
-                        let thStep1 = (THs[low] - THs[mid]) / dy1;
-                        let tvStep1 = (TVs[low] - TVs[mid]) / dy1;
-                        let nStep1 = (Ns[low] - Ns[mid]) * 255 / dy1;
+                        const xStep1 = (Xs[low] - Xs[mid]) / dy1;
+                        const zStep1 = (Zs[low] - Zs[mid]) / dy1;
+                        const thStep1 = (THs[low] - THs[mid]) / dy1;
+                        const tvStep1 = (TVs[low] - TVs[mid]) / dy1;
+                        const nStep1 = (Ns[low] - Ns[mid]) * 255 / dy1;
 
                         let x2 = Xs[mid];
                         let z2 = Zs[mid];
@@ -2815,11 +2815,11 @@ export class Viewer {
                         let n2 = Ns[mid] * 255;
                         let dy2 = Ys[mid] - Ys[high];
                         dy2 = dy2 != 0 ? dy2 : 1;
-                        let xStep2 = (Xs[mid] - Xs[high]) / dy2;
-                        let zStep2 = (Zs[mid] - Zs[high]) / dy2;
-                        let thStep2 = (THs[mid] - THs[high]) / dy2;
-                        let tvStep2 = (TVs[mid] - TVs[high]) / dy2;
-                        let nStep2 = (Ns[mid] - Ns[high]) * 255 / dy2;
+                        const xStep2 = (Xs[mid] - Xs[high]) / dy2;
+                        const zStep2 = (Zs[mid] - Zs[high]) / dy2;
+                        const thStep2 = (THs[mid] - THs[high]) / dy2;
+                        const tvStep2 = (TVs[mid] - TVs[high]) / dy2;
+                        const nStep2 = (Ns[mid] - Ns[high]) * 255 / dy2;
 
                         let linebase = Ys[low] * w;
                         for (let y = Ys[low]; y > Ys[high]; y--) {
@@ -2863,10 +2863,10 @@ export class Viewer {
                                     nRight = temp;
                                 }
 
-                                let zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
-                                let thInc = (xLeft != xRight) ? ((thRight - thLeft) / (xRight - xLeft)) : 1;
-                                let tvInc = (xLeft != xRight) ? ((tvRight - tvLeft) / (xRight - xLeft)) : 1;
-                                let nInc = (xLeft != xRight) ? ((nRight - nLeft) / (xRight - xLeft)) : 0;
+                                const zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
+                                const thInc = (xLeft != xRight) ? ((thRight - thLeft) / (xRight - xLeft)) : 1;
+                                const tvInc = (xLeft != xRight) ? ((tvRight - tvLeft) / (xRight - xLeft)) : 1;
+                                const nInc = (xLeft != xRight) ? ((nRight - nLeft) / (xRight - xLeft)) : 0;
 
                                 if (xLeft < 0) {
                                     zLeft -= xLeft * zInc;
@@ -2884,11 +2884,11 @@ export class Viewer {
                                     for (let x = xLeft, z = zLeft, n = nLeft, th = thLeft, tv = tvLeft; x <= xRight; x++, z += zInc, n += nInc, th += thInc, tv += tvInc) {
                                         if (z > zbuf[pix]) {
                                             zbuf[pix] = z;
-                                            let color = palette[n > 0 ? (~~n) : 0];
-                                            let texel = tdata[(tv & tbound) * tdim + (th & tbound)];
-                                            let rr = (((color & 0xff0000) >> 16) * ((texel & 0xff0000) >> 8));
-                                            let gg = (((color & 0xff00) >> 8) * ((texel & 0xff00) >> 8));
-                                            let bb = ((color & 0xff) * (texel & 0xff)) >> 8;
+                                            const color = palette[n > 0 ? (~~n) : 0];
+                                            const texel = tdata[(tv & tbound) * tdim + (th & tbound)];
+                                            const rr = (((color & 0xff0000) >> 16) * ((texel & 0xff0000) >> 8));
+                                            const gg = (((color & 0xff00) >> 8) * ((texel & 0xff00) >> 8));
+                                            const bb = ((color & 0xff) * (texel & 0xff)) >> 8;
                                             cbuf[pix] = 0xff000000 | (rr & 0xff0000) | (gg & 0xff00) | (bb & 0xff);
                                             sbuf[pix] = id;
                                         }
@@ -2897,18 +2897,18 @@ export class Viewer {
                                 } else {
                                     for (let x = xLeft, z = zLeft, n = nLeft, th = thLeft, tv = tvLeft; x < xRight; x++, z += zInc, n += nInc, th += thInc, tv += tvInc) {
                                         if (z > zbuf[pix]) {
-                                            let color = palette[n > 0 ? (~~n) : 0];
-                                            let foreColor = tdata[(tv & tbound) * tdim + (th & tbound)];
-                                            let backColor = cbuf[pix];
-                                            let opaci = (((foreColor >> 24) & 0xff) * (matOpacity & 0xff)) >> 8;
+                                            const color = palette[n > 0 ? (~~n) : 0];
+                                            const foreColor = tdata[(tv & tbound) * tdim + (th & tbound)];
+                                            const backColor = cbuf[pix];
+                                            const opaci = (((foreColor >> 24) & 0xff) * (matOpacity & 0xff)) >> 8;
                                             let rr = (((color & 0xff0000) >> 16) * ((foreColor & 0xff0000) >> 8));
                                             let gg = (((color & 0xff00) >> 8) * ((foreColor & 0xff00) >> 8));
                                             let bb = ((color & 0xff) * (foreColor & 0xff)) >> 8;
-                                            let aa = (backColor & 0xff000000) | (opaci << 24);
+                                            const aa = (backColor & 0xff000000) | (opaci << 24);
                                             if (opaci > 250) {
                                                 zbuf[pix] = z;
                                             } else {
-                                                let trans = 255 - opaci;
+                                                const trans = 255 - opaci;
                                                 rr = (rr * opaci + (backColor & 0xff0000) * trans) >> 8;
                                                 gg = (gg * opaci + (backColor & 0xff00) * trans) >> 8;
                                                 bb = (bb * opaci + (backColor & 0xff) * trans) >> 8;
@@ -2961,29 +2961,29 @@ export class Viewer {
         @private
     */
     renderSolidSphereMapped(mesh) {
-        let w = this.frameWidth;
-        let h = this.frameHeight;
-        let ibuf = mesh.indexBuffer;
-        let vbuf = mesh.transformedVertexBuffer;
+        const w = this.frameWidth;
+        const h = this.frameHeight;
+        const ibuf = mesh.indexBuffer;
+        const vbuf = mesh.transformedVertexBuffer;
         let vnbuf = mesh.transformedVertexNormalBuffer;
-        let vnibuf = mesh.vertexNormalIndexBuffer ? mesh.vertexNormalIndexBuffer : mesh.indexBuffer;
+        const vnibuf = mesh.vertexNormalIndexBuffer ? mesh.vertexNormalIndexBuffer : mesh.indexBuffer;
         let fnbuf = mesh.transformedFaceNormalZBuffer;
-        let cbuf = this.colorBuffer;
-        let zbuf = this.zBuffer;
-        let sbuf = this.selectionBuffer;
-        let numOfFaces = mesh.faceCount;
-        let numOfVertices = vbuf.length / 3;
-        let id = mesh.internalId;
-        let material = mesh.material ? mesh.material : this.defaultMaterial;
-        let palette = material.getPalette();
-        let sphereMap = this.sphereMap;
-        let sdata = sphereMap.data;
-        let sdim = sphereMap.width;
-        let sbound = sdim - 1;
-        let isOpaque = material.transparency == 0;
-        let trans = ~~(material.transparency * 255);
-        let opaci = 255 - trans;
-        let drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
+        const cbuf = this.colorBuffer;
+        const zbuf = this.zBuffer;
+        const sbuf = this.selectionBuffer;
+        const numOfFaces = mesh.faceCount;
+        const numOfVertices = vbuf.length / 3;
+        const id = mesh.internalId;
+        const material = mesh.material ? mesh.material : this.defaultMaterial;
+        const palette = material.getPalette();
+        const sphereMap = this.sphereMap;
+        const sdata = sphereMap.data;
+        const sdim = sphereMap.width;
+        const sbound = sdim - 1;
+        const isOpaque = material.transparency == 0;
+        const trans = ~~(material.transparency * 255);
+        const opaci = 255 - trans;
+        const drawBothSides = mesh.isDoubleSided || this.isCullingDisabled;
 
         // skip this mesh if it is completely transparent
         if (material.transparency == 1) {
@@ -3003,12 +3003,12 @@ export class Viewer {
         new Math3D().transformVectors(this.rotMatrix, mesh.vertexNormalBuffer, vnbuf);
         new Math3D().transformVectorZs(this.rotMatrix, mesh.faceNormalBuffer, fnbuf);
 
-        let Xs = new Array(3);
-        let Ys = new Array(3);
-        let Zs = new Array(3);
-        let NXs = new Array(3);
-        let NYs = new Array(3);
-        let NZs = new Array(3);
+        const Xs = new Array(3);
+        const Ys = new Array(3);
+        const Zs = new Array(3);
+        const NXs = new Array(3);
+        const NYs = new Array(3);
+        const NZs = new Array(3);
         let i = 0, j = 0;
         while (i < numOfFaces) {
             let xformedFNz = fnbuf[i++];
@@ -3068,7 +3068,7 @@ export class Viewer {
                     high = Ys[high] < Ys[2] ? high : 2;
                     let low = Ys[0] > Ys[1] ? 0 : 1;
                     low = Ys[low] > Ys[2] ? low : 2;
-                    let mid = 3 - low - high;
+                    const mid = 3 - low - high;
 
                     if (high != low) {
                         let x0 = Xs[low];
@@ -3078,11 +3078,11 @@ export class Viewer {
                         let sv0 = ((0.5 - NYs[low] / 2) * sdim) & sbound;
                         let dy0 = Ys[low] - Ys[high];
                         dy0 = dy0 != 0 ? dy0 : 1;
-                        let xStep0 = (Xs[low] - Xs[high]) / dy0;
-                        let zStep0 = (Zs[low] - Zs[high]) / dy0;
-                        let nStep0 = (NZs[low] - NZs[high]) * 255 / dy0;
-                        let shStep0 = (((NXs[low] - NXs[high]) / 2) * sdim) / dy0;
-                        let svStep0 = (((NYs[high] - NYs[low]) / 2) * sdim) / dy0;
+                        const xStep0 = (Xs[low] - Xs[high]) / dy0;
+                        const zStep0 = (Zs[low] - Zs[high]) / dy0;
+                        const nStep0 = (NZs[low] - NZs[high]) * 255 / dy0;
+                        const shStep0 = (((NXs[low] - NXs[high]) / 2) * sdim) / dy0;
+                        const svStep0 = (((NYs[high] - NYs[low]) / 2) * sdim) / dy0;
 
                         let x1 = Xs[low];
                         let z1 = Zs[low];
@@ -3091,11 +3091,11 @@ export class Viewer {
                         let sv1 = ((0.5 - NYs[low] / 2) * sdim) & sbound;
                         let dy1 = Ys[low] - Ys[mid];
                         dy1 = dy1 != 0 ? dy1 : 1;
-                        let xStep1 = (Xs[low] - Xs[mid]) / dy1;
-                        let zStep1 = (Zs[low] - Zs[mid]) / dy1;
-                        let nStep1 = (NZs[low] - NZs[mid]) * 255 / dy1;
-                        let shStep1 = (((NXs[low] - NXs[mid]) / 2) * sdim) / dy1;
-                        let svStep1 = (((NYs[mid] - NYs[low]) / 2) * sdim) / dy1;
+                        const xStep1 = (Xs[low] - Xs[mid]) / dy1;
+                        const zStep1 = (Zs[low] - Zs[mid]) / dy1;
+                        const nStep1 = (NZs[low] - NZs[mid]) * 255 / dy1;
+                        const shStep1 = (((NXs[low] - NXs[mid]) / 2) * sdim) / dy1;
+                        const svStep1 = (((NYs[mid] - NYs[low]) / 2) * sdim) / dy1;
 
                         let x2 = Xs[mid];
                         let z2 = Zs[mid];
@@ -3104,11 +3104,11 @@ export class Viewer {
                         let sv2 = ((0.5 - NYs[mid] / 2) * sdim) & sbound;
                         let dy2 = Ys[mid] - Ys[high];
                         dy2 = dy2 != 0 ? dy2 : 1;
-                        let xStep2 = (Xs[mid] - Xs[high]) / dy2;
-                        let zStep2 = (Zs[mid] - Zs[high]) / dy2;
-                        let nStep2 = (NZs[mid] - NZs[high]) * 255 / dy2;
-                        let shStep2 = (((NXs[mid] - NXs[high]) / 2) * sdim) / dy2;
-                        let svStep2 = (((NYs[high] - NYs[mid]) / 2) * sdim) / dy2;
+                        const xStep2 = (Xs[mid] - Xs[high]) / dy2;
+                        const zStep2 = (Zs[mid] - Zs[high]) / dy2;
+                        const nStep2 = (NZs[mid] - NZs[high]) * 255 / dy2;
+                        const shStep2 = (((NXs[mid] - NXs[high]) / 2) * sdim) / dy2;
+                        const svStep2 = (((NYs[high] - NYs[mid]) / 2) * sdim) / dy2;
 
                         let linebase = Ys[low] * w;
                         for (let y = Ys[low]; y > Ys[high]; y--) {
@@ -3152,10 +3152,10 @@ export class Viewer {
                                     svRight = temp;
                                 }
 
-                                let zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
-                                let nInc = (xLeft != xRight) ? ((nRight - nLeft) / (xRight - xLeft)) : 1;
-                                let shInc = (xLeft != xRight) ? ((shRight - shLeft) / (xRight - xLeft)) : 1;
-                                let svInc = (xLeft != xRight) ? ((svRight - svLeft) / (xRight - xLeft)) : 1;
+                                const zInc = (xLeft != xRight) ? ((zRight - zLeft) / (xRight - xLeft)) : 1;
+                                const nInc = (xLeft != xRight) ? ((nRight - nLeft) / (xRight - xLeft)) : 1;
+                                const shInc = (xLeft != xRight) ? ((shRight - shLeft) / (xRight - xLeft)) : 1;
+                                const svInc = (xLeft != xRight) ? ((svRight - svLeft) / (xRight - xLeft)) : 1;
                                 if (xLeft < 0) {
                                     zLeft -= xLeft * zInc;
                                     nLeft -= xLeft * nInc;
@@ -3171,11 +3171,11 @@ export class Viewer {
                                     for (let x = xLeft, z = zLeft, n = nLeft, sh = shLeft, sv = svLeft; x <= xRight; x++, z += zInc, n += nInc, sh += shInc, sv += svInc) {
                                         if (z > zbuf[pix]) {
                                             zbuf[pix] = z;
-                                            let color = palette[n > 0 ? (~~n) : 0];
-                                            let stexel = sdata[(sv & sbound) * sdim + (sh & sbound)];
-                                            let rr = (((color & 0xff0000) >> 16) * ((stexel & 0xff0000) >> 8));
-                                            let gg = (((color & 0xff00) >> 8) * ((stexel & 0xff00) >> 8));
-                                            let bb = ((color & 0xff) * (stexel & 0xff)) >> 8;
+                                            const color = palette[n > 0 ? (~~n) : 0];
+                                            const stexel = sdata[(sv & sbound) * sdim + (sh & sbound)];
+                                            const rr = (((color & 0xff0000) >> 16) * ((stexel & 0xff0000) >> 8));
+                                            const gg = (((color & 0xff00) >> 8) * ((stexel & 0xff00) >> 8));
+                                            const bb = ((color & 0xff) * (stexel & 0xff)) >> 8;
                                             cbuf[pix] = 0xff000000 | (rr & 0xff0000) | (gg & 0xff00) | (bb & 0xff);
                                             sbuf[pix] = id;
                                         }
@@ -3184,13 +3184,13 @@ export class Viewer {
                                 } else {
                                     for (let x = xLeft, z = zLeft, n = nLeft, sh = shLeft, sv = svLeft; x < xRight; x++, z += zInc, n += nInc, sh += shInc, sv += svInc) {
                                         if (z > zbuf[pix]) {
-                                            let color = palette[n > 0 ? (~~n) : 0];
-                                            let foreColor = sdata[(sv & sbound) * sdim + (sh & sbound)];
-                                            let backColor = cbuf[pix];
+                                            const color = palette[n > 0 ? (~~n) : 0];
+                                            const foreColor = sdata[(sv & sbound) * sdim + (sh & sbound)];
+                                            const backColor = cbuf[pix];
                                             let rr = (((color & 0xff0000) >> 16) * ((foreColor & 0xff0000) >> 8));
                                             let gg = (((color & 0xff00) >> 8) * ((foreColor & 0xff00) >> 8));
                                             let bb = ((color & 0xff) * (foreColor & 0xff)) >> 8;
-                                            let aa = (backColor | color) & 0xff000000;
+                                            const aa = (backColor | color) & 0xff000000;
                                             rr = (rr * opaci + (backColor & 0xff0000) * trans) >> 8;
                                             gg = (gg * opaci + (backColor & 0xff00) * trans) >> 8;
                                             bb = (bb * opaci + (backColor & 0xff) * trans) >> 8;

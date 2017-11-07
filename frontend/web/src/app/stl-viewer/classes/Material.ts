@@ -38,12 +38,12 @@ export class Material {
         @private
     */
     generatePalette() {
-        let ambientR = (this.ambientColor & 0xff0000) >> 16;
-        let ambientG = (this.ambientColor & 0xff00) >> 8;
-        let ambientB = this.ambientColor & 0xff;
-        let diffuseR = (this.diffuseColor & 0xff0000) >> 16;
-        let diffuseG = (this.diffuseColor & 0xff00) >> 8;
-        let diffuseB = this.diffuseColor & 0xff;
+        const ambientR = (this.ambientColor & 0xff0000) >> 16;
+        const ambientG = (this.ambientColor & 0xff00) >> 8;
+        const ambientB = this.ambientColor & 0xff;
+        const diffuseR = (this.diffuseColor & 0xff0000) >> 16;
+        const diffuseG = (this.diffuseColor & 0xff00) >> 8;
+        const diffuseB = this.diffuseColor & 0xff;
 
         if (this.simulateSpecular) {
             let i = 0;

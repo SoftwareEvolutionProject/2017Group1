@@ -49,8 +49,8 @@ export class Texture {
         @param {Boolean} useMipmap set true to generate mip-maps; false(default) not to generate mip-maps.
     */
     createFromUrl(imageUrl, useMipmap) {
-        let self = this;
-        let img = new Image;
+        const self = this;
+        const img = new Image;
 
         img.onload = function() {
             self.data = null;
@@ -124,18 +124,18 @@ export class Texture {
 
         let data;
         try {
-            let ctx = canvas.getContext('2d');
+            const ctx = canvas.getContext('2d');
             if (!isCanvasClean) {
                 ctx.clearRect(0, 0, dim, dim);
             }
             ctx.drawImage(image, 0, 0, dim, dim);
-            let imgData = ctx.getImageData(0, 0, dim, dim);
+            const imgData = ctx.getImageData(0, 0, dim, dim);
             data = imgData.data;
         } catch (e) {
             return;
         }
 
-        let size = data.length / 4;
+        const size = data.length / 4;
         this.data = new Array(size);
         let alpha;
         for (let i = 0, j = 0; i < size; i++, j += 4) {
@@ -180,24 +180,24 @@ export class Texture {
         this.mipmaps = [this.data];
         this.mipentries = [1];
 
-        let numOfMipLevels = 1 + ~~(0.1 + Math.log(this.width) * Math.LOG2E);
+        const numOfMipLevels = 1 + ~~(0.1 + Math.log(this.width) * Math.LOG2E);
         let dim = this.width >> 1;
         for (let level = 1; level < numOfMipLevels; level++) {
-            let map = new Array(dim * dim);
-            let uppermap = this.mipmaps[level - 1];
-            let upperdim = dim << 1;
+            const map = new Array(dim * dim);
+            const uppermap = this.mipmaps[level - 1];
+            const upperdim = dim << 1;
 
             let src = 0, dest = 0;
             for (let i = 0; i < dim; i++) {
                 for (let j = 0; j < dim; j++) {
-                    let texel0 = uppermap[src];
-                    let texel1 = uppermap[src + 1];
-                    let texel2 = uppermap[src + upperdim];
-                    let texel3 = uppermap[src + upperdim + 1];
-                    let a = ( ((texel0 & 0xff000000) >>> 2) + ((texel1 & 0xff000000) >>> 2) + ((texel2 & 0xff000000) >>> 2) + ((texel3 & 0xff000000) >>> 2) ) & 0xff000000;
-                    let r = ( ((texel0 & 0xff0000) + (texel1 & 0xff0000) + (texel2 & 0xff0000) + (texel3 & 0xff0000)) >> 2 ) & 0xff0000;
-                    let g = ( ((texel0 & 0xff00) + (texel1 & 0xff00) + (texel2 & 0xff00) + (texel3 & 0xff00)) >> 2 ) & 0xff00;
-                    let b = ( ((texel0 & 0xff) + (texel1 & 0xff) + (texel2 & 0xff) + (texel3 & 0xff)) >> 2 ) & 0xff;
+                    const texel0 = uppermap[src];
+                    const texel1 = uppermap[src + 1];
+                    const texel2 = uppermap[src + upperdim];
+                    const texel3 = uppermap[src + upperdim + 1];
+                    const a = ( ((texel0 & 0xff000000) >>> 2) + ((texel1 & 0xff000000) >>> 2) + ((texel2 & 0xff000000) >>> 2) + ((texel3 & 0xff000000) >>> 2) ) & 0xff000000;
+                    const r = ( ((texel0 & 0xff0000) + (texel1 & 0xff0000) + (texel2 & 0xff0000) + (texel3 & 0xff0000)) >> 2 ) & 0xff0000;
+                    const g = ( ((texel0 & 0xff00) + (texel1 & 0xff00) + (texel2 & 0xff00) + (texel3 & 0xff00)) >> 2 ) & 0xff00;
+                    const b = ( ((texel0 & 0xff) + (texel1 & 0xff) + (texel2 & 0xff) + (texel3 & 0xff)) >> 2 ) & 0xff;
                     map[dest] = a + r + g + b;
                     src += 2;
                     dest++;

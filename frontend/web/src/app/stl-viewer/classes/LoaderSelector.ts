@@ -21,7 +21,7 @@ export class LoaderSelector {
         @returns {Object} loader object for the specific format; null if not found.
         */
     getLoader(fileExtName) {
-        let loaderCtor = this.loaderTable[fileExtName.toLowerCase()];
+        const loaderCtor = this.loaderTable[fileExtName.toLowerCase()];
         if (!loaderCtor) {
             return null;
         }
@@ -36,4 +36,4 @@ export class LoaderSelector {
         return loaderInst;
     }
 }
-
+

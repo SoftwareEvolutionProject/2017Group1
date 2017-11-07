@@ -69,7 +69,7 @@ export class Scene {
         @param {JSC3D.Mesh} mesh the mesh to be removed.
     */
     removeChild(mesh) {
-        let foundAt = this.children.indexOf(mesh);
+        const foundAt = this.children.indexOf(mesh);
         if (foundAt >= 0) {
             this.children.splice(foundAt, 1);
         }
@@ -91,14 +91,14 @@ export class Scene {
         this.aabb.minX = this.aabb.minY = this.aabb.minZ = Infinity;
         this.aabb.maxX = this.aabb.maxY = this.aabb.maxZ = -Infinity;
         for (let i = 0; i < this.children.length; i++) {
-            let child = this.children[i];
+            const child = this.children[i];
             if (!child.isTrivial()) {
-                let minX = child.aabb.minX;
-                let minY = child.aabb.minY;
-                let minZ = child.aabb.minZ;
-                let maxX = child.aabb.maxX;
-                let maxY = child.aabb.maxY;
-                let maxZ = child.aabb.maxZ;
+                const minX = child.aabb.minX;
+                const minY = child.aabb.minY;
+                const minZ = child.aabb.minZ;
+                const maxX = child.aabb.maxX;
+                const maxY = child.aabb.maxY;
+                const maxZ = child.aabb.maxZ;
                 if (this.aabb.minX > minX) {
                     this.aabb.minX = minX;
                 }

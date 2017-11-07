@@ -60,8 +60,7 @@ export class BinaryStream {
     skip(bytesToSkip) {
         if (this.offset + bytesToSkip > this.data.length) {
             this.offset = this.data.length;
-        }
-        else {
+        } else {
             this.offset += bytesToSkip;
         }
     }
@@ -198,13 +197,13 @@ export class BinaryStream {
             return NaN;
         }
 
-        let mLen = significandBits;
-        let eLen = bytes * 8 - mLen - 1;
-        let eMax = (1 << eLen) - 1;
-        let eBias = eMax >> 1;
+        const mLen = significandBits;
+        const eLen = bytes * 8 - mLen - 1;
+        const eMax = (1 << eLen) - 1;
+        const eBias = eMax >> 1;
 
         let i = bytes - 1;
-        let d = -1;
+        const d = -1;
         let s = this.data[this.offset + i].charCodeAt(0) & 0xff;
         i += d;
         let bits = -7;

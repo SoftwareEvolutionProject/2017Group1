@@ -1,10 +1,10 @@
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {DigitalPart} from '../../model/digital-part';
-import {DigitalPartMockService} from '../../services/digital-part/digital-part-mock.service';
-import {ErrorService} from '../../services/error.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { DigitalPart } from '../../model/digital-part';
+import { DigitalPartMockService } from '../../services/digital-part/digital-part-mock.service';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-digital-part-detail',
@@ -39,7 +39,7 @@ export class DigitalPartDetailComponent implements OnInit {
         this.populate();
       } else if (id) {
         this.getData(id);
-           }
+      }
     });
   }
 
@@ -66,7 +66,7 @@ export class DigitalPartDetailComponent implements OnInit {
     const fields = {
       name: [this.digitalPart && this.digitalPart.name ? this.digitalPart.name : '',
       Validators.compose([Validators.required])],
-      id: [{value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true},
+      id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
       stlFile: [this.digitalPart && this.digitalPart.stlFile ? this.digitalPart.stlFile : '',
       Validators.compose([Validators.required])],

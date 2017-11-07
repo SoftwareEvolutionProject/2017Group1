@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {DigitalPart} from '../../model/digital-part';
-import {DigitalPartMockService} from '../../services/digital-part/digital-part-mock.service';
-import {ErrorService} from '../../services/error.service';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { DigitalPart } from '../../model/digital-part';
+import { DigitalPartMockService } from '../../services/digital-part/digital-part-mock.service';
+import { ErrorService } from '../../services/error.service';
 declare var $: any;
 
 @Component({
@@ -14,7 +14,7 @@ declare var $: any;
 })
 export class DigitalPartListComponent implements OnInit, AfterViewInit {
   private table;
-  private digitalParts: DigitalPart [];
+  private digitalParts: DigitalPart[];
 
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
@@ -103,7 +103,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
 
   private amountFormatter(value, row, index) {
     return value > 0 ? '' : {
-      css: {'background-color': 'rgba(255, 0, 0, 0.4)'},
+      css: { 'background-color': 'rgba(255, 0, 0, 0.4)' },
     };
   }
 
@@ -131,12 +131,12 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   private confirmDelete() {
     if (this.toBeDeleted) {
       this.digitalPartMockService.delete(this.toBeDeleted).subscribe((res) => {
-          this.toBeDeleted = null;
-          this.modalRef.hide();
-          this.loadAndPopulate();
-        }, (error) => {
-          this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
-        },
+        this.toBeDeleted = null;
+        this.modalRef.hide();
+        this.loadAndPopulate();
+      }, (error) => {
+        this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
+      },
       );
     }
   }
