@@ -96,11 +96,7 @@ export class PhysicalPrintEditComponent implements OnInit {
     console.log(physicalPrint);
 
     if (this.creating) { // a new product
-<<<<<<< HEAD
-      this.physicalPrint.createPhysicalPrint(physicalPrint).subscribe(
-=======
       this.physicalPrintService.createPhysicalPrint(physicalPrint).subscribe(
->>>>>>> 12d7b4b8afb6e139a07e8cb62415ee57f2638be5
         (data) => {
           if (this.nav) this.back();
           this.changed.emit(data);
@@ -110,11 +106,7 @@ export class PhysicalPrintEditComponent implements OnInit {
         },
       );
     } else {
-<<<<<<< HEAD
-      this.physicalPrint.updatePhysicalPrint(physicalPrint).subscribe(
-=======
-      this.physicalPrintService.createPhysicalPrint(physicalPrint).subscribe(
->>>>>>> 12d7b4b8afb6e139a07e8cb62415ee57f2638be5
+      this.physicalPrintService.updatePhysicalPrint(physicalPrint).subscribe(
         (data) => {
           if (this.nav) this.back();
           this.changed.emit(data);
