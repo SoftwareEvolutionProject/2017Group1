@@ -1,7 +1,6 @@
 /**
-	@class Material
-
-	This class implements material which describes the feel and look of a mesh.
+ * @class Material
+ * This class implements material which describes the feel and look of a mesh.
  */
 export class Material {
     name = '';
@@ -15,16 +14,17 @@ export class Material {
         this.name = name || '';
         this.diffuseColor = diffuseColor || 0x7f7f7f;
         // default ambient color will be of 1/8 the intensity of the diffuse color
-        this.ambientColor = (typeof ambientColor) == 'number' ? ambientColor : (((this.diffuseColor & 0xff0000) >> 3) & 0xff0000 | ((this.diffuseColor & 0xff00) >> 3) & 0xff00 | ((this.diffuseColor & 0xff) >> 3));
+        this.ambientColor = (typeof ambientColor) === 'number' ? ambientColor : (((this.diffuseColor & 0xff0000) >> 3) & 0xff0000 |
+            ((this.diffuseColor & 0xff00) >> 3) & 0xff00 | ((this.diffuseColor & 0xff) >> 3));
         this.transparency = transparency || 0;
         this.simulateSpecular = simulateSpecular || false;
         this.palette = null;
     }
 
     /**
-        Get the palette of the material used for shadings.
-        @return {Array} palette of the material as an array.
-    */
+     *   Get the palette of the material used for shadings.
+     *   @return {Array} palette of the material as an array.
+     */
     getPalette() {
         if (!this.palette) {
             this.palette = new Array(256);
@@ -35,8 +35,8 @@ export class Material {
     }
 
     /**
-        @private
-    */
+     *   @private
+     */
     generatePalette() {
         const ambientR = (this.ambientColor & 0xff0000) >> 16;
         const ambientG = (this.ambientColor & 0xff00) >> 8;
