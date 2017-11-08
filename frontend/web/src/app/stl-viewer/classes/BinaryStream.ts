@@ -175,7 +175,8 @@ export class BinaryStream {
             return NaN;
         }
 
-        let rv = 0, f = 1;
+        let rv = 0;
+        let f = 1;
         for (let i = 0; i < bytes; i++) {
             rv += ((this.data[this.offset++].charCodeAt(0) & 0xff) * f);
             f *= 256;
