@@ -69,7 +69,8 @@ export class Mesh {
     transformedFaceNormalZBuffer = null;
     transformedVertexNormalBuffer = null;
 
-    constructor(name, visible, material, texture, creaseAngle, isDoubleSided, isEnvironmentCast, coordBuffer, indexBuffer, texCoordBuffer, texCoordIndexBuffer) {
+    constructor(name, visible, material, texture, creaseAngle, isDoubleSided, isEnvironmentCast, coordBuffer, indexBuffer, 
+                texCoordBuffer, texCoordIndexBuffer) {
         this.name = name || '';
         this.metadata = '';
         this.visible = (visible != undefined) ? visible : true;
@@ -200,8 +201,8 @@ export class Mesh {
             ibuf.push(-1);
         }
 
-        for (let i = 0; i < ibuf.length; i++) {
-			if (ibuf[i] == -1) {
+        for (const buf of ibuf) {
+            if (ibuf === -1) {
                 this.faceCount++;
             }
         }
@@ -426,10 +427,9 @@ export class Mesh {
                 const fnz0 = nfnbuf[f0 + 2];
                 // go through faces around this vertex, accumulating normals
                 const faces = vertTouchedFaces[vindex];
-                for (let j = 0; j < faces.length; j++) {
-					const findex1 = faces[j];
-                    if (findex0 !== findex1) {
-                        const f1 = findex1 * 3;
+                for (const face of faces) {
+                    if (findex0 !== face) {
+                        const f1 = face * 3;
                         const fnx1 = nfnbuf[f1];
                         const fny1 = nfnbuf[f1 + 1];
                         const fnz1 = nfnbuf[f1 + 2];
