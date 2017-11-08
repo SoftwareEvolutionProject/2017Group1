@@ -1,6 +1,6 @@
 package se.chalmers.dat265.group1.model;
 
-public class Customer implements DataModel{
+public class Customer extends DataModel {
     private int id;
     private String name, eMail;
 

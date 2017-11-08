@@ -61,6 +61,10 @@ import {HttpClientService} from './services/http/http-client.service';
 
     RouterModule.forRoot([
       {
+        path: '',
+        component: HomeComponent,
+      },
+      {
         path: 'home',
         component: HomeComponent,
       },

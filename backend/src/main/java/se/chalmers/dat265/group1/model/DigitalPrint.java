@@ -2,7 +2,7 @@ package se.chalmers.dat265.group1.model;
 
 import java.util.Map;
 
-public class DigitalPrint  implements DataModel {
+public class DigitalPrint extends DataModel {
     private int id;
     private String magicsPath;
 
