@@ -1,16 +1,15 @@
 /**
-    @class Matrix3x4
-
-    This class implements 3x4 matrix and mass operations for 3D transformations.
-*/
+ * @class Matrix3x4
+ * This class implements 3x4 matrix and mass operations for 3D transformations.
+ */
 export class Matrix3x4 {
     m00 = 1; m01 = 0; m02 = 0; m03 = 0;
     m10 = 0; m11 = 1; m12 = 0; m13 = 0;
     m20 = 0; m21 = 0; m22 = 1; m23 = 0;
 
     /**
-        Make the matrix an identical matrix.
-    */
+     * Make the matrix an identical matrix.
+     */
     identity() {
         this.m00 = 1; this.m01 = 0; this.m02 = 0; this.m03 = 0;
         this.m10 = 0; this.m11 = 1; this.m12 = 0; this.m13 = 0;
@@ -18,11 +17,11 @@ export class Matrix3x4 {
     }
 
     /**
-        Scale the matrix using scaling factors on each axial directions.
-        @param {Number} sx scaling factors on x-axis.
-        @param {Number} sy scaling factors on y-axis.
-        @param {Number} sz scaling factors on z-axis.
-    */
+     *   Scale the matrix using scaling factors on each axial directions.
+     *   @param {Number} sx scaling factors on x-axis.
+     *   @param {Number} sy scaling factors on y-axis.
+     *   @param {Number} sz scaling factors on z-axis.
+     */
     scale(sx, sy, sz) {
         this.m00 *= sx; this.m01 *= sx; this.m02 *= sx; this.m03 *= sx;
         this.m10 *= sy; this.m11 *= sy; this.m12 *= sy; this.m13 *= sy;
@@ -30,11 +29,11 @@ export class Matrix3x4 {
     }
 
     /**
-        Translate the matrix using translations on each axial directions.
-        @param {Number} tx translations on x-axis.
-        @param {Number} ty translations on y-axis.
-        @param {Number} tz translations on z-axis.
-    */
+     *   Translate the matrix using translations on each axial directions.
+     *   @param {Number} tx translations on x-axis.
+     *   @param {Number} ty translations on y-axis.
+     *   @param {Number} tz translations on z-axis.
+     */
     translate(tx, ty, tz) {
         this.m03 += tx;
         this.m13 += ty;
@@ -42,11 +41,11 @@ export class Matrix3x4 {
     }
 
     /**
-        Rotate the matrix an arbitrary angle about the x-axis.
-        @param {Number} angle rotation angle in degrees.
-    */
+     *   Rotate the matrix an arbitrary angle about the x-axis.
+     *   @param {Number} angle rotation angle in degrees.
+     */
     rotateAboutXAxis(angle) {
-        if (angle != 0) {
+        if (angle !== 0) {
             angle *= Math.PI / 180;
             const c = Math.cos(angle);
             const s = Math.sin(angle);
@@ -66,11 +65,11 @@ export class Matrix3x4 {
     }
 
     /**
-        Rotate the matrix an arbitrary angle about the y-axis.
-        @param {Number} angle rotation angle in degrees.
-    */
+     *   Rotate the matrix an arbitrary angle about the y-axis.
+     *   @param {Number} angle rotation angle in degrees.
+     */
     rotateAboutYAxis(angle) {
-        if (angle != 0) {
+        if (angle !== 0) {
             angle *= Math.PI / 180;
             const c = Math.cos(angle);
             const s = Math.sin(angle);
@@ -90,11 +89,11 @@ export class Matrix3x4 {
     }
 
     /**
-        Rotate the matrix an arbitrary angle about the z-axis.
-        @param {Number} angle rotation angle in degrees.
-    */
+     *   Rotate the matrix an arbitrary angle about the z-axis.
+     *   @param {Number} angle rotation angle in degrees.
+     */
     rotateAboutZAxis(angle) {
-        if (angle != 0) {
+        if (angle !== 0) {
             angle *= Math.PI / 180;
             const c = Math.cos(angle);
             const s = Math.sin(angle);
@@ -114,9 +113,9 @@ export class Matrix3x4 {
     }
 
     /**
-        Multiply the matrix by another matrix.
-        @param {JSC3D.Matrix3x4} mult another matrix to be multiplied on this.
-    */
+     *   Multiply the matrix by another matrix.
+     *   @param {JSC3D.Matrix3x4} mult another matrix to be multiplied on this.
+     */
     multiply(mult) {
         const m00 = mult.m00 * this.m00 + mult.m01 * this.m10 + mult.m02 * this.m20;
         const m01 = mult.m00 * this.m01 + mult.m01 * this.m11 + mult.m02 * this.m21;
