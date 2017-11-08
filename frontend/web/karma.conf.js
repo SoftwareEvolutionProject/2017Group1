@@ -51,7 +51,7 @@ module.exports = function (config) {
     autoWatch: true,
     browsers:[ isDocker ? 'Chrome_without_sandbox' : 'Chrome'],
     singleRun: isDocker,
-    browserNoActivityTimeout: 1000000,
+    browserNoActivityTimeout: 10000000,
     captureTimeout: 100000
   });
 };
