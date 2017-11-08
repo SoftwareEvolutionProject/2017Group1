@@ -2,7 +2,7 @@ version: "2"
 services: 
   dev: 
     build: .
-    container_name: sverea
+    container_name: swerea
     ports: 
       - "8080:8080"
       - "4200:4200"
@@ -16,7 +16,7 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=svereadb
+      - POSTGRES_DB=swereadb
     cap_add:
       - SYS_ADMIN
 
@@ -30,4 +30,4 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=svereadb
+      - POSTGRES_DB=swereadb
