@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS orderedpart(
   amount INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS digitalprint(
+CREATE TABLE IF NOT EXISTS digitalprintdata(
   id serial PRIMARY KEY,
   magicsPath VARCHAR(300)
 );
@@ -54,14 +54,14 @@ CREATE TABLE IF NOT EXISTS magicspairing(
   digitalPartID INTEGER,
   label VARCHAR(200),
   FOREIGN KEY (digitalPartID) REFERENCES digitalpart(id),
-  FOREIGN KEY (digitalPrintID) REFERENCES digitalprint(id)
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
 );
 
 CREATE TABLE IF NOT EXISTS physicalprint(
   id SERIAL PRIMARY KEY,
   digitalPrintID INTEGER,
   slmPath VARCHAR(300),
-  FOREIGN KEY (digitalPrintID) REFERENCES digitalprint(id)
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
 );
 
 CREATE TABLE IF NOT EXISTS physicalpart(

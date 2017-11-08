@@ -1,6 +1,6 @@
 package se.chalmers.dat265.group1.model;
 
-public class DigitalPart implements DataModel {
+public class DigitalPart extends DataModel {
     private int id;
     private int customerID;
     private String name;

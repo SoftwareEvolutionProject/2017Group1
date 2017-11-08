@@ -5,7 +5,7 @@ import se.chalmers.dat265.group1.model.PhysicalPrint;
 
 import java.util.List;
 
-public interface PhysicalInterface {
+public interface PhysicalAPI {
     List<PhysicalPart> getAllPhysicalParts();
 
     PhysicalPart getPhysicalPart(String physicalPartID);
