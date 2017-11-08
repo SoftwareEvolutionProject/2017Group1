@@ -28,7 +28,8 @@ export class Math3D {
      */
     transformVectorZs(mat, vecs, xfveczs) {
         const num = vecs.length / 3;
-        let i = 0, j = 0;
+        let i = 0;
+        let j = 0;
         while (i < num) {
             xfveczs[i] = mat.m20 * vecs[j] + mat.m21 * vecs[j + 1] + mat.m22 * vecs[j + 2] + mat.m23;
             i++;
