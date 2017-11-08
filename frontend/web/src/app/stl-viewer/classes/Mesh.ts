@@ -69,7 +69,7 @@ export class Mesh {
     transformedFaceNormalZBuffer = null;
     transformedVertexNormalBuffer = null;
 
-    constructor(name, visible, material, texture, creaseAngle, isDoubleSided, isEnvironmentCast, coordBuffer, indexBuffer, 
+    constructor(name, visible, material, texture, creaseAngle, isDoubleSided, isEnvironmentCast, coordBuffer, indexBuffer,
                 texCoordBuffer, texCoordIndexBuffer) {
         this.name = name || '';
         this.metadata = '';
@@ -104,9 +104,9 @@ export class Mesh {
             return;
         }
 
-        if (this.faceCount == 0) {
+        if (this.faceCount === 0) {
             this.calcFaceCount();
-            if (this.faceCount == 0) {
+            if (this.faceCount === 0) {
                 return;
             }
         }
@@ -197,7 +197,7 @@ export class Mesh {
         const ibuf = this.indexBuffer;
 
         // add the last -1 if it is omitted
-        if (ibuf[ibuf.length - 1] != -1) {
+        if (ibuf[ibuf.length - 1] !== -1) {
             ibuf.push(-1);
         }
 
