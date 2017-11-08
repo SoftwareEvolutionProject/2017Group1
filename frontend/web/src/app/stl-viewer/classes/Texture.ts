@@ -1,8 +1,8 @@
 /**
-    @class Texture
-
-    This class implements texture which describes the surface details for a mesh.
-*/
+ *    @class Texture
+ *
+ *    This class implements texture which describes the surface details for a mesh.
+ */
 export class Texture {
 
     name = '';
@@ -40,17 +40,20 @@ export class Texture {
         this.mipentries = null;
         this.hasTransparency = false;
         this.srcUrl = '';
-        this.onready = (onready && typeof(onready) == 'function') ? onready : null;
+        this.onready = (onready && typeof(onready) === 'function') ? onready : null;
     }
 
     /**
-        Load an image and extract texture data from it.
-        @param {String} imageUrl where to load the image.
-        @param {Boolean} useMipmap set true to generate mip-maps; false(default) not to generate mip-maps.
-    */
+     *
+     *    Load an image and extract texture data from it.
+     *
+     *    @param {String} imageUrl where to load the image.
+     *
+     *    @param {Boolean} useMipmap set true to generate mip-maps; false(default) not to generate mip-maps.
+     */
     createFromUrl(imageUrl, useMipmap) {
         const self = this;
-        const img = new Image;
+        const img = new Image();
 
         img.onload = function() {
             self.data = null;
@@ -78,10 +81,10 @@ export class Texture {
     }
 
     /**
-        Extract texture data from an exsisting image.
-        @param {Image} image image as datasource of the texture.
-        @param {Boolean} useMipmap set true to generate mip-maps; false(default) not to generate mip-maps.
-    */
+     *  Extract texture data from an exsisting image.
+     *  @param {Image} image image as datasource of the texture.
+     *  @param {Boolean} useMipmap set true to generate mip-maps; false(default) not to generate mip-maps.
+     */
     createFromImage(image, useMipmap) {
         if (image.width <= 0 || image.height <= 0) {
             return;
@@ -117,7 +120,7 @@ export class Texture {
             dim = 1024;
              }
 
-        if (canvas.width != dim || canvas.height != dim) {
+        if (canvas.width !== dim || canvas.height !== dim) {
             canvas.width = canvas.height = dim;
             isCanvasClean = true;
         }
@@ -156,22 +159,22 @@ export class Texture {
 
         this.srcUrl = image.src;
 
-        if (this.onready != null && (typeof this.onready) == 'function') {
+        if (this.onready != null && (typeof this.onready) === 'function') {
             this.onready();
         }
     }
 
     /**
-        See if this texture contains texel data.
-        @returns {Boolean} true if it has texel data; false if not.
-    */
+     *   See if this texture contains texel data.
+     *   @returns {Boolean} true if it has texel data; false if not.
+     */
     hasData() {
         return (this.data != null);
     }
 
     /**
-        Generate mip-map pyramid for the texture.
-    */
+     *   Generate mip-map pyramid for the texture.
+     */
     generateMipmaps() {
         if (this.width <= 1 || this.data == null || this.mipmaps != null) {
             return;
@@ -187,14 +190,16 @@ export class Texture {
             const uppermap = this.mipmaps[level - 1];
             const upperdim = dim << 1;
 
-            let src = 0, dest = 0;
+            let src = 0;
+            let dest = 0;
             for (let i = 0; i < dim; i++) {
                 for (let j = 0; j < dim; j++) {
                     const texel0 = uppermap[src];
                     const texel1 = uppermap[src + 1];
                     const texel2 = uppermap[src + upperdim];
                     const texel3 = uppermap[src + upperdim + 1];
-                    const a = ( ((texel0 & 0xff000000) >>> 2) + ((texel1 & 0xff000000) >>> 2) + ((texel2 & 0xff000000) >>> 2) + ((texel3 & 0xff000000) >>> 2) ) & 0xff000000;
+                    const a = ( ((texel0 & 0xff000000) >>> 2) + ((texel1 & 0xff000000) >>> 2) + ((texel2 & 0xff000000) >>> 2) +
+                                ((texel3 & 0xff000000) >>> 2) ) & 0xff000000;
                     const r = ( ((texel0 & 0xff0000) + (texel1 & 0xff0000) + (texel2 & 0xff0000) + (texel3 & 0xff0000)) >> 2 ) & 0xff0000;
                     const g = ( ((texel0 & 0xff00) + (texel1 & 0xff00) + (texel2 & 0xff00) + (texel3 & 0xff00)) >> 2 ) & 0xff00;
                     const b = ( ((texel0 & 0xff) + (texel1 & 0xff) + (texel2 & 0xff) + (texel3 & 0xff)) >> 2 ) & 0xff;
@@ -212,9 +217,9 @@ export class Texture {
     }
 
     /**
-        See if this texture has mip-maps.
-        @returns {Boolean} true if it has mip-maps; false if not.
-    */
+     *   See if this texture has mip-maps.
+     *   @returns {Boolean} true if it has mip-maps; false if not.
+     */
     hasMipmap = function() {
         return (this.mipmaps != null);
     };
