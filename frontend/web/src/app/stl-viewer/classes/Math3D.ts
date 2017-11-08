@@ -1,15 +1,14 @@
 /**
-	@class Math3D
-
-	This class provides some utility methods for 3D mathematics.
+ * @class Math3D
+ * This class provides some utility methods for 3D mathematics.
  */
 export class Math3D {
     /**
-        Transform vectors using the given matrix.
-        @param {JSC3D.Matrix3x4} mat the transformation matrix.
-        @param {Array} vecs a batch of vectors to be transform.
-        @param {Array} xfvecs where to output the transformed vetors.
-        */
+     *   Transform vectors using the given matrix.
+     *   @param {JSC3D.Matrix3x4} mat the transformation matrix.
+     *   @param {Array} vecs a batch of vectors to be transform.
+     *   @param {Array} xfvecs where to output the transformed vetors.
+     */
     transformVectors(mat, vecs, xfvecs) {
         for (let i = 0; i < vecs.length; i += 3) {
             const x = vecs[i];
@@ -22,11 +21,11 @@ export class Math3D {
     }
 
     /**
-        Transform vectors using the given matrix. Only z components (transformed) will be written out.
-        @param {JSC3D.Matrix3x4} mat the transformation matrix.
-        @param {Array} vecs a batch of vectors to be transform.
-        @param {Array} xfveczs where to output the transformed z components of the input vectors.
-        */
+     *   Transform vectors using the given matrix. Only z components (transformed) will be written out.
+     *   @param {JSC3D.Matrix3x4} mat the transformation matrix.
+     *   @param {Array} vecs a batch of vectors to be transform.
+     *   @param {Array} xfveczs where to output the transformed z components of the input vectors.
+     */
     transformVectorZs(mat, vecs, xfveczs) {
         const num = vecs.length / 3;
         let i = 0, j = 0;
@@ -38,10 +37,10 @@ export class Math3D {
     }
 
     /**
-        Normalize vectors.
-        @param {Array} src a batch of vectors to be normalized.
-        @param {Array} dest where to output the normalized results.
-        */
+     *   Normalize vectors.
+     *   @param {Array} src a batch of vectors to be normalized.
+     *   @param {Array} dest where to output the normalized results.
+     */
     normalizeVectors(src, dest) {
         const num = src.length;
         for (let i = 0; i < num; i += 3) {
