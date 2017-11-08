@@ -32,7 +32,7 @@ export class DigitalPartDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      if (!id || id == 'create') { //new product is being created
+      if (!id || id === 'create') { // new product is being created
         this.creating = true;
         /* init with a boilerplate */
         if (this.creating) { this.digitalPart = new DigitalPart({}); }

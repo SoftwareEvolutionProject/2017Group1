@@ -149,7 +149,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
 
   openModal(autoFocusIdWithHashtag: string) {
     this.modalRef = this.modalService.show(this.modalDelete);
-    if (autoFocusIdWithHashtag != null && autoFocusIdWithHashtag != '') {
+    if (autoFocusIdWithHashtag != null && autoFocusIdWithHashtag !== '') {
       const addInput: any = ($(autoFocusIdWithHashtag) as any);
       setTimeout(() => {
         addInput.focus();
