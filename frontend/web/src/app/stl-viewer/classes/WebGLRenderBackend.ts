@@ -35,8 +35,9 @@ export class WebGLRenderBackend {
         this.canvas = canvas;
         // IE11 only has a partial implementation of WebGL API, thus some special treatments are required
         // to avoid usage of unsupported methods and properties.
-        this.isIE11 = false; //(JSC3D.PlatformInfo.browser == 'ie') && (parseInt(JSC3D.PlatformInfo.version) >= 11);
-        this.gl = canvas.getContext('experimental-webgl', {/*antialias: false,*/ preserveDrawingBuffer: true/*this is necessary since we need to read back pixels for picking*/}) || canvas.getContext('webgl');
+        this.isIE11 = false; // (JSC3D.PlatformInfo.browser == 'ie') && (parseInt(JSC3D.PlatformInfo.version) >= 11);
+        this.gl = canvas.getContext('experimental-webgl', { /* antialias: false,*/ preserveDrawingBuffer: true,
+            /*this is necessary since we need to read back pixels for picking*/}) || canvas.getContext('webgl');
         if (!this.gl) {
             throw new Error('JSC3D.WebGLRenderBackend constructor failed: Cannot get WebGL context!');
         }
@@ -153,7 +154,8 @@ export class WebGLRenderBackend {
                         'varying vec2 v_texCoord; \n' +
                         '\n' +
                         'void main(void) { \n' +
-                        '	vec4 materialColor = u_isLit ? vec4(texture2D(s_palette, vec2(abs(v_normal.z), 0.0)).rgb, u_opacity) : vec4(1.0, 1.0, 1.0, u_opacity); \n' +
+                        '	vec4 materialColor = u_isLit ? vec4(texture2D(s_palette, vec2(abs(v_normal.z), 0.0)).rgb, u_opacity) : ' +
+                            'vec4(1.0, 1.0, 1.0, u_opacity); \n' +
                         '	if(u_isCast) { \n' +
                         '		gl_FragColor = materialColor * texture2D(s_sphereTexture, vec2(0.5, -0.5) * v_normal.xy + vec2(0.5, 0.5)); \n' +
                         '	} \n' +
@@ -240,7 +242,7 @@ export class WebGLRenderBackend {
      */
     setBackgroundColors(color1, color2) {
         this.bkgColors = [new Float32Array([(color1 & 0xff0000) / 16777216, (color1 & 0xff00) / 65536, (color1 & 0xff) / 256])];
-        if (color1 != color2) {
+        if (color1 !== color2) {
             this.bkgColors.push(new Float32Array([(color2 & 0xff0000) / 16777216, (color2 & 0xff00) / 65536, (color2 & 0xff) / 256]));
         }
     }
@@ -281,7 +283,7 @@ export class WebGLRenderBackend {
 
             // create a texture object and set it as the color attachment of the fbo
             const colorAttachment = gl.createTexture();
-            //gl.activeTexture(gl.TEXTURE0);
+            // gl.activeTexture(gl.TEXTURE0);
             gl.bindTexture(gl.TEXTURE_2D, colorAttachment);
             gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, colorAttachment, 0);
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
@@ -330,12 +332,12 @@ export class WebGLRenderBackend {
         * For definitions other than 'standard', drawings will be generated in the back frame-buffer
         * and then resampled to be applied on canvas.
         */
-        if (frameWidth != this.canvas.width) {
+        if (frameWidth !== this.canvas.width) {
             if (!this.backFB) {
                 // create the back frame-buffer and bind it as render target
                 this.backFB = gl.createFramebuffer();
                 prepareFB(gl, this.backFB, frameWidth, frameHeight);
-            } else if (this.definition != definition) {
+            } else if (this.definition !== definition) {
                 // reallocate storage for the back frame-buffer as definition has changed, then bind it
                 // as render target
                 prepareFB(gl, this.backFB, frameWidth, frameHeight);
@@ -461,11 +463,11 @@ export class WebGLRenderBackend {
         ]);
 
         function sortRenderList(rlist) {
-            const opaque = [], transparent = [];
+            const opaque = [];
+            const transparent = [];
 
             // sort the input meshes into an opaque list and a transparent list
-            for (let i = 0; i < rlist.length; i++) {
-                const mesh = rlist[i];
+            for (const mesh of rlist) {
                 // is it transparent?
                 if ((mesh.material || defaultMaterial).transparency > 0 || mesh.hasTexture() && mesh.texture.hasTransparency) {
                     // calculate depth of this mesh
@@ -483,7 +485,7 @@ export class WebGLRenderBackend {
             }
 
             // sort the transparent meshes from the farthest closer
-            transparent.sort(function(m0, m1) {
+            transparent.sort( (m0, m1) => {
                 return m0.c[2] - m1.c[2];
             });
 
@@ -495,7 +497,8 @@ export class WebGLRenderBackend {
         renderList = sortRenderList(renderList);
 
         // render the color pass
-        this.renderColorPass(renderList, transformMat4Flattened, normalMat3Flattened, renderMode, defaultMaterial, sphereMap, isCullingDisabled);
+        this.renderColorPass(renderList, transformMat4Flattened, normalMat3Flattened, renderMode, defaultMaterial,
+                                sphereMap, isCullingDisabled);
 
         // render the picking pass
         if (this.pickingFB) {
@@ -543,8 +546,8 @@ export class WebGLRenderBackend {
         let curProgram = null;
         let isBlendEnabled = false;
 
-        for (let i = 0; i < renderList.length; i++) {
-            const mesh = renderList[i];
+        for (const mesh of renderList) {
+
             if (mesh.isTrivial() || !mesh.visible) {
                 continue;
             }
@@ -568,7 +571,7 @@ export class WebGLRenderBackend {
             }
 
             // switch blend mode
-            if (isTransparent != isBlendEnabled) {
+            if (isTransparent !== isBlendEnabled) {
                 if (isTransparent) {
                     gl.depthMask(false);
                     gl.enable(gl.BLEND);
@@ -614,11 +617,11 @@ export class WebGLRenderBackend {
             }
 
             // need to recompile the mesh?
-            if (!mesh.compiled || mesh.compiled.remderMode != rmode) {
+            if (!mesh.compiled || mesh.compiled.remderMode !== rmode) {
                 this.compileMesh(mesh, rmode);
             }
 
-            if (curProgram != program) {
+            if (curProgram !== program) {
                 gl.useProgram(program);
                 curProgram = program;
             }
@@ -764,8 +767,8 @@ export class WebGLRenderBackend {
 
         gl.useProgram(this.programs.picking);
 
-        for (let i = 0; i < renderList.length; i++) {
-            const mesh = renderList[i];
+        for (const mesh of renderList) {
+
             if (mesh.isTrivial() || !mesh.visible) {
                 continue;
             }
@@ -825,7 +828,9 @@ export class WebGLRenderBackend {
         function makeWireframe(ibuf, vbuf, numOfFaces, trianglesOnly) {
             let edges;
 
-            let v0, v1, v2;
+            let v0;
+            let v1;
+            let v2;
             if (trianglesOnly) {
                 edges = new Float32Array(18 * numOfFaces);
                 for (let i = 0, e = 0; i < ibuf.length; i += 4, e += 18) {
@@ -877,9 +882,9 @@ export class WebGLRenderBackend {
 
         const gl = this.gl;
 
-        const needFlat = (renderMode == 'flat') || (renderMode == 'textureflat');
+        const needFlat = (renderMode === 'flat') || (renderMode === 'textureflat');
 
-        const hasTrianglesOnly = mesh.indexBuffer.length == 4 * mesh.faceCount;
+        const hasTrianglesOnly = mesh.indexBuffer.length === 4 * mesh.faceCount;
         const hasTextureCoords = mesh.texCoordBuffer && mesh.texCoordBuffer.length >= 2;
 
         const ibuf  = mesh.indexBuffer;
@@ -904,16 +909,24 @@ export class WebGLRenderBackend {
                 (mesh.internalId & 0xff0000) / 16777216, (mesh.internalId & 0xff00) / 65536, (mesh.internalId & 0xff) / 256,
             ]);
 
-            let triangles, edges, coords, normals, texcoords;
+            let coords;
+            let normals;
+            let texcoords;
             if (hasTrianglesOnly) {
                 coords = new Float32Array(9 * numOfFaces);
                 normals = new Float32Array(9 * numOfFaces);
                 if (hasTextureCoords) {
                     texcoords = new Float32Array(6 * numOfFaces);
                 }
-                let v0, v1, v2;
-                let n0, n1, n2;
-                let t0, t1, t2;
+                let v0;
+                let v1;
+                let v2;
+                let n0;
+                let n1;
+                let n2;
+                let t0;
+                let t1;
+                let t2;
                 for (let i = 0, j = 0, k = 0, faceIndex = 0; i < ibuf.length; i += 4, j += 9, k += 6, faceIndex++) {
                     v0 = ibuf[i    ] * 3;
                     v1 = ibuf[i + 1] * 3;
@@ -967,9 +980,15 @@ export class WebGLRenderBackend {
                 if (hasTextureCoords) {
                     texcoords = [];
                 }
-                let v0, v1, v2;
-                let n0, n1, n2;
-                let t0, t1, t2;
+                let v0;
+                let v1;
+                let v2;
+                let n0;
+                let n1;
+                let n2;
+                let t0;
+                let t1;
+                let t2;
                 for (let i = 0, j = 0; i < numOfFaces; i++) {
                     v0 = ibuf[j    ] * 3;
                     v1 = ibuf[j + 1] * 3;
@@ -982,14 +1001,17 @@ export class WebGLRenderBackend {
                     j += 2;
                     while (ibuf[j] >= 0) {
                         v2 = ibuf[j] * 3;
-                        coords.push(vbuf[v0], vbuf[v0 + 1], vbuf[v0 + 2], vbuf[v1], vbuf[v1 + 1], vbuf[v1 + 2], vbuf[v2], vbuf[v2 + 1], vbuf[v2 + 2]);
+                        coords.push(vbuf[v0], vbuf[v0 + 1], vbuf[v0 + 2], vbuf[v1], vbuf[v1 + 1], vbuf[v1 + 2], vbuf[v2],
+                                    vbuf[v2 + 1], vbuf[v2 + 2]);
                         v1 = v2;
                         if (needFlat) {
                             n0 = i * 3;
-                            normals.push(fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2], fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2], fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2]);
+                            normals.push(fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2], fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2],
+                                        fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2]);
                         } else {
                             n2 = nibuf[j] * 3;
-                            normals.push(nbuf[n0], nbuf[n0 + 1], nbuf[n0 + 2], nbuf[n1], nbuf[n1 + 1], nbuf[n1 + 2], nbuf[n2], nbuf[n2 + 1], nbuf[n2 + 2]);
+                            normals.push(nbuf[n0], nbuf[n0 + 1], nbuf[n0 + 2], nbuf[n1], nbuf[n1 + 1], nbuf[n1 + 2],
+                                            nbuf[n2], nbuf[n2 + 1], nbuf[n2 + 2]);
                             n1 = n2;
                         }
                         if (hasTextureCoords) {
@@ -1028,12 +1050,14 @@ export class WebGLRenderBackend {
             * Do not need to rebuild, just update normal data.
             */
 
-            const isFlat = (mesh.compiled.remderMode == 'flat') || (mesh.compiled.remderMode == 'textureflat');
-            if (isFlat != needFlat) {
+            const isFlat = (mesh.compiled.remderMode === 'flat') || (mesh.compiled.remderMode === 'textureflat');
+            if (isFlat !== needFlat) {
                 let normals;
                 if (hasTrianglesOnly) {
                     normals = new Float32Array(9 * numOfFaces);
-                    let n0, n1, n2;
+                    let n0;
+                    let n1;
+                    let n2;
                     for (let i = 0, j = 0, faceIndex = 0; i < ibuf.length; i += 4, j += 9, faceIndex++) {
                         if (needFlat) {
                             n0 = faceIndex * 3;
@@ -1058,17 +1082,21 @@ export class WebGLRenderBackend {
                     }
                 } else {
                     normals = [];
-                    let n0, n1, n2;
+                    let n0;
+                    let n1;
+                    let n2;
                     for (let i = 0, j = 0; i < numOfFaces; i++) {
                         n0 = nibuf[j++] * 3;
                         n1 = nibuf[j++] * 3;
                         while (ibuf[j] >= 0) {
                             if (needFlat) {
                                 n0 = i * 3;
-                                normals.push(fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2], fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2], fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2]);
+                                normals.push(fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2], fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2],
+                                            fnbuf[n0], fnbuf[n0 + 1], fnbuf[n0 + 2]);
                             } else {
                                 n2 = nibuf[j] * 3;
-                                normals.push(nbuf[n0], nbuf[n0 + 1], nbuf[n0 + 2], nbuf[n1], nbuf[n1 + 1], nbuf[n1 + 2], nbuf[n2], nbuf[n2 + 1], nbuf[n2 + 2]);
+                                normals.push(nbuf[n0], nbuf[n0 + 1], nbuf[n0 + 2], nbuf[n1], nbuf[n1 + 1], nbuf[n1 + 2],
+                                            nbuf[n2], nbuf[n2 + 1], nbuf[n2 + 2]);
                                 n1 = n2;
                             }
                             j++;
@@ -1079,7 +1107,8 @@ export class WebGLRenderBackend {
                 }
 
                 if (this.isIE11) {
-                    // IE11 does not support bufferSubData() for buffer content update. So the normal VBO has to be reallocated for the new data.
+                    // IE11 does not support bufferSubData() for buffer content update.
+                    // So the normal VBO has to be reallocated for the new data.
                     gl.deleteBuffer(mesh.compiled.normals);
                     mesh.compiled.normals = gl.createBuffer();
                     gl.bindBuffer(gl.ARRAY_BUFFER, mesh.compiled.normals);
@@ -1096,7 +1125,7 @@ export class WebGLRenderBackend {
         /*
         * Build wireframe if it is not built yet.
         */
-        if (renderMode == 'wireframe' && !mesh.compiled.edges) {
+        if (renderMode === 'wireframe' && !mesh.compiled.edges) {
             const edges = makeWireframe(ibuf, vbuf, numOfFaces, hasTrianglesOnly);
 
             mesh.compiled.edges = gl.createBuffer();
@@ -1120,12 +1149,14 @@ export class WebGLRenderBackend {
         const gl = this.gl;
 
         material.compiled = {
-            diffColor: new Float32Array([(material.diffuseColor & 0xff0000) / 16777216, (material.diffuseColor & 0xff00) / 65536, (material.diffuseColor & 0xff) / 256]),
+            diffColor: new Float32Array([(material.diffuseColor & 0xff0000) / 16777216,
+                                        (material.diffuseColor & 0xff00) / 65536,
+                                        (material.diffuseColor & 0xff) / 256]),
         };
 
         const rgba = new Uint8Array((new Uint32Array(material.getPalette())).buffer);
         // the sequence should be converted from BGRA to RGBA by swapping each 1st and 3rd components
-        //TODO: this only works on Little-Endian platforms. We shall also take into account the case for Big-Endian.
+        // TODO: this only works on Little-Endian platforms. We shall also take into account the case for Big-Endian.
         for (let i = 0; i < rgba.length; i += 4) {
             const tmp = rgba[i];
             rgba[i] = rgba[i + 2];
@@ -1165,7 +1196,7 @@ export class WebGLRenderBackend {
 
         const rgba = new Uint8Array((new Uint32Array(texture.data)).buffer);
         // convert the sequence from BGRA to RGBA by swapping each 1st and 3rd components
-        //TODO: also take into account the case for Big-Endian?
+        // TODO: also take into account the case for Big-Endian?
         for (let i = 0; i < rgba.length; i += 4) {
             const tmp = rgba[i];
             rgba[i] = rgba[i + 2];
