@@ -1,7 +1,8 @@
 /**
-	@class AABB
-
-	This class implements the Axis-Aligned Bounding Box to measure spatial enclosure.
+ *
+ * @class AABB
+ *
+ * This class implements the Axis-Aligned Bounding Box to measure spatial enclosure.
  */
 export class AABB {
     minX: number;
@@ -39,30 +40,31 @@ export class AABB {
     }
 
     /**
-        Get center coordinates of the AABB.
-        @param {Array} c an array to receive the result.
-        @returns {Array} center coordinates as an array.
-    */
+     * Get center coordinates of the AABB.
+     *  @param {Array} c an array to receive the result.
+     *  @returns {Array} center coordinates as an array.
+     */
+
     center(c) {
-        if(c) {
+        if (c) {
             c[0] = 0.5 * (this.minX + this.maxX);
             c[1] = 0.5 * (this.minY + this.maxY);
             c[2] = 0.5 * (this.minZ + this.maxZ);
-        }
-        else
+        } else {
             c = [0.5 * (this.minX + this.maxX), 0.5 * (this.minY + this.maxY), 0.5 * (this.minZ + this.maxZ)];
+        }
         return c;
     }
 
     /**
-        Get the length of the diagonal of the AABB.
-        @returns {Number} length of the diagonal.
-    */
+     * Get the length of the diagonal of the AABB.
+     * @returns {Number} length of the diagonal.
+     */
+
     lengthOfDiagonal() {
-        var xx = this.maxX - this.minX;
-        var yy = this.maxY - this.minY;
-        var zz = this.maxZ - this.minZ;
+        const xx = this.maxX - this.minX;
+        const yy = this.maxY - this.minY;
+        const zz = this.maxZ - this.minZ;
         return Math.sqrt(xx * xx + yy * yy + zz * zz);
     }
 }
-

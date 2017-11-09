@@ -1,10 +1,10 @@
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {DigitalPart} from '../../model/digital-part';
-import {DigitalPartMockService} from '../../services/digital-part/digital-part-mock.service';
-import {ErrorService} from '../../services/error.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { DigitalPart } from '../../model/digital-part';
+import { DigitalPartMockService } from '../../services/digital-part/digital-part-mock.service';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-digital-part-detail',
@@ -32,14 +32,14 @@ export class DigitalPartDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      if (!id || id == 'create'){ //new product is being created
+      if (!id || id === 'create') { // new product is being created
         this.creating = true;
         /* init with a boilerplate */
-        if (this.creating)this.digitalPart = new DigitalPart({});
+        if (this.creating) { this.digitalPart = new DigitalPart({}); }
         this.populate();
-      }
-      else if (id)
+      } else if (id) {
         this.getData(id);
+      }
     });
   }
 
@@ -47,7 +47,7 @@ export class DigitalPartDetailComponent implements OnInit {
   }
 
   /* get the product */
-  getData(id){
+  getData(id) {
     this.digitalPartMockService.getDigialPart(id).subscribe(
       (digitalPart) => {
         this.digitalPart = digitalPart;
@@ -57,7 +57,7 @@ export class DigitalPartDetailComponent implements OnInit {
   }
 
   /* populate data */
-  private populate(){
+  private populate() {
     this.constructForms();
   }
 
@@ -66,7 +66,7 @@ export class DigitalPartDetailComponent implements OnInit {
     const fields = {
       name: [this.digitalPart && this.digitalPart.name ? this.digitalPart.name : '',
       Validators.compose([Validators.required])],
-      id: [{value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true},
+      id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
       stlFile: [this.digitalPart && this.digitalPart.stlFile ? this.digitalPart.stlFile : '',
       Validators.compose([Validators.required])],
@@ -77,7 +77,7 @@ export class DigitalPartDetailComponent implements OnInit {
     this.loaded = true;
   }
 
-  back(){
+  back() {
     this._location.back();
   }
 

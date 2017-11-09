@@ -131,4 +131,3 @@ import {HttpClientService} from './services/http/http-client.service';
   bootstrap: [AppComponent],
 })
 export class AppModule { }
-

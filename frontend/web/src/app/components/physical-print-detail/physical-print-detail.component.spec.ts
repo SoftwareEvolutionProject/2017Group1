@@ -8,7 +8,7 @@ describe('PhysicalPrintDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhysicalPrintDetailComponent ]
+      declarations: [ PhysicalPrintDetailComponent ],
     })
     .compileComponents();
   }));

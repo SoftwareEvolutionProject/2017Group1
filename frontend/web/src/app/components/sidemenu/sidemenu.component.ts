@@ -20,22 +20,22 @@ export class SidemenuComponent implements OnInit, AfterViewInit {
     this.trigger = $('.hamburger');
 
     const _self = this;
-    this.trigger.click(function() {
+    this.trigger.click(() => {
       _self.hamburger_cross();
     });
 
-    $('[data-toggle="offcanvas"]').click(function() {
+    $('[data-toggle="offcanvas"]').click(() =>  {
       $('#wrapper').toggleClass('toggled');
     });
 
-    $('[data-toggle="collapse"]').click(function(){
+    $('[data-toggle="collapse"]').click(function() {
       $(this).find('em').toggleClass('glyphicon-menu-down').toggleClass('glyphicon-menu-up');
     });
   }
 
   hamburger_cross() {
 
-    if (this.isClosed == true) {
+    if (this.isClosed === true) {
       this.trigger.removeClass('is-open');
       this.trigger.addClass('is-closed');
       this.isClosed = false;
