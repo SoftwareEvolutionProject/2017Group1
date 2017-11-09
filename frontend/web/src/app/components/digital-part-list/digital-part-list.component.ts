@@ -96,7 +96,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
 
   private prepareTriggers() {
     const _self = this;
-    (this.table as any).on('click-row.bs.table', function(row, $element) {
+    (this.table as any).on('click-row.bs.table', (row, $element) => {
       _self.router.navigate([_self.router.url, $element.id]);
     });
   }

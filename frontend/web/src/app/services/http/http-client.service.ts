@@ -16,7 +16,7 @@ export class HttpClientService {
       .map((res: Response) => {
         return res.json();
       }).catch((error: any) => {
-        if (error.status == 0) {
+        if (error.status === 0) {
           error.verbose_message = 'Unable to get resource: connection cannot be established';
         } else {
           error.verbose_message = 'Unable to get resource: unknown error';
@@ -30,7 +30,7 @@ export class HttpClientService {
       .map((res: Response) => {
         return res.json();
       }).catch((error: any) => {
-        if (error.status == 0) {
+        if (error.status === 0) {
           error.verbose_message = 'Unable to create resource: connection cannot be established';
         } else {
           error.verbose_message = 'Unable to create resource: unknown error';
@@ -44,7 +44,7 @@ export class HttpClientService {
       .map((res: Response) => {
         return res.json();
       }).catch((error: any) => {
-        if (error.status == 0) {
+        if (error.status === 0) {
           error.verbose_message = 'Unable to update resource: connection cannot be established';
         } else {
           error.verbose_message = 'Unable to update resource: unknown error';
@@ -58,7 +58,7 @@ export class HttpClientService {
       .map((res: Response) => {
         return res.json();
       }).catch((error: any) => {
-        if (error.status == 0) {
+        if (error.status === 0) {
           error.verbose_message = 'Unable to delete resource: connection cannot be established';
         } else {
           error.verbose_message = 'Unable to delete resource: unknown error';

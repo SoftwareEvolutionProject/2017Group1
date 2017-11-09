@@ -102,7 +102,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
 
   private prepareTriggers() {
     const _self = this;
-    (this.table as any).on('click-row.bs.table', function(row, $element) {
+    (this.table as any).on('click-row.bs.table', (row, $element) => {
       _self.selectedCustomer = _self.customers.filter((customer) => { if (customer.id === $element.id) { return customer; } })[0];
     });
   }

@@ -1,9 +1,8 @@
 import { AABB } from './AABB';
 
 /**
-	@class Scene
-
-	This class implements scene that contains a group of meshes that forms the world.
+ * @class Scene
+ * This class implements scene that contains a group of meshes that forms the world.
  */
 export class Scene {
     /**
@@ -30,15 +29,15 @@ export class Scene {
     }
 
     /**
-        Initialize the scene.
-    */
+     * Initialize the scene.
+     */
     init() {
         if (this.isEmpty()) {
             return;
         }
 
-        for (let i = 0; i < this.children.length; i++) {
-            this.children[i].init();
+        for (const child of this.children) {
+            child.init();
         }
 
         if (!this.aabb) {
@@ -48,26 +47,26 @@ export class Scene {
     }
 
     /**
-        See if the scene is empty.
-        @returns {Boolean} true if it does not contain meshes; false if it has any.
-    */
+     * See if the scene is empty.
+     * @returns {Boolean} true if it does not contain meshes; false if it has any.
+     */
     isEmpty() {
-        return (this.children.length == 0);
+        return (this.children.length === 0);
     }
 
     /**
-        Add a mesh to the scene.
-        @param {JSC3D.Mesh} mesh the mesh to be added.
-    */
+     * Add a mesh to the scene.
+     * @param {JSC3D.Mesh} mesh the mesh to be added.
+     */
     addChild(mesh) {
         mesh.internalId = this.maxChildId++;
         this.children.push(mesh);
     }
 
     /**
-        Remove a mesh from the scene.
-        @param {JSC3D.Mesh} mesh the mesh to be removed.
-    */
+     * Remove a mesh from the scene.
+     * @param {JSC3D.Mesh} mesh the mesh to be removed.
+     */
     removeChild(mesh) {
         const foundAt = this.children.indexOf(mesh);
         if (foundAt >= 0) {
@@ -76,22 +75,21 @@ export class Scene {
     }
 
     /**
-        Get all meshes in the scene.
-        @returns {Array} meshes as an array.
-    */
+     * Get all meshes in the scene.
+     * @returns {Array} meshes as an array.
+     */
     getChildren() {
         return this.children.slice(0);
     }
 
     /**
-	Calculate AABB of the scene.
-	@private
-    */
+     * Calculate AABB of the scene.
+     * @private
+     */
     private calcAABB() {
         this.aabb.minX = this.aabb.minY = this.aabb.minZ = Infinity;
         this.aabb.maxX = this.aabb.maxY = this.aabb.maxZ = -Infinity;
-        for (let i = 0; i < this.children.length; i++) {
-            const child = this.children[i];
+        for (const child of this.children) {
             if (!child.isTrivial()) {
                 const minX = child.aabb.minX;
                 const minY = child.aabb.minY;

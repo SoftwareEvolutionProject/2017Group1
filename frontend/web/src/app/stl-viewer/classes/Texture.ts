@@ -66,7 +66,7 @@ export class Texture {
             self.createFromImage(this, useMipmap);
         };
 
-        img.onerror = function() {
+        img.onerror = () => {
             self.data = null;
             self.mipmaps = null;
             self.mipentries = null;

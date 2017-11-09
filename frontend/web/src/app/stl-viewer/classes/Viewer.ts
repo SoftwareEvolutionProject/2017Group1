@@ -622,9 +622,9 @@ export class Viewer {
 
         if (pickedId > 0) {
             const meshes = this.scene.getChildren();
-            for (let i = 0; i < meshes.length; i++) {
-                if (meshes[i].internalId  === pickedId) {
-                    pickInfo.mesh = meshes[i];
+            for (const mesh of meshes) {
+                if (mesh.internalId  === pickedId) {
+                    pickInfo.mesh = mesh;
                     break;
                 }
             }
