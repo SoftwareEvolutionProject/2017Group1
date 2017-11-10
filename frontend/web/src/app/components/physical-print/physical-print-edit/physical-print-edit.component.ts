@@ -2,18 +2,17 @@ import {Location} from '@angular/common';
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {isNullOrUndefined} from 'util';
-import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 import {PhysicalPrint} from '../../../model/physical-print';
 import {ErrorService} from '../../../services/error.service';
+import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 
 @Component({
   selector: 'app-physical-print-edit',
   providers: [PhysicalPrintService, ErrorService],
   templateUrl: './physical-print-edit.component.html',
-  styleUrls: ['./physical-print-edit.component.scss']
+  styleUrls: ['./physical-print-edit.component.scss'],
 })
-export class PhysicalPrintEditComponent implements OnInit {
+export class PhysicalPrintEditComponent implements OnInit, OnChanges {
 
   @Input('physicalPrint') physicalPrint: PhysicalPrint = null;
   @Input('nav') nav = true;
@@ -34,21 +33,20 @@ export class PhysicalPrintEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      if (id == 'create') { //new product is being created
+      if (id === 'create') { // new product is being created
         this.create();
-      }
-      else if (id)
+      } else if (id) {
         this.getData(id);
+      }
     });
-  }
-
-  ngAfterViewInit() {
   }
 
   create() {
     /* init with a boilerplate */
     this.creating = true;
-    if (this.creating) this.physicalPrint = new PhysicalPrint({});
+    if (this.creating) {
+      this.physicalPrint = new PhysicalPrint({});
+    }
     this.populate();
   }
 
@@ -101,7 +99,9 @@ export class PhysicalPrintEditComponent implements OnInit {
     if (this.creating) { // a new product
       this.physicalPrintService.createPhysicalPrint(physicalPrint).subscribe(
         (data) => {
-          if (this.nav) this.back();
+          if (this.nav) {
+            this.back();
+          }
           this.changed.emit(data);
         }, (error) => {
           console.log(error);
@@ -111,7 +111,9 @@ export class PhysicalPrintEditComponent implements OnInit {
     } else {
       this.physicalPrintService.updatePhysicalPrint(physicalPrint).subscribe(
         (data) => {
-          if (this.nav) this.back();
+          if (this.nav) {
+            this.back();
+          }
           this.changed.emit(data);
         }, (error) => {
           console.log(error);
@@ -122,13 +124,14 @@ export class PhysicalPrintEditComponent implements OnInit {
   }
 
   cancel() {
-    if (this.nav) this.back();
+    if (this.nav) {
+      this.back();
+    }
     this.changed.emit(this.physicalPrint);
   }
 
   back() {
     this._location.back();
   }
-
 
 }

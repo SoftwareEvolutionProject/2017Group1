@@ -12,7 +12,7 @@ declare var $: any;
   styleUrls: ['./physical-print-list.component.scss'],
   providers: [PhysicalPrintService, ErrorService]
 })
-export class PhysicalPrintListComponent implements OnInit {
+export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
@@ -102,8 +102,12 @@ export class PhysicalPrintListComponent implements OnInit {
 
   private prepareTriggers() {
     const _self = this;
-    (this.table as any).on('click-row.bs.table', function(row, $element) {
-      _self.selected.emit(_self.physicalPrints.filter((physicalPrint) => {if (physicalPrint.id ===  $element.id)return physicalPrint; })[0]);
+    (this.table as any).on('click-row.bs.table', (row, $element) => {
+      _self.selected.emit(_self.physicalPrints.filter((physicalPrint) => {
+        if (physicalPrint.id ===  $element.id) {
+          return physicalPrint;
+        }
+      })[0]);
     });
   }
 
@@ -149,7 +153,7 @@ export class PhysicalPrintListComponent implements OnInit {
 
   openModal(autoFocusIdWithHashtag: string) {
     this.modalRef = this.modalService.show(this.modalDelete);
-    if (autoFocusIdWithHashtag != null && autoFocusIdWithHashtag != '') {
+    if (autoFocusIdWithHashtag != null && autoFocusIdWithHashtag !== '') {
       const addInput: any = ($(autoFocusIdWithHashtag) as any);
       setTimeout(() => {
         addInput.focus();

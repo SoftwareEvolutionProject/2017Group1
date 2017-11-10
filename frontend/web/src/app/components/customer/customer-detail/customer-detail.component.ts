@@ -41,9 +41,6 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     });
   }
 
-  ngAfterViewInit() {
-  }
-
   create() {
     /* init with a boilerplate */
     this.creating = true;
