@@ -1,11 +1,12 @@
-import {Location} from '@angular/common';
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {isNullOrUndefined} from 'util';
-import {CustomerService} from "../../../services/customer/customer.service";
-import {ErrorService} from "../../../services/error.service";
-import {Customer} from "../../../model/customer";
+import { Location } from '@angular/common';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { isNullOrUndefined } from 'util';
+import { Customer } from '../../model/customer';
+import { CustomerMockService } from '../../services/customer/customer-mock.service';
+import { CustomerService } from '../../services/customer/customer.service';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-customer-detail',
@@ -33,11 +34,11 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      if (id == 'create') { //new product is being created
+      if (id === 'create') { // new product is being created
         this.create();
-      }
-      else if (id)
+      } else if (id) {
         this.getData(id);
+      }
     });
   }
 
@@ -47,7 +48,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   create() {
     /* init with a boilerplate */
     this.creating = true;
-    if (this.creating) this.customer = new Customer({});
+    if (this.creating) { this.customer = new Customer({}); }
     this.populate();
   }
 
@@ -59,7 +60,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     }
   }
 
-  /* getPhysicalPrint the product */
+  /* get the product */
   getData(id) {
     this.customerService.getCustomer(id).subscribe(
       (customer) => {
@@ -78,9 +79,9 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   private constructForms() {
     const fields = {
       name: [this.customer && this.customer.name ? this.customer.name : '',
-        Validators.compose([Validators.required])],
+      Validators.compose([Validators.required])],
       eMail: [this.customer && this.customer.eMail ? this.customer.eMail : '',
-        Validators.compose([Validators.required])],
+      Validators.compose([Validators.required])],
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
@@ -100,7 +101,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     if (this.creating) { // a new product
       this.customerService.createCustomer(customer).subscribe(
         (data) => {
-          if (this.nav) this.back();
+          if (this.nav) { this.back(); }
           this.changed.emit(data);
         }, (error) => {
           console.log(error);
@@ -110,7 +111,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     } else {
       this.customerService.updateCustomer(customer).subscribe(
         (data) => {
-          if (this.nav) this.back();
+          if (this.nav) { this.back(); }
           this.changed.emit(data);
         }, (error) => {
           console.log(error);
@@ -121,7 +122,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
   }
 
   cancel() {
-    if (this.nav) this.back();
+    if (this.nav) { this.back(); }
     this.changed.emit(this.customer);
   }
 

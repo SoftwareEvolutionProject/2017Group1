@@ -1,5 +1,6 @@
 package se.chalmers.dat265.group1.api;
 
+import se.chalmers.dat265.group1.model.DataModel;
 import se.chalmers.dat265.group1.model.*;
 import se.chalmers.dat265.group1.storage.DBInterface;
 import se.chalmers.dat265.group1.storage.PostgresSQLConnector;

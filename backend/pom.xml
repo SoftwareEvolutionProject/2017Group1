@@ -38,7 +38,7 @@
     </dependencies>
 
     <parent>
-        <groupId>com.dat265.sverea</groupId>
+        <groupId>com.dat265.swerea</groupId>
         <artifactId>parent</artifactId>
         <version>1</version>
     </parent>

@@ -60,9 +60,9 @@ script:
   - docker ps -a
   - docker-compose up -d --build
 
-  #docker exec -it sverea bash
+  #docker exec -it swerea bash
 
-  - docker exec sverea bash -c "make install"
-  - docker exec sverea bash -c "make db-init"
-  - docker exec sverea bash -c "make test"
+  - docker exec swerea bash -c "make install"
+  - docker exec swerea bash -c "make db-init"
+  - docker exec swerea bash -c "make test"
 

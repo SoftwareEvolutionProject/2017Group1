@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {RouterTestingModule} from '@angular/router/testing';
-import {BsModalService, ModalModule} from 'ngx-bootstrap';
-import {CustomerMockService} from '../../../services/customer/customer-mock.service';
-import {CustomerService} from '../../../services/customer/customer.service';
-import {ErrorService} from '../../../services/error.service';
-import {CustomerDetailPanelComponent} from '../customer-detail-panel/customer-detail-panel.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BsModalService, ModalModule } from 'ngx-bootstrap';
+import { CustomerMockService } from '../../services/customer/customer-mock.service';
+import { CustomerService } from '../../services/customer/customer.service';
+import { ErrorService } from '../../services/error.service';
+import { CustomerDetailPanelComponent } from '../customer-detail-panel/customer-detail-panel.component';
 import { CustomerListComponent } from './customer-list.component';
 
 describe('CustomerListComponent', () => {
@@ -14,19 +14,19 @@ describe('CustomerListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomerListComponent, CustomerDetailPanelComponent ],
+      declarations: [CustomerListComponent, CustomerDetailPanelComponent],
       imports: [RouterTestingModule, ModalModule.forRoot()],
     });
     TestBed.overrideComponent(CustomerListComponent, {
       set: {
         providers: [
-          {provide: CustomerService, useClass: CustomerMockService},
-          {provide: ErrorService, useClass: ErrorService},
+          { provide: CustomerService, useClass: CustomerMockService },
+          { provide: ErrorService, useClass: ErrorService },
           BsModalService,
         ],
       },
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -35,7 +35,7 @@ describe('CustomerListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should CustomerListComponent', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

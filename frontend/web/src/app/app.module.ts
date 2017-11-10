@@ -9,9 +9,9 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import { SidebarModule } from 'ng-sidebar';
 import {AlertModule, ModalModule} from 'ngx-bootstrap';
-import { CustomerDetailPanelComponent } from './components/customer/customer-detail-panel/customer-detail-panel.component';
-import { CustomerDetailComponent } from './components/customer/customer-detail/customer-detail.component';
-import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
+import { CustomerDetailPanelComponent } from './components/customer-detail-panel/customer-detail-panel.component';
+import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
+import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { DigitalPartDetailComponent } from './components/digital-part-detail/digital-part-detail.component';
 import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
 import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
@@ -21,16 +21,12 @@ import { MaterialDetailComponent } from './components/material-detail/material-d
 import { MaterialListComponent } from './components/material-list/material-list.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
+import { PhysicalPartDetailComponent } from './components/physical-part-detail/physical-part-detail.component';
+import { PhysicalPartListComponent } from './components/physical-part-list/physical-part-list.component';
+import { PhysicalPrintDetailComponent } from './components/physical-print-detail/physical-print-detail.component';
+import { PhysicalPrintListComponent } from './components/physical-print-list/physical-print-list.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
-import { CustomerMasterViewComponent } from './components/customer/customer-master-view/customer-master-view.component';
-import { PhysicalPrintMasterViewComponent } from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
-import { PhysicalPrintDetailsPanelComponent } from './components/physical-print/physical-print-details-panel/physical-print-details-panel.component';
-import { PhysicalPrintEditComponent } from './components/physical-print/physical-print-edit/physical-print-edit.component';
-import { PhysicalPrintListComponent } from './components/physical-print/physical-print-list/physical-print-list.component';
-import {Error500Component} from "./components/errors/500-error/500-error.component";
-import {Error404Component} from "./components/errors/404-error/404-error.component";
-
 
 @NgModule({
   declarations: [
@@ -44,18 +40,15 @@ import {Error404Component} from "./components/errors/404-error/404-error.compone
     DigitalPartDetailComponent,
     DigitalPrintListComponent,
     DigitalPrintDetailComponent,
+    PhysicalPrintDetailComponent,
+    PhysicalPrintListComponent,
+    PhysicalPartDetailComponent,
+    PhysicalPartListComponent,
     OrderDetailComponent,
     OrderListComponent,
     MaterialListComponent,
     MaterialDetailComponent,
     CustomerDetailPanelComponent,
-    CustomerMasterViewComponent,
-    PhysicalPrintMasterViewComponent,
-    PhysicalPrintDetailsPanelComponent,
-    PhysicalPrintEditComponent,
-    PhysicalPrintListComponent,
-    Error404Component,
-    Error500Component
   ],
   imports: [
     AlertModule.forRoot(),
@@ -68,12 +61,16 @@ import {Error404Component} from "./components/errors/404-error/404-error.compone
 
     RouterModule.forRoot([
       {
+        path: '',
+        component: HomeComponent,
+      },
+      {
         path: 'home',
         component: HomeComponent,
       },
       {
         path: 'customers',
-        component: CustomerMasterViewComponent,
+        component: CustomerListComponent,
       },
       {
         path: 'customers/:id',
@@ -97,11 +94,11 @@ import {Error404Component} from "./components/errors/404-error/404-error.compone
       },
       {
         path: 'physical-parts',
-        component: HomeComponent,
+        component: PhysicalPartListComponent,
       },
       {
         path: 'physical-parts/:id',
-        component: HomeComponent,
+        component: PhysicalPartDetailComponent,
       },
       {
         path: 'digital-prints',
@@ -113,11 +110,11 @@ import {Error404Component} from "./components/errors/404-error/404-error.compone
       },
       {
         path: 'physical-prints',
-        component: PhysicalPrintMasterViewComponent,
+        component: PhysicalPrintListComponent,
       },
       {
         path: 'physical-prints/:id',
-        component: PhysicalPrintEditComponent,
+        component: PhysicalPrintDetailComponent,
       },
       {
         path: 'materials',
@@ -127,14 +124,6 @@ import {Error404Component} from "./components/errors/404-error/404-error.compone
         path: 'materials/:id',
         component: MaterialDetailComponent,
       },
-      {
-        path: '500',
-        component: Error500Component
-      },
-      {
-        path: '404',
-        component: Error404Component
-      },
     ]),
   ],
 
@@ -142,4 +131,3 @@ import {Error404Component} from "./components/errors/404-error/404-error.compone
   bootstrap: [AppComponent],
 })
 export class AppModule { }
-

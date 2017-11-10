@@ -3,11 +3,17 @@ package se.chalmers.dat265.group1.model;
 
 import java.time.Instant;
 
-public class Order implements DataModel{
+public class Order extends DataModel {
 
     private int id;
     private int customerID;
-    private Instant date;
+    private String date;
+
+    public Order() {
+        id = -1;
+        customerID = -1;
+        date = "";
+    }
 
     public int getId() {
         return id;
@@ -17,7 +23,7 @@ public class Order implements DataModel{
         return customerID;
     }
 
-    public Instant getDate() {
+    public String getDate() {
         return date;
     }
 }

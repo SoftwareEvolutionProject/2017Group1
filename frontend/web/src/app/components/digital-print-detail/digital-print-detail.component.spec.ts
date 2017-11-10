@@ -8,7 +8,7 @@ describe('DigitalPrintDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DigitalPrintDetailComponent ]
+      declarations: [ DigitalPrintDetailComponent ],
     })
     .compileComponents();
   }));
