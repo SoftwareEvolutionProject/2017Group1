@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {PhysicalPrint} from '../../model/physical-print';
 
 @Injectable()
-export class PhysicalPartMockService {
+export class PhysicalPrintMockService {
 
   private data: PhysicalPrint[] = [
     new PhysicalPrint({

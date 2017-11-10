@@ -74,6 +74,7 @@ public class WebApi {
         setupPrintingInterface();
         setupOrderInterface();
         setupDigitalPartsInterface();
+        setupPhysicalInterface();
 
         log.info("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         log.info("SERVER RUNNING!");

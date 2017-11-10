@@ -60,7 +60,7 @@ describe('HttpClientService', () => {
     },
   ]);
 
-  describe('get()', () => {
+  describe('getPhysicalPrint()', () => {
 
     it('should return an array of customers', (done) => {
       backend.connections.subscribe((connection: MockConnection) => {

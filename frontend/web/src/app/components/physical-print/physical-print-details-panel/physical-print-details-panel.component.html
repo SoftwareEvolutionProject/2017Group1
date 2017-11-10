@@ -1,0 +1,10 @@
+<div  class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Details</h3>
+  </div>
+  <div *ngIf="physicalPrint" class="panel-body" style="padding-right: 30px">
+    ID: {{physicalPrint.id}} <br>
+    Digital Print: {{physicalPrint.digitalPrint}}<br>
+    SLM File: {{physicalPrint.slmpath}}
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+
+  <div class="row">
+    <div *ngIf="loaded" >
+
+      <h2  *ngIf="!creating">Editing Physical Print</h2>
+      <h2  *ngIf="creating">Creating new Physical Print</h2>
+
+      <hr>
+
+      <div class="panel panel-default">
+        <div class="panel-body" style="padding-right: 30px">
+
+            <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
+              <label>ID:</label>
+              <span *ngIf="!creating">{{physicalPrint.id}} </span>
+              <span *ngIf="creating">Auto Generated </span>
+              <br>
+
+              <label>Digital Part</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrint').valid}">
+                <input class="form-control" formControlName="digitalPrint" value="{{physicalPrint.digitalPrint}}">
+              </div>
+              <label>SLM File</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('slmpath').valid}">
+                <input class="form-control" formControlName="slmpath" value="{{physicalPrint.slmpath}}">
+              </div>
+            </form>
+
+            <div class="pull-left" style="margin-top: 20px">
+              <button class="btn btn-default"
+                      style="min-width: 100px" (click)="cancel()">Cancel</button>
+            </div>
+            <div class="pull-right" style="margin-top: 20px">
+              <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
+                      style="min-width: 100px" (click)="save()">Save</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
