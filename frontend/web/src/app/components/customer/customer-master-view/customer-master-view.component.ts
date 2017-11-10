@@ -4,7 +4,7 @@ import {Customer} from "../../../model/customer";
 @Component({
   selector: 'app-customer-master-view',
   templateUrl: './customer-master-view.component.html',
-  styleUrls: ['./customer-master-view.component.scss']
+  styleUrls: ['./customer-master-view.component.scss'],
 })
 export class CustomerMasterViewComponent implements OnInit {
 
@@ -14,7 +14,7 @@ export class CustomerMasterViewComponent implements OnInit {
   ngOnInit() {
   }
 
-  public customerSelected(event){
+  public customerSelected(event) {
     this.selectedCustomer = event;
   }
 

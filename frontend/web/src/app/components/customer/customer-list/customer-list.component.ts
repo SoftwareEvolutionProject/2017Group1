@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { Customer } from '../../model/customer';
-import { CustomerService } from '../../services/customer/customer.service';
-import { ErrorService } from '../../services/error.service';
+import {Customer} from '../../../model/customer';
+import {CustomerService} from '../../../services/customer/customer.service';
+import {ErrorService} from '../../../services/error.service';
+
 declare var $: any;
 
 @Component({
@@ -13,6 +14,7 @@ declare var $: any;
   providers: [CustomerService, ErrorService],
 })
 export class CustomerListComponent implements OnInit, AfterViewInit {
+  @Output() selected: EventEmitter<Customer> = new EventEmitter<Customer>();
   private table;
   private customers: Customer[];
 
@@ -103,7 +105,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   private prepareTriggers() {
     const _self = this;
     (this.table as any).on('click-row.bs.table', (row, $element) => {
-      _self.selectedCustomer = _self.customers.filter((customer) => { if (customer.id === $element.id) { return customer; } })[0];
+      _self.selected.emit(_self.customers.filter((customer) => { if (customer.id === $element.id) { return customer; } })[0]);
     });
   }
 

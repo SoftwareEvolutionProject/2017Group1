@@ -5,7 +5,7 @@ import {PhysicalPrint} from '../../../model/physical-print';
 @Component({
   selector: 'app-physical-print-details-panel',
   templateUrl: './physical-print-details-panel.component.html',
-  styleUrls: ['./physical-print-details-panel.component.scss']
+  styleUrls: ['./physical-print-details-panel.component.scss'],
 })
 export class PhysicalPrintDetailsPanelComponent implements OnInit {
   @Input('physicalPrint') physicalPrint: PhysicalPrint = null;
@@ -13,7 +13,6 @@ export class PhysicalPrintDetailsPanelComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("physicalPrint", this.physicalPrint);
   }
 
 }

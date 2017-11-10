@@ -3,10 +3,9 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { isNullOrUndefined } from 'util';
-import { Customer } from '../../model/customer';
-import { CustomerMockService } from '../../services/customer/customer-mock.service';
-import { CustomerService } from '../../services/customer/customer.service';
-import { ErrorService } from '../../services/error.service';
+import {Customer} from '../../../model/customer';
+import {CustomerService} from '../../../services/customer/customer.service';
+import {ErrorService} from '../../../services/error.service';
 
 @Component({
   selector: 'app-customer-detail',
