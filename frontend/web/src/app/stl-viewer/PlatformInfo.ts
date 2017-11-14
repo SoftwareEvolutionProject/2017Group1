@@ -4,7 +4,7 @@ export class PlatformInfo {
 
     browser = 'other';
     version = 'n/a';
-    isTouchDevice = false; // (document.createTouch != undefined); // detect if it is running on touch device
+    isTouchDevice = true; // (document.createTouch != undefined); // detect if it is running on touch device
     supportTypedArrays = false; // (window.Uint32Array != undefined); // see if Typed Arrays are supported
     supportWebGL = true; // (window.WebGLRenderingContext != undefined); // see if WebGL context is supported
 
