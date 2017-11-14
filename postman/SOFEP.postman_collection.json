@@ -1,0 +1,287 @@
+{
+	"info": {
+		"name": "SOFEP",
+		"_postman_id": "21f077c8-d35e-84f0-c5b2-4cad563e823f",
+		"description": "# Introduction\nREST-API for the Swerea backend\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CustomerAPI",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All Customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Digital-parts of Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}/digital-part",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}",
+								"digital-part"
+							]
+						},
+						"description": "Get Digital parts belonging to a customer"
+					},
+					"response": []
+				},
+				{
+					"name": "New Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"Lol2kpe Productions\",\n  \"eMail\":\"wannabe@lol2kpe.com\"\n}"
+						},
+						"url": {
+							"raw": "{{domain}}/customers",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\":{{customerID}},\n  \"name\":\"Edited Company\",\n  \"eMail\":\"wannabe@editco.com\"\n}"
+						},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Body is correct\"] = responseBody == customerID;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": "Removes a customer from the system"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderAPI",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/orders",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"orders"
+							]
+						},
+						"description": "Get all orders in the system"
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/orders/{{orderID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"orders",
+								"{{orderID}}"
+							]
+						},
+						"description": "Get order given an ID"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

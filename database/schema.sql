@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS customer(
   email VARCHAR(100)
 );
 
-CREATE TABLE IF NOT EXISTS "order"(
+CREATE TABLE IF NOT EXISTS orderdata(
   id serial PRIMARY KEY,
   customerID INTEGER REFERENCES customer(id),
   date DATE
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS digitalpart(
 
 CREATE TABLE IF NOT EXISTS orderedpart(
   id serial PRIMARY KEY,
-  orderID INTEGER REFERENCES "order"(id),
+  orderID INTEGER REFERENCES orderdata(id),
   digitalPartID INTEGER REFERENCES digitalpart(id),
   amount INTEGER
 );

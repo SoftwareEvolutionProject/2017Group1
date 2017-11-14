@@ -1,6 +1,8 @@
 package se.chalmers.dat265.group1;
 
 import se.chalmers.dat265.group1.api.MaterialInterface;
+import se.chalmers.dat265.group1.api.order.OrderAPI;
+import se.chalmers.dat265.group1.api.order.OrderController;
 import se.chalmers.dat265.group1.api.physical.PhysicalAPI;
 import se.chalmers.dat265.group1.api.physical.PhysicalsController;
 import se.chalmers.dat265.group1.api.printing.PrintingController;
@@ -13,6 +15,7 @@ import com.google.gson.Gson;
 import se.chalmers.dat265.group1.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import se.chalmers.dat265.group1.model.dbEntities.OrderedPart;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import static spark.Spark.*;
@@ -23,6 +26,7 @@ import static spark.Spark.*;
 public class WebApi {
 
     private static CustomerAPI ci;
+    private static OrderAPI oi;
     private static DigitalPartAPI dpi;
     private static MaterialInterface mi;
     private static PrintingAPI pi;
@@ -64,6 +68,8 @@ public class WebApi {
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
         dpi = new DigitalPartController(debug);
+        oi = new OrderController(debug);
+
         long start = System.currentTimeMillis();
         log.info("STARTED ENDPIONT SETUP");
         log.info("STARTED ENDPIONT SETUP");
@@ -94,9 +100,7 @@ public class WebApi {
         // Customers
         get(CUSTOMERS_URL, (request, response) -> ci.getAllCustomers(), gson::toJson);
         get(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.getCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
-        get(CUSTOMERS_URL + CUSTOMER_ID_URL + ORDERS_URL, ((request, response) -> ci.getOrdersFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
         get(CUSTOMERS_URL + CUSTOMER_ID_URL + DIGITALPARTS_URL, ((request, response) -> ci.getDigitalPartsFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
-        get(CUSTOMERS_URL + CUSTOMER_ID_URL + PHYSICALPARTS_URL, ((request, response) -> ci.getPhysicalPartsFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
         post(CUSTOMERS_URL, ((request, response) -> ci.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
         put(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.updateCustomer(request.params(CUSTOMER_PARAM), gson.fromJson(request.body(), Customer.class))), gson::toJson);
         delete(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.deleteCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
@@ -127,13 +131,10 @@ public class WebApi {
 
     private static void setupOrderInterface() {
         //Orders
-        get(ORDERS_URL, (request, response) -> ci.getAllOrders(), gson::toJson);
-        get(ORDERS_URL + ORDER_ID_URL, (request, response) -> ci.getOrder(request.params(ORDER_ID_PARAM)), gson::toJson);
-        get(ORDERS_URL + ORDER_ID_URL + PARTS_URL, (request, response) -> ci.getOrderedParts(request.params(ORDER_ID_PARAM)), gson::toJson);
-        post(ORDERS_URL, ((request, response) -> ci.createNewOrder(gson.fromJson(request.body(), Order.class))), gson::toJson);
-        put(ORDERS_URL + ORDER_ID_URL, ((request, response) -> ci.updateOrder(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), Order.class))), gson::toJson);
-        post(ORDERS_URL + ORDER_ID_URL + PARTS_URL, ((request, response) -> ci.createNewOrderedPart(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
-        put(ORDERS_URL + ORDER_ID_URL + PARTS_URL + ORDEREDPART_ID_URL, ((request, response) -> ci.updateOrderDetail(request.params(ORDER_ID_PARAM), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
+        get(ORDERS_URL, (request, response) -> oi.getAllOrders(), gson::toJson);
+        get(ORDERS_URL + ORDER_ID_URL, (request, response) -> oi.getOrder(request.params(ORDER_ID_PARAM)), gson::toJson);
+        post(ORDERS_URL, ((request, response) -> oi.createNewOrder(gson.fromJson(request.body(), Order.class))), gson::toJson);
+        put(ORDERS_URL + ORDER_ID_URL, ((request, response) -> oi.updateOrder(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), Order.class))), gson::toJson);
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.
