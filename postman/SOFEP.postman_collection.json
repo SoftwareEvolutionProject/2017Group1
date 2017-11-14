@@ -7,103 +7,281 @@
 	},
 	"item": [
 		{
-			"name": "New Customer",
-			"event": [
+			"name": "CustomerAPI",
+			"description": "",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"name\":\"Lol2kpe Productions\",\n  \"eMail\":\"wannabe@lol2kpe.com\"\n}"
-				},
-				"url": {
-					"raw": "{{domain}}/customers",
-					"host": [
-						"{{domain}}"
+					"name": "Get All Customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
 					],
-					"path": [
-						"customers"
-					]
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers"
+							]
+						},
+						"description": ""
+					},
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
+				{
+					"name": "Get Customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Digital-parts of Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}/digital-part",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}",
+								"digital-part"
+							]
+						},
+						"description": "Get Digital parts belonging to a customer"
+					},
+					"response": []
+				},
+				{
+					"name": "New Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"Lol2kpe Productions\",\n  \"eMail\":\"wannabe@lol2kpe.com\"\n}"
+						},
+						"url": {
+							"raw": "{{domain}}/customers",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\":{{customerID}},\n  \"name\":\"Edited Company\",\n  \"eMail\":\"wannabe@editco.com\"\n}"
+						},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Body is correct\"] = responseBody == customerID;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": "Removes a customer from the system"
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "Get All Customers",
-			"event": [
+			"name": "OrderAPI",
+			"description": "",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{domain}}/customers",
-					"host": [
-						"{{domain}}"
+					"name": "Get Orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
 					],
-					"path": [
-						"customers"
-					]
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/orders",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"orders"
+							]
+						},
+						"description": "Get all orders in the system"
+					},
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Get Customers",
-			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{domain}}/customers/{{customerID}}",
-					"host": [
-						"{{domain}}"
+					"name": "Get specific order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
 					],
-					"path": [
-						"customers",
-						"{{customerID}}"
-					]
-				},
-				"description": ""
-			},
-			"response": []
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/orders/{{orderID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"orders",
+								"{{orderID}}"
+							]
+						},
+						"description": "Get order given an ID"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
