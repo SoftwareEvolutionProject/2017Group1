@@ -26,4 +26,8 @@ public class OrderedPart extends DataModel {
     public int getId() {
         return id;
     }
+
+    public void setID(int ID) {
+        this.id = ID;
+    }
 }
