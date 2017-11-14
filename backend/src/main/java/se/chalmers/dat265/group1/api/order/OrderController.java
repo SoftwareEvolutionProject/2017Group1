@@ -46,11 +46,6 @@ public class OrderController extends ApiController implements OrderAPI {
     }
 
     @Override
-    public List<OrderedPart> getOrderedParts(String orderID) {
-        return orderedPartRepository.getObjects("orderID=" + orderID);
-    }
-
-    @Override
     public Order updateOrder(String orderID, Order order) {
         checkIDs(orderID, order);
 
@@ -76,17 +71,6 @@ public class OrderController extends ApiController implements OrderAPI {
             orderedPartRepository.deleteObject(dbOrderdPart.getId());
         }
         return getOrder(orderID);
-    }
-
-    @Override
-    public OrderedPart createNewOrderedPart(String orderID, OrderedPart orderedPart) {
-        return orderedPartRepository.postObject(orderedPart);
-    }
-
-    @Override
-    public OrderedPart updateOrderDetail(String orderID, String orderedPartID, OrderedPart orderedPart) {
-        checkIDs(orderedPartID, orderedPart);
-        return orderedPartRepository.updateObject(orderedPart);
     }
 
     @Override

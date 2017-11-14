@@ -15,11 +15,5 @@ public interface OrderAPI {
 
     Order createNewOrder(Order order);
 
-    List<OrderedPart> getOrderedParts(String orderID);
-
     Order updateOrder(String orderID, Order order);
-
-    OrderedPart createNewOrderedPart(String orderID, OrderedPart orderedPart);
-
-    OrderedPart updateOrderDetail(String orderID, String orderedPartID, OrderedPart orderedPart);
 }
