@@ -924,7 +924,7 @@ export class Viewer {
                 return;
             }
 
-            if (this.mouseUsage  === 'zoom') {
+            if (this.mouseUsage  === 'zoom' && e.touches.length === 2) {
                 const clientX1 = e.touches[1].clientX;
                 const clientY1 = e.touches[1].clientY;
                 const dc = (clientX - clientX1) ** 2 + (clientY - clientY1) ** 2;
@@ -933,7 +933,7 @@ export class Viewer {
                 this.zoomFactor *= (dc > dm) ? 1.04 : 0.96;
                 this.mouseX1 = clientX1;
                 this.mouseY1 = clientY1;
-            } else if (this.mouseUsage  === 'pan') {
+            } else if (this.mouseUsage  === 'pan' && e.touches.length === 2) {
                 const ratio = (this.definition  === 'low') ? 0.5 : ((this.definition  === 'high') ? 2 : 1);
                 this.panning[0] += ratio * (clientX - this.mouseX);
                 this.panning[1] += ratio * (clientY - this.mouseY);
