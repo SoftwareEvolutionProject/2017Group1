@@ -46,8 +46,8 @@ public class WebApi {
     private static final String DIGITALPRINT_URL = "/digital-print";
     private static final String DIGITALPRINT_ID_URL = "/:digitalPrint";
 
-    private static final String DIGITALPARTS_URL = "/digital-part";
-    private static final String DIGITALPART_ID_URL = "/:digitalPart";
+    private static final String DIGITALPARTS_URL = "/digital-parts";
+    private static final String DIGITALPART_ID_URL = "/:digitalPartID";
     private static final String DIGITALPART_ID_PARAM = "digitalPartID";
 
     private static final String PHYSICALPRINTS_URL = "/physical-prints";
