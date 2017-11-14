@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { DigitalPart } from '../../../model/digital-part';
-import { DigitalPartMockService } from '../../../services/digital-part/digital-part-mock.service';
+import { DigitalPartService } from '../../../services/digital-part/digital-part.service';
 import { ErrorService } from '../../../services/error.service';
 declare var $: any;
 
@@ -10,7 +10,7 @@ declare var $: any;
   selector: 'app-digital-part-list',
   templateUrl: './digital-part-list.component.html',
   styleUrls: ['./digital-part-list.component.scss'],
-  providers: [DigitalPartMockService, ErrorService],
+  providers: [DigitalPartService, ErrorService],
 })
 export class DigitalPartListComponent implements OnInit, AfterViewInit {
   private table;
@@ -20,7 +20,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
 
-  constructor(private digitalPartMockService: DigitalPartMockService,
+  constructor(private digitalPartService: DigitalPartService,
               private errorService: ErrorService,
               private router: Router,
               private modalService: BsModalService) {
@@ -36,7 +36,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
 
   loadAndPopulate() {
     /* getPhysicalPrint users */
-    this.digitalPartMockService.getDigitalParts().subscribe(
+    this.digitalPartService.getDigitalParts().subscribe(
       (customers) => {
         this.digitalParts = customers;
 
@@ -130,7 +130,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
 
   private confirmDelete() {
     if (this.toBeDeleted) {
-      this.digitalPartMockService.delete(this.toBeDeleted).subscribe((res) => {
+      this.digitalPartService.deleteDigitalPart(this.toBeDeleted).subscribe((res) => {
         this.toBeDeleted = null;
         this.modalRef.hide();
         this.loadAndPopulate();
