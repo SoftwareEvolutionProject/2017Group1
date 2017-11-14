@@ -1,9 +1,9 @@
 export class DigitalPrint {
   public id: number;
   public magicsPath: string;
-  public magicsPartPairing: object;
+  public magicsPartPairing: any;
 
-  constructor(values: Object = {}) {
+  constructor(values) {
     if (!values) {
       return null;
     }

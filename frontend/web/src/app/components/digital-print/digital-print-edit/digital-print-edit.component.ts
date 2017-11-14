@@ -2,13 +2,15 @@ import {Location} from '@angular/common';
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {DigitalPart} from '../../../model/digital-part';
 import {DigitalPrint} from '../../../model/digital-print';
-import {ErrorService} from '../../../services/error.service';
+import {DigitalPartMockService as DigitalPartService} from '../../../services/digital-part/digital-part-mock.service';
 import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
+import {ErrorService} from '../../../services/error.service';
 
 @Component({
   selector: 'app-digital-print-edit',
-  providers: [DigitalPrintService, ErrorService],
+  providers: [DigitalPrintService, ErrorService, DigitalPartService],
   templateUrl: './digital-print-edit.component.html',
   styleUrls: ['./digital-print-edit.component.scss'],
 })
@@ -18,26 +20,36 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
   @Input('nav') nav = true;
   @Input('creating') creating = false;
   @Output() changed: EventEmitter<DigitalPrint> = new EventEmitter<DigitalPrint>();
+
   private loaded = false;
 
   /* forms */
   private requiredFieldsForm: FormGroup = null;
+  magicPairingsFieldsForm: FormGroup[] = [];
+  private digitalParts: DigitalPart[];
 
   constructor(private route: ActivatedRoute,
               private digitalPrintService: DigitalPrintService,
+              private digitalPartService: DigitalPartService,
               private formBuilder: FormBuilder,
               private errorService: ErrorService,
               private _location: Location) {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      const id = params['id'];
-      if (id === 'create') { // new product is being created
-        this.create();
-      } else if (id) {
-        this.getData(id);
-      }
+    /* get parts */
+    this.digitalPartService.getDigitalParts().subscribe((dParts) => {
+      this.digitalParts = dParts;
+
+      /* get route param n create or load */
+      this.route.params.subscribe((params) => {
+        const id = params['id'];
+        if (id === 'create') { // new product is being created
+          this.create();
+        } else if (id) {
+          this.getData(id);
+        }
+      });
     });
   }
 
@@ -45,7 +57,7 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     /* init with a boilerplate */
     this.creating = true;
     if (this.creating) {
-      this.digitalPrint = new DigitalPrint({});
+      this.digitalPrint = new DigitalPrint({'magicsPartPairing':{}});
     }
     this.populate();
   }
@@ -68,6 +80,45 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     );
   }
 
+  private constructMagicPairingFormGroup(){
+    /* load attr with default data from product instance*/
+    this.magicPairingsFieldsForm = [];
+    Object.getOwnPropertyNames(this.digitalPrint.magicsPartPairing).forEach((id) => {
+      this.magicPairingsFieldsForm.push(this.formBuilder.group({
+        magicsId: [id,
+          Validators.compose([Validators.required])],
+        digitalPart: [this.digitalPrint.magicsPartPairing[id] ? this.digitalPrint.magicsPartPairing[id] : '',
+          Validators.compose([Validators.required])],
+      }));
+    });
+    console.log(this.magicPairingsFieldsForm);
+  }
+
+  deleteMagicPairing(option) {
+    this.magicPairingsFieldsForm.splice(option, 1);
+  }
+
+  addMagicPairing() {
+    const fields = {
+      magicsId: ['',
+        Validators.compose([Validators.required])],
+      digitalPart: ['',
+        Validators.compose([Validators.required])],
+    };
+    this.magicPairingsFieldsForm.push(this.formBuilder.group(fields));
+  }
+
+  public pairingValid(): boolean {
+    let valid = true;
+    this.magicPairingsFieldsForm.forEach((formGroup) => {
+      if (!formGroup.valid) {
+        valid = false;
+        return;
+      }
+    });
+    return valid;
+  }
+
   /* populate data */
   private populate() {
     this.constructForms();
@@ -81,6 +132,7 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
+    this.constructMagicPairingFormGroup();
     this.loaded = true;
   }
 
@@ -92,7 +144,14 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     const digitalPrint: DigitalPrint = new DigitalPrint(this.requiredFieldsForm.value);
     this.creating ? delete digitalPrint['id'] : digitalPrint.id = id;
 
+    const pairings = {};
+    this.magicPairingsFieldsForm.forEach((formGroup) => {
+      pairings[formGroup.get('magicsId').value] = parseInt(formGroup.get('digitalPart').value);
+    });
+    digitalPrint.magicsPartPairing = pairings;
+
     console.log(digitalPrint);
+    console.log(JSON.stringify(digitalPrint));
 
     if (this.creating) { // a new product
       this.digitalPrintService.createDigitalPrint(digitalPrint).subscribe(

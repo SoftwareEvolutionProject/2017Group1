@@ -30,6 +30,7 @@ import {PhysicalPrintListComponent} from './components/physical-print/physical-p
 import {PhysicalPrintMasterViewComponent} from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
+import {DropdownModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {HttpClientService} from './services/http/http-client.service';
     PhysicalPrintMasterViewComponent,
   ],
   imports: [
+    DropdownModule,
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     BrowserModule,
