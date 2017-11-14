@@ -101,7 +101,6 @@ public class WebApi {
         get(CUSTOMERS_URL, (request, response) -> ci.getAllCustomers(), gson::toJson);
         get(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.getCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
         get(CUSTOMERS_URL + CUSTOMER_ID_URL + DIGITALPARTS_URL, ((request, response) -> ci.getDigitalPartsFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
-        get(CUSTOMERS_URL + CUSTOMER_ID_URL + PHYSICALPARTS_URL, ((request, response) -> ci.getPhysicalPartsFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
         post(CUSTOMERS_URL, ((request, response) -> ci.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
         put(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.updateCustomer(request.params(CUSTOMER_PARAM), gson.fromJson(request.body(), Customer.class))), gson::toJson);
         delete(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.deleteCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
@@ -134,12 +133,8 @@ public class WebApi {
         //Orders
         get(ORDERS_URL, (request, response) -> oi.getAllOrders(), gson::toJson);
         get(ORDERS_URL + ORDER_ID_URL, (request, response) -> oi.getOrder(request.params(ORDER_ID_PARAM)), gson::toJson);
-        get(ORDERS_URL + ORDER_ID_URL + PARTS_URL, (request, response) -> oi.getOrderedParts(request.params(ORDER_ID_PARAM)), gson::toJson);
         post(ORDERS_URL, ((request, response) -> oi.createNewOrder(gson.fromJson(request.body(), Order.class))), gson::toJson);
         put(ORDERS_URL + ORDER_ID_URL, ((request, response) -> oi.updateOrder(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), Order.class))), gson::toJson);
-        //post(ORDERS_URL + ORDER_ID_URL + PARTS_URL, ((request, response) -> oi.createNewOrderedPart(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
-        //put(ORDERS_URL + ORDER_ID_URL + PARTS_URL + ORDEREDPART_ID_URL, ((request, response) -> oi.updateOrderDetail(request.params(ORDER_ID_PARAM), request.params("orderedPartID"), gson.fromJson(request.body(), OrderedPart.class))), gson::toJson);
-        //get(CUSTOMERS_URL + CUSTOMER_ID_URL + ORDERS_URL, ((request, response) -> oi.getOrdersFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.

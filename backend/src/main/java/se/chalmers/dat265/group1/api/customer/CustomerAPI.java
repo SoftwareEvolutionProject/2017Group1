@@ -16,8 +16,6 @@ public interface CustomerAPI {
 
     List<DigitalPart> getDigitalPartsFromCustomer(String customerID);
 
-    List<PhysicalPart> getPhysicalPartsFromCustomer(String customerID);
-
     Customer createNewCustomer(Customer customer);
 
     Customer updateCustomer(String customerID, Customer customer);
