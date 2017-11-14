@@ -10,7 +10,6 @@ declare var JSC3D: any;
   styleUrls: ['./stl-viewer.component.scss'],
 })
 export class StlViewerComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
@@ -29,5 +28,4 @@ export class StlViewerComponent implements OnInit {
     viewer.setParameter('Renderer', 'webgl');
     viewer.init();
   }
-
 }

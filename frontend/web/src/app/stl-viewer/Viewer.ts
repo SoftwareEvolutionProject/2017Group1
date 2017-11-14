@@ -26,6 +26,8 @@ import { WebGLRenderBackend } from './WebGLRenderBackend';
  */
 
 export class Viewer {
+    mouseY1: any;
+    mouseX1: any;
     loader = null;
 
     canvas = null;
@@ -73,6 +75,7 @@ export class Viewer {
     mouseDownX = -1;
     mouseDownY = -1;
     isTouchHeld = false;
+    isThreeFingeraHeld = false;
     baseZoomFactor = 1;
     suppressDraggingRotation = false;
     progressFrame = null;
@@ -263,6 +266,8 @@ export class Viewer {
             this.canvas.addEventListener('touchstart', (e) => {self.touchStartHandler(e); }, false);
             this.canvas.addEventListener('touchend', (e) => {self.touchEndHandler(e); }, false);
             this.canvas.addEventListener('touchmove', (e) => {self.touchMoveHandler(e); }, false);
+            // Get a reference to an element.
+            // Create an instance of Hammer with the reference.
         }
     }
 
@@ -546,10 +551,27 @@ export class Viewer {
      *   @param {String} usage control of mouse pointer to be set.
      *   @deprecated This method is obsolete since version 1.5.0 and may be removed in the future.
      */
-    setMouseUsage(usage) {
-        this.mouseUsage = usage;
+    setMouseUsage(usage: string|number) {
+        console.log(usage);
+        if (typeof usage === 'string') {
+            this.mouseUsage = usage;
+            console.log("string")
+        } else {
+            console.log("number")
+            switch (usage) {
+                case 1:
+                this.mouseUsage = 'default';
+                break;
+                case 2:
+                this.mouseUsage = 'zoom';
+                break;
+                case 3:
+                this.mouseUsage = 'pan';
+                break;
+                default: this.mouseUsage = 'default';
+            }
+        }
     }
-
     /**
      *   Check if WebGL is enabled for rendering.
      *   @returns {Boolean} true if WebGL is enabled; false if WebGL is not enabled or unavailable.
@@ -785,6 +807,7 @@ export class Viewer {
     }
 
     mouseWheelHandler(e) {
+
         if (!this.isLoaded) {
             return;
         }
@@ -816,8 +839,9 @@ export class Viewer {
         if (!this.isLoaded) {
             return;
         }
-
         if (e.touches.length > 0) {
+            console.log(typeof e.touches.length)
+            this.setMouseUsage(e.touches.length);
             const clientX = e.touches[0].clientX;
             const clientY = e.touches[0].clientY;
 
@@ -887,7 +911,7 @@ export class Viewer {
         if (e.touches.length > 0) {
             const clientX = e.touches[0].clientX;
             const clientY = e.touches[0].clientY;
-
+            
             if (this.onmousemove) {
                 const info = this.pick(clientX, clientY);
                 this.onmousemove(info.canvasX, info.canvasY, 0, info.depth, info.mesh);
@@ -901,7 +925,14 @@ export class Viewer {
             }
 
             if (this.mouseUsage  === 'zoom') {
-                this.zoomFactor *= (this.mouseY <= clientY) ? 1.04 : 0.96;
+                const clientX1 = e.touches[1].clientX;
+                const clientY1 = e.touches[1].clientY;
+                const dc = (clientX - clientX1) ** 2 + (clientY - clientY1) ** 2;
+                const dm = (this.mouseX - this.mouseX1) ** 2 + (this.mouseY - this.mouseY1) ** 2;
+
+                this.zoomFactor *= (dc > dm) ? 1.04 : 0.96;
+                this.mouseX1 = clientX1;
+                this.mouseY1 = clientY1;
             } else if (this.mouseUsage  === 'pan') {
                 const ratio = (this.definition  === 'low') ? 0.5 : ((this.definition  === 'high') ? 2 : 1);
                 this.panning[0] += ratio * (clientX - this.mouseX);
