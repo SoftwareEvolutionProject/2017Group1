@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DigitalPart } from '../../../model/digital-part';
-import { DigitalPartMockService } from '../../../services/digital-part/digital-part-mock.service';
+import { DigitalPartService } from '../../../services/digital-part/digital-part.service';
 import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-digital-part-detail',
   templateUrl: './digital-part-detail.component.html',
   styleUrls: ['./digital-part-detail.component.scss'],
-  providers: [DigitalPartMockService, ErrorService],
+  providers: [DigitalPartService, ErrorService],
 })
 export class DigitalPartDetailComponent implements OnInit {
   private loaded = false;
@@ -24,12 +24,13 @@ export class DigitalPartDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private digitalPartMockService: DigitalPartMockService,
+    private digitalPartService: DigitalPartService,
     private formBuilder: FormBuilder,
     private errorService: ErrorService,
     private _location: Location) { }
 
   ngOnInit(): void {
+    console.log("Vi gör något roligt!");
     this.route.params.subscribe((params) => {
       const id = params['id'];
       if (!id || id === 'create') { // new product is being created
@@ -48,7 +49,7 @@ export class DigitalPartDetailComponent implements OnInit {
 
   /* get the product */
   getData(id) {
-    this.digitalPartMockService.getDigialPart(id).subscribe(
+    this.digitalPartService.getDigitalPart(id).subscribe(
       (digitalPart) => {
         this.digitalPart = digitalPart;
         this.populate();
