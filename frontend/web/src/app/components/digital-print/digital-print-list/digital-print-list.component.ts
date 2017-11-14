@@ -2,8 +2,8 @@ import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild
 import {Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {DigitalPrint} from '../../../model/digital-print';
-import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
 import {ErrorService} from '../../../services/error.service';
+import {DigitalPrintService} from "../../../services/digital-print/digital-print.service";
 declare var $: any;
 
 @Component({

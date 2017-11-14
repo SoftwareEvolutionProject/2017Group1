@@ -5,6 +5,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {ErrorService} from '../../../services/error.service';
 import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
 import {DigitalPrintEditComponent} from './digital-print-edit.component';
+import {HttpClientService} from "../../../services/http/http-client.service";
 
 describe('DigitalPrintEditComponent', () => {
   let component: DigitalPrintEditComponent;
@@ -13,6 +14,7 @@ describe('DigitalPrintEditComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule, ReactiveFormsModule, RouterTestingModule ],
+      providers: [HttpClientService],
       declarations: [ DigitalPrintEditComponent ],
     });
     TestBed.overrideComponent(DigitalPrintEditComponent, {

@@ -4,7 +4,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {BsModalService, ModalModule} from 'ngx-bootstrap';
 import {ErrorService} from '../../../services/error.service';
 import {HttpClientService} from '../../../services/http/http-client.service';
-import {DigitalPrintService} from '../../../services/physical-print/physical-print.service';
+import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
 import {DigitalPrintDetailsPanelComponent} from '../digital-print-details-panel/digital-print-details-panel.component';
 import {DigitalPrintEditComponent} from '../digital-print-edit/digital-print-edit.component';
 import { DigitalPrintListComponent } from './digital-print-list.component';
