@@ -1,4 +1,6 @@
-package se.chalmers.dat265.group1.model;
+package se.chalmers.dat265.group1.model.dbEntities;
+
+import se.chalmers.dat265.group1.model.DataModel;
 
 public class OrderedPart extends DataModel {
 
