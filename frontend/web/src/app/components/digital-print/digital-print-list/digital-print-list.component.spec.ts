@@ -8,6 +8,7 @@ import {DigitalPrintService} from '../../../services/digital-print/digital-print
 import {DigitalPrintDetailsPanelComponent} from '../digital-print-details-panel/digital-print-details-panel.component';
 import {DigitalPrintEditComponent} from '../digital-print-edit/digital-print-edit.component';
 import { DigitalPrintListComponent } from './digital-print-list.component';
+import {DigitalPartMockService} from "../../../services/digital-part/digital-part-mock.service";
 
 describe('DigitalPrintListComponent', () => {
   let component: DigitalPrintListComponent;
@@ -23,6 +24,7 @@ describe('DigitalPrintListComponent', () => {
       set: {
         providers: [
           { provide: DigitalPrintService, useClass: DigitalPrintService },
+          { provide: DigitalPartMockService, useClass: DigitalPartMockService },
           { provide: ErrorService, useClass: ErrorService },
           BsModalService,
         ],
