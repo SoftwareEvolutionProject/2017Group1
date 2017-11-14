@@ -250,15 +250,16 @@ export class Viewer {
         // setup input handlers.
         // compatibility for touch devices is taken into account
         const self = this;
-        if (!this.platformInfo.isTouchDevice) {
-            this.canvas.addEventListener('mousedown', (e) => {self.mouseDownHandler(e); }, false);
-            this.canvas.addEventListener('mouseup', (e) =>  {self.mouseUpHandler(e); }, false);
-            this.canvas.addEventListener('mousemove', (e) => {self.mouseMoveHandler(e); }, false);
-            this.canvas.addEventListener(this.platformInfo.browser === 'firefox' ? 'DOMMouseScroll' : 'mousewheel',
-                                        (e) => {self.mouseWheelHandler(e); }, false);
-            document.addEventListener('keydown', (e) => {self.keyDownHandler(e); }, false);
-            document.addEventListener('keyup', (e) => {self.keyUpHandler(e); }, false);
-        } else {
+    // if (!this.platformInfo.isTouchDevice) {
+        this.canvas.addEventListener('mousedown', (e) => {self.mouseDownHandler(e); }, false);
+        this.canvas.addEventListener('mouseup', (e) =>  {self.mouseUpHandler(e); }, false);
+        this.canvas.addEventListener('mousemove', (e) => {self.mouseMoveHandler(e); }, false);
+        this.canvas.addEventListener(this.platformInfo.browser === 'firefox' ? 'DOMMouseScroll' : 'mousewheel',
+                                    (e) => {self.mouseWheelHandler(e); }, false);
+        document.addEventListener('keydown', (e) => {self.keyDownHandler(e); }, false);
+        document.addEventListener('keyup', (e) => {self.keyUpHandler(e); }, false);
+    // } else {
+        if (this.platformInfo.isTouchDevice) {
             this.canvas.addEventListener('touchstart', (e) => {self.touchStartHandler(e); }, false);
             this.canvas.addEventListener('touchend', (e) => {self.touchEndHandler(e); }, false);
             this.canvas.addEventListener('touchmove', (e) => {self.touchMoveHandler(e); }, false);
