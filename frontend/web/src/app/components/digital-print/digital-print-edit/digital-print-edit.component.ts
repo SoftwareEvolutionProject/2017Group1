@@ -127,7 +127,7 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
   /* init forms */
   private constructForms() {
     const fields = {
-      magicspath: [this.digitalPrint && this.digitalPrint.magicsPath ? this.digitalPrint.magicsPath : '',
+      magicsPath: [this.digitalPrint && this.digitalPrint.magicsPath ? this.digitalPrint.magicsPath : '',
         Validators.compose([Validators.required])],
     };
 
