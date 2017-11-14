@@ -46,6 +46,7 @@ public class PrintingController extends ApiController implements PrintingAPI {
         List<MagicsPairing> returnMpeList = new LinkedList<>();
 
         for (MagicsPairing mpe : mpeList) {
+            mpe.setDigitalPrintID(returnDpe.getId());
             returnMpeList.add(magicsPairingRepository.postObject(mpe));
         }
 
