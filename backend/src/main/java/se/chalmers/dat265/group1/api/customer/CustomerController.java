@@ -32,11 +32,6 @@ public class CustomerController extends ApiController implements CustomerAPI {
     }
 
     @Override
-    public List<PhysicalPart> getPhysicalPartsFromCustomer(String customerID) {
-        return physicalPartRepository.getObjects("customerID= " + customerID);
-    }
-
-    @Override
     public Customer createNewCustomer(Customer customer) {
         return customerRepository.postObject(customer);
     }
