@@ -15,8 +15,10 @@ import {CustomerListComponent} from './components/customer/customer-list/custome
 import {CustomerMasterViewComponent} from './components/customer/customer-master-view/customer-master-view.component';
 import { DigitalPartDetailComponent } from './components/digital-part-detail/digital-part-detail.component';
 import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
-import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
-import { DigitalPrintListComponent } from './components/digital-print-list/digital-print-list.component';
+import {DigitalPrintDetailsPanelComponent} from './components/digital-print/digital-print-details-panel/digital-print-details-panel.component';
+import {DigitalPrintEditComponent} from './components/digital-print/digital-print-edit/digital-print-edit.component';
+import {DigitalPrintListComponent} from './components/digital-print/digital-print-list/digital-print-list.component';
+import {DigitalPrintMasterViewComponent} from './components/digital-print/physical-print-master-view/digital-print-master-view.component';
 import { HomeComponent } from './components/home/home.component';
 import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
 import { MaterialListComponent } from './components/material-list/material-list.component';
@@ -40,7 +42,9 @@ import {HttpClientService} from './services/http/http-client.service';
     DigitalPartListComponent,
     DigitalPartDetailComponent,
     DigitalPrintListComponent,
-    DigitalPrintDetailComponent,
+    DigitalPrintEditComponent,
+    DigitalPrintMasterViewComponent,
+    DigitalPrintDetailsPanelComponent,
     PhysicalPrintDetailsPanelComponent,
     PhysicalPrintListComponent,
     PhysicalPrintEditComponent,
@@ -104,11 +108,11 @@ import {HttpClientService} from './services/http/http-client.service';
       },
       {
         path: 'digital-prints',
-        component: DigitalPrintListComponent,
+        component: DigitalPrintMasterViewComponent,
       },
       {
         path: 'digital-prints/:id',
-        component: DigitalPrintDetailComponent,
+        component: DigitalPrintEditComponent,
       },
       {
         path: 'physical-prints',

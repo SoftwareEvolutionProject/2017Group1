@@ -1,0 +1,37 @@
+<table id="table" data-search="true" data-search-align="right" data-pagination="true" data-page-list="[10, 25, 50, 100, ALL]">
+
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<br>
+<div>
+  <button class="btn btn-primary pull-right" style="min-width: 100px" (click)="create()">
+    <span style="margin-left : 5px" class="glyphicon glyphicon-plus"></span> Add Physical Print </button>
+</div>
+
+
+
+<!-- Modal -->
+<ng-template #modalDelete>
+  <div class="modal-header">
+    <h3 class="modal-title">Delete customer</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="dismissDelete()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="alert alert-danger">
+      <strong>Warning!</strong>
+      <br/>
+      <p>Are you sure you want to permanently delete the Digital Print?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="deleteFormDismissBtn" type="button" class="btn btn-default" (click)="dismissDelete()">Dismiss
+      </button>
+      <button autofocus type="submit" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</ng-template>

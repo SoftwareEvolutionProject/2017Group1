@@ -39,12 +39,13 @@ public class WebApi {
     private static final String ORDER_ID_URL = "/:orderID";
     private static final String ORDER_ID_PARAM = "orderID";
 
-    private static final String DIGITALPRINT_URL = "/digital-print";
+    private static final String DIGITALPRINT_URL = "/digital-prints";
     private static final String DIGITALPRINT_ID_URL = "/:digitalPrint";
+    private static final String DIGITALPRINT_ID_PARAM = "digitalPrint";
 
     private static final String DIGITALPARTS_URL = "/digital-part";
     private static final String DIGITALPART_ID_URL = "/:digitalPart";
-    private static final String DIGITALPART_ID_PARAM = "digitalPartID";
+    private static final String DIGITALPART_ID_PARAM = "digitalPart";
 
     private static final String PHYSICALPRINTS_URL = "/physical-prints";
     private static final String PHYSICALPRINT_ID_URL = "/:physicalPrint";
@@ -83,8 +84,7 @@ public class WebApi {
     private static void setupPrintingInterface() {
         pi = new PrintingController(debug);
         get(DIGITALPRINT_URL, (request, response) -> pi.getAllDigitalPrints(), gson::toJson);
-        get(DIGITALPRINT_URL + DIGITALPRINT_ID_URL, (request, response) -> pi.getDigitalPrint(request.params("id")), gson::toJson);
-        get(DIGITALPRINT_URL + DIGITALPRINT_ID_URL, (request, response) -> pi.getDigitalPrint(request.params("id")), gson::toJson);
+        get(DIGITALPRINT_URL + DIGITALPRINT_ID_URL, (request, response) -> pi.getDigitalPrint(request.params(DIGITALPRINT_ID_PARAM)), gson::toJson);
         post(DIGITALPRINT_URL, ((request, response) -> pi.createDigitalPrint(gson.fromJson(request.body(), DigitalPrint.class))), gson::toJson);
     }
 
