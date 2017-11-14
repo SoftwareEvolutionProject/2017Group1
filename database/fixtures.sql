@@ -19,7 +19,7 @@ COMMIT;
 INSERT INTO customer (name, email) VALUES ('Testbolag', 'test@testbolag.se');
 INSERT INTO customer (name, email) VALUES ('Chalmers n Stuff', 'gangsters@tjalmers.se');
 
-INSERT INTO "order"(customerID, date) VALUES
+INSERT INTO orderdata(customerID, date) VALUES
   ((select id from customer where name = 'Testbolag'), '10/10/2017'),
   ((select id from customer where name = 'Testbolag'), '01/11/2017'),
   ((select id from customer where name = 'Chalmers n Stuff'), '09/09/2017');
@@ -61,12 +61,12 @@ INSERT INTO physicalprint (digitalPrintID, slmPath) VALUES
 
 
 INSERT INTO orderedpart (orderID, digitalPartID, amount) VALUES
-  ((select id from "order" where date = '10/10/2017'), (select id from digitalpart where name = 'Screw'), 40),
-  ((select id from "order" where date = '01/11/2017'), (select id from digitalpart where name = 'Hinge'), 10);
+  ((select id from orderdata where date = '10/10/2017'), (select id from digitalpart where name = 'Screw'), 40),
+  ((select id from orderdata where date = '01/11/2017'), (select id from digitalpart where name = 'Hinge'), 10);
 
 INSERT INTO orderedpart (orderID, digitalPartID, amount) VALUES
-  ((select id from "order" where date = '09/09/2017'), (select id from digitalpart where name = 'Emil'), 6),
-  ((select id from "order" where date = '09/09/2017'), (select id from digitalpart where name = 'Emilia'), 6);
+  ((select id from orderdata where date = '09/09/2017'), (select id from digitalpart where name = 'Emil'), 6),
+  ((select id from orderdata where date = '09/09/2017'), (select id from digitalpart where name = 'Emilia'), 6);
 
 INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingID) VALUES
   (1,1,1),(1,1,2),(1,1,3),(1,1,4),(1,1,5),(1,2,6),(1,2,7),(1,2,8),
