@@ -2,9 +2,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { DigitalPart } from '../../model/digital-part';
-import { DigitalPartMockService } from '../../services/digital-part/digital-part-mock.service';
-import { ErrorService } from '../../services/error.service';
+import { DigitalPart } from '../../../model/digital-part';
+import { DigitalPartMockService } from '../../../services/digital-part/digital-part-mock.service';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-digital-part-detail',

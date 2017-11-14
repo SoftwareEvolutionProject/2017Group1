@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { DigitalPart } from '../../model/digital-part';
-import { DigitalPartMockService } from '../../services/digital-part/digital-part-mock.service';
-import { ErrorService } from '../../services/error.service';
+import { DigitalPart } from '../../../model/digital-part';
+import { DigitalPartMockService } from '../../../services/digital-part/digital-part-mock.service';
+import { ErrorService } from '../../../services/error.service';
 declare var $: any;
 
 @Component({

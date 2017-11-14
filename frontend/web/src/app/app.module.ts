@@ -13,8 +13,8 @@ import {CustomerDetailPanelComponent} from './components/customer/customer-detai
 import {CustomerDetailComponent} from './components/customer/customer-detail/customer-detail.component';
 import {CustomerListComponent} from './components/customer/customer-list/customer-list.component';
 import {CustomerMasterViewComponent} from './components/customer/customer-master-view/customer-master-view.component';
-import { DigitalPartDetailComponent } from './components/digital-part-detail/digital-part-detail.component';
-import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
+import { DigitalPartDetailComponent } from './components/digital-part/digital-part-detail/digital-part-detail.component';
+import { DigitalPartListComponent } from './components/digital-part/digital-part-list/digital-part-list.component';
 import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
 import { DigitalPrintListComponent } from './components/digital-print-list/digital-print-list.component';
 import { HomeComponent } from './components/home/home.component';
