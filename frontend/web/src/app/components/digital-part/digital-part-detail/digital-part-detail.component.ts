@@ -13,7 +13,7 @@ import {CustomerService} from '../../../services/customer/customer.service';
   selector: 'app-digital-part-detail',
   templateUrl: './digital-part-detail.component.html',
   styleUrls: ['./digital-part-detail.component.scss'],
-  providers: [DigitalPartService, ErrorService],
+  providers: [DigitalPartService, CustomerService, ErrorService],
 })
 export class DigitalPartDetailComponent implements OnInit, OnChanges {
 
@@ -24,8 +24,8 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
   private loaded = false;
   /* forms */
   private requiredFieldsForm: FormGroup = null;
-  
-  private customers: Customer[]
+
+  private customers: Customer[];
   /* data */
 
   constructor(
@@ -74,6 +74,7 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
   /* populate data */
   private populate() {
     this.constructForms();
+    this.getAllCustomers();
   }
 
   /* init forms */
@@ -136,6 +137,7 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
     this.customerService.getCustomers().subscribe(
       (customers) => {
         this.customers = customers;
+        console.log("We should have something here!!", customers);
       }, (error) => {
         alert(error.verbose_message);
       },
