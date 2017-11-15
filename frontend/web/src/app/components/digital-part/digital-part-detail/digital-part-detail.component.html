@@ -21,13 +21,18 @@
           </div>
           <label>Customers</label>
           <div [ngClass]="{'has-error': !requiredFieldsForm.get('customers').valid}">
-            <input class="form-control" formControlName="customers">
+            <input class="form-control" formControlName="customer">
           </div>
           <label>STL File</label>
           <div [ngClass]="{'has-error': !requiredFieldsForm.get('stlFile').valid}">
             <input class="form-control" formControlName="stlFile">
           </div>
         </form>
+        <select placeholder="Customers" [(ngModel)]="customers" name="customers">
+          <option *ngFor="let customer of customers" [value]="customer.name">
+            {{customer.name}}
+          </option>
+        </select>
         <div class="pull-right" style="margin-top: 20px">
           <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary" style="min-width: 100px" (click)="save()">Save</button>
         </div>
