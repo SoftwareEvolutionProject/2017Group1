@@ -1,8 +1,8 @@
 export class PhysicalPart {
   public id: number;
-  public orderedPart: number;
-  public physicalPrint: number;
-  public magicID: number;
+  public orderedPartID: number;
+  public physicalPrintID: number;
+  public magicsPartPairingID: number;
   public name: string;
 
   constructor(values: Object = {}) {

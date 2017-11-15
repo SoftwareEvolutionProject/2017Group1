@@ -1,0 +1,18 @@
+<div class="container">
+
+  <div class="row">
+    <h2>PhysicalParts</h2><hr>
+  </div>
+  <div class="row">
+    <div class="col-md-7" id="list">
+      <app-physicalPart-list (selected)="physicalPartSelected($event)">
+      </app-physicalPart-list>
+    </div>
+    <div class="col-md-5" id="detail" style="margin-top: 54px">
+      <app-physicalPart-detail-panel [physicalPart]="selectedPhysicalPart">
+      </app-physicalPart-detail-panel>
+    </div>
+
+  </div>
+</div>
+
