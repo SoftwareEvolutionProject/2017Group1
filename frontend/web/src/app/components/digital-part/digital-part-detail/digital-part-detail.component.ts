@@ -69,12 +69,12 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
         this.populate();
       },
     );
+    this.getAllCustomers();
   }
 
   /* populate data */
   private populate() {
     this.constructForms();
-    this.getAllCustomers();
   }
 
   /* init forms */
@@ -137,7 +137,6 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
     this.customerService.getCustomers().subscribe(
       (customers) => {
         this.customers = customers;
-        console.log("We should have something here!!", customers);
       }, (error) => {
         alert(error.verbose_message);
       },
