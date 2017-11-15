@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DigitalPart } from '../../../model/digital-part';
@@ -12,15 +12,17 @@ import { ErrorService } from '../../../services/error.service';
   styleUrls: ['./digital-part-detail.component.scss'],
   providers: [DigitalPartService, ErrorService],
 })
-export class DigitalPartDetailComponent implements OnInit {
-  private loaded = false;
-  private creating = false;
+export class DigitalPartDetailComponent implements OnInit, OnChanges {
 
+  @Input('digitalPart') digitalPart: DigitalPart = null;
+  @Input('nav') nav = true;
+  @Input('creating') creating = false;
+  @Output() changed: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
+  private loaded = false;
   /* forms */
   private requiredFieldsForm: FormGroup = null;
 
   /* data */
-  private digitalPart: DigitalPart = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,20 +34,28 @@ export class DigitalPartDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      if (!id || id === 'create') { // new product is being created
-        this.creating = true;
-        /* init with a boilerplate */
-        if (this.creating) { this.digitalPart = new DigitalPart({}); }
-        this.populate();
+      if (id === 'create') { // new product is being created
+        this.create();
       } else if (id) {
         this.getData(id);
       }
     });
   }
 
-  ngAfterViewInit() {
+  create() {
+    /* init with a boilerplate */
+    this.creating = true;
+    if (this.creating) { this.digitalPart = new DigitalPart({}); }
+    this.populate();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.creating) {
+      this.create();
+    } else if (this.digitalPart) {
+      this.populate();
+    }
+  }
   /* get the product */
   getData(id) {
     this.digitalPartService.getDigitalPart(id).subscribe(
@@ -74,6 +84,41 @@ export class DigitalPartDetailComponent implements OnInit {
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
     this.loaded = true;
+  }
+   /* save product instance */
+   save() {
+    /* convert relevant fields */
+
+    const id = this.digitalPart.id;
+    const digitalPart: DigitalPart = new DigitalPart(this.requiredFieldsForm.value);
+    this.creating ? delete digitalPart['id'] : digitalPart.id = id;
+
+    if (this.creating) { // a new product
+      this.digitalPartService.createDigitalPart(digitalPart).subscribe(
+        (data) => {
+          if (this.nav) { this.back(); }
+          this.changed.emit(data);
+        }, (error) => {
+          console.log(error);
+          this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
+        },
+      );
+    } else {
+      this.digitalPartService.updateDigitalPart(digitalPart).subscribe(
+        (data) => {
+          if (this.nav) { this.back(); }
+          this.changed.emit(data);
+        }, (error) => {
+          console.log(error);
+          this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
+        },
+      );
+    }
+  }
+
+  cancel() {
+    if (this.nav) { this.back(); }
+    this.changed.emit(this.digitalPart);
   }
 
   back() {
