@@ -8,14 +8,14 @@ public class PhysicalPart extends DataModel {
     private int physicalPrintID;
     private int orderedPartID;
     private String magicsPartPairingID;
-    private List<String> photoPaths;
+/*    private List<String> photoPaths;*/
 
     public PhysicalPart() {
         id = -1;
         physicalPrintID = -1;
         orderedPartID = -1;
         magicsPartPairingID = "";
-        photoPaths = new LinkedList<>();
+/*        photoPaths = new LinkedList<>(); */
     }
 
     public int getId() {
@@ -34,7 +34,7 @@ public class PhysicalPart extends DataModel {
         return magicsPartPairingID;
     }
 
-    public List<String> getPhotoPaths() {
+/*    public List<String> getPhotoPaths() {
         return photoPaths;
-    }
+    } */
 }
