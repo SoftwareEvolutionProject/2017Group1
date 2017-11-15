@@ -19,6 +19,10 @@
           <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
             <input class="form-control" formControlName="name">
           </div>
+          <label>Customers</label>
+          <div [ngClass]="{'has-error': !requiredFieldsForm.get('customers').valid}">
+            <input class="form-control" formControlName="customers">
+          </div>
           <label>STL File</label>
           <div [ngClass]="{'has-error': !requiredFieldsForm.get('stlFile').valid}">
             <input class="form-control" formControlName="stlFile">

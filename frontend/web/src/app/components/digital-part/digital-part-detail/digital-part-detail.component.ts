@@ -6,6 +6,9 @@ import { DigitalPart } from '../../../model/digital-part';
 import { DigitalPartService } from '../../../services/digital-part/digital-part.service';
 import { ErrorService } from '../../../services/error.service';
 
+import {Customer} from '../../../model/customer';
+import {CustomerService} from '../../../services/customer/customer.service';
+
 @Component({
   selector: 'app-digital-part-detail',
   templateUrl: './digital-part-detail.component.html',
@@ -21,12 +24,14 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
   private loaded = false;
   /* forms */
   private requiredFieldsForm: FormGroup = null;
-
+  
+  private customers: Customer[]
   /* data */
 
   constructor(
     private route: ActivatedRoute,
     private digitalPartService: DigitalPartService,
+    private customerService: CustomerService,
     private formBuilder: FormBuilder,
     private errorService: ErrorService,
     private _location: Location) { }
@@ -78,6 +83,8 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
       Validators.compose([Validators.required])],
       id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
+      customers: [ '',
+      Validators.compose([Validators.required])],
       stlFile: [this.digitalPart && this.digitalPart.stlFile ? this.digitalPart.stlFile : '',
       Validators.compose([Validators.required])],
     };
@@ -125,4 +132,13 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
     this._location.back();
   }
 
+  getAllCustomers() {
+    this.customerService.getCustomers().subscribe(
+      (customers) => {
+        this.customers = customers;
+      }, (error) => {
+        alert(error.verbose_message);
+      },
+    );
+  }
 }
