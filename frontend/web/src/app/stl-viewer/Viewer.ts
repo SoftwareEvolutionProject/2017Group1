@@ -552,12 +552,9 @@ export class Viewer {
      *   @deprecated This method is obsolete since version 1.5.0 and may be removed in the future.
      */
     setMouseUsage(usage: string|number) {
-        console.log(usage);
         if (typeof usage === 'string') {
             this.mouseUsage = usage;
-            console.log("string")
         } else {
-            console.log("number")
             switch (usage) {
                 case 1:
                 this.mouseUsage = 'default';
@@ -840,7 +837,6 @@ export class Viewer {
             return;
         }
         if (e.touches.length > 0) {
-            console.log(typeof e.touches.length)
             this.setMouseUsage(e.touches.length);
             const clientX = e.touches[0].clientX;
             const clientY = e.touches[0].clientY;

@@ -92,8 +92,6 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     const customer: Customer = new Customer(this.requiredFieldsForm.value);
     this.creating ? delete customer['id'] : customer.id = id;
 
-    console.log(customer);
-
     if (this.creating) { // a new product
       this.customerService.createCustomer(customer).subscribe(
         (data) => {

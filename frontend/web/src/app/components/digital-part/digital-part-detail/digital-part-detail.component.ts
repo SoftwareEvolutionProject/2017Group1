@@ -30,7 +30,6 @@ export class DigitalPartDetailComponent implements OnInit {
     private _location: Location) { }
 
   ngOnInit(): void {
-    console.log("Vi gör något roligt!");
     this.route.params.subscribe((params) => {
       const id = params['id'];
       if (!id || id === 'create') { // new product is being created
@@ -74,7 +73,6 @@ export class DigitalPartDetailComponent implements OnInit {
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
-    console.log(!this.requiredFieldsForm.get('id').valid);
     this.loaded = true;
   }
 
