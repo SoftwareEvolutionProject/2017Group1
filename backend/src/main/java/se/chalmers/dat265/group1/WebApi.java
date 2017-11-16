@@ -90,11 +90,11 @@ public class WebApi {
 
         get(DIGITALPRINT_URL, (request, response) -> pi.getAllDigitalPrints(), gson::toJson);
         get(DIGITALPRINT_URL + DIGITALPRINT_ID_URL, (request, response) -> pi.getDigitalPrint(request.params(DIGITALPRINT_ID_PARAM)), gson::toJson);
-        post(DIGITALPRINT_URL, ((request, response) -> {
+        post(DIGITALPRINT_URL, (request, response) -> {
             DigitalPrint digitalPrint = pi.createDigitalPrint(gson.fromJson(request.body(), DigitalPrint.class));
             response.status(201);
-            return gson.toJson(digitalPrint);
-        }));
+            return digitalPrint;
+        }, gson::toJson);
     }
 
     private static void setupCustomerInterface() {
@@ -103,39 +103,60 @@ public class WebApi {
         get(CUSTOMERS_URL, (request, response) -> ci.getAllCustomers(), gson::toJson);
         get(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.getCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
         get(CUSTOMERS_URL + CUSTOMER_ID_URL + DIGITALPARTS_URL, ((request, response) -> ci.getDigitalPartsFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
-        post(CUSTOMERS_URL, ((request, response) -> ci.createNewCustomer(gson.fromJson(request.body(), Customer.class))), gson::toJson);
         put(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.updateCustomer(request.params(CUSTOMER_PARAM), gson.fromJson(request.body(), Customer.class))), gson::toJson);
         delete(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.deleteCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
+        post(CUSTOMERS_URL, (request, response) -> {
+            Customer customer = ci.createNewCustomer(gson.fromJson(request.body(), Customer.class));
+            response.status(201);
+            return customer;
+        }, gson::toJson);
     }
 
     private static void setupDigitalPartsInterface() {
         //DigitalParts
         get(DIGITALPARTS_URL, (request, response) -> dpi.getAllDigitalParts(), gson::toJson);
         get(DIGITALPARTS_URL + DIGITALPART_ID_URL, (request, response) -> dpi.getDigitalPart(request.params(DIGITALPART_ID_PARAM)), gson::toJson);
-        post(DIGITALPARTS_URL, (request, response) -> dpi.createNewDigitalPart(gson.fromJson(request.body(), DigitalPart.class)), gson::toJson);
         put(DIGITALPARTS_URL + DIGITALPART_ID_URL, (request, response) -> dpi.updateDigitalPart(gson.fromJson(request.body(), DigitalPart.class)), gson::toJson);
+        post(DIGITALPARTS_URL, (request, response) -> {
+            DigitalPart digitalPart = dpi.createNewDigitalPart(gson.fromJson(request.body(), DigitalPart.class));
+            response.status(201);
+            return digitalPart;
+        }, gson::toJson);
     }
 
     private static void setupPhysicalInterface() {
         //PhysicalParts
         get(PHYSICALPARTS_URL, (request, response) -> phi.getAllPhysicalParts(), gson::toJson);
         get(PHYSICALPARTS_URL + PHYSICALPART_ID_URL, (request, response) -> phi.getPhysicalPart(request.params(PHYSICALPART_ID_PARAM)), gson::toJson);
-        post(PHYSICALPARTS_URL, (request, response) -> phi.createNewPhysicalPart(gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
         put(PHYSICALPARTS_URL + PHYSICALPART_ID_URL, (request, response) -> phi.updatePhysicalPart(request.params(PHYSICALPART_ID_PARAM), gson.fromJson(request.body(), PhysicalPart.class)), gson::toJson);
+        post(PHYSICALPARTS_URL, (request, response) -> {
+            PhysicalPart physicalPart = phi.createNewPhysicalPart(gson.fromJson(request.body(), PhysicalPart.class));
+            response.status(201);
+            return physicalPart;
+        }, gson::toJson);
 
         //PhysicalPrints
         get(PHYSICALPRINTS_URL, (request, response) -> phi.getAllPhysicalPrints(), gson::toJson);
         get(PHYSICALPRINTS_URL + PHYSICALPRINT_ID_URL, (request, response) -> phi.getPhysicalPrint(request.params(PHYSICALPRINT_ID_PARAM)), gson::toJson);
-        post(PHYSICALPRINTS_URL, (request, response) -> phi.createNewPhysicalPrint(gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
         put(PHYSICALPRINTS_URL + PHYSICALPRINT_ID_URL, (request, response) -> phi.updatePhysicalPrint(request.params(PHYSICALPRINT_ID_PARAM), gson.fromJson(request.body(), PhysicalPrint.class)), gson::toJson);
+        post(PHYSICALPRINTS_URL, (request, response) -> {
+            PhysicalPrint physicalPrint = phi.createNewPhysicalPrint(gson.fromJson(request.body(), PhysicalPrint.class));
+            response.status(201);
+            return physicalPrint;
+        }, gson::toJson);
+
     }
 
     private static void setupOrderInterface() {
         //Orders
         get(ORDERS_URL, (request, response) -> oi.getAllOrders(), gson::toJson);
         get(ORDERS_URL + ORDER_ID_URL, (request, response) -> oi.getOrder(request.params(ORDER_ID_PARAM)), gson::toJson);
-        post(ORDERS_URL, ((request, response) -> oi.createNewOrder(gson.fromJson(request.body(), Order.class))), gson::toJson);
         put(ORDERS_URL + ORDER_ID_URL, ((request, response) -> oi.updateOrder(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), Order.class))), gson::toJson);
+        post(ORDERS_URL, ((request, response) -> {
+            Order order = oi.createNewOrder(gson.fromJson(request.body(), Order.class));
+            response.status(201);
+            return order;
+        }), gson::toJson);
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.
