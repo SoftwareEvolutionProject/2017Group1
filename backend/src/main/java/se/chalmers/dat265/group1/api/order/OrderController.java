@@ -5,6 +5,10 @@ import se.chalmers.dat265.group1.model.Order;
 import se.chalmers.dat265.group1.model.dbEntities.OrderData;
 import se.chalmers.dat265.group1.model.dbEntities.OrderedPart;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,6 +16,8 @@ public class OrderController extends ApiController implements OrderAPI {
     public OrderController(boolean debug) {
         super(debug);
     }
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Override
     public List<Order> getAllOrders() {
@@ -36,34 +42,42 @@ public class OrderController extends ApiController implements OrderAPI {
     }
 
     @Override
-    public Order createNewOrder(Order order) {
+    public Order createNewOrder(Order order) throws InvalidDateFormatException {
+        validateDate(order.getDate());
         int id = orderDataRepository.postObject(new OrderData(order)).getId();
         for (OrderedPart orderedPart : order.getOrderedParts()) {
-            orderedPart.setID(id);
+            orderedPart.setOrderID(id);
             orderedPartRepository.postObject(orderedPart);
         }
         return getOrder(id + "");
     }
 
     @Override
-    public Order updateOrder(String orderID, Order order) {
+    public Order updateOrder(String orderID, Order order) throws InvalidDateFormatException {
         checkIDs(orderID, order);
+        validateDate(order.getDate());
 
         OrderData orderData = orderDataRepository.updateObject(new OrderData(order));
 
         List<OrderedPart> orderedInDb = orderedPartRepository.getObjects("orderID=" + orderID);
         List<OrderedPart> orderedNew = order.getOrderedParts();
+        List<OrderedPart> toPostToDb = new LinkedList<>();
 
         for (OrderedPart newOrdered : orderedNew) {
+            boolean preExisting = false;
             for (OrderedPart dbOrderdPart : orderedInDb) {
                 if (dbOrderdPart.getId() == newOrdered.getId()) {
                     orderedPartRepository.updateObject(newOrdered);
-                    orderedNew.remove(newOrdered);
+                    preExisting = true;
                     orderedInDb.remove(dbOrderdPart);
+                    break;
                 }
             }
+            if(!preExisting){
+                toPostToDb.add(newOrdered);
+            }
         }
-        for (OrderedPart newOrdered : orderedNew) {
+        for (OrderedPart newOrdered : toPostToDb) {
             orderedPartRepository.postObject(newOrdered);
         }
 
@@ -71,6 +85,22 @@ public class OrderController extends ApiController implements OrderAPI {
             orderedPartRepository.deleteObject(dbOrderdPart.getId());
         }
         return getOrder(orderID);
+    }
+
+    /**
+     * Dates should be on format yyyy-MM-dd
+     *
+     * @param date
+     */
+    private void validateDate(String date) throws InvalidDateFormatException {
+        //TODO
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
+        try {
+            format.parse(date);
+        }catch (Exception e){
+            throw new InvalidDateFormatException(e);
+        }
+
     }
 
     @Override

@@ -33,7 +33,7 @@ public class OrderedPart extends DataModel {
         return digitalPartID;
     }
 
-    public void setID(int ID) {
-        this.id = ID;
+    public void setOrderID(int ID) {
+        this.orderID = ID;
     }
 }
