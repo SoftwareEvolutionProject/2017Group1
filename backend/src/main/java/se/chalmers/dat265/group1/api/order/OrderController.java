@@ -64,6 +64,7 @@ public class OrderController extends ApiController implements OrderAPI {
         List<OrderedPart> toPostToDb = new LinkedList<>();
 
         for (OrderedPart newOrdered : orderedNew) {
+            newOrdered.setOrderID(orderData.getId());
             boolean preExisting = false;
             for (OrderedPart dbOrderdPart : orderedInDb) {
                 if (dbOrderdPart.getId() == newOrdered.getId()) {
