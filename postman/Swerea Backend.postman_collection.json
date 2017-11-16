@@ -1,0 +1,907 @@
+{
+	"info": {
+		"name": "Swerea Backend",
+		"_postman_id": "21f077c8-d35e-84f0-c5b2-4cad563e823f",
+		"description": "# Introduction\nREST-API for the Swerea backend\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CustomerAPI",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All Customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Digital-parts of Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}/digital-part",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}",
+								"digital-part"
+							]
+						},
+						"description": "Get Digital parts belonging to a customer"
+					},
+					"response": []
+				},
+				{
+					"name": "New Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"Lol2kpe Productions\",\n  \"eMail\":\"wannabe@lol2kpe.com\"\n}"
+						},
+						"url": {
+							"raw": "{{domain}}/customers",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\":{{customerID}},\n  \"name\":\"Edited Company\",\n  \"eMail\":\"wannabe@editco.com\"\n}"
+						},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}"
+							]
+						},
+						"description": "Removes a customer from the system"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderAPI",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/orders",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"orders"
+							]
+						},
+						"description": "Get all orders in the system"
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/orders/{{orderID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"orders",
+								"{{orderID}}"
+							]
+						},
+						"description": "Get order given an ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"customerID\": 1,\n        \"date\": \"2017-10-10\",\n        \"orderedParts\": [\n            {\n                \"orderID\": 1,\n                \"amount\": 40\n            },\n            {\n                \"orderID\": 1,\n                \"amount\": 40\n            }\n        ]\n}"
+						},
+						"url": {
+							"raw": "{{domain}}/orders",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"orders"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"customerID\": 1,\n    \"date\": \"2017-10-11\",\n    \"orderedParts\": [\n        {\n            \"id\": 1,\n            \"orderID\": 1,\n            \"amount\": 20\n        },\n        {\n            \"id\": 5,\n            \"orderID\": 1,\n            \"amount\": 20\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{domain}}/orders/{{orderID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"orders",
+								"{{orderID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PrintingAPI",
+			"description": "",
+			"item": [
+				{
+					"name": "Get specific digital print",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/digital-prints/{{digitalPrintID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-prints",
+								"{{digitalPrintID}}"
+							]
+						},
+						"description": "Get all digital prints"
+					},
+					"response": []
+				},
+				{
+					"name": "Get digital prints",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/digital-prints",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-prints"
+							]
+						},
+						"description": "Get all digital prints"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Digital Print",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \n        \"magicsPath\": \"pathTest\",\n        \"magicsPartPairing\": {\n            \"HingeNStuff\": 2,\n            \"ScrewToStuff\": 1,\n            \"ScrewToOtherStuff\": 1\n        }\n    }"
+						},
+						"url": {
+							"raw": "{{domain}}/digital-prints",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-prints"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DigitalPartsAPI",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Digital Parts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/digital-parts",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-parts"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Digital Part",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/digital-parts/{{digitalPartID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-parts",
+								"{{digitalPartID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Digital Part",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n        \"customerID\": 1,\n        \"name\": \"Stick Figure\"\n    }"
+						},
+						"url": {
+							"raw": "{{domain}}/digital-parts",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-parts"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Digital Part",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"id\":1,\n        \"customerID\": 1,\n        \"name\": \"Edited name\"\n    }"
+						},
+						"url": {
+							"raw": "{{domain}}/digital-parts/{{digitalPartID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-parts",
+								"{{digitalPartID}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PhysicalAPI",
+			"description": "",
+			"item": [
+				{
+					"name": "Prints",
+					"description": "",
+					"item": [
+						{
+							"name": "Get Specific Physical Print",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/physical-prints/{{physicalBuildID}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"physical-prints",
+										"{{physicalBuildID}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Physical Print",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/physical-prints",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"physical-prints"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Create Physical Print",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n    \"digitalPrintID\": 1,\n    \"slmPath\": \"slm/pathTest\"\n}"
+								},
+								"url": {
+									"raw": "{{domain}}/physical-prints",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"physical-prints"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Physical Print",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"digitalPrintID\": 1,\n    \"slmPath\": \"slm/editedPath\"\n}"
+								},
+								"url": {
+									"raw": "{{domain}}/physical-prints/{{physicalPrintID}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"physical-prints",
+										"{{physicalPrintID}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Part",
+					"description": "",
+					"item": [
+						{
+							"name": "Get Specific Physical Part",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/physical-parts/{{physicalPartID}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"physical-parts",
+										"{{physicalPartID}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Physical Parts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/physical-parts",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"physical-parts"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Create Physical Part",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"physicalPrintID\": 1,\n    \"orderedPartID\": 1,\n    \"magicsPartPairingID\": 1\n}"
+								},
+								"url": {
+									"raw": "{{domain}}/physical-parts",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"physical-parts"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Physical Part",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"physicalPrintID\": 2,\n    \"orderedPartID\": 1,\n    \"magicsPartPairingID\": \"1\"\n}"
+								},
+								"url": {
+									"raw": "{{domain}}/physical-parts/{{physicalPartID}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"physical-parts",
+										"{{physicalPartID}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
