@@ -90,14 +90,14 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{domain}}/customers/{{customerID}}/digital-part",
+							"raw": "{{domain}}/customers/{{customerID}}/digital-parts",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
 								"customers",
 								"{{customerID}}",
-								"digital-part"
+								"digital-parts"
 							]
 						},
 						"description": "Get Digital parts belonging to a customer"
@@ -304,7 +304,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"customerID\": 1,\n        \"date\": \"2017-10-10\",\n        \"orderedParts\": [\n            {\n                \"orderID\": 1,\n                \"amount\": 40\n            },\n            {\n                \"orderID\": 1,\n                \"amount\": 40\n            }\n        ]\n}"
+							"raw": "{\n        \"customerID\": 1,\n        \"date\": \"2017-14-13\",\n        \"orderedParts\": [\n            {\n                \"orderID\": 1,\n                \"digitalPartID\": 1,\n                \"amount\": 2\n            }\n        ]\n    }"
 						},
 						"url": {
 							"raw": "{{domain}}/orders",
@@ -625,13 +625,13 @@
 								"header": [],
 								"body": {},
 								"url": {
-									"raw": "{{domain}}/physical-prints/{{physicalBuildID}}",
+									"raw": "{{domain}}/physical-prints/{{physicalPrintID}}",
 									"host": [
 										"{{domain}}"
 									],
 									"path": [
 										"physical-prints",
-										"{{physicalBuildID}}"
+										"{{physicalPrintID}}"
 									]
 								},
 								"description": ""
