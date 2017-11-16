@@ -6,12 +6,14 @@ public class OrderedPart extends DataModel {
 
     private int id;
     private int orderID;
+    private int digitalPartID;
     private int amount;
 
     public OrderedPart() {
         id = -1;
         orderID = -1;
         amount = -1;
+        digitalPartID = -1;
     }
 
     public int getOrderID() {
@@ -25,6 +27,10 @@ public class OrderedPart extends DataModel {
     @Override
     public int getId() {
         return id;
+    }
+
+    public int getDigitalPartID() {
+        return digitalPartID;
     }
 
     public void setID(int ID) {
