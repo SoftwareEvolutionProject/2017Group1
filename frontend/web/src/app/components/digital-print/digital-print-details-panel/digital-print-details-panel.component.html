@@ -2,8 +2,28 @@
   <div class="panel-heading">
     <h3 class="panel-title">Details</h3>
   </div>
-  <div *ngIf="digitalPrint" class="panel-body" style="padding-right: 30px">
+  <div [hidden]="!digitalPrint" class="panel-body" style="padding-right: 30px">
+    <div *ngIf="digitalPrint">
     ID: {{digitalPrint.id}} <br>
     Magics File: {{digitalPrint.magicsPath}}
+    </div>
+    <br>
+
+
+    <table id="dPartsTable">
+
+      <thead>
+      <tr>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <br>
+
   </div>
+
+
+
 </div>
+

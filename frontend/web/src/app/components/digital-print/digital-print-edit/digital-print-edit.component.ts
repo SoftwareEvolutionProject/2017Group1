@@ -4,9 +4,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {DigitalPart} from '../../../model/digital-part';
 import {DigitalPrint} from '../../../model/digital-print';
-import {DigitalPartMockService as DigitalPartService} from '../../../services/digital-part/digital-part-mock.service';
 import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
 import {ErrorService} from '../../../services/error.service';
+import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
 
 @Component({
   selector: 'app-digital-print-edit',
