@@ -80,7 +80,7 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
         data,
         columns,
         sortStable: true,
-        sortName: 'id',
+        sortName: 'mid',
       },
     );
   }
