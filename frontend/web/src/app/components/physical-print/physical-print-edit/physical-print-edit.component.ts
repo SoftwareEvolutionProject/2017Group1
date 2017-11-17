@@ -5,14 +5,17 @@ import {ActivatedRoute} from '@angular/router';
 import {PhysicalPrint} from '../../../model/physical-print';
 import {ErrorService} from '../../../services/error.service';
 import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
+import {DigitalPrintService} from "../../../services/digital-print/digital-print.service";
+import {DigitalPrint} from "../../../model/digital-print";
 
 @Component({
   selector: 'app-physical-print-edit',
-  providers: [PhysicalPrintService, ErrorService],
+  providers: [PhysicalPrintService, ErrorService, DigitalPrintService],
   templateUrl: './physical-print-edit.component.html',
   styleUrls: ['./physical-print-edit.component.scss'],
 })
 export class PhysicalPrintEditComponent implements OnInit, OnChanges {
+  digitalPrints: DigitalPrint[];
 
   @Input('physicalPrint') physicalPrint: PhysicalPrint = null;
   @Input('nav') nav = true;
@@ -25,6 +28,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
 
   constructor(private route: ActivatedRoute,
               private physicalPrintService: PhysicalPrintService,
+              private digitalPrintService: DigitalPrintService,
               private formBuilder: FormBuilder,
               private errorService: ErrorService,
               private _location: Location) {
@@ -70,7 +74,11 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
 
   /* populate data */
   private populate() {
-    this.constructForms();
+    /* get d prints */
+    this.digitalPrintService.getAllDigitalPrint().subscribe((dPrints) => {
+      this.digitalPrints = dPrints;
+      this.constructForms();
+    });
   }
 
   /* init forms */
@@ -78,7 +86,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
     const fields = {
       slmpath: [this.physicalPrint && this.physicalPrint.slmpath ? this.physicalPrint.slmpath : '',
         Validators.compose([Validators.required])],
-      digitalPrint: [this.physicalPrint && this.physicalPrint.digitalPrint ? this.physicalPrint.digitalPrint : '',
+      digitalPrintID: [this.physicalPrint && this.physicalPrint.digitalPrintID ? this.physicalPrint.digitalPrintID : '',
         Validators.compose([Validators.required])],
     };
 
@@ -91,6 +99,8 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
     /* convert relevant fields */
 
     const id = this.physicalPrint.id;
+
+    this.requiredFieldsForm.value.digitalPrintID = parseInt(this.requiredFieldsForm.get('digitalPrintID').value);
     const physicalPrint: PhysicalPrint = new PhysicalPrint(this.requiredFieldsForm.value);
     this.creating ? delete physicalPrint['id'] : physicalPrint.id = id;
 
