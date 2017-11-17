@@ -8,6 +8,8 @@ import {HttpClientService} from '../../../services/http/http-client.service';
 import {PhysicalPrintMockService} from '../../../services/physical-print/physical-print-mock.service';
 import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 import {PhysicalPrintEditComponent} from './physical-print-edit.component';
+import {DigitalPrintService} from "../../../services/digital-print/digital-print.service";
+import {DigitalPrintMockService} from "../../../services/digital-print/digital-print-mock.service";
 
 describe('PhysicalPrintEditComponent', () => {
   let component: PhysicalPrintEditComponent;
@@ -22,6 +24,7 @@ describe('PhysicalPrintEditComponent', () => {
       set: {
         providers: [
           { provide: PhysicalPrintService, useClass: PhysicalPrintMockService },
+          { provide: DigitalPrintService, useClass: DigitalPrintMockService },
           { provide: ErrorService, useClass: ErrorService },
         ],
       },

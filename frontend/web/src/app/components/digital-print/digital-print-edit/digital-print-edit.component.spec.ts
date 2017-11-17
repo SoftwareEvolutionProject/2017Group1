@@ -7,6 +7,8 @@ import {DigitalPrintService} from '../../../services/digital-print/digital-print
 import {DigitalPrintEditComponent} from './digital-print-edit.component';
 import {HttpClientService} from '../../../services/http/http-client.service';
 import {DigitalPartMockService} from '../../../services/digital-part/digital-part-mock.service';
+import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
+import {DigitalPrintMockService} from "../../../services/digital-print/digital-print-mock.service";
 
 describe('DigitalPrintEditComponent', () => {
   let component: DigitalPrintEditComponent;
@@ -21,8 +23,8 @@ describe('DigitalPrintEditComponent', () => {
     TestBed.overrideComponent(DigitalPrintEditComponent, {
       set: {
         providers: [
-          { provide: DigitalPartMockService, useClass: DigitalPartMockService },
-          { provide: DigitalPrintService, useClass: DigitalPrintService },
+          { provide: DigitalPartService, useClass: DigitalPartMockService },
+          { provide: DigitalPrintService, useClass: DigitalPrintMockService },
           { provide: ErrorService, useClass: ErrorService },
         ],
       },
