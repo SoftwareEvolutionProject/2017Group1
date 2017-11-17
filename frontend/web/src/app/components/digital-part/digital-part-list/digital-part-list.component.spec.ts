@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BsModalService, ModalModule } from 'ngx-bootstrap';
 import { DigitalPartMockService } from '../../../services/digital-part/digital-part-mock.service';
+import { DigitalPartService } from '../../../services/digital-part/digital-part.service';
 import { ErrorService } from '../../../services/error.service';
 import { DigitalPartListComponent } from './digital-part-list.component';
 
@@ -19,7 +20,7 @@ describe('DigitalPartListComponent', () => {
     TestBed.overrideComponent(DigitalPartListComponent, {
       set: {
         providers: [
-          { provide: DigitalPartMockService, useClass: DigitalPartMockService },
+          { provide: DigitalPartService, useClass: DigitalPartMockService },
           { provide: ErrorService, useClass: ErrorService },
           BsModalService,
         ],
@@ -34,7 +35,7 @@ describe('DigitalPartListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should createPhysicalPrint', () => {
+  it('should createDigitalPartList', () => {
     expect(component).toBeTruthy();
   });
 });
