@@ -13,13 +13,7 @@ public interface OrderAPI {
 
     Order getOrder(String orderID);
 
-    Order createNewOrder(Order order);
+    Order createNewOrder(Order order) throws InvalidDateFormatException;
 
-    List<OrderedPart> getOrderedParts(String orderID);
-
-    Order updateOrder(String orderID, Order order);
-
-    OrderedPart createNewOrderedPart(String orderID, OrderedPart orderedPart);
-
-    OrderedPart updateOrderDetail(String orderID, String orderedPartID, OrderedPart orderedPart);
+    Order updateOrder(String orderID, Order order) throws InvalidDateFormatException;
 }

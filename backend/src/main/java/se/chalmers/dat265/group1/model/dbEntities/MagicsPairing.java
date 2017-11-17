@@ -36,4 +36,8 @@ public class MagicsPairing extends DataModel {
     public String getLabel() {
         return label;
     }
+
+    public void setDigitalPrintID(int digitalPrintID) {
+        this.digitalPrintID = digitalPrintID;
+    }
 }

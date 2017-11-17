@@ -10,6 +10,7 @@ declare var JSC3D: any;
   styleUrls: ['./stl-viewer.component.scss'],
 })
 export class StlViewerComponent implements OnInit {
+  viewer: Viewer;
   constructor() { }
 
   ngOnInit() {
@@ -23,9 +24,18 @@ export class StlViewerComponent implements OnInit {
     stlLoader.setDecimalPrecision(3);
 
     // =========================================================================
-    const viewer = new Viewer(canvas, parameters);
-    viewer.setLoader(stlLoader);
-    viewer.setParameter('Renderer', 'webgl');
-    viewer.init();
+    this.viewer = new Viewer(canvas, parameters);
+    this.viewer.setLoader(stlLoader);
+    this.viewer.setParameter('Renderer', 'webgl');
+    this.viewer.init();
+  }
+
+  resetView(){
+    this.viewer.resetScene();
+    this.viewer.update();
+  }
+
+  toogleRotation(){
+    //TODO Animation toogle goes in here
   }
 }

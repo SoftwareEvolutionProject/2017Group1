@@ -10,6 +10,12 @@
 - Johan Andersson
 - Mikael Lönn
 
+# Documentation
+
+Backend API documentation is hosted through postman and found at the link below.
+
+[API Documentation](https://documenter.getpostman.com/view/686564/sofep/77o31N2)
+
 # Development
 It is setup using docker. Set up docker container with backend/fronted/postgres:
 > docker-compose up -d --build
