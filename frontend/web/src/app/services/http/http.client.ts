@@ -3,6 +3,6 @@ export class HttpClient {
   static loginUrl = HttpClient.baseUrl + 'login';
   static customerUrl = HttpClient.baseUrl + 'customers';
   static physicalPrintUrl = HttpClient.baseUrl + 'physical-prints';
+  static digitalPartUrl = HttpClient.baseUrl + 'digital-parts';
   static digitalPrintUrl = HttpClient.baseUrl + 'digital-prints';
-  static digitalPartUrl =  HttpClient.baseUrl + 'digital-parts';
 }

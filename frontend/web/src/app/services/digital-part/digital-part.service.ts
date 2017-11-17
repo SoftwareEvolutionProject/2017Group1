@@ -9,7 +9,7 @@ import {HttpClient} from '../http/http.client';
 export class DigitalPartService {
   private endpoint: string = HttpClient.digitalPartUrl;
 
-  constructor(private http: HttpClientService, private client: HttpClientService) {}
+  constructor(private client: HttpClientService) {}
 
   getDigitalPart(id: number): Observable<DigitalPart> {
     return this.client.get(this.endpoint + '/' + id)
@@ -21,23 +21,23 @@ export class DigitalPartService {
   getDigitalParts(): Observable<DigitalPart[]> {
     return this.client.get(this.endpoint)
       .map((data) => {
-        const customers: DigitalPart[] = [];
+        const digitalParts: DigitalPart[] = [];
         for (let i = 0; i < data.length; i++) {
-          customers[i] = DigitalPart.create(data[i]);
+          digitalParts[i] = DigitalPart.create(data[i]);
         }
-        return customers;
+        return digitalParts;
 
       });
   }
 
-  createDigitalPart(customer: DigitalPart): Observable<DigitalPart> {
-    return this.client.post(this.endpoint, customer)
+  createDigitalPart(digitalPart: DigitalPart): Observable<DigitalPart> {
+    return this.client.post(this.endpoint, digitalPart)
       .map((data) => {
           return data;
       });
   }
-  updateDigitalPart(customer: DigitalPart): Observable<DigitalPart> {
-    return this.client.put(this.endpoint + '/' + customer.id, JSON.stringify(customer))
+  updateDigitalPart(digitalPart: DigitalPart): Observable<DigitalPart> {
+    return this.client.put(this.endpoint + '/' + digitalPart.id, JSON.stringify(digitalPart))
       .map((data) => {
         return data;
       });
