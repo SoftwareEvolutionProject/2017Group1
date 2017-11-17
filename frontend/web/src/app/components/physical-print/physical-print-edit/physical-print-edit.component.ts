@@ -94,8 +94,6 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
     const physicalPrint: PhysicalPrint = new PhysicalPrint(this.requiredFieldsForm.value);
     this.creating ? delete physicalPrint['id'] : physicalPrint.id = id;
 
-    console.log(physicalPrint);
-
     if (this.creating) { // a new product
       this.physicalPrintService.createPhysicalPrint(physicalPrint).subscribe(
         (data) => {

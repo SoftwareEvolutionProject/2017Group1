@@ -9,12 +9,15 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import { SidebarModule } from 'ng-sidebar';
 import {AlertModule, ModalModule} from 'ngx-bootstrap';
+import {DropdownModule} from 'primeng/primeng';
 import {CustomerDetailPanelComponent} from './components/customer/customer-detail-panel/customer-detail-panel.component';
 import {CustomerDetailComponent} from './components/customer/customer-detail/customer-detail.component';
 import {CustomerListComponent} from './components/customer/customer-list/customer-list.component';
 import {CustomerMasterViewComponent} from './components/customer/customer-master-view/customer-master-view.component';
-import { DigitalPartDetailComponent } from './components/digital-part-detail/digital-part-detail.component';
-import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
+import { DigitalPartDetailPanelComponent } from './components/digital-part/digital-part-detail-panel/digital-part-detail-panel.component';
+import { DigitalPartDetailComponent } from './components/digital-part/digital-part-detail/digital-part-detail.component';
+import { DigitalPartListComponent } from './components/digital-part/digital-part-list/digital-part-list.component';
+import { DigitalPartMasterViewComponent } from './components/digital-part/digital-part-master-view/digital-part-master-view.component';
 import {DigitalPrintDetailsPanelComponent} from './components/digital-print/digital-print-details-panel/digital-print-details-panel.component';
 import {DigitalPrintEditComponent} from './components/digital-print/digital-print-edit/digital-print-edit.component';
 import {DigitalPrintListComponent} from './components/digital-print/digital-print-list/digital-print-list.component';
@@ -30,7 +33,6 @@ import {PhysicalPrintListComponent} from './components/physical-print/physical-p
 import {PhysicalPrintMasterViewComponent} from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
-import {DropdownModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import {DropdownModule} from 'primeng/primeng';
     CustomerDetailPanelComponent,
     CustomerMasterViewComponent,
     PhysicalPrintMasterViewComponent,
+    DigitalPartDetailPanelComponent,
+    DigitalPartMasterViewComponent,
   ],
   imports: [
     DropdownModule,
@@ -94,7 +98,7 @@ import {DropdownModule} from 'primeng/primeng';
       },
       {
         path: 'digital-parts',
-        component: DigitalPartListComponent,
+        component: DigitalPartMasterViewComponent,
       },
       {
         path: 'digital-parts/:id',

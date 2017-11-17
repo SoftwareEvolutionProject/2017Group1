@@ -552,12 +552,9 @@ export class Viewer {
      *   @deprecated This method is obsolete since version 1.5.0 and may be removed in the future.
      */
     setMouseUsage(usage: string|number) {
-        console.log(usage);
         if (typeof usage === 'string') {
             this.mouseUsage = usage;
-            console.log("string")
         } else {
-            console.log("number")
             switch (usage) {
                 case 1:
                 this.mouseUsage = 'default';
@@ -840,7 +837,6 @@ export class Viewer {
             return;
         }
         if (e.touches.length > 0) {
-            console.log(typeof e.touches.length)
             this.setMouseUsage(e.touches.length);
             const clientX = e.touches[0].clientX;
             const clientY = e.touches[0].clientY;
@@ -924,7 +920,7 @@ export class Viewer {
                 return;
             }
 
-            if (this.mouseUsage  === 'zoom') {
+            if (this.mouseUsage  === 'zoom' && e.touches.length === 2) {
                 const clientX1 = e.touches[1].clientX;
                 const clientY1 = e.touches[1].clientY;
                 const dc = (clientX - clientX1) ** 2 + (clientY - clientY1) ** 2;
@@ -933,7 +929,7 @@ export class Viewer {
                 this.zoomFactor *= (dc > dm) ? 1.04 : 0.96;
                 this.mouseX1 = clientX1;
                 this.mouseY1 = clientY1;
-            } else if (this.mouseUsage  === 'pan') {
+            } else if (this.mouseUsage  === 'pan' && e.touches.length === 2) {
                 const ratio = (this.definition  === 'low') ? 0.5 : ((this.definition  === 'high') ? 2 : 1);
                 this.panning[0] += ratio * (clientX - this.mouseX);
                 this.panning[1] += ratio * (clientY - this.mouseY);
