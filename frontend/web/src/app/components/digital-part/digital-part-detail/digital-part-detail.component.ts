@@ -69,6 +69,7 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
         this.populate();
       },
     );
+    // this.getCustomer(this.digitalPart.customerID);
     this.getAllCustomers();
   }
 
@@ -84,7 +85,7 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
       Validators.compose([Validators.required])],
       id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
-      customers: [ '',
+      customer: [ '',
       Validators.compose([Validators.required])],
       stlFile: [this.digitalPart && this.digitalPart.stlFile ? this.digitalPart.stlFile : '',
       Validators.compose([Validators.required])],
@@ -138,6 +139,7 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
       (customers) => {
         this.customers = customers;
       }, (error) => {
+        console.log(error);
         alert(error.verbose_message);
       },
     );

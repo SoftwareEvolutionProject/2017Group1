@@ -19,8 +19,8 @@
           <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
             <input class="form-control" formControlName="name">
           </div>
-          <label>Customers</label>
-          <div [ngClass]="{'has-error': !requiredFieldsForm.get('customers').valid}">
+          <label>Customer</label>
+          <div [ngClass]="{'has-error': !requiredFieldsForm.get('customer').valid}">
             <input class="form-control" formControlName="customer">
           </div>
           <label>STL File</label>
@@ -28,8 +28,8 @@
             <input class="form-control" formControlName="stlFile">
           </div>
         </form>
-        <select placeholder="Customers" [(ngModel)]="customers" name="customers">
-          <option *ngFor="let customer of customers" [value]="customer.name">
+        <select clas="dropdown-menu" placeholder="Customers" [(ngModel)]="customers" name="customers">
+          <option class="dropdown-item" *ngFor="let customer of customers" [value]="customer.name">
             {{customer.name}}
           </option>
         </select>

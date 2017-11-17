@@ -13,8 +13,10 @@ import {CustomerDetailPanelComponent} from './components/customer/customer-detai
 import {CustomerDetailComponent} from './components/customer/customer-detail/customer-detail.component';
 import {CustomerListComponent} from './components/customer/customer-list/customer-list.component';
 import {CustomerMasterViewComponent} from './components/customer/customer-master-view/customer-master-view.component';
+import { DigitalPartDetailPanelComponent } from './components/digital-part/digital-part-detail-panel/digital-part-detail-panel.component';
 import { DigitalPartDetailComponent } from './components/digital-part/digital-part-detail/digital-part-detail.component';
 import { DigitalPartListComponent } from './components/digital-part/digital-part-list/digital-part-list.component';
+import { DigitalPartMasterViewComponent } from './components/digital-part/digital-part-master-view/digital-part-master-view.component';
 import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
 import { DigitalPrintListComponent } from './components/digital-print-list/digital-print-list.component';
 import { HomeComponent } from './components/home/home.component';
@@ -28,6 +30,8 @@ import {PhysicalPrintListComponent} from './components/physical-print/physical-p
 import {PhysicalPrintMasterViewComponent} from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
+
+
 
 @NgModule({
   declarations: [
@@ -51,6 +55,8 @@ import {HttpClientService} from './services/http/http-client.service';
     CustomerDetailPanelComponent,
     CustomerMasterViewComponent,
     PhysicalPrintMasterViewComponent,
+    DigitalPartDetailPanelComponent,
+    DigitalPartMasterViewComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -88,7 +94,7 @@ import {HttpClientService} from './services/http/http-client.service';
       },
       {
         path: 'digital-parts',
-        component: DigitalPartListComponent,
+        component: DigitalPartMasterViewComponent,
       },
       {
         path: 'digital-parts/:id',
