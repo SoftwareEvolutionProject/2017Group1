@@ -19,6 +19,10 @@ import { DigitalPartListComponent } from './components/digital-part/digital-part
 import { DigitalPartMasterViewComponent } from './components/digital-part/digital-part-master-view/digital-part-master-view.component';
 import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
 import { DigitalPrintListComponent } from './components/digital-print-list/digital-print-list.component';
+import {DigitalPrintDetailsPanelComponent} from './components/digital-print/digital-print-details-panel/digital-print-details-panel.component';
+import {DigitalPrintEditComponent} from './components/digital-print/digital-print-edit/digital-print-edit.component';
+import {DigitalPrintListComponent} from './components/digital-print/digital-print-list/digital-print-list.component';
+import {DigitalPrintMasterViewComponent} from './components/digital-print/physical-print-master-view/digital-print-master-view.component';
 import { HomeComponent } from './components/home/home.component';
 import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
 import { MaterialListComponent } from './components/material-list/material-list.component';
@@ -30,6 +34,7 @@ import {PhysicalPrintListComponent} from './components/physical-print/physical-p
 import {PhysicalPrintMasterViewComponent} from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
+import {DropdownModule} from 'primeng/primeng';
 
 
 
@@ -44,7 +49,9 @@ import {HttpClientService} from './services/http/http-client.service';
     DigitalPartListComponent,
     DigitalPartDetailComponent,
     DigitalPrintListComponent,
-    DigitalPrintDetailComponent,
+    DigitalPrintEditComponent,
+    DigitalPrintMasterViewComponent,
+    DigitalPrintDetailsPanelComponent,
     PhysicalPrintDetailsPanelComponent,
     PhysicalPrintListComponent,
     PhysicalPrintEditComponent,
@@ -59,6 +66,7 @@ import {HttpClientService} from './services/http/http-client.service';
     DigitalPartMasterViewComponent,
   ],
   imports: [
+    DropdownModule,
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     BrowserModule,
@@ -110,11 +118,11 @@ import {HttpClientService} from './services/http/http-client.service';
       },
       {
         path: 'digital-prints',
-        component: DigitalPrintListComponent,
+        component: DigitalPrintMasterViewComponent,
       },
       {
         path: 'digital-prints/:id',
-        component: DigitalPrintDetailComponent,
+        component: DigitalPrintEditComponent,
       },
       {
         path: 'physical-prints',

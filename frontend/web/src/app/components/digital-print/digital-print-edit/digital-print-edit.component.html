@@ -1,0 +1,87 @@
+<div class="container">
+
+  <div class="row">
+    <div *ngIf="loaded" >
+
+      <h2  *ngIf="!creating">Editing Digital Print</h2>
+      <h2  *ngIf="creating">Creating new Digital Print</h2>
+
+      <hr>
+
+      <div class="panel panel-default">
+        <div class="panel-body" style="padding: 30px">
+
+          <div class="row">
+            <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
+              <label>ID:</label>
+              <span *ngIf="!creating">{{digitalPrint.id}} </span>
+              <span *ngIf="creating">Auto Generated </span>
+              <br>
+
+              <label>Magics File</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('magicsPath').valid}">
+                <input class="form-control" formControlName="magicsPath" value="{{digitalPrint.magicsPath}}">
+              </div>
+            </form>
+          </div>
+          <br>
+
+          <div *ngFor="let formGroup of magicPairingsFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
+            <div class="col-sm-5">
+              <label><span class="glyphicon glyphicon-tag" style="margin-right: 10px"></span>Unique Magics Identifier</label>
+
+              <form [formGroup]="formGroup">
+                <div [ngClass]="{'has-error': !formGroup.get('magicsId').valid}">
+                  <input class="form-control" formControlName="magicsId" value="{{formGroup.get('magicsId').value}}">
+                </div>
+
+
+              </form>
+
+            </div>
+            <div class="col-sm-6 ">
+
+              <label><span class="glyphicon glyphicon-tag" style="margin-right: 10px"></span>Digital Part</label>
+              <form [formGroup]="formGroup">
+                <select class="selectpicker form-control" formControlName="digitalPart" title="Choose Digital Part"
+                        [ngClass]="{'has-error': !formGroup.get('digitalPart').valid}">
+                  <option title="{{_digitalPart.name}}"
+                          *ngFor="let _digitalPart of this.digitalParts; let i = index" [value]="_digitalPart.id">
+                    {{_digitalPart.name}}
+                  </option>
+                </select>
+              </form>
+            </div>
+
+            <div class="col-sm-1">
+              <button class="btn btn-danger" (click)="deleteMagicPairing(i)" style="margin-top: 25px">
+                <span class="glyphicon glyphicon-trash" > </span>
+              </button>
+            </div>
+          </div>
+
+          <div class="row" style="margin-bottom: 10px; margin-top: 20px">
+            <div class="col-sm-11 "></div>
+            <div class="col-sm-1 ">
+              <button id="addOption" class="btn btn-primary btn " (click)="addMagicPairing()">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button></div>
+          </div>
+
+          <div class="row">
+
+            <div class="pull-left" style="margin-top: 20px">
+              <button class="btn btn-default"
+                      style="min-width: 100px" (click)="cancel()">Cancel</button>
+            </div>
+            <div class="pull-right" style="margin-top: 20px">
+              <button [disabled]=" !requiredFieldsForm.valid || !pairingValid()" class="btn btn-primary"
+                      style="min-width: 100px" (click)="save()">Save</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

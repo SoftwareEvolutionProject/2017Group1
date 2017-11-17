@@ -90,6 +90,7 @@ public class WebApi {
 
         get(DIGITALPRINT_URL, (request, response) -> pi.getAllDigitalPrints(), gson::toJson);
         get(DIGITALPRINT_URL + DIGITALPRINT_ID_URL, (request, response) -> pi.getDigitalPrint(request.params(DIGITALPRINT_ID_PARAM)), gson::toJson);
+
         post(DIGITALPRINT_URL, (request, response) -> {
             DigitalPrint digitalPrint = pi.createDigitalPrint(gson.fromJson(request.body(), DigitalPrint.class));
             response.status(201);
