@@ -16,7 +16,7 @@ export class DigitalPrintMockService {
   constructor() {
   }
 
-  getAll(): Observable<DigitalPrint[]> {
+  getDigitalPrints(): Observable<DigitalPrint[]> {
     return Observable.of(this.data);
   }
   get(id: number): Observable<DigitalPrint> {

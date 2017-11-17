@@ -75,7 +75,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
   /* populate data */
   private populate() {
     /* get d prints */
-    this.digitalPrintService.getAllDigitalPrint().subscribe((dPrints) => {
+    this.digitalPrintService.getDigitalPrints().subscribe((dPrints) => {
       this.digitalPrints = dPrints;
       this.constructForms();
     });

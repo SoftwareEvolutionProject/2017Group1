@@ -38,7 +38,7 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
 
   loadAndPopulate() {
     /* get users */
-    this.digitalPrintService.getAllDigitalPrint().subscribe(
+    this.digitalPrintService.getDigitalPrints().subscribe(
       (digitalPrints) => {
         this.digitalPrints = digitalPrints;
 
