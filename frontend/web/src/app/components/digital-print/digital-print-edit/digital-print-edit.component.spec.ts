@@ -5,9 +5,8 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {ErrorService} from '../../../services/error.service';
 import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
 import {DigitalPrintEditComponent} from './digital-print-edit.component';
-import {HttpClientService} from "../../../services/http/http-client.service";
-import {DigitalPrintMockService} from "../../../services/digital-print/digital-print-mock.service";
-import {DigitalPartMockService} from "../../../services/digital-part/digital-part-mock.service";
+import {HttpClientService} from '../../../services/http/http-client.service';
+import {DigitalPartMockService} from '../../../services/digital-part/digital-part-mock.service';
 
 describe('DigitalPrintEditComponent', () => {
   let component: DigitalPrintEditComponent;
@@ -23,7 +22,7 @@ describe('DigitalPrintEditComponent', () => {
       set: {
         providers: [
           { provide: DigitalPartMockService, useClass: DigitalPartMockService },
-          { provide: DigitalPrintService, useClass: DigitalPrintMockService },
+          { provide: DigitalPrintService, useClass: DigitalPrintService },
           { provide: ErrorService, useClass: ErrorService },
         ],
       },
