@@ -42,14 +42,14 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
       field: 'id',
       sortable: true,
     }, {
-      title: 'Magics ID',
-      field: 'mid',
-      sortable: true,
-    }, {
       title: 'Name',
       field: 'name',
       sortable: true,
     }, {
+      title: 'Magics ID',
+      field: 'mid',
+      sortable: true,
+    },  {
       title: 'STL File',
       field: 'stlpath',
       sortable: true,
