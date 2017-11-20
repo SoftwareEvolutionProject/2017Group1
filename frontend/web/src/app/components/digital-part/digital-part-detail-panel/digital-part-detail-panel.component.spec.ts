@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DigitalPartDetailPanelComponent } from './digital-part-detail-panel.component';
+import {StlViewerComponent} from '../../stl-viewer/stl-viewer.component';
 
 describe('DigitalPartDetailPanelComponent', () => {
   let component: DigitalPartDetailPanelComponent;
@@ -8,7 +9,7 @@ describe('DigitalPartDetailPanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DigitalPartDetailPanelComponent],
+      declarations: [DigitalPartDetailPanelComponent, StlViewerComponent],
     })
       .compileComponents();
   }));
