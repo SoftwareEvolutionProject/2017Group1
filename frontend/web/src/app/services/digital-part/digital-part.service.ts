@@ -39,6 +39,7 @@ export class DigitalPartService {
   updateDigitalPart(digitalPart: DigitalPart): Observable<DigitalPart> {
     return this.client.put(this.endpoint + '/' + digitalPart.id, JSON.stringify(digitalPart))
       .map((data) => {
+      console.log(data);
         return data;
       });
   }

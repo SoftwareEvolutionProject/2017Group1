@@ -11,11 +11,11 @@ import {CustomerService} from '../../../services/customer/customer.service';
 
 @Component({
   selector: 'app-digital-part-detail',
-  templateUrl: './digital-part-detail.component.html',
-  styleUrls: ['./digital-part-detail.component.scss'],
+  templateUrl: './digital-part-edit.component.html',
+  styleUrls: ['./digital-part-edit.component.scss'],
   providers: [DigitalPartService, CustomerService, ErrorService],
 })
-export class DigitalPartDetailComponent implements OnInit, OnChanges {
+export class DigitalPartEditComponent implements OnInit, OnChanges {
 
   @Input('digitalPart') digitalPart: DigitalPart = null;
   @Input('nav') nav = true;
@@ -23,8 +23,9 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
   @Output() changed: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
   private loaded = false;
   /* forms */
-  private requiredFieldsForm: FormGroup = null;
 
+  private requiredFieldsForm: FormGroup = null;
+  private customer: Customer;
   private customers: Customer[];
   /* data */
 
@@ -37,13 +38,16 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
     private _location: Location) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      const id = params['id'];
-      if (id === 'create') { // new product is being created
-        this.create();
-      } else if (id) {
-        this.getData(id);
-      }
+    this.customerService.getCustomers().subscribe((customers) => {
+      this.customers = customers;
+      this.route.params.subscribe((params) => {
+        const id = params['id'];
+        if (id === 'create') { // new product is being created
+          this.create();
+        } else if (id) {
+          this.getData(id);
+        }
+      });
     });
   }
 
@@ -55,11 +59,19 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.creating) {
-      this.create();
-    } else if (this.digitalPart) {
-      this.populate();
-    }
+    console.log(this.customer);
+    this.customerService.getCustomers().subscribe((customers) => {
+      this.customers = customers;
+      if (this.creating) {
+        this.create();
+      } else if (this.digitalPart) {
+        this.populate();
+      }
+    });
+  }
+  update(id) {
+    console.log(id)
+    this.digitalPart.customerID = id;
   }
   /* get the product */
   getData(id) {
@@ -69,15 +81,15 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
         this.populate();
       },
     );
-    // this.getCustomer(this.digitalPart.customerID);
-    this.getAllCustomers();
   }
 
   /* populate data */
   private populate() {
     this.constructForms();
   }
+  private constructCustomerForm() {
 
+  }
   /* init forms */
   private constructForms() {
     const fields = {
@@ -85,9 +97,7 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
       Validators.compose([Validators.required])],
       id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
-      customer: [ '',
-      Validators.compose([Validators.required])],
-      stlFile: [this.digitalPart && this.digitalPart.stlFile ? this.digitalPart.stlFile : '',
+      stlPath: [this.digitalPart && this.digitalPart.stlPath ? this.digitalPart.stlPath : '',
       Validators.compose([Validators.required])],
     };
 
@@ -97,8 +107,10 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
    /* save product instance */
    save() {
     /* convert relevant fields */
-
     const id = this.digitalPart.id;
+    let data = this.requiredFieldsForm.value;
+    data.customerID = this.digitalPart.customerID;
+
     const digitalPart: DigitalPart = new DigitalPart(this.requiredFieldsForm.value);
     this.creating ? delete digitalPart['id'] : digitalPart.id = id;
 
@@ -132,16 +144,5 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
 
   back() {
     this._location.back();
-  }
-
-  getAllCustomers() {
-    this.customerService.getCustomers().subscribe(
-      (customers) => {
-        this.customers = customers;
-      }, (error) => {
-        console.log(error);
-        alert(error.verbose_message);
-      },
-    );
   }
 }

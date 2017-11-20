@@ -15,7 +15,7 @@ import {CustomerDetailComponent} from './components/customer/customer-detail/cus
 import {CustomerListComponent} from './components/customer/customer-list/customer-list.component';
 import {CustomerMasterViewComponent} from './components/customer/customer-master-view/customer-master-view.component';
 import { DigitalPartDetailPanelComponent } from './components/digital-part/digital-part-detail-panel/digital-part-detail-panel.component';
-import { DigitalPartDetailComponent } from './components/digital-part/digital-part-detail/digital-part-detail.component';
+import { DigitalPartEditComponent } from './components/digital-part/digital-part-edit/digital-part-edit.component';
 import { DigitalPartListComponent } from './components/digital-part/digital-part-list/digital-part-list.component';
 import { DigitalPartMasterViewComponent } from './components/digital-part/digital-part-master-view/digital-part-master-view.component';
 import {DigitalPrintDetailsPanelComponent} from './components/digital-print/digital-print-details-panel/digital-print-details-panel.component';
@@ -43,7 +43,7 @@ import {HttpClientService} from './services/http/http-client.service';
     CustomerListComponent,
     CustomerDetailComponent,
     DigitalPartListComponent,
-    DigitalPartDetailComponent,
+    DigitalPartEditComponent,
     DigitalPrintListComponent,
     DigitalPrintEditComponent,
     DigitalPrintMasterViewComponent,
@@ -102,7 +102,7 @@ import {HttpClientService} from './services/http/http-client.service';
       },
       {
         path: 'digital-parts/:id',
-        component: DigitalPartDetailComponent,
+        component: DigitalPartEditComponent,
       },
       {
         path: 'physical-parts',
