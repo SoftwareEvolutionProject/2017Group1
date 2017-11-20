@@ -11,11 +11,11 @@ import {CustomerService} from '../../../services/customer/customer.service';
 
 @Component({
   selector: 'app-digital-part-detail',
-  templateUrl: './digital-part-detail.component.html',
-  styleUrls: ['./digital-part-detail.component.scss'],
+  templateUrl: './digital-part-edit.component.html',
+  styleUrls: ['./digital-part-edit.component.scss'],
   providers: [DigitalPartService, CustomerService, ErrorService],
 })
-export class DigitalPartDetailComponent implements OnInit, OnChanges {
+export class DigitalPartEditComponent implements OnInit, OnChanges {
 
   @Input('digitalPart') digitalPart: DigitalPart = null;
   @Input('nav') nav = true;
@@ -55,11 +55,14 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.creating) {
-      this.create();
-    } else if (this.digitalPart) {
-      this.populate();
-    }
+    this.customerService.getCustomers().subscribe((customers) => {
+      this.customers = customers;
+      if (this.creating) {
+        this.create();
+      } else if (this.digitalPart) {
+        this.populate();
+      }
+    });
   }
   /* get the product */
   getData(id) {
@@ -69,8 +72,6 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
         this.populate();
       },
     );
-    // this.getCustomer(this.digitalPart.customerID);
-    this.getAllCustomers();
   }
 
   /* populate data */
@@ -132,16 +133,5 @@ export class DigitalPartDetailComponent implements OnInit, OnChanges {
 
   back() {
     this._location.back();
-  }
-
-  getAllCustomers() {
-    this.customerService.getCustomers().subscribe(
-      (customers) => {
-        this.customers = customers;
-      }, (error) => {
-        console.log(error);
-        alert(error.verbose_message);
-      },
-    );
   }
 }
