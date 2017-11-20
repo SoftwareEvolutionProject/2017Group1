@@ -54,7 +54,6 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     /* init with a boilerplate */
     this.creating = true;
     if (this.creating) { this.digitalPart = new DigitalPart({}); }
-    console.log(this.digitalPart);
     this.populate();
   }
 
@@ -73,6 +72,7 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     this.digitalPartService.getDigitalPart(id).subscribe(
       (digitalPart) => {
         this.digitalPart = digitalPart;
+        console.log(this.digitalPart);
         this.populate();
       },
     );
@@ -82,18 +82,18 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
   private populate() {
     this.constructForms();
   }
+  private constructCustomerForm() {
 
+  }
   /* init forms */
   private constructForms() {
-    console.log(this.digitalPart);
     const fields = {
       name: [this.digitalPart && this.digitalPart.name ? this.digitalPart.name : '',
       Validators.compose([Validators.required])],
       id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
-      customer: [this.customers[this.digitalPart.customerID] ? this.customers[this.digitalPart.customerID] : '',
-        Validators.compose([Validators.required])],
-      stlFile: [this.digitalPart && this.digitalPart.stlFile ? this.digitalPart.stlFile : '',
+
+      stlPath: [this.digitalPart && this.digitalPart.stlPath ? this.digitalPart.stlPath : '',
       Validators.compose([Validators.required])],
     };
 

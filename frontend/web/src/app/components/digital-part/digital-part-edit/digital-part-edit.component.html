@@ -3,7 +3,7 @@
   <div class="row">
     <div *ngIf="loaded" >
 
-      <h2  *ngIf="!creating">Editing Digital Part{{digitalPart}}</h2>
+      <h2  *ngIf="!creating">Editing Digital Part</h2>
       <h2  *ngIf="creating">Creating new Digital Part</h2>
 
       <hr>
@@ -20,16 +20,15 @@
               <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
                 <input class="form-control" formControlName="name">
               </div>
-              <label>Stl-file</label>
-              <div [ngClass]="{'has-error': !requiredFieldsForm.get('stlfile').valid}">
-                <input class="form-control" formControlName="stlfile">
+              <label>Stl-File</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('stlPath').valid}">
+                <input class="form-control" formControlName="stlPath">
               </div>
             </form>
             <label><span class="glyphicon glyphicon-tag" style="margin-right: 10px"></span>Customer</label>
-              <select class="selectpicker form-control" formControlName="customer" title="Choose Customer"
-                      [ngClass]="{'has-error': !formGroup.get('customer').valid}">
+              <select class="selectpicker form-control" title="Choose Customer">
                 <option title="{{_customer.name}}"
-                        *ngFor="let _customer of this.customers; let i = index" [value]="_customer.id">
+                        *ngFor="let _customer of this.customers; let i = index" [value]="_customer.name">
                   {{_customer.name}}
                 </option>
               </select>
@@ -40,7 +39,7 @@
                       style="min-width: 100px" (click)="cancel()">Cancel</button>
             </div>
             <div class="pull-right" style="margin-top: 20px">
-              <button [disabled]=" !requiredFieldsForm.valid || !pairingValid()" class="btn btn-primary"
+              <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
                       style="min-width: 100px" (click)="save()">Save</button>
             </div>
           </div>
