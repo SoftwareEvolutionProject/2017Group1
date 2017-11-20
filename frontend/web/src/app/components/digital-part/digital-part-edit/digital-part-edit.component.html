@@ -25,10 +25,10 @@
                 <input class="form-control" formControlName="stlPath">
               </div>
             </form>
-            <label><span class="glyphicon glyphicon-tag" style="margin-right: 10px"></span>Customer</label>
-              <select class="selectpicker form-control" title="Choose Customer">
+            <label>Customer</label>
+              <select name="cusotmer" class="selectpicker form-control" title="Choose Customer" #c (change)="update(c.value)">
                 <option title="{{_customer.name}}"
-                        *ngFor="let _customer of this.customers; let i = index" [value]="_customer.name">
+                        *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id [selected]="_customer.id == digitalPart.customerID">
                   {{_customer.name}}
                 </option>
               </select>

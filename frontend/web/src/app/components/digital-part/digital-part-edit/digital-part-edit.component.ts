@@ -23,8 +23,9 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
   @Output() changed: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
   private loaded = false;
   /* forms */
-  private requiredFieldsForm: FormGroup = null;
 
+  private requiredFieldsForm: FormGroup = null;
+  private customer: Customer;
   private customers: Customer[];
   /* data */
 
@@ -58,6 +59,7 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(this.customer);
     this.customerService.getCustomers().subscribe((customers) => {
       this.customers = customers;
       if (this.creating) {
@@ -67,12 +69,15 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
       }
     });
   }
+  update(id) {
+    console.log(id)
+    this.digitalPart.customerID = id;
+  }
   /* get the product */
   getData(id) {
     this.digitalPartService.getDigitalPart(id).subscribe(
       (digitalPart) => {
         this.digitalPart = digitalPart;
-        console.log(this.digitalPart);
         this.populate();
       },
     );
@@ -92,7 +97,6 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
       Validators.compose([Validators.required])],
       id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
-
       stlPath: [this.digitalPart && this.digitalPart.stlPath ? this.digitalPart.stlPath : '',
       Validators.compose([Validators.required])],
     };
@@ -103,11 +107,10 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
    /* save product instance */
    save() {
     /* convert relevant fields */
-
     const id = this.digitalPart.id;
     let data = this.requiredFieldsForm.value;
     data.customerID = this.digitalPart.customerID;
-    console.log(data);
+
     const digitalPart: DigitalPart = new DigitalPart(this.requiredFieldsForm.value);
     this.creating ? delete digitalPart['id'] : digitalPart.id = id;
 
@@ -124,7 +127,6 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     } else {
       this.digitalPartService.updateDigitalPart(digitalPart).subscribe(
         (data) => {
-          console.log(data);
           if (this.nav) { this.back(); }
           this.changed.emit(data);
         }, (error) => {
