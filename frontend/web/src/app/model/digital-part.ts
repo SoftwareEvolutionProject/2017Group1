@@ -5,6 +5,7 @@ export class DigitalPart {
   public customerID: number;
 
   constructor(values: Object = {}) {
+    console.log(values);
     if (!values) {
       return null;
     }
@@ -12,6 +13,7 @@ export class DigitalPart {
   }
 
   static create(json: any) {
+    console.log(json);
     if (json) {
       return new DigitalPart(json);
     } else {

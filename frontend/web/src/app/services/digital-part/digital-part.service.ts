@@ -12,8 +12,12 @@ export class DigitalPartService {
   constructor(private http: Http, private client: HttpClientService) {}
 
   getDigitalPart(id: number): Observable<DigitalPart> {
+    console.log(id);
+    console.log(this.client);
+    console.log(this.endpoint + '/' + id);
     return this.client.get(this.endpoint + '/' + id)
       .map((data) => {
+        console.log(data);
         return DigitalPart.create(data);
       });
   }

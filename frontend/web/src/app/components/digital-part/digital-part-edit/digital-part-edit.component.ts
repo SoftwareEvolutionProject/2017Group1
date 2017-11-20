@@ -37,13 +37,16 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     private _location: Location) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      const id = params['id'];
-      if (id === 'create') { // new product is being created
-        this.create();
-      } else if (id) {
-        this.getData(id);
-      }
+    this.customerService.getCustomers().subscribe((customers) => {
+      this.customers = customers;
+      this.route.params.subscribe((params) => {
+        const id = params['id'];
+        if (id === 'create') { // new product is being created
+          this.create();
+        } else if (id) {
+          this.getData(id);
+        }
+      });
     });
   }
 
@@ -51,6 +54,7 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     /* init with a boilerplate */
     this.creating = true;
     if (this.creating) { this.digitalPart = new DigitalPart({}); }
+    console.log(this.digitalPart);
     this.populate();
   }
 
@@ -81,13 +85,14 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
 
   /* init forms */
   private constructForms() {
+    console.log(this.digitalPart);
     const fields = {
       name: [this.digitalPart && this.digitalPart.name ? this.digitalPart.name : '',
       Validators.compose([Validators.required])],
       id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
-      customer: [ '',
-      Validators.compose([Validators.required])],
+      customer: [this.customers[this.digitalPart.customerID] ? this.customers[this.digitalPart.customerID] : '',
+        Validators.compose([Validators.required])],
       stlFile: [this.digitalPart && this.digitalPart.stlFile ? this.digitalPart.stlFile : '',
       Validators.compose([Validators.required])],
     };
