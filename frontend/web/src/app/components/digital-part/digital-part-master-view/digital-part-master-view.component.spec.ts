@@ -9,6 +9,7 @@ import {HttpClientService} from '../../../services/http/http-client.service';
 import {DigitalPartDetailPanelComponent} from '../digital-part-detail-panel/digital-part-detail-panel.component';
 import {DigitalPartListComponent} from '../digital-part-list/digital-part-list.component';
 import { DigitalPartMasterViewComponent } from './digital-part-master-view.component';
+import {StlViewerComponent} from '../../stl-viewer/stl-viewer.component';
 
 describe('DigtialPartMasterViewComponent', () => {
   let component: DigitalPartMasterViewComponent;
@@ -18,7 +19,7 @@ describe('DigtialPartMasterViewComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpModule, RouterTestingModule, ModalModule.forRoot()],
       providers: [HttpClientService],
-      declarations: [ DigitalPartMasterViewComponent, DigitalPartListComponent, DigitalPartDetailPanelComponent ],
+      declarations: [ DigitalPartMasterViewComponent, DigitalPartListComponent, DigitalPartDetailPanelComponent, StlViewerComponent],
     });
     TestBed.overrideComponent(DigitalPartListComponent, {
       set: {
