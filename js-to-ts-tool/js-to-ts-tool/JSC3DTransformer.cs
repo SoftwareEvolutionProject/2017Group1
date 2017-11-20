@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace js_to_ts_tool
 {
@@ -31,6 +27,10 @@ namespace js_to_ts_tool
         public JSC3DTransformer(String fileContent)
         {
             this.fileContent = fileContent;
+        }
+
+        public static bool IsOfType(String fileContent) {
+            return true;
         }
 
         public bool CleanUpClasses()

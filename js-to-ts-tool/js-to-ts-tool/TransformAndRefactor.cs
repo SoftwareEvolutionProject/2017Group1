@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace js_to_ts_tool {
@@ -13,8 +8,14 @@ namespace js_to_ts_tool {
 
         ITransformer transformer;
 
-        public TransformAndRefactor(String fileContent) {
-            transformer = new JSC3DTransformer(fileContent);
+        public TransformAndRefactor(String fileContent, String outputPath = "output/") {
+            this.outputPath = outputPath;
+
+            if(JSC3DTransformer.IsOfType(fileContent)) {
+                transformer = new JSC3DTransformer(fileContent);
+            } else {
+                throw new InvalidDataException("Could not find the format of the file.");
+            }
         }
 
         public bool Run() {
@@ -33,7 +34,7 @@ namespace js_to_ts_tool {
             int j = 0;
 
             if (!Directory.Exists(outputPath)) {
-                Console.WriteLine("directory does not exist.");
+                Console.WriteLine("directory does not exist, creating!");
                 Directory.CreateDirectory(outputPath);
             }
 
