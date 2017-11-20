@@ -105,6 +105,9 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     /* convert relevant fields */
 
     const id = this.digitalPart.id;
+    let data = this.requiredFieldsForm.value;
+    data.customerID = this.digitalPart.customerID;
+    console.log(data);
     const digitalPart: DigitalPart = new DigitalPart(this.requiredFieldsForm.value);
     this.creating ? delete digitalPart['id'] : digitalPart.id = id;
 
@@ -121,6 +124,7 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     } else {
       this.digitalPartService.updateDigitalPart(digitalPart).subscribe(
         (data) => {
+          console.log(data);
           if (this.nav) { this.back(); }
           this.changed.emit(data);
         }, (error) => {
