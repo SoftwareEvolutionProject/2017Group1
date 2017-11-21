@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {DigitalPrint} from '../../model/digital-print';
 import {HttpClientService} from '../http/http-client.service';
 import {HttpClient} from '../http/http.client';
+import {MagicsFile} from "../../model/magics-file";
 
 @Injectable()
 export class DigitalPrintService {
@@ -41,6 +42,10 @@ export class DigitalPrintService {
       .map((data) => {
         return data;
       });
+  }
+
+  downloadMagicsFile(id: number): Observable<MagicsFile> {
+    return this.client.get(this.endpoint + '/' + id);
   }
 
   deleteDigitalPrint(id: number): Observable<boolean> {

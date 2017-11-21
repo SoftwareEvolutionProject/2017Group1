@@ -17,6 +17,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
+import javax.servlet.http.HttpServletResponse;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static spark.Spark.*;
 
 /**
@@ -81,9 +87,42 @@ public class WebApi {
         setupOrderInterface();
         setupDigitalPartsInterface();
         setupPhysicalInterface();
+        setupFileTranferInterface();
 
         log.info("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         log.info("SERVER RUNNING!");
+    }
+
+    private static void setupFileTranferInterface() {
+        get( "/files/:id", (request, response) -> {
+
+            Path path = Paths.get("C:\\Users\\danie\\code\\2017Group1\\backend\\rescources\\kitten-little.jpg");
+            byte[] data = null;
+            try {
+                data = Files.readAllBytes(path);
+            } catch (Exception e1) {
+
+                e1.printStackTrace();
+            }
+            PhysicalPartImage image = new PhysicalPartImage();
+            image.setImage(data);
+            return gson.toJson(image);
+            /*
+            HttpServletResponse raw = response.raw();
+            response.header("Content-Disposition", "attachment; filename=image.jpg");
+            response.type("application/force-download");
+            try {
+                raw.getOutputStream().write(data);
+                raw.getOutputStream().flush();
+                raw.getOutputStream().close();
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+            return raw;
+*/
+
+        });
     }
 
     private static void setupPrintingInterface() {
