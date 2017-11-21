@@ -15,7 +15,13 @@ import com.google.gson.Gson;
 import se.chalmers.dat265.group1.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import se.chalmers.dat265.group1.storage.FileUtil;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
+
+import javax.servlet.MultipartConfigElement;
+
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import static spark.Spark.*;
 
@@ -62,7 +68,7 @@ public class WebApi {
 
 
     public static void main(String[] args) {
-        String staticFolder = "/staticFolder";
+        String staticFolder = "C:\\Users\\danie\\code\\2017Group1\\storage";
         Log log = LogFactory.getLog(GenericRepository.class);
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
@@ -74,7 +80,8 @@ public class WebApi {
         long start = System.currentTimeMillis();
         log.info("STARTED ENDPIONT SETUP");
 
-        staticFileLocation(staticFolder);
+        //Dynamic API of static files.... hehehe
+        externalStaticFileLocation(staticFolder);
 
         WebApi.enableCORS("*", "*", "*");
 
@@ -85,9 +92,24 @@ public class WebApi {
         setupOrderInterface();
         setupDigitalPartsInterface();
         setupPhysicalInterface();
+        setupFileDump();
 
         log.info("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         log.info("SERVER RUNNING!");
+    }
+
+    private static void setupFileDump() {
+
+        //Taken from stackOverflow
+        post("/upload", (request, response) -> {
+            byte[] test = request.bodyAsBytes();
+            FileUtil.write(test, "testByte.jpg");
+            //request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+            try (InputStream is = request.raw().getPart("").getInputStream()) {
+                FileUtil.writeToFile(is, "test.jpg");
+            }
+            return "File uploaded";
+        });
     }
 
     private static void setupPrintingInterface() {
