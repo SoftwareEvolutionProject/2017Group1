@@ -18,6 +18,8 @@ import org.apache.commons.logging.LogFactory;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 
+import java.io.File;
+
 import static spark.Spark.*;
 
 /**
@@ -58,13 +60,14 @@ public class WebApi {
     private static final String PHYSICALPART_ID_PARAM = "physicalPartID";
     private static final String PHYSICALPART_ID_URL = PARAM_URL_PREFIX + PHYSICALPART_ID_PARAM;
 
-    private static final String STATIC_FOLDER = "C:\\Users\\danie\\code\\2017Group1\\storage";
+    private static File storageFolder;
 
     private static Gson gson = new Gson();
     private static boolean debug;
 
 
     public static void main(String[] args) {
+        storageFolder = new File("storage");
         Log log = LogFactory.getLog(GenericRepository.class);
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
@@ -77,7 +80,7 @@ public class WebApi {
         log.info("STARTED ENDPIONT SETUP");
 
         //Dynamic API of static files.... hehehe
-        externalStaticFileLocation(STATIC_FOLDER);
+        externalStaticFileLocation(storageFolder.getAbsolutePath());
 
         WebApi.enableCORS("*", "*", "*");
 
@@ -106,7 +109,7 @@ public class WebApi {
         }, gson::toJson);
 
         post(DIGITALPRINT_URL + DIGITALPRINT_ID_URL + "/magics", ((request, response) -> {
-            MagicsData magicsData = pi.uploadMagicsFile(request.params(DIGITALPRINT_ID_PARAM), request.bodyAsBytes(), STATIC_FOLDER);
+            MagicsData magicsData = pi.uploadMagicsFile(request.params(DIGITALPRINT_ID_PARAM), request.bodyAsBytes(), storageFolder.getAbsolutePath());
             response.status(201);
             return magicsData;
         }), gson::toJson);
@@ -139,7 +142,7 @@ public class WebApi {
             return digitalPart;
         }, gson::toJson);
         post(DIGITALPARTS_URL + DIGITALPART_ID_URL + "/stl", ((request, response) -> {
-            StlData stlData = dpi.uploadStlFile(request.params(DIGITALPART_ID_PARAM), request.bodyAsBytes(), STATIC_FOLDER);
+            StlData stlData = dpi.uploadStlFile(request.params(DIGITALPART_ID_PARAM), request.bodyAsBytes(), storageFolder.getAbsolutePath());
             response.status(201);
             return stlData;
         }), gson::toJson);
