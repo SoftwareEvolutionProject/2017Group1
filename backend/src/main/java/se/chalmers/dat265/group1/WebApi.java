@@ -65,7 +65,6 @@ public class WebApi {
 
 
     public static void main(String[] args) {
-
         Log log = LogFactory.getLog(GenericRepository.class);
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
