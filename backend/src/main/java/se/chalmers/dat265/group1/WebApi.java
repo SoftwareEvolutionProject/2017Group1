@@ -15,13 +15,9 @@ import com.google.gson.Gson;
 import se.chalmers.dat265.group1.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import se.chalmers.dat265.group1.storage.FileUtil;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
-import javax.servlet.http.HttpServletResponse;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static spark.Spark.*;
 
@@ -68,6 +64,7 @@ public class WebApi {
 
 
     public static void main(String[] args) {
+        String staticFolder = "C:\\Users\\danie\\code\\2017Group1\\storage";
         Log log = LogFactory.getLog(GenericRepository.class);
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
@@ -78,6 +75,10 @@ public class WebApi {
 
         long start = System.currentTimeMillis();
         log.info("STARTED ENDPIONT SETUP");
+
+        //Dynamic API of static files.... hehehe
+        externalStaticFileLocation(staticFolder);
+
         WebApi.enableCORS("*", "*", "*");
 
         get("/hello", (req, res) -> "Hello World");
@@ -87,41 +88,19 @@ public class WebApi {
         setupOrderInterface();
         setupDigitalPartsInterface();
         setupPhysicalInterface();
-        setupFileTranferInterface();
+
+        setupFileDump();
 
         log.info("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         log.info("SERVER RUNNING!");
     }
 
-    private static void setupFileTranferInterface() {
-        get( "/files/:id", (request, response) -> {
-
-            Path path = Paths.get("C:\\Users\\danie\\code\\2017Group1\\backend\\rescources\\kitten-little.jpg");
-            byte[] data = null;
-            try {
-                data = Files.readAllBytes(path);
-            } catch (Exception e1) {
-
-                e1.printStackTrace();
-            }
-            PhysicalPartImage image = new PhysicalPartImage();
-            image.setImage(data);
-            return gson.toJson(image);
-            /*
-            HttpServletResponse raw = response.raw();
-            response.header("Content-Disposition", "attachment; filename=image.jpg");
-            response.type("application/force-download");
-            try {
-                raw.getOutputStream().write(data);
-                raw.getOutputStream().flush();
-                raw.getOutputStream().close();
-            } catch (Exception e) {
-
-                e.printStackTrace();
-            }
-            return raw;
-*/
-
+    private static void setupFileDump() {
+        //Taken from stackOverflow
+        post("/upload", (request, response) -> {
+            byte[] test = request.bodyAsBytes();
+            FileUtil.write(test, "testByte.jpg");
+            return "File uploaded";
         });
     }
 
