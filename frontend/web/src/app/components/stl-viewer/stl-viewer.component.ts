@@ -10,11 +10,12 @@ declare var JSC3D: any;
   styleUrls: ['./stl-viewer.component.scss'],
 })
 export class StlViewerComponent implements OnInit {
+  canvas = null;
   viewer: Viewer;
   constructor() { }
 
   ngOnInit() {
-    const canvas = document.getElementById('stl');
+    this.canvas = document.getElementById('stl');
     const parameters = {
       SceneUrl: 'https://rawgit.com/SoftwareEvolutionProject/2017Group1/feature/host-stl-file/top.stl',
     };
@@ -24,7 +25,7 @@ export class StlViewerComponent implements OnInit {
     stlLoader.setDecimalPrecision(3);
 
     // =========================================================================
-    this.viewer = new Viewer(canvas, parameters);
+    this.viewer = new Viewer(this.canvas, parameters);
     this.viewer.setLoader(stlLoader);
     this.viewer.setParameter('Renderer', 'webgl');
     this.viewer.init();
@@ -33,6 +34,11 @@ export class StlViewerComponent implements OnInit {
   resetView(){
     this.viewer.resetScene();
     this.viewer.update();
+  }
+
+  enlargeViewer(){
+    this.canvas.width = 1500;
+    this.canvas.height = 1000;
   }
 
   toogleRotation(){
