@@ -118,6 +118,7 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     this.digitalPartService.getDigitalPart(id).subscribe(
       (digitalPart) => {
         this.digitalPart = digitalPart;
+        this.selectedFile = digitalPart.stlPath;
         this.populate();
       },
     );
