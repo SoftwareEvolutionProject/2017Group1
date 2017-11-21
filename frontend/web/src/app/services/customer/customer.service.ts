@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Customer} from '../../model/customer';
 import {HttpClientService} from '../http/http-client.service';
 import {HttpClient} from '../http/http.client';
+import {DigitalPart} from "../../model/digital-part";
 
 @Injectable()
 export class CustomerService {
@@ -41,6 +42,17 @@ export class CustomerService {
       .map((data) => {
         return data;
       });
+  }
+
+  getDigitalParts(id: number): Observable<DigitalPart[]> {
+    return this.client.get(this.endpoint + '/' + id + '/digital-parts')
+        .map((data) => {
+            const digitalParts: DigitalPart[] = [];
+            for (let i = 0; i < data.length; i++) {
+              digitalParts[i] = DigitalPart.create(data[i]);
+            }
+            return digitalParts;
+          });
   }
 
   deleteCustomer(id: number): Observable<boolean> {
