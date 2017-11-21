@@ -104,10 +104,6 @@ public class WebApi {
         post("/upload", (request, response) -> {
             byte[] test = request.bodyAsBytes();
             FileUtil.write(test, "testByte.jpg");
-            //request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
-            try (InputStream is = request.raw().getPart("").getInputStream()) {
-                FileUtil.writeToFile(is, "test.jpg");
-            }
             return "File uploaded";
         });
     }
