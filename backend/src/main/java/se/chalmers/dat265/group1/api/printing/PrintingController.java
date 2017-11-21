@@ -3,10 +3,14 @@ package se.chalmers.dat265.group1.api.printing;
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DataModel;
 import se.chalmers.dat265.group1.model.DigitalPrint;
+import se.chalmers.dat265.group1.model.MagicsData;
+import se.chalmers.dat265.group1.model.StlData;
 import se.chalmers.dat265.group1.model.dbEntities.DigitalPrintData;
 import se.chalmers.dat265.group1.model.dbEntities.MagicsPairing;
+import se.chalmers.dat265.group1.storage.FileUtil;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
+import java.io.IOException;
 import java.util.*;
 
 public class PrintingController extends ApiController implements PrintingAPI {
@@ -51,6 +55,13 @@ public class PrintingController extends ApiController implements PrintingAPI {
         }
 
         return combine(returnDpe, returnMpeList);
+    }
+
+    @Override
+    public MagicsData uploadMagicsFile(String id, byte[] body) throws IOException {
+        String path = "/magics/" + id + "-" + Arrays.hashCode(body) + ".magics";
+        FileUtil.write(body, path);
+        return magicsRepo.postObject(new MagicsData(Integer.valueOf(id), path));
     }
 
     private DigitalPrint getPairings(DigitalPrintData dpe) {

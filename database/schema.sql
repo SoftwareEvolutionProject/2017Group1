@@ -74,15 +74,13 @@ CREATE TABLE IF NOT EXISTS physicalpart(
 );
 
 CREATE TABLE IF NOT EXISTS magicsdata(
-  id SERIAL PRIMARY KEY,
-  digitalPrintID INTEGER,
+  digitalPrintID INTEGER PRIMARY KEY,
   path VARCHAR(200),
   FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
 );
 
 CREATE TABLE IF NOT EXISTS stldata(
-  id SERIAL PRIMARY KEY,
-  digitalPartID INTEGER,
+  digitalPartID INTEGER PRIMARY KEY,
   path VARCHAR(200),
   FOREIGN KEY (digitalPartID) REFERENCES digitalpart(id)
 );

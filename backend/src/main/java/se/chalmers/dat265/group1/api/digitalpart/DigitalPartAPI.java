@@ -1,7 +1,9 @@
 package se.chalmers.dat265.group1.api.digitalpart;
 
 import se.chalmers.dat265.group1.model.DigitalPart;
+import se.chalmers.dat265.group1.model.StlData;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,13 +18,5 @@ public interface DigitalPartAPI {
 
     DigitalPart updateDigitalPart(DigitalPart digitalPart);
 
-    int deleteDigitalPart(String digitalPartID);
-
-    String getStlPath(String digitalPartID);
-
-    String updateStlPath(String digitalPartID);
-
-    String getCadPath(String digitalPartID);
-
-    String updateCadPath(String digitalPartID);
+    StlData uploadStlFile(String digitalPartID, byte[] body) throws IOException;
 }
