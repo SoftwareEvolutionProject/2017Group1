@@ -2,7 +2,32 @@
   <div class="panel-heading">
     <h3 class="panel-title">Details</h3>
   </div>
+  <div [hidden]="!customer" class="panel-body" style="padding-right: 30px">
   <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
     Name: {{customer.name}}
+  </div>
+  <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
+    Email: {{customer.eMail}}
+  </div>
+    <h3>Orders</h3>
+    <table id="ordersTable"
+           data-pagination="true"
+           data-page-list="[10, 25, 50, 100, ALL]">
+      <thead>
+      <tr>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <h3>Digital Parts</h3>
+    <table id="dPartsTable"
+           data-pagination="true"
+           data-page-list="[10, 25, 50, 100, ALL]">
+      <thead>
+      <tr>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
 </div>

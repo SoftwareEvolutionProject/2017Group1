@@ -1,6 +1,7 @@
 package se.chalmers.dat265.group1.api.customer;
 
 import se.chalmers.dat265.group1.model.*;
+import se.chalmers.dat265.group1.model.dbEntities.OrderData;
 import se.chalmers.dat265.group1.model.dbEntities.OrderedPart;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public interface CustomerAPI {
     Customer getCustomer(String customerID);
 
     List<DigitalPart> getDigitalPartsFromCustomer(String customerID);
+
+    List<OrderData> getOrdersFromCustomer(String customerID);
 
     Customer createNewCustomer(Customer customer);
 
