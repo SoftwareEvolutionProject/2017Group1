@@ -13,5 +13,5 @@ public interface PrintingAPI {
 
     DigitalPrint createDigitalPrint(DigitalPrint digitalPrint);
 
-    MagicsData uploadMagicsFile(String id, byte[] body) throws IOException;
+    MagicsData uploadMagicsFile(String id, byte[] body, String staticFolder) throws IOException;
 }

@@ -8,6 +8,7 @@ import se.chalmers.dat265.group1.storage.FileUtil;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,9 +42,18 @@ public class DigitalPartController extends ApiController implements DigitalPartA
     }
 
     @Override
-    public StlData uploadStlFile(String digitalPartID, byte[] body) throws IOException {
+    public StlData uploadStlFile(String digitalPartID, byte[] body, String basePath) throws IOException {
+        boolean exist=false;
+        try{
+            exist = stlRepo.getObject(Integer.valueOf(digitalPartID))!= null;
+        }catch (Exception e){
+            exist = false;
+        }
+        if (exist){
+            throw new FileAlreadyExistsException("ID have file");
+        }
         String path = "/stl/" + digitalPartID + "-" + Arrays.hashCode(body) + ".stl";
-        FileUtil.write(body, path);
+        FileUtil.write(body, basePath+path);
         return stlRepo.postObject(new StlData(Integer.valueOf(digitalPartID), path));
     }
 }

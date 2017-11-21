@@ -1,10 +1,12 @@
 package se.chalmers.dat265.group1.model;
 
 public class StlData extends DataModel {
+    private int id;
     private int digitalPartID;
     private String path;
 
     public StlData() {
+        id = -1;
         digitalPartID = -1;
         path = "";
     }
@@ -16,6 +18,6 @@ public class StlData extends DataModel {
 
     @Override
     public int getId() {
-        return digitalPartID;
+        return id;
     }
 }

@@ -1,10 +1,12 @@
 package se.chalmers.dat265.group1.model;
 
 public class MagicsData extends DataModel {
+    private int id;
     private int digitalPrintID;
     private String path;
 
     public MagicsData() {
+        id=-1;
         digitalPrintID = -1;
         path = "";
     }
@@ -16,6 +18,6 @@ public class MagicsData extends DataModel {
 
     @Override
     public int getId() {
-        return digitalPrintID;
+        return id;
     }
 }

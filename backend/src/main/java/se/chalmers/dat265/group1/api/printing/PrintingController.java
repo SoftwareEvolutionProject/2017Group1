@@ -11,6 +11,7 @@ import se.chalmers.dat265.group1.storage.FileUtil;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.*;
 
 public class PrintingController extends ApiController implements PrintingAPI {
@@ -28,7 +29,7 @@ public class PrintingController extends ApiController implements PrintingAPI {
         List<DigitalPrint> resultList = new LinkedList<>();
         List<DigitalPrintData> dpeList = digitalPrintRepository.getObjects();
         for (DigitalPrintData dpe : dpeList) {
-            System.out.println("Getting stuff for "+ dpe.getId());
+            System.out.println("Getting stuff for " + dpe.getId());
             resultList.add(getPairings(dpe));
         }
 
@@ -58,15 +59,24 @@ public class PrintingController extends ApiController implements PrintingAPI {
     }
 
     @Override
-    public MagicsData uploadMagicsFile(String id, byte[] body) throws IOException {
+    public MagicsData uploadMagicsFile(String id, byte[] body, String basePath) throws IOException {
+        boolean exist = false;
+        try {
+            exist = magicsRepo.getObject(Integer.valueOf(id)) != null;
+        } catch (Exception e) {
+            exist = false;
+        }
+        if (exist) {
+            throw new FileAlreadyExistsException("ID have file");
+        }
         String path = "/magics/" + id + "-" + Arrays.hashCode(body) + ".magics";
-        FileUtil.write(body, path);
+        FileUtil.write(body, basePath + path);
         return magicsRepo.postObject(new MagicsData(Integer.valueOf(id), path));
     }
 
     private DigitalPrint getPairings(DigitalPrintData dpe) {
         List<MagicsPairing> mpeList = magicsPairingRepository.getObjects("digitalPrintID = " + dpe.getId());
-        System.out.println("Found "+ mpeList.size() +  " number of pairings");
+        System.out.println("Found " + mpeList.size() + " number of pairings");
         return combine(dpe, mpeList);
     }
 
@@ -74,11 +84,11 @@ public class PrintingController extends ApiController implements PrintingAPI {
         Map<String, Integer> magicsPartPairing = new HashMap<>();
 
         for (MagicsPairing mpe : mpList) {
-            System.out.println("Label: "+ mpe.getLabel());
+            System.out.println("Label: " + mpe.getLabel());
             magicsPartPairing.put(mpe.getLabel(), mpe.getDigitalPartID());
         }
 
-        return new DigitalPrint(dp.getId(), dp.getName() , magicsPartPairing);
+        return new DigitalPrint(dp.getId(), dp.getName(), magicsPartPairing);
     }
 
     private List<MagicsPairing> extractMagicsPairingEntity(DigitalPrint digitalPrint) {
