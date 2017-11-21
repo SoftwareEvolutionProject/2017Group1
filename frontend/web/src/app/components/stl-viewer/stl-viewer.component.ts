@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LoaderSelector } from '../../stl-viewer/LoaderSelector';
 import { StlLoader } from '../../stl-viewer/StlLoader';
 import { Viewer } from '../../stl-viewer/Viewer';
-declare var JSC3D: any;
 
 @Component({
   selector: 'app-stl-viewer',
@@ -11,6 +10,9 @@ declare var JSC3D: any;
 })
 export class StlViewerComponent implements OnInit {
   viewer: Viewer;
+  private rotate = false;
+  private timer = null;
+
   constructor() { }
 
   ngOnInit() {
@@ -35,7 +37,17 @@ export class StlViewerComponent implements OnInit {
     this.viewer.update();
   }
 
-  toogleRotation(){
-    //TODO Animation toogle goes in here
+  toogleRotation() {
+    this.rotate = !this.rotate;
+
+    if (this.rotate) {
+      this.timer = setInterval(() => {
+        console.log('rotating');
+        this.viewer.rotate(0.25, 0.5, 0.1);
+        this.viewer.update();
+      }, 10);
+    } else {
+      clearInterval(this.timer);
+    }
   }
 }
