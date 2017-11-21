@@ -79,4 +79,6 @@ INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingID) V
   (6,3,9), (6,4,10),
   (7,3,9), (7,4,10);
 
+INSERT INTO stldata (digitalPartID, path) VALUES (2, '2-1082100546.stl'), (3,'3-129913882.stl');
+
 COMMIT;
