@@ -105,6 +105,10 @@ import {HttpClientService} from './services/http/http-client.service';
         component: DigitalPartEditComponent,
       },
       {
+        path: 'digital-parts/:id/stl',
+        component: StlViewerComponent,
+      },
+      {
         path: 'physical-parts',
         component: HomeComponent,
       },
