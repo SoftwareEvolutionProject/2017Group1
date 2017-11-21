@@ -78,7 +78,7 @@ public class PrintingController extends ApiController implements PrintingAPI {
             magicsPartPairing.put(mpe.getLabel(), mpe.getDigitalPartID());
         }
 
-        return new DigitalPrint(dp.getId(), dp.getMagicsPath(), magicsPartPairing);
+        return new DigitalPrint(dp.getId(), dp.getName() , magicsPartPairing);
     }
 
     private List<MagicsPairing> extractMagicsPairingEntity(DigitalPrint digitalPrint) {
@@ -92,7 +92,7 @@ public class PrintingController extends ApiController implements PrintingAPI {
     }
 
     private DigitalPrintData extractDigitalPrintEntity(DigitalPrint digitalPrint) {
-        return new DigitalPrintData(digitalPrint.getId(), digitalPrint.getMagicsPath());
+        return new DigitalPrintData(digitalPrint.getId(), digitalPrint.getName());
     }
 
 }

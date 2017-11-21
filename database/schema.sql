@@ -30,9 +30,7 @@ CREATE TABLE IF NOT EXISTS orderdata(
 CREATE TABLE IF NOT EXISTS digitalpart(
   id serial PRIMARY KEY,
   customerID INTEGER REFERENCES customer(id),
-  name VARCHAR(100),
-  stlPath VARCHAR(300),
-  cadPath VARCHAR(300)
+  name VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS orderedpart(
@@ -44,7 +42,7 @@ CREATE TABLE IF NOT EXISTS orderedpart(
 
 CREATE TABLE IF NOT EXISTS digitalprintdata(
   id serial PRIMARY KEY,
-  magicsPath VARCHAR(300)
+  name VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS magicspairing(

@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class DigitalPrint extends DataModel {
     private int id;
-    private String magicsPath;
+    private String name;
 
-    public DigitalPrint(int id, String magicsPath, Map<String, Integer> magicsPartPairing) {
+    public DigitalPrint(int id, String name, Map<String, Integer> magicsPartPairing) {
         this.id = id;
-        this.magicsPath = magicsPath;
+        this.name = name;
         this.magicsPartPairing = magicsPartPairing;
     }
 
@@ -19,8 +19,8 @@ public class DigitalPrint extends DataModel {
         return id;
     }
 
-    public String getMagicsPath() {
-        return magicsPath;
+    public String getName() {
+        return name;
     }
 
     /**
