@@ -58,11 +58,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
       title: 'Namn',
       field: 'name',
       sortable: true,
-    }, {
-      title: 'Email',
-      field: 'email',
-      sortable: true,
-    }, {
+    },{
       title: 'Kund ID',
       field: 'id',
       visible: false,
@@ -86,7 +82,6 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
     this.customers.forEach((customer) => {
       data.push({
         name: customer.name,
-        email: customer.eMail,
         id: customer.id,
       });
     });

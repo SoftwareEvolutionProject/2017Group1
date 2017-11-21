@@ -2,6 +2,7 @@ export class Order {
 
   public id: number;
   public customer: number;
+  public date: string;
 
   constructor(values: Object = {}) {
     if (!values) {

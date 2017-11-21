@@ -128,6 +128,7 @@ public class WebApi {
         get(CUSTOMERS_URL, (request, response) -> ci.getAllCustomers(), gson::toJson);
         get(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.getCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
         get(CUSTOMERS_URL + CUSTOMER_ID_URL + DIGITALPARTS_URL, ((request, response) -> ci.getDigitalPartsFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
+        get(CUSTOMERS_URL + CUSTOMER_ID_URL + ORDERS_URL, ((request, response) -> ci.getOrdersFromCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
         put(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.updateCustomer(request.params(CUSTOMER_PARAM), gson.fromJson(request.body(), Customer.class))), gson::toJson);
         delete(CUSTOMERS_URL + CUSTOMER_ID_URL, ((request, response) -> ci.deleteCustomer(request.params(CUSTOMER_PARAM))), gson::toJson);
         post(CUSTOMERS_URL, (request, response) -> {
