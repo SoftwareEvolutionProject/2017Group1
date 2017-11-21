@@ -2,6 +2,7 @@ package se.chalmers.dat265.group1.api.customer;
 
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.*;
+import se.chalmers.dat265.group1.model.dbEntities.OrderData;
 import se.chalmers.dat265.group1.model.dbEntities.OrderedPart;
 
 import java.util.List;
@@ -29,6 +30,11 @@ public class CustomerController extends ApiController implements CustomerAPI {
     @Override
     public List<DigitalPart> getDigitalPartsFromCustomer(String customerID) {
         return digitalPartRepository.getObjects("customerID=" + customerID);
+    }
+
+    @Override
+    public List<OrderData> getOrdersFromCustomer(String customerID) {
+        return orderDataRepository.getObjects("customerID=" + customerID);
     }
 
     @Override
