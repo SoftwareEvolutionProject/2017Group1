@@ -73,39 +73,6 @@ CREATE TABLE IF NOT EXISTS physicalpart(
   FOREIGN KEY (magicsPartPairingID) REFERENCES magicspairing(id)
 );
 
-CREATE TABLE IF NOT EXISTS stlfile(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(200),
-  digitalPartID INTEGER,
-  stlFile BYTEA,
-  FOREIGN KEY (digitalPartID) REFERENCES digitalpart(id)
-);
-
-CREATE TABLE IF NOT EXISTS magicsfile(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(200),
-  digitalPrintDataID INTEGER,
-  magicsFile BYTEA,
-  FOREIGN KEY (digitalPrintDataID) REFERENCES digitalprintdata(id)
-);
-
-CREATE TABLE IF NOT EXISTS physicalpartimage(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(200),
-  physicalPartID INTEGER,
-  image BYTEA,
-  FOREIGN KEY (physicalPartID) REFERENCES physicalpart(id)
-);
-
-CREATE TABLE IF NOT EXISTS physicalprintimage(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(200),
-  physicalPrintID INTEGER,
-  image BYTEA,
-  FOREIGN KEY (physicalPrintID) REFERENCES physicalprint(id)
-);
-
-
 COMMIT;
 
 
