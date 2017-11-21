@@ -62,6 +62,7 @@ public class WebApi {
 
 
     public static void main(String[] args) {
+        String staticFolder = "/staticFolder";
         Log log = LogFactory.getLog(GenericRepository.class);
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
@@ -72,6 +73,9 @@ public class WebApi {
 
         long start = System.currentTimeMillis();
         log.info("STARTED ENDPIONT SETUP");
+
+        staticFileLocation(staticFolder);
+
         WebApi.enableCORS("*", "*", "*");
 
         get("/hello", (req, res) -> "Hello World");
