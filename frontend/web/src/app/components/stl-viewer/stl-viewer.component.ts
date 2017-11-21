@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { LoaderSelector } from '../../stl-viewer/LoaderSelector';
-import { StlLoader } from '../../stl-viewer/StlLoader';
-import { Viewer } from '../../stl-viewer/Viewer';
+import {Component, Input, OnInit} from '@angular/core';
+import {LoaderSelector} from '../../stl-viewer/LoaderSelector';
+import {StlLoader} from '../../stl-viewer/StlLoader';
+import {Viewer} from '../../stl-viewer/Viewer';
+import {Router} from '@angular/router';
+
 declare var JSC3D: any;
 
 @Component({
@@ -12,7 +14,10 @@ declare var JSC3D: any;
 export class StlViewerComponent implements OnInit {
   canvas = null;
   viewer: Viewer;
-  constructor() { }
+  @Input ('digitalPartID') digitalPartID: number;
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     this.canvas = document.getElementById('stl');
@@ -31,17 +36,16 @@ export class StlViewerComponent implements OnInit {
     this.viewer.init();
   }
 
-  resetView(){
+  resetView() {
     this.viewer.resetScene();
     this.viewer.update();
   }
 
-  enlargeViewer(){
-    this.canvas.width = 1500;
-    this.canvas.height = 1000;
+  enlargeViewer() {
+    this.router.navigate([this.router.url + '/'+this.digitalPartID+'/stl']);
   }
 
-  toogleRotation(){
+  toogleRotation() {
     //TODO Animation toogle goes in here
   }
 }
