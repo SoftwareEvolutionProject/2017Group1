@@ -77,7 +77,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
       name: [this.customer && this.customer.name ? this.customer.name : '',
       Validators.compose([Validators.required])],
       eMail: [this.customer && this.customer.eMail ? this.customer.eMail : '',
-      Validators.compose([Validators.required])],
+        Validators.compose([Validators.required])],
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
