@@ -114,6 +114,12 @@ public class WebApi {
             response.status(201);
             return digitalPrint;
         }, gson::toJson);
+
+        post(DIGITALPRINT_URL + DIGITALPRINT_ID_URL + "/magics", ((request, response) -> {
+            MagicsData magicsData = pi.uploadMagicsFile(request.params(DIGITALPRINT_ID_PARAM), request.bodyAsBytes());
+            response.status(201);
+            return magicsData;
+        }), gson::toJson);
     }
 
     private static void setupCustomerInterface() {
@@ -141,6 +147,11 @@ public class WebApi {
             response.status(201);
             return digitalPart;
         }, gson::toJson);
+        post(DIGITALPARTS_URL + DIGITALPART_ID_URL + "/stl", ((request, response) -> {
+            StlData stlData = dpi.uploadStlFile(request.params(DIGITALPART_ID_PARAM), request.bodyAsBytes());
+            response.status(201);
+            return stlData;
+        }), gson::toJson);
     }
 
     private static void setupPhysicalInterface() {
