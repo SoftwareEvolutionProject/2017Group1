@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import {Headers, Http, Response, ResponseOptions} from '@angular/http';
-import {Observable} from 'rxjs';
+
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {DigitalPart} from '../../model/digital-part';
 import {HttpClientService} from '../http/http-client.service';
 import {HttpClient} from '../http/http.client';
@@ -9,7 +9,7 @@ import {HttpClient} from '../http/http.client';
 export class DigitalPartService {
   private endpoint: string = HttpClient.digitalPartUrl;
 
-  constructor(private http: Http, private client: HttpClientService) {}
+  constructor(private client: HttpClientService) {}
 
   getDigitalPart(id: number): Observable<DigitalPart> {
     return this.client.get(this.endpoint + '/' + id)
@@ -39,6 +39,7 @@ export class DigitalPartService {
   updateDigitalPart(digitalPart: DigitalPart): Observable<DigitalPart> {
     return this.client.put(this.endpoint + '/' + digitalPart.id, JSON.stringify(digitalPart))
       .map((data) => {
+      console.log(data);
         return data;
       });
   }

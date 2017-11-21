@@ -19,7 +19,7 @@ export class DigitalPrintService {
       });
   }
 
-  getAllDigitalPrint(): Observable<DigitalPrint[]> {
+  getDigitalPrints(): Observable<DigitalPrint[]> {
     return this.client.get(this.endpoint)
       .map((data) => {
         const customers: DigitalPrint[] = [];

@@ -11,6 +11,7 @@ import {HttpClientService} from '../../../services/http/http-client.service';
 import {DigitalPrintDetailsPanelComponent} from '../digital-print-details-panel/digital-print-details-panel.component';
 import {DigitalPrintEditComponent} from '../digital-print-edit/digital-print-edit.component';
 import { DigitalPrintListComponent } from './digital-print-list.component';
+import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
 
 describe('DigitalPrintListComponent', () => {
   let component: DigitalPrintListComponent;
@@ -19,14 +20,13 @@ describe('DigitalPrintListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DigitalPrintListComponent, DigitalPrintDetailsPanelComponent ],
-      providers: [HttpClientService],
-      imports: [HttpModule, RouterTestingModule, ModalModule.forRoot()],
+      imports: [RouterTestingModule, ModalModule.forRoot()],
     });
-    TestBed.overrideComponent(DigitalPrintEditComponent, {
+    TestBed.overrideComponent(DigitalPrintListComponent, {
       set: {
         providers: [
           { provide: DigitalPrintService, useClass: DigitalPrintMockService },
-          { provide: DigitalPartMockService, useClass: DigitalPartMockService },
+          { provide: DigitalPartService, useClass: DigitalPartMockService },
           { provide: ErrorService, useClass: ErrorService },
           BsModalService,
         ],
