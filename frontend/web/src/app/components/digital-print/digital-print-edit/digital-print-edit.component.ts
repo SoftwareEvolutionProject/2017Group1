@@ -115,6 +115,7 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     this.digitalPrintService.getDigitalPrint(id).subscribe(
       (digitalPrint) => {
         this.digitalPrint = digitalPrint;
+        this.selectedFile = this.digitalPrint.magicsPath;
         this.populate();
       },
     );
