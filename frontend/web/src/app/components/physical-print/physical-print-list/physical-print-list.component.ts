@@ -83,9 +83,9 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
     const data = [];
     this.physicalPrints.forEach((physicalPrint) => {
       data.push({
-        slmPath: physicalPrint.slmpath,
+        slmPath: physicalPrint.slmPath,
         id: physicalPrint.id,
-        digitalPrintId : physicalPrint.digitalPrintID,
+        digitalPrintID : physicalPrint.digitalPrintID,
       });
     });
 
