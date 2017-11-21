@@ -17,9 +17,18 @@
               <span *ngIf="creating">Auto Generated </span>
               <br>
 
-              <label>Digital Part</label>
-              <div [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrint').valid}">
-                <input class="form-control" formControlName="digitalPrint" value="{{physicalPrint.digitalPrint}}">
+              <label>Digital Print</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
+
+
+                <select class="selectpicker form-control" formControlName="digitalPrintID" title="Choose Digital Print"
+                        [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
+                  <option *ngFor="let _digitalPrint of this.digitalPrints; let i = index" [value]="_digitalPrint.id"
+                          title="{{_digitalPrint.id}}">
+                    {{_digitalPrint.id}}
+                  </option>
+                </select>
+
               </div>
               <label>SLM File</label>
               <div [ngClass]="{'has-error': !requiredFieldsForm.get('slmpath').valid}">

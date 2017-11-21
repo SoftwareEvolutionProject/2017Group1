@@ -1,0 +1,29 @@
+<div  class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Details</h3>
+  </div>
+  <div [hidden]="!digitalPrint" class="panel-body" style="padding-right: 30px">
+    <div *ngIf="digitalPrint">
+    ID: {{digitalPrint.id}} <br>
+    Magics File: {{digitalPrint.magicsPath}}
+    </div>
+    <br>
+
+    <h3>Digital Parts Included:</h3>
+    <table id="dPartsTable">
+
+      <thead>
+      <tr>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <br>
+
+  </div>
+
+
+
+</div>
+

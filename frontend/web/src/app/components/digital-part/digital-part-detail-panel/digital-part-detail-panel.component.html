@@ -1,0 +1,17 @@
+<div  class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Details</h3>
+  </div>
+  <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
+    Name: {{digitalPart.name}}
+  </div>
+  <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
+    Customer: {{customer.name}}
+  </div>
+  <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
+    Stl-File: {{digitalPart.stlPath}}
+  </div>
+  <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
+    <app-stl-viewer></app-stl-viewer>
+  </div>
+</div>

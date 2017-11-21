@@ -36,6 +36,8 @@ public class PostgresSQLConnector implements DBInterface {
 
     @Override
     public ResultSet executeQuerry(String query) {
+        System.out.println("Running Querry: " + query);
+
         PreparedStatement stmt = null;
 
         try {

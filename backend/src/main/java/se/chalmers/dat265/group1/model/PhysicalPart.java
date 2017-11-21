@@ -7,15 +7,14 @@ public class PhysicalPart extends DataModel {
     private int id;
     private int physicalPrintID;
     private int orderedPartID;
-    private String magicsPartPairingID;
-/*    private List<String> photoPaths;*/
+    private int magicsPartPairingID;
+    private List<String> photoPaths;
 
     public PhysicalPart() {
         id = -1;
         physicalPrintID = -1;
         orderedPartID = -1;
-        magicsPartPairingID = "";
-/*        photoPaths = new LinkedList<>(); */
+        magicsPartPairingID = -1;
     }
 
     public int getId() {
@@ -30,11 +29,11 @@ public class PhysicalPart extends DataModel {
         return orderedPartID;
     }
 
-    public String getMagicsPartPairingID() {
+    public int getMagicsPartPairingID() {
         return magicsPartPairingID;
     }
 
-/*    public List<String> getPhotoPaths() {
+    public List<String> getPhotoPaths() {
         return photoPaths;
-    } */
+    }
 }
