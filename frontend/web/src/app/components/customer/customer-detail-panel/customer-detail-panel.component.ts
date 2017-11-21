@@ -3,6 +3,7 @@ import {Customer} from '../../../model/customer';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {DigitalPart} from '../../../model/digital-part';
 import {Router} from '@angular/router';
+import {Order} from "../../../model/order";
 
 declare var $:any;
 
@@ -13,38 +14,40 @@ declare var $:any;
   providers: [CustomerService],
 })
 export class CustomerDetailPanelComponent implements OnInit, OnChanges {
-  private table;
+  private dPartsTable;
+  private ordersTable;
   @Input('customer') customer: Customer;
   @Output() selected: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
   private digitalParts: DigitalPart[];
+  private orders: Order[];
   constructor(private customerService: CustomerService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.table = $('#dPartsTable');
-    console.log(this.table);
+    this.dPartsTable = $('#dPartsTable');
+    this.ordersTable = $('#ordersTable');
   }
   ngOnChanges() {
-    if (this.customer && this.table) {
+    if (this.customer && this.dPartsTable && this.ordersTable) {
       this.customerService.getDigitalParts(this.customer.id).subscribe(
         (digitalParts) => {
           this.digitalParts = digitalParts;
-          this.populate();
+          this.populateDigitlParts();
+          this.customerService.getOrders(this.customer.id).subscribe(
+            (orders) => {
+              this.orders = orders;
+              this.populateOrders();
+            }
+          )
         }, (error) => {
           alert(error.verbose_message);
         },
       );
     }
   }
-  private prepareTriggers() {
-    const _self = this;
-    (this.table as any).on('click-row.bs.table', (row, $element) => {
-      _self.selected.emit(_self.digitalParts.filter((digtialPart) => { if (digtialPart.id === $element.id) { return digtialPart; } })[0]);
-    });
-  }
 
-  private populate() {
+  private populateDigitlParts() {
     const _self = this;
     /*manually generate columns*/
     const columns = [{
@@ -62,7 +65,6 @@ export class CustomerDetailPanelComponent implements OnInit, OnChanges {
       align: 'center',
       events: {
         'click .edit'(e, value, row, index) {
-          
           _self.router.navigate(['digital-parts', row.id]);
         },
       },
@@ -76,9 +78,51 @@ export class CustomerDetailPanelComponent implements OnInit, OnChanges {
         id: digitalPart.id,
       });
     });
-    console.log(data, columns, this.table);
-    (this.table as any).bootstrapTable('destroy');
-    (this.table as any).bootstrapTable(
+    console.log(data, columns, this.dPartsTable);
+    (this.dPartsTable as any).bootstrapTable('destroy');
+    (this.dPartsTable as any).bootstrapTable(
+      {
+        data,
+        columns,
+        sortStable: true,
+        sortName: 'name',
+      },
+    );
+  }
+  private populateOrders() {
+    const _self = this;
+    /*manually generate columns*/
+    const columns = [{
+      title: 'Date',
+      field: 'date',
+      sortable: true,
+    }, {
+      title: 'Order ID',
+      field: 'id',
+      visible: false,
+      sortable: true,
+    }, {
+      field: 'operate',
+      title: '<span class="glyphicon glyphicon-cog">',
+      align: 'center',
+      events: {
+        'click .edit'(e, value, row, index) {
+          _self.router.navigate(['orders', row.id]);
+        },
+      },
+      formatter: this.operateFormatter,
+    }];
+
+    const data = [];
+    this.orders.forEach((order) => {
+      data.push({
+        date: order.date,
+        id: order.id,
+      });
+    });
+    console.log(data, columns, this.ordersTable);
+    (this.ordersTable as any).bootstrapTable('destroy');
+    (this.ordersTable as any).bootstrapTable(
       {
         data,
         columns,
@@ -91,7 +135,7 @@ export class CustomerDetailPanelComponent implements OnInit, OnChanges {
     return [
       '<button class="edit btn btn-xs btn-primary" href="javascript:void(0)" title="Edit">',
       '<i class="glyphicon glyphicon-pencil"></i>',
-      '</button>  '
+      '</button>'
     ].join('');
   }
 

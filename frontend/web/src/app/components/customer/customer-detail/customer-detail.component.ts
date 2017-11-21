@@ -66,7 +66,7 @@ export class CustomerDetailComponent implements OnInit, OnChanges {
     );
   }
 
-  /* populate data */
+  /* populateDigitlParts data */
   private populate() {
     this.constructForms();
   }
