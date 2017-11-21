@@ -18,7 +18,7 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
   private toBeDeleted: number = null;
 
   private table;
-  @Input('digitalPrint') digitalPrints: DigitalPrint [];
+  @Input('digitalPrintID') digitalPrints: DigitalPrint [];
   @Output() selected: EventEmitter<DigitalPrint> = new EventEmitter<DigitalPrint>();
 
 
@@ -38,7 +38,7 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
 
   loadAndPopulate() {
     /* get users */
-    this.digitalPrintService.getAllDigitalPrint().subscribe(
+    this.digitalPrintService.getDigitalPrints().subscribe(
       (digitalPrints) => {
         this.digitalPrints = digitalPrints;
 
