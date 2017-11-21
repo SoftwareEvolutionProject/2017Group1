@@ -73,6 +73,20 @@ CREATE TABLE IF NOT EXISTS physicalpart(
   FOREIGN KEY (magicsPartPairingID) REFERENCES magicspairing(id)
 );
 
+CREATE TABLE IF NOT EXISTS magicsdata(
+  id SERIAL PRIMARY KEY,
+  digitalPrintID INTEGER,
+  path VARCHAR(200),
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
+);
+
+CREATE TABLE IF NOT EXISTS stldata(
+  id SERIAL PRIMARY KEY,
+  digitalPartID INTEGER,
+  path VARCHAR(200),
+  FOREIGN KEY (digitalPartID) REFERENCES digitalpart(id)
+);
+
 COMMIT;
 
 

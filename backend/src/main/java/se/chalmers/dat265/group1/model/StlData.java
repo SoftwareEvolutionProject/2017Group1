@@ -1,0 +1,18 @@
+package se.chalmers.dat265.group1.model;
+
+public class StlData extends DataModel {
+    private int id;
+    private int digitalPartID;
+    private String path;
+
+    public StlData() {
+        id = -1;
+        digitalPartID = -1;
+        path = "";
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+}
