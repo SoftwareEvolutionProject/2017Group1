@@ -80,6 +80,7 @@ public class WebApi {
         log.info("STARTED ENDPIONT SETUP");
 
         //Dynamic API of static files.... hehehe
+        log.info(storageFolder.getAbsolutePath());
         externalStaticFileLocation(storageFolder.getAbsolutePath());
 
         WebApi.enableCORS("*", "*", "*");
@@ -146,6 +147,7 @@ public class WebApi {
             response.status(201);
             return stlData;
         }), gson::toJson);
+        get(DIGITALPARTS_URL + DIGITALPART_ID_URL + "/stl", ((request, response) -> dpi.getStlData(request.params((DIGITALPART_ID_PARAM)))),gson::toJson);
     }
 
     private static void setupPhysicalInterface() {

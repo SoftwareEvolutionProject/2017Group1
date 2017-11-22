@@ -2,10 +2,8 @@ package se.chalmers.dat265.group1.api.digitalpart;
 
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DigitalPart;
-import org.apache.commons.lang3.NotImplementedException;
 import se.chalmers.dat265.group1.model.StlData;
 import se.chalmers.dat265.group1.storage.FileUtil;
-import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -41,6 +39,10 @@ public class DigitalPartController extends ApiController implements DigitalPartA
         return digitalPartRepository.updateObject(digitalPart);
     }
 
+    @Override
+    public List<StlData> getStlData(String digitalPartID) {
+        return stlRepo.getObjects("digitalPartID="+digitalPartID);
+    };
     @Override
     public StlData uploadStlFile(String digitalPartID, byte[] body, String basePath) throws IOException {
         boolean exist=false;

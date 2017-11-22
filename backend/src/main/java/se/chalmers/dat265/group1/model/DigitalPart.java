@@ -4,6 +4,7 @@ public class DigitalPart extends DataModel {
     private int id;
     private int customerID;
     private String name;
+    private String stlPath;
 
     public DigitalPart() {
         this.id = -1;
