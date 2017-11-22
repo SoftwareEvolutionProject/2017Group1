@@ -32,20 +32,20 @@
             </select>
 
 
-            <label>Stl-File</label>
+              <label>Stl-File</label>
 
-            <div class="input-group image-preview">
-              <div placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
-                {{selectedFile}}
-              </div>
-              <!-- don't give a name === doesn't send on POST/GET -->
-              <span class="input-group-btn">
+              <div class="input-group image-preview">
+                <div placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+                  {{selectedFile}}
+                </div>
+                <!-- don't give a name === doesn't send on POST/GET -->
+                <span class="input-group-btn">
 						<!-- image-preview-clear button -->
 
 						  <button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span
                 class="glyphicon glyphicon-remove"></span> Clear </button>
 
-                <!-- image-preview-input -->
+                  <!-- image-preview-input -->
             <ng4-files-click (filesSelect)="filesSelect($event)">
               <div class="btn btn-default stl-file-preview"> <span
                 class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Browse</span>
@@ -53,16 +53,17 @@
               </div>
             </ng4-files-click>
 						</span></div>
-            <!-- /input-group image-preview [TO HERE]-->
+              <!-- /input-group image-preview [TO HERE]-->
 
-            <br/>
-            <!-- Drop Zone -->
-            <ng4-files-drop (filesSelect)="filesSelect($event)">
-              <div class="upload-drop-zone" id="drop-zone">
-                Or drag and drop files here
-              </div>
-            </ng4-files-drop>
-            <br/>
+              <br/>
+              <!-- Drop Zone -->
+              <ng4-files-drop (filesSelect)="filesSelect($event)">
+                <div class="upload-drop-zone" id="drop-zone">
+                  Or drag and drop files here
+                </div>
+              </ng4-files-drop>
+              <br/>
+
           </div>
           <div class="row">
             <div class="pull-left" style="margin-top: 20px">
@@ -71,7 +72,7 @@
               </button>
             </div>
             <div class="pull-right" style="margin-top: 20px">
-              <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
+              <button [disabled]=" !selectedFile || !requiredFieldsForm.valid" class="btn btn-primary"
                       style="min-width: 100px" (click)="save()">Save
               </button>
             </div>

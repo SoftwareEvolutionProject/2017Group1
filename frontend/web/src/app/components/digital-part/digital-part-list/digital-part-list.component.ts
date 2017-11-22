@@ -41,7 +41,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
     this.digitalPartService.getDigitalParts().subscribe(
       (digitalParts) => {
         this.digitalParts = digitalParts;
-
+        console.log(this.digitalParts);
         this.populate();
         this.prepareTriggers();
       }, (error) => {

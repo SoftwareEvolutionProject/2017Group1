@@ -138,8 +138,6 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
       Validators.compose([Validators.required])],
       id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
       Validators.compose([Validators.required])],
-      stlPath: [this.digitalPart && this.digitalPart.stlPath ? this.digitalPart.stlPath : '',
-      Validators.compose([Validators.required])],
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
@@ -151,16 +149,22 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     const id = this.digitalPart.id;
     const data = this.requiredFieldsForm.value;
     data.customerID = this.digitalPart.customerID;
-    data.stlPath = this.selectedFile;
+    data.stlFileName = this.selectedFile;
 
-    const digitalPart: DigitalPart = new DigitalPart(this.requiredFieldsForm.value);
+    const digitalPart: DigitalPart = new DigitalPart(data);
+    console.log(digitalPart);
     this.creating ? delete digitalPart['id'] : digitalPart.id = id;
 
     if (this.creating) { // a new product
       this.digitalPartService.createDigitalPart(digitalPart).subscribe(
         (data) => {
-          if (this.nav) { this.back(); }
-          this.changed.emit(data);
+          this.digitalPartService.uploadStlFile(data, this.selectedFile).subscribe(
+            (response) => {
+              console.log(response);
+              if (this.nav) { this.back(); }
+              this.changed.emit(data);
+            }
+          );
         }, (error) => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
@@ -169,8 +173,13 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     } else {
       this.digitalPartService.updateDigitalPart(digitalPart).subscribe(
         (data) => {
-          if (this.nav) { this.back(); }
-          this.changed.emit(data);
+          this.digitalPartService.uploadStlFile(data, this.selectedFile).subscribe(
+            (response) => {
+              console.log(response);
+              if (this.nav) { this.back(); }
+              this.changed.emit(data);
+            }
+          );
         }, (error) => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
