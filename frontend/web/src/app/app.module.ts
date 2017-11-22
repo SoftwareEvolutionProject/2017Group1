@@ -33,6 +33,7 @@ import {PhysicalPrintListComponent} from './components/physical-print/physical-p
 import {PhysicalPrintMasterViewComponent} from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
+import { Ng4FilesModule } from 'angular4-files-upload';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {HttpClientService} from './services/http/http-client.service';
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
+    Ng4FilesModule,
 
     RouterModule.forRoot([
       {
