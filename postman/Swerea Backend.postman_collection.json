@@ -38,7 +38,77 @@
 						},
 						"description": ""
 					},
-					"response": []
+					"response": [
+						{
+							"id": "8f1fefc4-5df1-4407-bbbe-9927fbebdb6e",
+							"name": "Get All Customers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/customers",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Nov 2017 22:29:32 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 44,
+							"body": "[{\"id\":1,\"name\":\"Testbolag\",\"eMail\":\"test@testbolag.se\"},{\"id\":2,\"name\":\"Chalmers n Stuff\",\"eMail\":\"gangsters@tjalmers.se\"}]"
+						}
+					]
 				},
 				{
 					"name": "Get Customers",
@@ -69,7 +139,78 @@
 						},
 						"description": ""
 					},
-					"response": []
+					"response": [
+						{
+							"id": "86fb371d-af68-4cf4-b658-fc6fba49a056",
+							"name": "Get Customers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/customers/{{customerID}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers",
+										"{{customerID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Nov 2017 22:29:45 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 29,
+							"body": "{\"id\":1,\"name\":\"Testbolag\",\"eMail\":\"test@testbolag.se\"}"
+						}
+					]
 				},
 				{
 					"name": "Get Digital-parts of Customer",
@@ -102,7 +243,184 @@
 						},
 						"description": "Get Digital parts belonging to a customer"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "3bdef144-07e3-49ed-8578-0dbfb32f8ec2",
+							"name": "Get Digital-parts of Customer",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/customers/{{customerID}}/digital-parts",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers",
+										"{{customerID}}",
+										"digital-parts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Nov 2017 22:29:54 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 24,
+							"body": "[{\"id\":1,\"customerID\":1,\"name\":\"Screw\"},{\"id\":2,\"customerID\":1,\"name\":\"Hinge\"}]"
+						}
+					]
+				},
+				{
+					"name": "Get Orders of Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/customers/{{customerID}}/orders",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"customers",
+								"{{customerID}}",
+								"orders"
+							]
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "ffe8eda8-9a08-4fef-8ac1-7fe11f01a24c",
+							"name": "Get Orders of Customer",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/customers/{{customerID}}/orders",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers",
+										"{{customerID}}",
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Nov 2017 22:30:01 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 9,
+							"body": "[{\"id\":1,\"customerID\":1,\"date\":\"2017-10-10\"},{\"id\":2,\"customerID\":1,\"date\":\"2017-11-23\"}]"
+						}
+					]
 				},
 				{
 					"name": "New Customer",
@@ -140,7 +458,85 @@
 						},
 						"description": ""
 					},
-					"response": []
+					"response": [
+						{
+							"id": "3cf49e20-f7a1-48c9-b694-2ca5c0048839",
+							"name": "New Customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\":\"Lol2kpe Productions\",\n  \"eMail\":\"wannabe@lol2kpe.com\"\n}"
+								},
+								"url": {
+									"raw": "{{domain}}/customers",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Nov 2017 22:30:09 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 10,
+							"body": "{\"id\":3,\"name\":\"Lol2kpe Productions\",\"eMail\":\"wannabe@lol2kpe.com\"}"
+						}
+					]
 				},
 				{
 					"name": "Edit Customer",
@@ -179,7 +575,86 @@
 						},
 						"description": ""
 					},
-					"response": []
+					"response": [
+						{
+							"id": "1de9f08e-5e61-444c-b85e-1c74c5d95dd9",
+							"name": "Edit Customer",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\":{{customerID}},\n  \"name\":\"Edited Company\",\n  \"eMail\":\"wannabe@editco.com\"\n}"
+								},
+								"url": {
+									"raw": "{{domain}}/customers/{{customerID}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers",
+										"{{customerID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Nov 2017 22:30:18 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 20,
+							"body": "{\"id\":1,\"name\":\"Edited Company\",\"eMail\":\"wannabe@editco.com\"}"
+						}
+					]
 				},
 				{
 					"name": "Delete customer",
@@ -210,7 +685,78 @@
 						},
 						"description": "Removes a customer from the system"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "12cd5d82-2351-4824-86c8-b7e691af1784",
+							"name": "Delete customer",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/customers/{{customerID}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers",
+										"{{customerID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Nov 2017 22:30:24 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 26,
+							"body": "\"1\""
+						}
+					]
 				}
 			]
 		},
@@ -402,12 +948,13 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{domain}}/digital-prints",
+							"raw": "{{domain}}/digital-prints/{{digitalPrintID}}",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
-								"digital-prints"
+								"digital-prints",
+								"{{digitalPrintID}}"
 							]
 						},
 						"description": "Get all digital prints"
@@ -438,7 +985,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \n        \"magicsPath\": \"pathTest\",\n        \"magicsPartPairing\": {\n            \"HingeNStuff\": 2,\n            \"ScrewToStuff\": 1,\n            \"ScrewToOtherStuff\": 1\n        }\n    }"
+							"raw": "{\n        \n        \"name\": \"NewName\",\n        \"magicsPartPairing\": {\n            \"HingeNStuff\": 2,\n            \"ScrewToStuff\": 1,\n            \"ScrewToOtherStuff\": 1\n        }\n    }"
 						},
 						"url": {
 							"raw": "{{domain}}/digital-prints",
@@ -447,6 +994,32 @@
 							],
 							"path": [
 								"digital-prints"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Upload magics file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": ""
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/digital-prints/{{digitalPrintID}}/magics",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-prints",
+								"{{digitalPrintID}}",
+								"magics"
 							]
 						},
 						"description": ""
@@ -596,6 +1169,120 @@
 						"description": ""
 					},
 					"response": []
+				},
+				{
+					"name": "Post Stl File",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": ""
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/digital-parts/{{digitalPartID}}/stl",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"digital-parts",
+								"{{digitalPartID}}",
+								"stl"
+							]
+						},
+						"description": "Posting an attached stl file to backend"
+					},
+					"response": [
+						{
+							"id": "b42e022d-f7fd-40f7-ae20-a6e37254f4da",
+							"name": "Post Stl File",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "file",
+									"file": {}
+								},
+								"url": {
+									"raw": "{{domain}}/digital-parts/{{digitalPartID}}/stl",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"digital-parts",
+										"{{digitalPartID}}",
+										"stl"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 21 Nov 2017 22:23:30 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 16114,
+							"body": "{\"id\":2,\"digitalPartID\":2,\"path\":\"/stl/2-1082100546.stl\"}"
+						}
+					]
 				}
 			]
 		},
