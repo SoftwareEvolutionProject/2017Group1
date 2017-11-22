@@ -17,6 +17,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
+
+import java.io.File;
+
 import static spark.Spark.*;
 
 /**
@@ -57,11 +60,14 @@ public class WebApi {
     private static final String PHYSICALPART_ID_PARAM = "physicalPartID";
     private static final String PHYSICALPART_ID_URL = PARAM_URL_PREFIX + PHYSICALPART_ID_PARAM;
 
+    private static File storageFolder;
+
     private static Gson gson = new Gson();
     private static boolean debug;
 
 
     public static void main(String[] args) {
+        storageFolder = new File("storage");
         Log log = LogFactory.getLog(GenericRepository.class);
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
@@ -72,6 +78,10 @@ public class WebApi {
 
         long start = System.currentTimeMillis();
         log.info("STARTED ENDPIONT SETUP");
+
+        //Dynamic API of static files.... hehehe
+        externalStaticFileLocation(storageFolder.getAbsolutePath());
+
         WebApi.enableCORS("*", "*", "*");
 
         get("/hello", (req, res) -> "Hello World");
@@ -81,6 +91,7 @@ public class WebApi {
         setupOrderInterface();
         setupDigitalPartsInterface();
         setupPhysicalInterface();
+
 
         log.info("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         log.info("SERVER RUNNING!");
@@ -96,6 +107,12 @@ public class WebApi {
             response.status(201);
             return digitalPrint;
         }, gson::toJson);
+
+        post(DIGITALPRINT_URL + DIGITALPRINT_ID_URL + "/magics", ((request, response) -> {
+            MagicsData magicsData = pi.uploadMagicsFile(request.params(DIGITALPRINT_ID_PARAM), request.bodyAsBytes(), storageFolder.getAbsolutePath());
+            response.status(201);
+            return magicsData;
+        }), gson::toJson);
     }
 
     private static void setupCustomerInterface() {
@@ -124,6 +141,11 @@ public class WebApi {
             response.status(201);
             return digitalPart;
         }, gson::toJson);
+        post(DIGITALPARTS_URL + DIGITALPART_ID_URL + "/stl", ((request, response) -> {
+            StlData stlData = dpi.uploadStlFile(request.params(DIGITALPART_ID_PARAM), request.bodyAsBytes(), storageFolder.getAbsolutePath());
+            response.status(201);
+            return stlData;
+        }), gson::toJson);
     }
 
     private static void setupPhysicalInterface() {

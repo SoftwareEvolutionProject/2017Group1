@@ -5,28 +5,28 @@ import se.chalmers.dat265.group1.model.DataModel;
 public class DigitalPrintData extends DataModel {
 
     private int id;
-    private String magicsPath;
+    private String name;
 
     public DigitalPrintData() {
         id = -1;
-        magicsPath = "";
+        name = "";
     }
 
-    public DigitalPrintData(int id, String magicsPath) {
+    public DigitalPrintData(int id, String name) {
         super();
         this.id = id;
-        this.magicsPath = magicsPath;
+        this.name = name;
     }
 
-    public DigitalPrintData(String magicsPath) {
-        this(-1, magicsPath);
+    public DigitalPrintData(String name) {
+        this(-1, name);
     }
 
     public int getId() {
         return id;
     }
 
-    public String getMagicsPath() {
-        return magicsPath;
+    public String getName() {
+        return name;
     }
 }
