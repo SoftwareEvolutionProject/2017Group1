@@ -4,12 +4,13 @@ public class DigitalPart extends DataModel {
     private int id;
     private int customerID;
     private String name;
-    private String stlPath;
+    private String path;
 
     public DigitalPart() {
         this.id = -1;
         this.customerID = -1;
         this.name = "";
+        this.path = "";
     }
 
     public DigitalPart(int id, int customerID, String name, String stlPath, String cadPath) {
@@ -28,5 +29,9 @@ public class DigitalPart extends DataModel {
 
     public int getCustomerID() {
         return customerID;
+    }
+
+    public void setStlPath(String stlPath) {
+        this.path = stlPath;
     }
 }

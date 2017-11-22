@@ -80,10 +80,16 @@ public class WebApi {
         log.info("STARTED ENDPIONT SETUP");
 
         //Dynamic API of static files.... hehehe
-        log.info(storageFolder.getAbsolutePath());
+        //access-control-allow-origin
+
         externalStaticFileLocation(storageFolder.getAbsolutePath());
+        staticFiles.header("access-control-allow-origin", "*");
 
         WebApi.enableCORS("*", "*", "*");
+
+
+
+
 
         get("/hello", (req, res) -> "Hello World");
 

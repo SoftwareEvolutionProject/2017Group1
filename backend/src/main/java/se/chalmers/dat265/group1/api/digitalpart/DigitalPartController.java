@@ -56,6 +56,10 @@ public class DigitalPartController extends ApiController implements DigitalPartA
         }
         String path = "/stl/" + digitalPartID + "-" + Arrays.hashCode(body) + ".stl";
         FileUtil.write(body, basePath+path);
+
+        DigitalPart dp = digitalPartRepository.getObject(Integer.valueOf(digitalPartID));
+        dp.setStlPath(path);
+        digitalPartRepository.updateObject(dp);
         return stlRepo.postObject(new StlData(Integer.valueOf(digitalPartID), path));
     }
 }

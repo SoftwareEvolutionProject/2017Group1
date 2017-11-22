@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS orderdata(
 
 CREATE TABLE IF NOT EXISTS digitalpart(
   id serial PRIMARY KEY,
+  path VARCHAR(200),
   customerID INTEGER REFERENCES customer(id),
   name VARCHAR(100)
 );
