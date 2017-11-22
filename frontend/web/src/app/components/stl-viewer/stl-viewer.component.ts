@@ -15,6 +15,7 @@ export class StlViewerComponent implements OnInit {
   canvas = null;
   viewer: Viewer;
   @Input ('digitalPartID') digitalPartID: number;
+  @Input ('stlUrl') stlUrl: string;
 
   constructor(private router: Router) {
   }
@@ -22,7 +23,7 @@ export class StlViewerComponent implements OnInit {
   ngOnInit() {
     this.canvas = document.getElementById('stl');
     const parameters = {
-      SceneUrl: 'https://rawgit.com/SoftwareEvolutionProject/2017Group1/feature/host-stl-file/top.stl',
+      SceneUrl: this.stlUrl,
     };
 
     // ========================================================================
