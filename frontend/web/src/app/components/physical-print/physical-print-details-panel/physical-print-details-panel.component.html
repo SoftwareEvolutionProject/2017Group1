@@ -2,9 +2,25 @@
   <div class="panel-heading">
     <h3 class="panel-title">Details</h3>
   </div>
-  <div *ngIf="physicalPrint" class="panel-body" style="padding-right: 30px">
+  <div [hidden]="!physicalPrint" class="panel-body" style="padding-right: 30px">
+    <div *ngIf="physicalPrint">
     ID: {{physicalPrint.id}} <br>
     Digital Print: {{physicalPrint.digitalPrintID}}<br>
     SLM File: {{physicalPrint.slmPath}}
+    </div>
+
+    <br>
+
+    <h3>Physical Parts Included:</h3>
+    <table id="pPartsTable">
+
+      <thead>
+      <tr>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <br>
   </div>
 </div>

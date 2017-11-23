@@ -1,6 +1,12 @@
 <div  class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Details</h3>
+    <div class="panel-title">Digital Print Details
+    <span class="pull-right" *ngIf="digitalPrint">
+      <button type="button" class="btn btn-default" (click)="closeReq.emit()" style="margin-top: -5px">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </span>
+    </div>
   </div>
   <div [hidden]="!digitalPrint" class="panel-body" style="padding-right: 30px">
     <div *ngIf="digitalPrint">
@@ -9,21 +15,28 @@
     </div>
     <br>
 
-    <h3>Digital Parts Included:</h3>
-    <table id="dPartsTable">
+    <div class="row row-fluid">
+      <div [ngClass]="{'col-sm-12': !selected, 'col-sm-5': selected}">
 
-      <thead>
-      <tr>
-      </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+        <h3>Digital Parts Included:</h3>
+        <table id="dPartsTable">
 
-    <br>
+          <thead>
+          <tr>
+          </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
 
+      </div>
+      <div [ngClass]="{'col-0': !selected, 'col-sm-7': selected}">
+
+        <div *ngIf="selected" >
+          <app-digital-part-detail-panel [digitalPart]="selected" (closeReq)="selected = null"></app-digital-part-detail-panel>
+        </div>
+
+      </div>
+    </div>
   </div>
-
-
-
 </div>
 

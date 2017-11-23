@@ -1,6 +1,12 @@
 <div  class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Details</h3>
+    <div class="panel-title">Digital Part Details
+      <span class="pull-right" *ngIf="digitalPart">
+      <button type="button" class="btn btn-default" (click)="closeReq.emit()" style="margin-top: -5px">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </span>
+    </div>
   </div>
   <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
     Name: {{digitalPart.name}}

@@ -3,13 +3,14 @@
     <div class="row">
       <h2>Digital Prints</h2><hr>
     </div>
-    <div class="row">
-      <div class="col-md-7" id="list">
+    <div class="row row-fluid">
+      <div [ngClass]="{'col-md-12': !selected, 'col-md-4': selected}" id="list">
         <app-digital-print-list (selected)="digitalPrintSelected($event)">
         </app-digital-print-list>
       </div>
-      <div class="col-md-5" id="detail" style="margin-top: 54px">
-        <app-digital-print-details-panel [digitalPrint]="selectedDigitalPrint">
+      <div [ngClass]="{'col-0': !selected, 'col-md-8': selected}" id="detail">
+        <app-digital-print-details-panel *ngIf="selected" [digitalPrint]="selected"
+                                         (closeReq)="selected = null">
         </app-digital-print-details-panel>
       </div>
 
