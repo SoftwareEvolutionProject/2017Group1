@@ -3,7 +3,6 @@ export class PhysicalPart {
   public orderedPartID: number;
   public physicalPrintID: number;
   public magicsPartPairingID: number;
-  public name: string;
 
   constructor(values: Object = {}) {
     if (!values) {
