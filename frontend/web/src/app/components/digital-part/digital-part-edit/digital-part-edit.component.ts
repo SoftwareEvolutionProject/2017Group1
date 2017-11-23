@@ -165,7 +165,7 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
             (response) => {
               if (this.nav) { this.back(); }
               this.changed.emit(data);
-            }
+            },
           );
         }, (error) => {
           console.log(error);
