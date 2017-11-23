@@ -176,6 +176,12 @@ public class WebApi {
             return physicalPrint;
         }, gson::toJson);
 
+        post(PHYSICALPRINTS_URL + PHYSICALPRINT_ID_URL + "/slm", ((request, response) -> {
+            SlmData slmData = phi.uploadSlmFile(request.params(PHYSICALPART_ID_PARAM), request.bodyAsBytes(), storageFolder.getAbsolutePath());
+            response.status(201);
+            return slmData;
+        }), gson::toJson);
+
     }
 
     private static void setupOrderInterface() {
