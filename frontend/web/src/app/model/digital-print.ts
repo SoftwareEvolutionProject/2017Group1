@@ -1,6 +1,7 @@
 export class DigitalPrint {
   public id: number;
-  public magicsPath: string;
+  public path: string;
+  public name: string;
   public magicsPartPairing: any;
 
   constructor(values) {

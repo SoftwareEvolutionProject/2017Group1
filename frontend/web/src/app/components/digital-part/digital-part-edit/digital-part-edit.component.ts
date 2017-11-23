@@ -174,10 +174,8 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     } else {
       this.digitalPartService.updateDigitalPart(digitalPart).subscribe(
         (data) => {
-
             if (this.nav) { this.back(); }
             this.changed.emit(data);
-
         }, (error) => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);

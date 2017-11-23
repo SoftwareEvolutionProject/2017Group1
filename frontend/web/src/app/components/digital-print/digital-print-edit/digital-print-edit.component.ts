@@ -25,9 +25,10 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
   private modalRef: BsModalRef;
   @ViewChild('modalError') modalDelete;
   @Output() changed: EventEmitter<DigitalPrint> = new EventEmitter<DigitalPrint>();
-
+  private requiredFieldsForm: FormGroup = null;
   private loaded = false;
   public selectedFile;
+  public selectedFileName;
   public errorMessage;
   private stlConfig: Ng4FilesConfig = {
     acceptExtensions: ['.magics'],
@@ -69,7 +70,8 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
 
   public filesSelect(selectedFiles: Ng4FilesSelected): void {
     if (selectedFiles.status === Ng4FilesStatus.STATUS_SUCCESS) {
-      this.selectedFile = Array.from(selectedFiles.files).map((file) => file.name)[0];
+      this.selectedFile = selectedFiles.files[0];
+      this.selectedFileName = this.selectedFile.name;
     } else if (selectedFiles.status === Ng4FilesStatus.STATUS_MAX_FILE_SIZE_EXCEED) {
       this.errorMessage = 'Max file size exceeded';
       this.openModal('#errorFormDismissBtn');
@@ -115,7 +117,7 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     this.digitalPrintService.getDigitalPrint(id).subscribe(
       (digitalPrint) => {
         this.digitalPrint = digitalPrint;
-        this.selectedFile = this.digitalPrint.magicsPath;
+        this.selectedFile = this.digitalPrint.path;
         this.populate();
       },
     );
@@ -162,8 +164,17 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
 
   /* populate data */
   private populate() {
-    this.constructMagicPairingFormGroup();
+    this.constructForms()
     this.loaded = true;
+  }
+  private constructForms() {
+    const fields = {
+      name: [this.digitalPrint && this.digitalPrint.name ? this.digitalPrint.name : '',
+        Validators.compose([Validators.required])],
+    };
+
+    this.requiredFieldsForm = this.formBuilder.group(fields);
+    this.constructMagicPairingFormGroup();
   }
 
   /* save product instance */
@@ -171,7 +182,7 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     /* convert relevant fields */
 
     const id = this.digitalPrint.id;
-    const digitalPrint: DigitalPrint = new DigitalPrint({magicsPath: this.selectedFile});
+    const digitalPrint: DigitalPrint = new DigitalPrint(this.requiredFieldsForm.value);
     this.creating ? delete digitalPrint['id'] : digitalPrint.id = id;
 
     const pairings = {};
@@ -185,10 +196,13 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     if (this.creating) { // a new product
       this.digitalPrintService.createDigitalPrint(digitalPrint).subscribe(
         (data) => {
-          if (this.nav) {
-            this.back();
-          }
-          this.changed.emit(data);
+          this.digitalPrintService.uploadMagicsFile(data, this.selectedFile).subscribe(
+            (response) => {
+              if (this.nav) {
+                this.back();
+              }
+              this.changed.emit(data);
+            });
         }, (error) => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);

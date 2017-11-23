@@ -1,10 +1,10 @@
 <div class="container">
 
   <div class="row">
-    <div *ngIf="loaded" >
+    <div *ngIf="loaded">
 
-      <h2  *ngIf="!creating">Editing Digital Print</h2>
-      <h2  *ngIf="creating">Creating new Digital Print</h2>
+      <h2 *ngIf="!creating">Editing Digital Print</h2>
+      <h2 *ngIf="creating">Creating new Digital Print</h2>
 
       <hr>
 
@@ -17,21 +17,28 @@
             <span *ngIf="!creating">{{digitalPrint.id}} </span>
             <span *ngIf="creating">Auto Generated </span>
             <br>
-
-            <label>Magics File</label>
-
-            <div class="input-group image-preview">
-              <div placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
-                {{selectedFile}}
+            <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
+              <label>Name</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
+                <input class="form-control" formControlName="name">
               </div>
-              <!-- don't give a name === doesn't send on POST/GET -->
-              <span class="input-group-btn">
+            </form>
+            <div *ngIf="creating">
+
+              <label>Magics File</label>
+
+              <div class="input-group image-preview">
+                <div placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+                  {{selectedFileName}}
+                </div>
+                <!-- don't give a name === doesn't send on POST/GET -->
+                <span class="input-group-btn">
 						<!-- image-preview-clear button -->
 
 						  <button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span
                 class="glyphicon glyphicon-remove"></span> Clear </button>
 
-                <!-- image-preview-input -->
+                  <!-- image-preview-input -->
             <ng4-files-click (filesSelect)="filesSelect($event)">
               <div class="btn btn-default magics-file-preview"> <span
                 class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Browse</span>
@@ -39,21 +46,22 @@
               </div>
             </ng4-files-click>
 						</span></div>
-            <!-- /input-group image-preview [TO HERE]-->
+              <!-- /input-group image-preview [TO HERE]-->
 
-            <br/>
-            <!-- Drop Zone -->
-            <ng4-files-drop (filesSelect)="filesSelect($event)">
-              <div class="upload-drop-zone" id="drop-zone">
-                Or drag and drop files here
-              </div>
-            </ng4-files-drop>
+              <br/>
+              <!-- Drop Zone -->
+              <ng4-files-drop (filesSelect)="filesSelect($event)">
+                <div class="upload-drop-zone" id="drop-zone">
+                  Or drag and drop files here
+                </div>
+              </ng4-files-drop>
+            </div>
+            <br>
           </div>
-          <br>
-
           <div *ngFor="let formGroup of magicPairingsFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
             <div class="col-sm-5">
-              <label><span class="glyphicon glyphicon-tag" style="margin-right: 10px"></span>Unique Magics Identifier</label>
+              <label><span class="glyphicon glyphicon-tag" style="margin-right: 10px"></span>Unique Magics
+                Identifier</label>
 
               <form [formGroup]="formGroup">
                 <div [ngClass]="{'has-error': !formGroup.get('magicsId').valid}">
@@ -80,7 +88,7 @@
 
             <div class="col-sm-1">
               <button class="btn btn-danger" (click)="deleteMagicPairing(i)" style="margin-top: 25px">
-                <span class="glyphicon glyphicon-trash" > </span>
+                <span class="glyphicon glyphicon-trash"> </span>
               </button>
             </div>
           </div>
@@ -90,18 +98,21 @@
             <div class="col-sm-1 ">
               <button id="addOption" class="btn btn-primary btn " (click)="addMagicPairing()">
                 <span class="glyphicon glyphicon-plus"></span>
-              </button></div>
+              </button>
+            </div>
           </div>
 
           <div class="row">
 
             <div class="pull-left" style="margin-top: 20px">
               <button class="btn btn-default"
-                      style="min-width: 100px" (click)="cancel()">Cancel</button>
+                      style="min-width: 100px" (click)="cancel()">Cancel
+              </button>
             </div>
             <div class="pull-right" style="margin-top: 20px">
-              <button [disabled]=" !selectedFile || !pairingValid()" class="btn btn-primary"
-                      style="min-width: 100px" (click)="save()">Save</button>
+              <button [disabled]=" (!selectedFile && creating) || !pairingValid() || !magicPairingsFieldsForm.length" class="btn btn-primary"
+                      style="min-width: 100px" (click)="save()">Save
+              </button>
             </div>
 
           </div>
