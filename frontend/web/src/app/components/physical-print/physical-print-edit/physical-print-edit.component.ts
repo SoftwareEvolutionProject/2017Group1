@@ -28,6 +28,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
   @Output() changed: EventEmitter<PhysicalPrint> = new EventEmitter<PhysicalPrint>();
   private loaded = false;
   public selectedFile;
+  public selectedFileName;
   public errorMessage;
   private slmConfig: Ng4FilesConfig = {
     acceptExtensions: ['.slm'],
@@ -63,7 +64,8 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
 
   public filesSelect(selectedFiles: Ng4FilesSelected): void {
     if (selectedFiles.status === Ng4FilesStatus.STATUS_SUCCESS) {
-      this.selectedFile = Array.from(selectedFiles.files).map((file) => file.name)[0];
+      this.selectedFile = selectedFiles.files[0];
+      this.selectedFileName = this.selectedFile.name;
     } else if (selectedFiles.status === Ng4FilesStatus.STATUS_MAX_FILE_SIZE_EXCEED) {
       this.errorMessage = 'Max file size exceeded';
       this.openModal('#errorFormDismissBtn');
@@ -108,7 +110,6 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
     this.physicalPrintService.getPhysicalPrint(id).subscribe(
       (physicalPrint) => {
         this.physicalPrint = physicalPrint;
-        this.selectedFile = this.physicalPrint.slmPath;
         this.populate();
       },
     );
@@ -126,8 +127,6 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
   /* init forms */
   private constructForms() {
     const fields = {
-      slmPath: [this.physicalPrint && this.physicalPrint.slmPath ? this.physicalPrint.slmPath : '',
-        Validators.compose([Validators.required])],
       digitalPrintID: [this.physicalPrint && this.physicalPrint.digitalPrintID ? this.physicalPrint.digitalPrintID : '',
         Validators.compose([Validators.required])],
     };
@@ -144,16 +143,19 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
 
     this.requiredFieldsForm.value.digitalPrintID = parseInt(this.requiredFieldsForm.get('digitalPrintID').value);
     const physicalPrint: PhysicalPrint = new PhysicalPrint(this.requiredFieldsForm.value);
-    physicalPrint.slmPath = this.selectedFile;
+
     this.creating ? delete physicalPrint['id'] : physicalPrint.id = id;
 
     if (this.creating) { // a new product
       this.physicalPrintService.createPhysicalPrint(physicalPrint).subscribe(
         (data) => {
-          if (this.nav) {
-            this.back();
-          }
-          this.changed.emit(data);
+          this.physicalPrintService.uploadSlmFile(data, this.selectedFile).subscribe(
+            (response) => {
+              if (this.nav) {
+                this.back();
+              }
+              this.changed.emit(data);
+            });
         }, (error) => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
@@ -162,7 +164,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
     } else {
       this.physicalPrintService.updatePhysicalPrint(physicalPrint).subscribe(
         (data) => {
-          if (this.nav) {
+            if (this.nav) {
             this.back();
           }
           this.changed.emit(data);

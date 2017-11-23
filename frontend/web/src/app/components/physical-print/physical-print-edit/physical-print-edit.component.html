@@ -1,50 +1,52 @@
 <div class="container">
 
   <div class="row">
-    <div *ngIf="loaded" >
+    <div *ngIf="loaded">
 
-      <h2  *ngIf="!creating">Editing Physical Print</h2>
-      <h2  *ngIf="creating">Creating new Physical Print</h2>
+      <h2 *ngIf="!creating">Editing Physical Print</h2>
+      <h2 *ngIf="creating">Creating new Physical Print</h2>
 
       <hr>
+
 
       <div class="panel panel-default">
         <div class="panel-body" style="padding-right: 30px">
 
-            <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
-              <label>ID:</label>
-              <span *ngIf="!creating">{{physicalPrint.id}} </span>
-              <span *ngIf="creating">Auto Generated </span>
-              <br>
+          <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
+            <label>ID:</label>
+            <span *ngIf="!creating">{{physicalPrint.id}} </span>
+            <span *ngIf="creating">Auto Generated </span>
+            <br>
 
-              <label>Digital Print</label>
-              <div [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
+            <label>Digital Print</label>
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
 
 
-                <select class="selectpicker form-control" formControlName="digitalPrintID" title="Choose Digital Print"
-                        [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
-                  <option *ngFor="let _digitalPrint of this.digitalPrints; let i = index" [value]="_digitalPrint.id"
-                          title="{{_digitalPrint.id}}">
-                    {{_digitalPrint.id}}
-                  </option>
-                </select>
+              <select class="selectpicker form-control" formControlName="digitalPrintID" title="Choose Digital Print"
+                      [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
+                <option *ngFor="let _digitalPrint of this.digitalPrints; let i = index" [value]="_digitalPrint.id"
+                        title="{{_digitalPrint.id}}">
+                  {{_digitalPrint.id}}
+                </option>
+              </select>
 
-              </div>
-            </form>
-          <label>Slm File</label>
-
-          <div class="input-group image-preview">
-            <div placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
-              {{selectedFile}}
             </div>
-            <!-- don't give a name === doesn't send on POST/GET -->
-            <span class="input-group-btn">
+          </form>
+          <div *ngIf="creating">
+            <label>Slm File</label>
+
+            <div class="input-group image-preview">
+              <div placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+                {{selectedFileName}}
+              </div>
+              <!-- don't give a name === doesn't send on POST/GET -->
+              <span class="input-group-btn">
 						<!-- image-preview-clear button -->
 
 						  <button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span
                 class="glyphicon glyphicon-remove"></span> Clear </button>
 
-              <!-- image-preview-input -->
+                <!-- image-preview-input -->
             <ng4-files-click (filesSelect)="filesSelect($event)">
               <div class="btn btn-default slm-file-preview"> <span
                 class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Browse</span>
@@ -52,25 +54,27 @@
               </div>
             </ng4-files-click>
 						</span></div>
-          <!-- /input-group image-preview [TO HERE]-->
+            <!-- /input-group image-preview [TO HERE]-->
 
-          <br/>
-          <!-- Drop Zone -->
-          <ng4-files-drop (filesSelect)="filesSelect($event)">
-            <div class="upload-drop-zone" id="drop-zone">
-              Or drag and drop files here
-            </div>
-          </ng4-files-drop>
-
+            <br/>
+            <!-- Drop Zone -->
+            <ng4-files-drop (filesSelect)="filesSelect($event)">
+              <div class="upload-drop-zone" id="drop-zone">
+                Or drag and drop files here
+              </div>
+            </ng4-files-drop>
+          </div>
 
           <div class="pull-left" style="margin-top: 20px">
-              <button class="btn btn-default"
-                      style="min-width: 100px" (click)="cancel()">Cancel</button>
-            </div>
-            <div class="pull-right" style="margin-top: 20px">
-              <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
-                      style="min-width: 100px" (click)="save()">Save</button>
-            </div>
+            <button class="btn btn-default"
+                    style="min-width: 100px" (click)="cancel()">Cancel
+            </button>
+          </div>
+          <div class="pull-right" style="margin-top: 20px">
+            <button [disabled]=" (!selectedFile && creating) || !requiredFieldsForm.valid" class="btn btn-primary"
+                    style="min-width: 100px" (click)="save()">Save
+            </button>
+          </div>
         </div>
       </div>
     </div>
