@@ -163,7 +163,6 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
         (data) => {
           this.digitalPartService.uploadStlFile(data, this.selectedFile).subscribe(
             (response) => {
-              console.log(response);
               if (this.nav) { this.back(); }
               this.changed.emit(data);
             }
@@ -176,13 +175,10 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     } else {
       this.digitalPartService.updateDigitalPart(digitalPart).subscribe(
         (data) => {
-          this.digitalPartService.uploadStlFile(data, this.selectedFile).subscribe(
-            (response) => {
-              console.log(response);
-              if (this.nav) { this.back(); }
-              this.changed.emit(data);
-            }
-          );
+
+            if (this.nav) { this.back(); }
+            this.changed.emit(data);
+
         }, (error) => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
