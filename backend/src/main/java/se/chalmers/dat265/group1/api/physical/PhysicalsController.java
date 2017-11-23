@@ -3,7 +3,13 @@ package se.chalmers.dat265.group1.api.physical;
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.PhysicalPart;
 import se.chalmers.dat265.group1.model.PhysicalPrint;
+import se.chalmers.dat265.group1.model.SlmData;
+import se.chalmers.dat265.group1.model.dto.PhysicalPrintSlm;
+import se.chalmers.dat265.group1.storage.FileUtil;
 
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.util.Arrays;
 import java.util.List;
 
 public class PhysicalsController extends ApiController implements PhysicalAPI {
@@ -39,7 +45,7 @@ public class PhysicalsController extends ApiController implements PhysicalAPI {
 
     @Override
     public PhysicalPrint getPhysicalPrint(String physicalPrintID) {
-        return physicalPrintRepository.getObject(Integer.valueOf(physicalPrintID));
+        return populatePathIfExist(physicalPrintRepository.getObject(Integer.valueOf(physicalPrintID)));
     }
 
     @Override
@@ -50,6 +56,30 @@ public class PhysicalsController extends ApiController implements PhysicalAPI {
     @Override
     public PhysicalPrint updatePhysicalPrint(String physicalPrintID, PhysicalPrint physicalPrint) {
         checkIDs(physicalPrintID, physicalPrint);
-        return physicalPrintRepository.updateObject(physicalPrint);
+        return populatePathIfExist(physicalPrintRepository.updateObject(physicalPrint));
+    }
+
+    @Override
+    public SlmData uploadSlmFile(String id, byte[] body, String absolutePath) throws IOException {
+        boolean exist = false;
+        try {
+            exist = slmRepo.getObject(Integer.valueOf(id)) != null;
+        } catch (Exception e) {
+            exist = false;
+        }
+        if (exist) {
+            throw new FileAlreadyExistsException("ID have file");
+        }
+        String path = "/magics/" + id + "-" + Arrays.hashCode(body) + ".magics";
+        FileUtil.write(body, absolutePath + path);
+        return slmRepo.postObject(new SlmData(Integer.valueOf(id), path));
+    }
+
+    private PhysicalPrint populatePathIfExist(PhysicalPrint physicalPrint) {
+        List<SlmData> slm = slmRepo.getObjects("physicalPrintID= "+ physicalPrint.getId());
+        if(slm.size()==1){
+            return new PhysicalPrintSlm(physicalPrint, slm.get(0).getPath());
+        }
+        return physicalPrint;
     }
 }

@@ -9,6 +9,11 @@ public class PhysicalPrint extends DataModel {
         digitalPrintID = -1;
     }
 
+    public PhysicalPrint(int id, int digitalPrintID) {
+        this.id = id;
+        this.digitalPrintID = digitalPrintID;
+    }
+
     public int getId() {
         return id;
     }
