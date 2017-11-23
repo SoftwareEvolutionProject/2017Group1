@@ -2,7 +2,9 @@ package se.chalmers.dat265.group1.api.digitalpart;
 
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DigitalPart;
+import se.chalmers.dat265.group1.model.DigitalPrint;
 import se.chalmers.dat265.group1.model.StlData;
+import se.chalmers.dat265.group1.model.dto.DigitalPartStl;
 import se.chalmers.dat265.group1.storage.FileUtil;
 
 import java.io.IOException;
@@ -26,7 +28,16 @@ public class DigitalPartController extends ApiController implements DigitalPartA
 
     @Override
     public DigitalPart getDigitalPart(String digitalPartID) {
-        return digitalPartRepository.getObject(Integer.parseInt(digitalPartID));
+        DigitalPart temp =  digitalPartRepository.getObject(Integer.parseInt(digitalPartID));
+        return populatePathIfExist(temp);
+    }
+
+    private DigitalPart populatePathIfExist(DigitalPart digitalPart) {
+        List<StlData> stl = stlRepo.getObjects("digitalPartID= "+ digitalPart.getId());
+        if(stl.size()==1){
+            return new DigitalPartStl(digitalPart, stl.get(0).getPath());
+        }
+        return digitalPart;
     }
 
     @Override
@@ -36,13 +47,10 @@ public class DigitalPartController extends ApiController implements DigitalPartA
 
     @Override
     public DigitalPart updateDigitalPart(DigitalPart digitalPart) {
-        return digitalPartRepository.updateObject(digitalPart);
+        DigitalPart temp =  digitalPartRepository.updateObject(digitalPart);
+        return populatePathIfExist(temp);
     }
 
-    @Override
-    public List<StlData> getStlData(String digitalPartID) {
-        return stlRepo.getObjects("digitalPartID="+digitalPartID);
-    };
     @Override
     public StlData uploadStlFile(String digitalPartID, byte[] body, String basePath) throws IOException {
         boolean exist=false;
@@ -56,10 +64,7 @@ public class DigitalPartController extends ApiController implements DigitalPartA
         }
         String path = "/stl/" + digitalPartID + "-" + Arrays.hashCode(body) + ".stl";
         FileUtil.write(body, basePath+path);
-
-        DigitalPart dp = digitalPartRepository.getObject(Integer.valueOf(digitalPartID));
-        dp.setStlPath(path);
-        digitalPartRepository.updateObject(dp);
+        
         return stlRepo.postObject(new StlData(Integer.valueOf(digitalPartID), path));
     }
 }

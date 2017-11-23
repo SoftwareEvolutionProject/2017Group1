@@ -153,7 +153,6 @@ public class WebApi {
             response.status(201);
             return stlData;
         }), gson::toJson);
-        get(DIGITALPARTS_URL + DIGITALPART_ID_URL + "/stl", ((request, response) -> dpi.getStlData(request.params((DIGITALPART_ID_PARAM)))),gson::toJson);
     }
 
     private static void setupPhysicalInterface() {
