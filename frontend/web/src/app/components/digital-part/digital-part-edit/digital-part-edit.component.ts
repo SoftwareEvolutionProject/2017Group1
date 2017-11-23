@@ -29,7 +29,6 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
   private loaded = false;
   public selectedFile;
   public selectedFileName;
-  public selectedName;
   public errorMessage;
   /* forms */
 
