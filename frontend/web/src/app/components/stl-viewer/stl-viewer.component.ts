@@ -42,7 +42,6 @@ export class StlViewerComponent implements OnInit {
 
     if (this.rotate) {
       this.timer = setInterval(() => {
-        console.log('rotating');
         this.viewer.rotate(0.25, 0.5, 0.1);
         this.viewer.update();
       }, 10);
