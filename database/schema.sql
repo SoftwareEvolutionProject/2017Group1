@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS magicspairing(
 CREATE TABLE IF NOT EXISTS physicalprint(
   id SERIAL PRIMARY KEY,
   digitalPrintID INTEGER,
-  slmPath VARCHAR(300),
+  path VARCHAR(200),
   FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
 );
 
@@ -83,6 +83,13 @@ CREATE TABLE IF NOT EXISTS stldata(
   digitalPartID INTEGER,
   path VARCHAR(200),
   FOREIGN KEY (digitalPartID) REFERENCES digitalpart(id)
+);
+
+CREATE TABLE IF NOT EXISTS slmdata(
+  id SERIAL PRIMARY KEY,
+  physicalPrintID INTEGER,
+  path VARCHAR(200),
+  FOREIGN KEY (physicalPrintID) REFERENCES physicalprint(id)
 );
 
 COMMIT;

@@ -80,9 +80,16 @@ public class WebApi {
         log.info("STARTED ENDPIONT SETUP");
 
         //Dynamic API of static files.... hehehe
+        //access-control-allow-origin
+
         externalStaticFileLocation(storageFolder.getAbsolutePath());
+        staticFiles.header("access-control-allow-origin", "*");
 
         WebApi.enableCORS("*", "*", "*");
+
+
+
+
 
         get("/hello", (req, res) -> "Hello World");
 
@@ -168,6 +175,13 @@ public class WebApi {
             response.status(201);
             return physicalPrint;
         }, gson::toJson);
+
+        post(PHYSICALPRINTS_URL + PHYSICALPRINT_ID_URL + "/slm", ((request, response) -> {
+
+            SlmData slmData = phi.uploadSlmFile(request.params(PHYSICALPRINT_ID_PARAM), request.bodyAsBytes(), storageFolder.getAbsolutePath());
+            response.status(201);
+            return slmData;
+        }), gson::toJson);
 
     }
 

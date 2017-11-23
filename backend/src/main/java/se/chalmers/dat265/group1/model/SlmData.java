@@ -1,18 +1,19 @@
 package se.chalmers.dat265.group1.model;
 
-public class StlData extends DataModel {
+public class SlmData extends DataModel{
+
     private int id;
-    private int digitalPartID;
+    private int physicalPrintID;
     private String path;
 
-    public StlData() {
+    public SlmData() {
         id = -1;
-        digitalPartID = -1;
+        physicalPrintID = -1;
         path = "";
     }
 
-    public StlData(int digitalPartID, String path) {
-        this.digitalPartID = digitalPartID;
+    public SlmData(int physicalPrintID, String path) {
+        this.physicalPrintID = physicalPrintID;
         this.path = path;
     }
 

@@ -47,11 +47,11 @@ INSERT INTO magicspairing(digitalPrintID, digitalPartID, label) VALUES
   ((select id from digitalprintdata where name = 'path2'), (select id from digitalpart where name = 'Emil'), 'EmilProtype'),
   ((select id from digitalprintdata where name = 'path2'), (select id from digitalpart where name = 'Emilia'), 'EmiliaProtype');
 
-INSERT INTO physicalprint (digitalPrintID, slmPath) VALUES
+INSERT INTO physicalprint (digitalPrintID, path) VALUES
   ((select id from digitalprintdata where name = 'path1'), 'slm/path1'),
   ((select id from digitalprintdata where name = 'path1'), 'slm/path2');
 
-INSERT INTO physicalprint (digitalPrintID, slmPath) VALUES
+INSERT INTO physicalprint (digitalPrintID, path) VALUES
   ((select id from digitalprintdata where name = 'path2'), 'slm/path3'),
   ((select id from digitalprintdata where name = 'path2'), 'slm/path4'),
   ((select id from digitalprintdata where name = 'path2'), 'slm/path5'),
@@ -79,6 +79,6 @@ INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingID) V
   (6,3,9), (6,4,10),
   (7,3,9), (7,4,10);
 
-INSERT INTO stldata (digitalPartID, path) VALUES (2, '2-1082100546.stl'), (3,'3-129913882.stl');
+INSERT INTO stldata (digitalPartID, path) VALUES (2, '/stl/2-1082100546.stl'), (3,'/stl/3-129913882.stl');
 
 COMMIT;

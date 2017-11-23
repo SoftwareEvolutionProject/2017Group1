@@ -20,4 +20,8 @@ public class MagicsData extends DataModel {
     public int getId() {
         return id;
     }
+
+    public String getPath() {
+        return path;
+    }
 }

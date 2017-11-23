@@ -1,7 +1,7 @@
 export class PhysicalPrint {
   public id: number;
   public digitalPrintID: number;
-  public slmPath: string;
+  public path: string;
 
   constructor(values: Object = {}) {
     if (!values) {

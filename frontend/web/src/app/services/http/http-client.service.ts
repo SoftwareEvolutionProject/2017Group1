@@ -8,7 +8,7 @@ export class HttpClientService {
 
   constructor(private http: Http) {
     this.headers = new Headers();
-    this.headers.append('Content-Type', 'application/json');
+    //this.headers.append('Content-Type', 'application/json'); TODO: fix headers
   }
 
   get(url: string): Observable<any> {

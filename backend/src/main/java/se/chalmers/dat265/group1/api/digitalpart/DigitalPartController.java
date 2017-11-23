@@ -2,14 +2,15 @@ package se.chalmers.dat265.group1.api.digitalpart;
 
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DigitalPart;
-import org.apache.commons.lang3.NotImplementedException;
+import se.chalmers.dat265.group1.model.DigitalPrint;
 import se.chalmers.dat265.group1.model.StlData;
+import se.chalmers.dat265.group1.model.dto.DigitalPartStl;
 import se.chalmers.dat265.group1.storage.FileUtil;
-import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,12 +24,26 @@ public class DigitalPartController extends ApiController implements DigitalPartA
 
     @Override
     public List<DigitalPart> getAllDigitalParts() {
-        return digitalPartRepository.getObjects();
+        List<DigitalPart> resultLit = new LinkedList<DigitalPart>();
+        List<DigitalPart> dpList = digitalPartRepository.getObjects();
+        for (DigitalPart dp : dpList) {
+            resultLit.add(populatePathIfExist(dp));
+        }
+        return resultLit;
     }
 
     @Override
     public DigitalPart getDigitalPart(String digitalPartID) {
-        return digitalPartRepository.getObject(Integer.parseInt(digitalPartID));
+        DigitalPart temp =  digitalPartRepository.getObject(Integer.parseInt(digitalPartID));
+        return populatePathIfExist(temp);
+    }
+
+    private DigitalPart populatePathIfExist(DigitalPart digitalPart) {
+        List<StlData> stl = stlRepo.getObjects("digitalPartID= "+ digitalPart.getId());
+        if(stl.size()==1){
+            return new DigitalPartStl(digitalPart, stl.get(0).getPath());
+        }
+        return digitalPart;
     }
 
     @Override
@@ -38,7 +53,8 @@ public class DigitalPartController extends ApiController implements DigitalPartA
 
     @Override
     public DigitalPart updateDigitalPart(DigitalPart digitalPart) {
-        return digitalPartRepository.updateObject(digitalPart);
+        DigitalPart temp =  digitalPartRepository.updateObject(digitalPart);
+        return populatePathIfExist(temp);
     }
 
     @Override
@@ -54,6 +70,7 @@ public class DigitalPartController extends ApiController implements DigitalPartA
         }
         String path = "/stl/" + digitalPartID + "-" + Arrays.hashCode(body) + ".stl";
         FileUtil.write(body, basePath+path);
+        
         return stlRepo.postObject(new StlData(Integer.valueOf(digitalPartID), path));
     }
 }

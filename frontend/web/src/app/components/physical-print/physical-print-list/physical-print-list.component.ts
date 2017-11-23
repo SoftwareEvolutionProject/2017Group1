@@ -63,7 +63,7 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
       sortable: true,
     },{
       title: 'SLM File',
-      field: 'slmPath',
+      field: 'path',
       sortable: true,
     }, {
       field: 'operate',
@@ -83,7 +83,7 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
     const data = [];
     this.physicalPrints.forEach((physicalPrint) => {
       data.push({
-        slmPath: physicalPrint.slmPath,
+        path: physicalPrint.path,
         id: physicalPrint.id,
         digitalPrintID : physicalPrint.digitalPrintID,
       });

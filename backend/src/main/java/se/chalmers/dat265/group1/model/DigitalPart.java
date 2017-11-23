@@ -11,7 +11,7 @@ public class DigitalPart extends DataModel {
         this.name = "";
     }
 
-    public DigitalPart(int id, int customerID, String name, String stlPath, String cadPath) {
+    public DigitalPart(int id, int customerID, String name) {
         this.id = id;
         this.customerID = customerID;
         this.name = name;
@@ -28,4 +28,5 @@ public class DigitalPart extends DataModel {
     public int getCustomerID() {
         return customerID;
     }
+
 }
