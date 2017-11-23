@@ -177,9 +177,9 @@ public class WebApi {
         }, gson::toJson);
 
         post(PHYSICALPRINTS_URL + PHYSICALPRINT_ID_URL + "/slm", ((request, response) -> {
-            StlData stlData = phi.uploadSlmFile(request.params(PHYSICALPART_ID_PARAM), request.bodyAsBytes(), storageFolder.getAbsolutePath());
+            SlmData slmData = phi.uploadSlmFile(request.params(PHYSICALPART_ID_PARAM), request.bodyAsBytes(), storageFolder.getAbsolutePath());
             response.status(201);
-            return stlData;
+            return slmData;
         }), gson::toJson);
 
     }
