@@ -10,6 +10,7 @@ import se.chalmers.dat265.group1.storage.FileUtil;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,7 +24,12 @@ public class DigitalPartController extends ApiController implements DigitalPartA
 
     @Override
     public List<DigitalPart> getAllDigitalParts() {
-        return digitalPartRepository.getObjects();
+        List<DigitalPart> resultLit = new LinkedList<DigitalPart>();
+        List<DigitalPart> dpList = digitalPartRepository.getObjects();
+        for (DigitalPart dp : dpList) {
+            resultLit.add(populatePathIfExist(dp));
+        }
+        return resultLit;
     }
 
     @Override

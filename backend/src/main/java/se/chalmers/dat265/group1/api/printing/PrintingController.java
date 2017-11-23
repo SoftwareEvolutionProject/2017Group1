@@ -31,7 +31,7 @@ public class PrintingController extends ApiController implements PrintingAPI {
         List<DigitalPrintData> dpeList = digitalPrintRepository.getObjects();
         for (DigitalPrintData dpe : dpeList) {
             System.out.println("Getting stuff for " + dpe.getId());
-            resultList.add(getPairings(dpe));
+            resultList.add(populatePathIfExist(getPairings(dpe)));
         }
 
         return resultList;

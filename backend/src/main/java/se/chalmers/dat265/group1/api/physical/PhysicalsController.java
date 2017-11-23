@@ -10,6 +10,7 @@ import se.chalmers.dat265.group1.storage.FileUtil;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PhysicalsController extends ApiController implements PhysicalAPI {
@@ -40,7 +41,12 @@ public class PhysicalsController extends ApiController implements PhysicalAPI {
 
     @Override
     public List<PhysicalPrint> getAllPhysicalPrints() {
-        return physicalPrintRepository.getObjects();
+        List<PhysicalPrint> resultList = new LinkedList<PhysicalPrint>();
+        List<PhysicalPrint> physicalPrintList = physicalPrintRepository.getObjects();
+        for (PhysicalPrint pl : physicalPrintList) {
+            resultList.add(populatePathIfExist(pl));
+        }
+        return resultList;
     }
 
     @Override
