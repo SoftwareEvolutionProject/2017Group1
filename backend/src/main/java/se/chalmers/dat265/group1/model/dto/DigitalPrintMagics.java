@@ -7,9 +7,8 @@ import java.util.Map;
 public class DigitalPrintMagics extends DigitalPrint {
     private String path = "";
 
-    public DigitalPrintMagics(int id, String name, Map<String, Integer> magicsPartPairing, String path) {
-        super(id, name, magicsPartPairing);
+    public DigitalPrintMagics(DigitalPrint parent, String path) {
+        super(parent.getId(),parent.getName(), parent.getMagicsPartPairing());
         this.path = path;
-
     }
 }

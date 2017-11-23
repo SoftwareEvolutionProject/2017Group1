@@ -7,6 +7,7 @@ import se.chalmers.dat265.group1.model.MagicsData;
 import se.chalmers.dat265.group1.model.StlData;
 import se.chalmers.dat265.group1.model.dbEntities.DigitalPrintData;
 import se.chalmers.dat265.group1.model.dbEntities.MagicsPairing;
+import se.chalmers.dat265.group1.model.dto.DigitalPrintMagics;
 import se.chalmers.dat265.group1.storage.FileUtil;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
@@ -39,7 +40,7 @@ public class PrintingController extends ApiController implements PrintingAPI {
     @Override
     public DigitalPrint getDigitalPrint(String id) {
         DigitalPrintData dpe = digitalPrintRepository.getObject(Integer.valueOf(id));
-        return getPairings(dpe);
+        return populatePathIfExist(getPairings(dpe));
     }
 
     @Override
@@ -103,6 +104,14 @@ public class PrintingController extends ApiController implements PrintingAPI {
 
     private DigitalPrintData extractDigitalPrintEntity(DigitalPrint digitalPrint) {
         return new DigitalPrintData(digitalPrint.getId(), digitalPrint.getName());
+    }
+
+    private DigitalPrint populatePathIfExist(DigitalPrint digitalPrint) {
+        List<MagicsData> magicsData = magicsRepo.getObjects("digitalPrintID= "+ digitalPrint.getId());
+        if(magicsData.size()==1){
+            return new DigitalPrintMagics(digitalPrint, magicsData.get(0).getPath());
+        }
+        return digitalPrint;
     }
 
 }
