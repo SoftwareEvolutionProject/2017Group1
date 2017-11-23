@@ -1,6 +1,12 @@
 <div  class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Details</h3>
+    <div class="panel-title">Customer Details
+      <span class="pull-right" *ngIf="customer">
+      <button type="button" class="btn btn-default" (click)="closeReq.emit()" style="margin-top: -5px">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </span>
+    </div>
   </div>
   <div [hidden]="!customer" class="panel-body" style="padding-right: 30px">
   <div *ngIf="customer" class="panel-body" style="padding-right: 30px">

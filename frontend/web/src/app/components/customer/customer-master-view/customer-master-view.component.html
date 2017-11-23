@@ -1,15 +1,15 @@
 <div class="container">
 
-  <div class="row">
+  <div class="row ">
     <h2>Customers</h2><hr>
   </div>
-  <div class="row">
-    <div class="col-md-5" id="list">
+  <div class="row row-fluid">
+    <div  [ngClass]="{'col-md-12': !selected, 'col-md-6': selected}" id="list">
       <app-customer-list (selected)="customerSelected($event)">
       </app-customer-list>
     </div>
-    <div class="col-md-7" id="detail" style="margin-top: 54px">
-      <app-customer-detail-panel [customer]="selectedCustomer">
+    <div  [ngClass]="{'col-0': !selected, 'col-md-6': selected}" id="detail">
+      <app-customer-detail-panel  *ngIf="selected"  [customer]="selected" (closeReq)="selected = null">
       </app-customer-detail-panel>
     </div>
 

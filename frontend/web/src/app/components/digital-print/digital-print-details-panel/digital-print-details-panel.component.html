@@ -9,14 +9,15 @@
     </div>
   </div>
   <div [hidden]="!digitalPrint" class="panel-body" style="padding-right: 30px">
-    <div *ngIf="digitalPrint">
-    ID: {{digitalPrint.id}} <br>
-    Magics File: {{digitalPrint.magicsPath}}
-    </div>
-    <br>
 
     <div class="row row-fluid">
-      <div [ngClass]="{'col-sm-12': !selected, 'col-sm-5': selected}">
+      <div [ngClass]="{'col-sm-12': !selected, 'col-lg-5': selected}">
+
+        <div *ngIf="digitalPrint">
+          ID: {{digitalPrint.id}} <br>
+          Magics File: {{digitalPrint.magicsPath}}
+        </div>
+        <br>
 
         <h3>Digital Parts Included:</h3>
         <table id="dPartsTable">
@@ -29,7 +30,8 @@
         </table>
 
       </div>
-      <div [ngClass]="{'col-0': !selected, 'col-sm-7': selected}">
+      <div [ngClass]="{'col-0': !selected, 'col-lg-7': selected}">
+        <br>
 
         <div *ngIf="selected" >
           <app-digital-part-detail-panel [digitalPart]="selected" (closeReq)="selected = null"></app-digital-part-detail-panel>

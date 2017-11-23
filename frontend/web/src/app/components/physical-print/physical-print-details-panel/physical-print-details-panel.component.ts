@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {PhysicalPart} from '../../../model/physical-part';
 import {PhysicalPrint} from '../../../model/physical-print';
 import {PhysicalPartService} from '../../../services/physical-part/physical-part.service';
@@ -13,14 +13,18 @@ declare let $: any;
 export class PhysicalPrintDetailsPanelComponent implements OnInit, OnChanges {
   private table;
   private dataLoaded = false;
+  private loadingTable = false;
+
   @Input('physicalPrint') physicalPrint: PhysicalPrint = null;
   @Input('physicalParts') physicalParts: PhysicalPart [] = null;
+  @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
 
   constructor(private physicalPartService: PhysicalPartService) {
     /* get parts */
     this.physicalPartService.getPhysicalParts().subscribe((pParts) => {
       this.physicalParts = pParts;
       this.dataLoaded = true;
+      this.loadTable();
     });
   }
 
@@ -29,9 +33,16 @@ export class PhysicalPrintDetailsPanelComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.dataLoaded && this.table) { // make sure we truly have loaded the parts
-      this.populate();
+    if (this.dataLoaded && !this.loadingTable && this.table) { // make sure we truly have loaded the parts
+      this.loadTable();
     }
+  }
+
+
+  private loadTable(){
+    this.loadingTable = true;
+    this.populate();
+    this.loadingTable = false;
   }
 
   private populate() {
