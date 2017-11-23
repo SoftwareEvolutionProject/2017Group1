@@ -20,4 +20,8 @@ public class StlData extends DataModel {
     public int getId() {
         return id;
     }
+
+    public String getPath() {
+        return path;
+    }
 }

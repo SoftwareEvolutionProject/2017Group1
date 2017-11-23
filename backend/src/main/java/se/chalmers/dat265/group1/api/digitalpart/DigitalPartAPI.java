@@ -19,6 +19,4 @@ public interface DigitalPartAPI {
     DigitalPart updateDigitalPart(DigitalPart digitalPart);
 
     StlData uploadStlFile(String digitalPartID, byte[] body, String basePath) throws IOException;
-
-    List<StlData> getStlData(String digitalPartID);
 }
