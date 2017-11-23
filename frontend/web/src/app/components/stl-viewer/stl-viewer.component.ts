@@ -1,9 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {LoaderSelector} from '../../stl-viewer/LoaderSelector';
+import {Router} from '@angular/router';
 import {StlLoader} from '../../stl-viewer/StlLoader';
 import {Viewer} from '../../stl-viewer/Viewer';
-import {Router} from '@angular/router';
-
 declare var JSC3D: any;
 
 @Component({
@@ -11,10 +10,14 @@ declare var JSC3D: any;
   templateUrl: './stl-viewer.component.html',
   styleUrls: ['./stl-viewer.component.scss'],
 })
+
 export class StlViewerComponent implements OnInit, OnChanges {
   baseUrl = 'http://localhost:4567';
   canvas = null;
   viewer: Viewer;
+  private rotate = false;
+  private timer = null;
+
   @Input ('digitalPartID') digitalPartID: number;
   @Input ('stlUrl') stlUrl: string;
 
@@ -22,7 +25,7 @@ export class StlViewerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.canvas = document.getElementById('stl');
+    const canvas = document.getElementById('stl');
     const parameters = {
       SceneUrl: this.baseUrl + this.stlUrl,
     };
@@ -32,7 +35,7 @@ export class StlViewerComponent implements OnInit, OnChanges {
     stlLoader.setDecimalPrecision(3);
 
     // =========================================================================
-    this.viewer = new Viewer(this.canvas, parameters);
+    this.viewer = new Viewer(canvas, parameters);
     this.viewer.setLoader(stlLoader);
     this.viewer.setParameter('Renderer', 'webgl');
     this.viewer.init();
@@ -49,11 +52,20 @@ export class StlViewerComponent implements OnInit, OnChanges {
     this.viewer.update();
   }
 
-  enlargeViewer() {
-    this.router.navigate([this.router.url + '/'+this.digitalPartID+'/stl']);
+  toogleRotation() {
+    this.rotate = !this.rotate;
+
+    if (this.rotate) {
+      this.timer = setInterval(() => {
+        this.viewer.rotate(0.25, 0.5, 0.1);
+        this.viewer.update();
+      }, 10);
+    } else {
+      clearInterval(this.timer);
+    }
   }
 
-  toogleRotation() {
-    //TODO Animation toogle goes in here
+  enlargeViewer() {
+    this.router.navigate([this.router.url + '/' + this.digitalPartID + '/stl']);
   }
 }
