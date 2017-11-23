@@ -3,6 +3,13 @@ package se.chalmers.dat265.group1.api.digitalpart;
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DigitalPart;
 import org.apache.commons.lang3.NotImplementedException;
+import se.chalmers.dat265.group1.model.StlData;
+import se.chalmers.dat265.group1.storage.FileUtil;
+import se.chalmers.dat265.group1.storage.repository.GenericRepository;
+
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,27 +42,18 @@ public class DigitalPartController extends ApiController implements DigitalPartA
     }
 
     @Override
-    public int deleteDigitalPart(String digitalPartID) {
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
-    public String getStlPath(String digitalPartID) {
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
-    public String updateStlPath(String digitalPartID) {
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
-    public String getCadPath(String digitalPartID) {
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
-    public String updateCadPath(String digitalPartID) {
-        throw new NotImplementedException("TODO");
+    public StlData uploadStlFile(String digitalPartID, byte[] body, String basePath) throws IOException {
+        boolean exist=false;
+        try{
+            exist = stlRepo.getObject(Integer.valueOf(digitalPartID))!= null;
+        }catch (Exception e){
+            exist = false;
+        }
+        if (exist){
+            throw new FileAlreadyExistsException("ID have file");
+        }
+        String path = "/stl/" + digitalPartID + "-" + Arrays.hashCode(body) + ".stl";
+        FileUtil.write(body, basePath+path);
+        return stlRepo.postObject(new StlData(Integer.valueOf(digitalPartID), path));
     }
 }
