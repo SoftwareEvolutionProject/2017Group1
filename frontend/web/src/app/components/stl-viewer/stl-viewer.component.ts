@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {LoaderSelector} from '../../stl-viewer/LoaderSelector';
 import {StlLoader} from '../../stl-viewer/StlLoader';
 import {Viewer} from '../../stl-viewer/Viewer';
@@ -11,7 +11,8 @@ declare var JSC3D: any;
   templateUrl: './stl-viewer.component.html',
   styleUrls: ['./stl-viewer.component.scss'],
 })
-export class StlViewerComponent implements OnInit {
+export class StlViewerComponent implements OnInit, OnChanges {
+  baseUrl = 'http://localhost:4567';
   canvas = null;
   viewer: Viewer;
   @Input ('digitalPartID') digitalPartID: number;
@@ -23,7 +24,7 @@ export class StlViewerComponent implements OnInit {
   ngOnInit() {
     this.canvas = document.getElementById('stl');
     const parameters = {
-      SceneUrl: this.stlUrl,
+      SceneUrl: this.baseUrl + this.stlUrl,
     };
 
     // ========================================================================
@@ -35,6 +36,12 @@ export class StlViewerComponent implements OnInit {
     this.viewer.setLoader(stlLoader);
     this.viewer.setParameter('Renderer', 'webgl');
     this.viewer.init();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.viewer) {
+      this.viewer.replaceSceneFromUrl(this.baseUrl + this.stlUrl);
+      this.viewer.update();
+    }
   }
 
   resetView() {

@@ -31,12 +31,12 @@
               </option>
             </select>
 
-
+              <div *ngIf="creating">
               <label>Stl-File</label>
 
               <div class="input-group image-preview">
                 <div placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
-                  {{selectedFile}}
+                  {{selectedFileName}}
                 </div>
                 <!-- don't give a name === doesn't send on POST/GET -->
                 <span class="input-group-btn">
@@ -63,7 +63,7 @@
                 </div>
               </ng4-files-drop>
               <br/>
-
+              </div>
           </div>
           <div class="row">
             <div class="pull-left" style="margin-top: 20px">
@@ -72,7 +72,7 @@
               </button>
             </div>
             <div class="pull-right" style="margin-top: 20px">
-              <button [disabled]=" !selectedFile || !requiredFieldsForm.valid" class="btn btn-primary"
+              <button [disabled]=" (!selectedFile && creating) || !requiredFieldsForm.valid" class="btn btn-primary"
                       style="min-width: 100px" (click)="save()">Save
               </button>
             </div>

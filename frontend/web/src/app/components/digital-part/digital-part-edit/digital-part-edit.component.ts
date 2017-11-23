@@ -28,6 +28,8 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
   @ViewChild('modalError') modalDelete;
   private loaded = false;
   public selectedFile;
+  public selectedFileName;
+  public selectedName;
   public errorMessage;
   /* forms */
 
@@ -70,7 +72,9 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
   }
   public filesSelect(selectedFiles: Ng4FilesSelected): void {
     if (selectedFiles.status === Ng4FilesStatus.STATUS_SUCCESS) {
-      this.selectedFile = Array.from(selectedFiles.files).map((file) => file.name)[0];
+      this.selectedFile = selectedFiles.files[0];
+      this.selectedFileName = this.selectedFile.name;
+
     } else if (selectedFiles.status === Ng4FilesStatus.STATUS_MAX_FILE_SIZE_EXCEED) {
       this.errorMessage = 'Max file size exceeded';
       this.openModal('#errorFormDismissBtn');
@@ -118,7 +122,7 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     this.digitalPartService.getDigitalPart(id).subscribe(
       (digitalPart) => {
         this.digitalPart = digitalPart;
-        this.selectedFile = digitalPart.stlPath;
+        this.selectedFileName = digitalPart.path;
         this.populate();
       },
     );
@@ -149,10 +153,9 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     const id = this.digitalPart.id;
     const data = this.requiredFieldsForm.value;
     data.customerID = this.digitalPart.customerID;
-    data.stlFileName = this.selectedFile;
+    data.stlFileName = this.selectedFileName;
 
     const digitalPart: DigitalPart = new DigitalPart(data);
-    console.log(digitalPart);
     this.creating ? delete digitalPart['id'] : digitalPart.id = id;
 
     if (this.creating) { // a new product

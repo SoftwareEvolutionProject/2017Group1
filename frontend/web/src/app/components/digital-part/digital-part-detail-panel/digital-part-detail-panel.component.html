@@ -9,9 +9,9 @@
     Customer: {{customer.name}}
   </div>
   <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
-    Stl-File: {{digitalPart.stlPath}}
+    Stl-File: {{digitalPart.path}}
   </div>
   <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
-    <app-stl-viewer [stlUrl]="" [digitalPartID]="digitalPart.id"></app-stl-viewer>
+    <app-stl-viewer [stlUrl]="digitalPart.path" [digitalPartID]="digitalPart.id"></app-stl-viewer>
   </div>
 </div>

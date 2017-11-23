@@ -65,7 +65,7 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
       })[0];
 
       data.push({
-        stlpath: dPart.stlPath,
+        stlpath: dPart.path,
         name: dPart.name,
         id: dPart.id,
         mid: key,

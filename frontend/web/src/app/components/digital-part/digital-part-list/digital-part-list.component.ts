@@ -41,7 +41,6 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
     this.digitalPartService.getDigitalParts().subscribe(
       (digitalParts) => {
         this.digitalParts = digitalParts;
-        console.log(this.digitalParts);
         this.populate();
         this.prepareTriggers();
       }, (error) => {
@@ -69,6 +68,9 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
       events: {
         'click .edit'(e, value, row, index) {
           _self.router.navigate([_self.router.url, row.id]);
+        },
+        'click .download'(e, value, row, index) {
+          _self.download(row.id);
         },
         'click .delete'(e, value, row, index) {
           _self.delete(row.id);
@@ -111,6 +113,9 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
 
   private operateFormatter(value, row, index) {
     return [
+      '<button class="download btn btn-xs btn-primary" href="javascript:void(0)" title="Download">',
+      '<i class="glyphicon glyphicon-download-alt"></i>',
+      '</button>  ',
       '<button class="edit btn btn-xs btn-primary" href="javascript:void(0)" title="Edit">',
       '<i class="glyphicon glyphicon-pencil"></i>',
       '</button>  ',
@@ -124,7 +129,12 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
     this.toBeDeleted = id;
     this.openModal('#deleteFormDismissBtn');
   }
-
+  private download(id) {
+    this.digitalPartService.getDigitalPart(id).subscribe((res) => {
+        // TODO: implement download
+      }
+    );
+  }
   private dismissDelete() {
     this.toBeDeleted = null;
     this.modalRef.hide();
