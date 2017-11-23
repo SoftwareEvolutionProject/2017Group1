@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS magicspairing(
 CREATE TABLE IF NOT EXISTS physicalprint(
   id SERIAL PRIMARY KEY,
   digitalPrintID INTEGER,
+  path VARCHAR(200),
   FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
 );
 

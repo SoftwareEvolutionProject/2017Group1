@@ -47,11 +47,11 @@ INSERT INTO magicspairing(digitalPrintID, digitalPartID, label) VALUES
   ((select id from digitalprintdata where name = 'path2'), (select id from digitalpart where name = 'Emil'), 'EmilProtype'),
   ((select id from digitalprintdata where name = 'path2'), (select id from digitalpart where name = 'Emilia'), 'EmiliaProtype');
 
-INSERT INTO physicalprint (digitalPrintID, slmPath) VALUES
+INSERT INTO physicalprint (digitalPrintID, path) VALUES
   ((select id from digitalprintdata where name = 'path1'), 'slm/path1'),
   ((select id from digitalprintdata where name = 'path1'), 'slm/path2');
 
-INSERT INTO physicalprint (digitalPrintID, slmPath) VALUES
+INSERT INTO physicalprint (digitalPrintID, path) VALUES
   ((select id from digitalprintdata where name = 'path2'), 'slm/path3'),
   ((select id from digitalprintdata where name = 'path2'), 'slm/path4'),
   ((select id from digitalprintdata where name = 'path2'), 'slm/path5'),
