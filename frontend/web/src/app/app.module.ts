@@ -33,8 +33,10 @@ import { PhysicalPrintListComponent } from './components/physical-print/physical
 import { PhysicalPrintMasterViewComponent } from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { HttpClientService } from './services/http/http-client.service';
-import { PhysicalPartDetailComponent } from './components/physical-part/physical-part-detail/physical-part-detail.component';
+import { PhysicalPartDetailPanelComponent } from './components/physical-part/physical-part-detail-panel/physical-part-detail-panel.component';
+// import { PhysicalPartEditComponent } from './components/physical-part/physical-part-edit/physical-part-edit.component';
 import { PhysicalPartListComponent } from './components/physical-part/physical-part-list/physical-part-list.component';
+import { PhysicalPartMasterViewComponent } from './components/physical-part/physical-part-master-view/physical-part-master-view.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { PhysicalPartListComponent } from './components/physical-part/physical-p
     DigitalPrintMasterViewComponent,
     DigitalPrintDetailsPanelComponent,
     PhysicalPartListComponent,
-    PhysicalPartDetailComponent,
+//    PhysicalPartEditComponent,
+    PhysicalPartDetailPanelComponent,
+    PhysicalPartMasterViewComponent,
     PhysicalPrintDetailsPanelComponent,
     PhysicalPrintListComponent,
     PhysicalPrintEditComponent,
@@ -118,12 +122,12 @@ import { PhysicalPartListComponent } from './components/physical-part/physical-p
       },
       {
         path: 'physical-parts',
-        component: PhysicalPartListComponent,
+        component: PhysicalPartMasterViewComponent,
       },
-      {
-        path: 'physical-parts/:id',
-        component: PhysicalPartDetailComponent,
-      },
+//      {
+//        path: 'physical-parts/:id',
+//        component: PhysicalPartEditComponent,
+//      },
       {
         path: 'physical-prints',
         component: PhysicalPrintMasterViewComponent,

@@ -1,8 +1,51 @@
-<div  class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Details</h3>
-  </div>
-  <div *ngIf="physicalPart" class="panel-body" style="padding-right: 30px">
-    Name: {{physicalPart.name}}
+<div class="container">
+
+  <div class="row">
+    <div *ngIf="loaded" >
+
+      <h2  *ngIf="!creating">Editing PhysicalPart</h2>
+      <h2  *ngIf="creating">Creating New PhysicalPart</h2>
+
+      <hr>
+
+      <div class="panel panel-default">
+        <div class="panel-body" style="padding-right: 30px">
+
+          <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
+            <label>Physical Part ID</label>
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('id').valid}">
+              <input class="form-control" formControlName="id" value="{{physicalPart.id}}">
+            </div>
+
+
+            <label>Physical Print ID</label>
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('physicalPrintID').valid}">
+              <input class="form-control" formControlName="physicalPrintID" value="{{physicalPart.physicalPrintID}}">
+            </div>
+
+
+            <label>Ordered Part ID</label>
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('orderedPartID').valid}">
+              <input class="form-control" formControlName="orderedPartID" value="{{physicalPart.orderedPartID}}">
+            </div>
+
+
+            <label>Magics Part ID</label>
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('magicsPartPairingID').valid}">
+              <input class="form-control" formControlName="magicsPartPairingID" value="{{physicalPart.magicsPartPairingID}}">
+            </div>
+          </form>
+
+          <div class="pull-left" style="margin-top: 20px">
+            <button class="btn btn-default"
+                    style="min-width: 100px" (click)="cancel()">Cancel</button>
+          </div>
+          <div class="pull-right" style="margin-top: 20px">
+            <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
+                    style="min-width: 100px" (click)="save()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
