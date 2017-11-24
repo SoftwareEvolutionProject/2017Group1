@@ -5,10 +5,7 @@ import se.chalmers.dat265.group1.model.Order;
 import se.chalmers.dat265.group1.model.dbEntities.OrderData;
 import se.chalmers.dat265.group1.model.dbEntities.OrderedPart;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +21,26 @@ public class OrderController extends ApiController implements OrderAPI {
         List<OrderData> orderDataList = orderDataRepository.getObjects();
         return getMerged(orderDataList);
 
+    }
+
+    /**
+     * At the moments only returns the specific orderPart and not all the ordered parts in an order
+     *
+     * @param digitalPartID filter
+     * @return orders with specific with specific part
+     */
+    @Override
+    public List<Order> getAllOrdersWithDigitalPart(String digitalPartID) {
+        List<OrderedPart> orderedPartList = orderedPartRepository.getObjects("digitalPartID=" + digitalPartID);
+        List<Order> orders = new LinkedList<>();
+        for (OrderedPart orderedPart : orderedPartList) {
+            OrderData tempData = orderDataRepository.getObject(orderedPart.getDigitalPartID());
+            List<OrderedPart> singleList = new LinkedList<>();
+            singleList.add(orderedPart);
+            Order order = new Order(tempData, singleList);
+            orders.add(order);
+        }
+        return orders;
     }
 
     private List<Order> getMerged(List<OrderData> orderDataList) {
@@ -74,7 +91,7 @@ public class OrderController extends ApiController implements OrderAPI {
                     break;
                 }
             }
-            if(!preExisting){
+            if (!preExisting) {
                 toPostToDb.add(newOrdered);
             }
         }
@@ -98,7 +115,7 @@ public class OrderController extends ApiController implements OrderAPI {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         try {
             format.parse(date);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InvalidDateFormatException(e);
         }
 
