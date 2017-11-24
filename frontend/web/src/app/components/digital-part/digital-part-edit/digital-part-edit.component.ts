@@ -102,7 +102,6 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.customer);
     this.customerService.getCustomers().subscribe((customers) => {
       this.customers = customers;
       if (this.creating) {
@@ -139,8 +138,9 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     const fields = {
       name: [this.digitalPart && this.digitalPart.name ? this.digitalPart.name : '',
       Validators.compose([Validators.required])],
-      id: [{ value: (this.digitalPart && this.digitalPart.id ? this.digitalPart.id : ''), disabled: true },
-      Validators.compose([Validators.required])],
+      customerID: [this.digitalPart && this.digitalPart.customerID ? this.digitalPart.customerID : '',
+        Validators.compose([Validators.required])],
+
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
@@ -151,9 +151,6 @@ export class DigitalPartEditComponent implements OnInit, OnChanges {
     /* convert relevant fields */
     const id = this.digitalPart.id;
     const data = this.requiredFieldsForm.value;
-    data.customerID = this.digitalPart.customerID;
-    data.stlFileName = this.selectedFileName;
-
     const digitalPart: DigitalPart = new DigitalPart(data);
     this.creating ? delete digitalPart['id'] : digitalPart.id = id;
 
