@@ -88,9 +88,6 @@ public class WebApi {
         WebApi.enableCORS("*", "*", "*");
 
 
-
-
-
         get("/hello", (req, res) -> "Hello World");
 
         setupCustomerInterface();
@@ -187,7 +184,15 @@ public class WebApi {
 
     private static void setupOrderInterface() {
         //Orders
-        get(ORDERS_URL, (request, response) -> oi.getAllOrders(), gson::toJson);
+        get(ORDERS_URL, (request, response) -> {
+            String digitalPartID = request.queryParams(DIGITALPART_ID_PARAM);
+            if (digitalPartID != null) {
+                return oi.getAllOrdersWithDigitalPart(digitalPartID);
+            }
+            return oi.getAllOrders();
+
+
+        }, gson::toJson);
         get(ORDERS_URL + ORDER_ID_URL, (request, response) -> oi.getOrder(request.params(ORDER_ID_PARAM)), gson::toJson);
         put(ORDERS_URL + ORDER_ID_URL, ((request, response) -> oi.updateOrder(request.params(ORDER_ID_PARAM), gson.fromJson(request.body(), Order.class))), gson::toJson);
         post(ORDERS_URL, ((request, response) -> {
@@ -195,6 +200,7 @@ public class WebApi {
             response.status(201);
             return order;
         }), gson::toJson);
+
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.
