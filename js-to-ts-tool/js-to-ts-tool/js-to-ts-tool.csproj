@@ -57,11 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITransformer.cs" />
-    <Compile Include="JSC3DTransformer.cs" />
+    <Compile Include="Transformers\ITransformer.cs" />
+    <Compile Include="Transformers\JSC3DTransformer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransformAndRefactor.cs" />
+    <Compile Include="Transformers\ToggleTransformer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

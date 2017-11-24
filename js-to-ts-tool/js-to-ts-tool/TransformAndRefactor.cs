@@ -10,8 +10,9 @@ namespace js_to_ts_tool {
 
         public TransformAndRefactor(String fileContent, String outputPath = "output/") {
             this.outputPath = outputPath;
-
-            if(JSC3DTransformer.IsOfType(fileContent)) {
+            if (ToggleTransformer.IsOfType(fileContent)) {
+                transformer = new ToggleTransformer(fileContent);
+            }else if(JSC3DTransformer.IsOfType(fileContent)) {
                 transformer = new JSC3DTransformer(fileContent);
             } else {
                 throw new InvalidDataException("Could not find the format of the file.");
