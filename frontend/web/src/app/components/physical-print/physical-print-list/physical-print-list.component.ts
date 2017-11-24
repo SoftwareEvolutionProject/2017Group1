@@ -1,67 +1,58 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PhysicalPrint} from '../../../model/physical-print';
-import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 import {ErrorService} from '../../../services/error.service';
+import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 declare var $: any;
 
 @Component({
   selector: 'app-physical-print-list',
   templateUrl: './physical-print-list.component.html',
   styleUrls: ['./physical-print-list.component.scss'],
-  providers: [PhysicalPrintService, ErrorService]
+  providers: [PhysicalPrintService, ErrorService],
 })
-export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
+export class PhysicalPrintListComponent implements OnInit, OnChanges {
+
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
 
   private table;
-  @Input('physicalPrint') physicalPrints: PhysicalPrint [];
+  @Input('physicalPrints') physicalPrints: PhysicalPrint [];
   @Output() selected: EventEmitter<PhysicalPrint> = new EventEmitter<PhysicalPrint>();
+  @Output() refresh: EventEmitter<null> = new EventEmitter<null>();
 
-
-  constructor(private physicalPrintService: PhysicalPrintService,
-              private errorService: ErrorService,
+  constructor(private errorService: ErrorService,
               private router: Router,
-              private modalService: BsModalService) {
+              private modalService: BsModalService,
+              private physicalPrintService: PhysicalPrintService) {
   }
 
   ngOnInit() {
     this.table = $('#table');
   }
 
-  ngAfterViewInit(): void {
-    this.loadAndPopulate();
-  }
-
-  loadAndPopulate() {
-    /* get users */
-    this.physicalPrintService.getAllPhysicalPrint().subscribe(
-      (physicalPrints) => {
-        this.physicalPrints = physicalPrints;
-
-        this.populate();
-        this.prepareTriggers();
-      }, (error) => {
-        alert(error.verbose_message);
-      },
-    );
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.physicalPrints) {
+      this.populate();
+      this.prepareTriggers();
+    }
   }
 
   private populate() {
+    this.table = $('#table');
     const _self = this;
     /*manually generate columns*/
     const columns = [ {
       title: 'ID',
       field: 'id',
       sortable: true,
-    },{
+    }, {
       title: 'Digital Print',
       field: 'digitalPrintID',
       sortable: true,
-    },{
+    }, {
       title: 'SLM File',
       field: 'path',
       sortable: true,
@@ -82,6 +73,7 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
 
     const data = [];
     this.physicalPrints.forEach((physicalPrint) => {
+      console.log(physicalPrint)
       data.push({
         path: physicalPrint.path,
         id: physicalPrint.id,
@@ -96,6 +88,20 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
         columns,
         sortStable: true,
         sortName: 'name',
+      },
+    );
+  }
+
+  loadAndPopulate() {
+    /* get users */
+    this.physicalPrintService.getAllPhysicalPrint().subscribe(
+      (physicalPrints) => {
+        this.physicalPrints = physicalPrints;
+
+        this.populate();
+        this.prepareTriggers();
+      }, (error) => {
+        alert(error.verbose_message);
       },
     );
   }

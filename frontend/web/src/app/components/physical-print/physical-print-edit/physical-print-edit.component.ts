@@ -12,11 +12,14 @@ import {ErrorService} from '../../../services/error.service';
 import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
 import {isNullOrUndefined} from "util";
+import {PhysicalPartService} from "../../../services/physical-part/physical-part.service";
+import {PhysicalPart} from "../../../model/physical-part";
+
 declare var $: any;
 
 @Component({
   selector: 'app-physical-print-edit',
-  providers: [PhysicalPrintService, ErrorService, DigitalPrintService, DigitalPartService],
+  providers: [PhysicalPrintService, ErrorService, DigitalPrintService, DigitalPartService, PhysicalPartService],
   templateUrl: './physical-print-edit.component.html',
   styleUrls: ['./physical-print-edit.component.scss'],
 })
@@ -54,7 +57,8 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
               private errorService: ErrorService,
               private _location: Location,
               private ng4FilesService: Ng4FilesService,
-              private digitalPartService: DigitalPartService) {
+              private digitalPartService: DigitalPartService,
+              private physicalPartService: PhysicalPartService) {
   }
 
   ngOnInit(): void {
@@ -175,13 +179,17 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
 
     if (this.creating) { // a new product
       this.physicalPrintService.createPhysicalPrint(physicalPrint).subscribe(
-        (data) => {
-          this.physicalPrintService.uploadSlmFile(data, this.selectedFile).subscribe(
+        (pPrint) => {
+          Object.getOwnPropertyNames(this.digitalPrint.magicsPartPairing).forEach((key) => {
+            this.physicalPartService.createPhysicalPart(PhysicalPart.createFromPhysicalPrint(pPrint)).subscribe((success) => {
+            });
+          });
+          this.physicalPrintService.uploadSlmFile(pPrint, this.selectedFile).subscribe(
             (response) => {
               if (this.nav) {
                 this.back();
               }
-              this.changed.emit(data);
+              this.changed.emit(pPrint);
             });
         }, (error) => {
           console.log(error);

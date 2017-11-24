@@ -4,7 +4,7 @@
     <div *ngIf="loaded">
 
       <h2 *ngIf="!creating">Editing Physical Print</h2>
-      <h2 *ngIf="creating">Creating new Physical Print</h2>
+      <h2 *ngIf="creating">Printing a Digital Print</h2>
 
       <hr>
 
@@ -28,13 +28,16 @@
                 </option>
               </select>
             </div>
+            <br>
             <div *ngIf="!creating">
               <input disabled value="{{physicalPrint.digitalPrintID}}" class="form-control">
             </div>
           </form>
-
+          <div *ngIf="digitalPrint" class="alert alert-info" role="alert">A Physical Part will be created for each
+            Digital Part in the Digital Print
+          </div>
           <app-digital-print-details-panel *ngIf="digitalPrint" [digitalPrint]="digitalPrint"
-                                           [digitalParts]="digitalParts" [title]="false">
+                                           [digitalParts]="digitalParts" [close]="false">
           </app-digital-print-details-panel>
 
           <div *ngIf="creating">
@@ -76,7 +79,7 @@
             </button>
           </div>
           <div class="pull-right" style="margin-top: 20px">
-            <button [disabled]=" (!selectedFile && creating) || !requiredFieldsForm.valid" class="btn btn-primary"
+            <button [disabled]="!requiredFieldsForm.valid" class="btn btn-primary"
                     style="min-width: 100px" (click)="save()">Save
             </button>
           </div>
