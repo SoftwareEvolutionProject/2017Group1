@@ -115,8 +115,8 @@ export class OrderEditComponent implements OnInit, OnChanges {
     const orderedParts: OrderedPart[] = [];
     this.orderedPartsFieldsForm.forEach((formGroup) => {
       orderedParts.push(new OrderedPart({
+        digitalPartID: formGroup.get('digitalPart').value,
         amount: formGroup.get('amount').value,
-        digitalPart: formGroup.get('digitalPart').value,
       }));
     });
     order.orderedParts = orderedParts;
