@@ -3,8 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BsModalService } from 'ngx-bootstrap';
-import { PhysicalPartMockService } from '../../../services/physicalPart/physical-part-mock.service';
-import { PhysicalPartService } from '../../../services/physicalPart/physical-part.service';
+import { PhysicalPartMockService } from '../../../services/physical-part/physical-part-mock.service';
+import { PhysicalPartService } from '../../../services/physical-part/physical-part.service';
 import { ErrorService } from '../../../services/error.service';
 import { PhysicalPartDetailPanelComponent } from './physical-part-detail-panel.component';
 
