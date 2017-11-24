@@ -8,7 +8,7 @@ import { DigitalPrint } from '../../../model/digital-print';
 })
 export class DigitalPrintMasterViewComponent implements OnInit {
 
-  selectedDigitalPrint: DigitalPrint = null;
+  selected: DigitalPrint = null;
 
   constructor() { }
 
@@ -16,7 +16,7 @@ export class DigitalPrintMasterViewComponent implements OnInit {
   }
 
   digitalPrintSelected(event: DigitalPrint) {
-    this.selectedDigitalPrint = event;
+    this.selected = event;
   }
 
 }

@@ -1,3 +1,4 @@
+/*
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PhysicalPrintDetailsPanelComponent } from './physical-print-details-panel.component';
@@ -23,3 +24,4 @@ describe('PhysicalPrintDetailsPanelComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+*/

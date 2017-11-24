@@ -13,14 +13,12 @@ declare var $: any;
   providers: [DigitalPartService, ErrorService],
 })
 export class DigitalPartListComponent implements OnInit, AfterViewInit {
-  @Output() selected: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
+  @Output() selectedDigitalPart: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
   private table;
   private digitalParts: DigitalPart[];
-
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
-  selectedDigitalPart: DigitalPart = null;
 
   constructor(private digitalPartService: DigitalPartService,
               private errorService: ErrorService,
@@ -101,7 +99,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   private prepareTriggers() {
     const _self = this;
     (this.table as any).on('click-row.bs.table', (row, $element) => {
-      _self.selected.emit(_self.digitalParts.filter((digtialPart) => { if (digtialPart.id === $element.id) { return digtialPart; } })[0]);
+      _self.selectedDigitalPart.emit(_self.digitalParts.filter((digtialPart) => { if (digtialPart.id === $element.id) { return digtialPart; } })[0]);
     });
   }
 

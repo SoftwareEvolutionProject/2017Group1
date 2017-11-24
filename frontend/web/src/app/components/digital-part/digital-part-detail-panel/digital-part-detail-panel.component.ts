@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {DigitalPart} from '../../../model/digital-part';
 import {Customer} from '../../../model/customer';
 
@@ -10,6 +10,7 @@ import {Customer} from '../../../model/customer';
 export class DigitalPartDetailPanelComponent implements OnInit {
   @Input('digitalPart') digitalPart: DigitalPart;
   @Input('customer') customer: Customer;
+  @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
 
   constructor() { }
 

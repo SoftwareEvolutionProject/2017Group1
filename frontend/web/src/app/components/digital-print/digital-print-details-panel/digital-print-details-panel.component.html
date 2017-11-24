@@ -1,29 +1,44 @@
 <div  class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Details</h3>
+    <div class="panel-title">Digital Print Details
+    <span class="pull-right" *ngIf="digitalPrint">
+      <button type="button" class="btn btn-default" (click)="closeReq.emit()" style="margin-top: -5px">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </span>
+    </div>
   </div>
   <div [hidden]="!digitalPrint" class="panel-body" style="padding-right: 30px">
-    <div *ngIf="digitalPrint">
-    ID: {{digitalPrint.id}} <br>
-    Magics File: {{digitalPrint.path}}
+
+    <div class="row row-fluid">
+      <div [ngClass]="{'col-sm-12': !selected, 'col-lg-5': selected}">
+
+        <div *ngIf="digitalPrint">
+          ID: {{digitalPrint.id}} <br>
+          Magics File: {{digitalPrint.path}}
+        </div>
+        <br>
+
+        <h3>Digital Parts Included:</h3>
+        <table id="dPartsTable">
+
+          <thead>
+          <tr>
+          </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+      </div>
+      <div [ngClass]="{'col-0': !selected, 'col-lg-7': selected}">
+        <br>
+
+        <div *ngIf="selected" >
+          <app-digital-part-detail-panel [digitalPart]="selected" (closeReq)="selected = null"></app-digital-part-detail-panel>
+        </div>
+
+      </div>
     </div>
-    <br>
-
-    <h3>Digital Parts Included:</h3>
-    <table id="dPartsTable">
-
-      <thead>
-      <tr>
-      </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-
-    <br>
-
   </div>
-
-
-
 </div>
 

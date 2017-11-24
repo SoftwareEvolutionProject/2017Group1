@@ -3,13 +3,13 @@
   <div class="row">
     <h2>Digital Parts</h2><hr>
   </div>
-  <div class="row">
-    <div class="col-md-7" id="list">
-      <app-digital-part-list (selected)="digitalPartSelected($event)">
+  <div class="row row-fluid">
+    <div [ngClass]="{'col-md-12': !selectedDigitalPart, 'col-md-6': selectedDigitalPart}" id="list">
+      <app-digital-part-list (selectedDigitalPart)="digitalPartSelected($event)">
       </app-digital-part-list>
     </div>
-    <div class="col-md-5" id="detail" style="margin-top: 54px">
-      <app-digital-part-detail-panel [digitalPart]="selectedDigitalPart" [customer]="selectedCustomer">
+    <div [ngClass]="{'col-0': !selectedDigitalPart, 'col-md-6': selectedDigitalPart}" id="detail">
+      <app-digital-part-detail-panel *ngIf="selectedDigitalPart" [digitalPart]="selectedDigitalPart" [customer]="selectedCustomer" (closeReq)="selectedDigitalPart = null">
       </app-digital-part-detail-panel>
     </div>
   </div>

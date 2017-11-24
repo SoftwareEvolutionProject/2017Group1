@@ -8,14 +8,14 @@ import {Customer} from '../../../model/customer';
 })
 export class CustomerMasterViewComponent implements OnInit {
 
-  selectedCustomer: Customer = null;
+  selected: Customer = null;
   constructor() { }
 
   ngOnInit() {
   }
 
   public customerSelected(event) {
-    this.selectedCustomer = event;
+    this.selected = event;
   }
 
 }

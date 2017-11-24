@@ -8,7 +8,7 @@ import { PhysicalPrint } from '../../../model/physical-print';
 })
 export class PhysicalPrintMasterViewComponent implements OnInit {
 
-  selectedPhysicalPrint: PhysicalPrint = null;
+  selected: PhysicalPrint = null;
 
   constructor() { }
 
@@ -16,7 +16,7 @@ export class PhysicalPrintMasterViewComponent implements OnInit {
   }
 
   physicalPrintSelected(event: PhysicalPrint) {
-    this.selectedPhysicalPrint = event;
+    this.selected = event;
   }
 
 }

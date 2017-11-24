@@ -16,8 +16,10 @@ declare var $:any;
 export class CustomerDetailPanelComponent implements OnInit, OnChanges {
   private dPartsTable;
   private ordersTable;
+  private loadingTable = false;
+  private dataLoaded = false;
   @Input('customer') customer: Customer;
-  @Output() selected: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
+  @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
   private digitalParts: DigitalPart[];
   private orders: Order[];
   constructor(private customerService: CustomerService,
@@ -29,25 +31,33 @@ export class CustomerDetailPanelComponent implements OnInit, OnChanges {
     this.ordersTable = $('#ordersTable');
   }
   ngOnChanges() {
-    if (this.customer && this.dPartsTable && this.ordersTable) {
-      this.customerService.getDigitalParts(this.customer.id).subscribe(
-        (digitalParts) => {
-          this.digitalParts = digitalParts;
-          this.populateDigitlParts();
-          this.customerService.getOrders(this.customer.id).subscribe(
-            (orders) => {
-              this.orders = orders;
-              this.populateOrders();
-            }
-          )
-        }, (error) => {
-          alert(error.verbose_message);
-        },
-      );
+    this.customerService.getDigitalParts(this.customer.id).subscribe(
+      (digitalParts) => {
+        this.digitalParts = digitalParts;
+        this.customerService.getOrders(this.customer.id).subscribe(
+          (orders) => {
+            this.orders = orders;
+            this.dataLoaded = true;
+            this.loadTables();
+          }
+        )
+      }, (error) => {
+        alert(error.verbose_message);
+      },
+    );
+  }
+
+
+  private loadTables(){
+    if(this.dataLoaded && !this.loadingTable && this.dPartsTable && this.ordersTable ){
+      this.loadingTable = true;
+      this.populateDigitalParts();
+      this.populateOrders();
+      this.loadingTable = false;
     }
   }
 
-  private populateDigitlParts() {
+  private populateDigitalParts() {
     const _self = this;
     /*manually generate columns*/
     const columns = [{
