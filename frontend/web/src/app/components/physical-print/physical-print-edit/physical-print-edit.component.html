@@ -19,19 +19,24 @@
             <br>
 
             <label>Digital Print</label>
-            <div [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
-
-
-              <select class="selectpicker form-control" formControlName="digitalPrintID" title="Choose Digital Print"
+            <div *ngIf="creating" [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
+              <select class="form-control" formControlName="digitalPrintID" title="Choose Digital Print"
                       [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
                 <option *ngFor="let _digitalPrint of this.digitalPrints; let i = index" [value]="_digitalPrint.id"
                         title="{{_digitalPrint.id}}">
                   {{_digitalPrint.id}}
                 </option>
               </select>
-
+            </div>
+            <div *ngIf="!creating">
+              <input disabled value="{{physicalPrint.digitalPrintID}}" class="form-control">
             </div>
           </form>
+
+          <app-digital-print-details-panel *ngIf="digitalPrint" [digitalPrint]="digitalPrint"
+                                           [digitalParts]="digitalParts" [title]="false">
+          </app-digital-print-details-panel>
+
           <div *ngIf="creating">
             <label>Slm File</label>
 

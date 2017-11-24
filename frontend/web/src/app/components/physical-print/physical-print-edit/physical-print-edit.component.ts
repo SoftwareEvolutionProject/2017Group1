@@ -2,22 +2,26 @@ import {Location} from '@angular/common';
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {Ng4FilesConfig, Ng4FilesSelected, Ng4FilesService, Ng4FilesStatus} from 'angular4-files-upload';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {DigitalPart} from '../../../model/digital-part';
+import {DigitalPrint} from '../../../model/digital-print';
 import {PhysicalPrint} from '../../../model/physical-print';
+import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
 import {ErrorService} from '../../../services/error.service';
 import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
-import {DigitalPrintService} from "../../../services/digital-print/digital-print.service";
-import {DigitalPrint} from "../../../model/digital-print";
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {Ng4FilesConfig, Ng4FilesSelected, Ng4FilesService, Ng4FilesStatus} from "angular4-files-upload";
+import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
+import {isNullOrUndefined} from "util";
 declare var $: any;
 
 @Component({
   selector: 'app-physical-print-edit',
-  providers: [PhysicalPrintService, ErrorService, DigitalPrintService],
+  providers: [PhysicalPrintService, ErrorService, DigitalPrintService, DigitalPartService],
   templateUrl: './physical-print-edit.component.html',
   styleUrls: ['./physical-print-edit.component.scss'],
 })
 export class PhysicalPrintEditComponent implements OnInit, OnChanges {
+  digitalPrint: DigitalPrint;
   digitalPrints: DigitalPrint[];
 
   @Input('physicalPrint') physicalPrint: PhysicalPrint = null;
@@ -27,6 +31,8 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
   @ViewChild('modalError') modalDelete;
   @Output() changed: EventEmitter<PhysicalPrint> = new EventEmitter<PhysicalPrint>();
   private loaded = false;
+  private table: any;
+  private digitalParts: DigitalPart[];
   public selectedFile;
   public selectedFileName;
   public errorMessage;
@@ -47,7 +53,8 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
               private formBuilder: FormBuilder,
               private errorService: ErrorService,
               private _location: Location,
-              private ng4FilesService: Ng4FilesService) {
+              private ng4FilesService: Ng4FilesService,
+              private digitalPartService: DigitalPartService) {
   }
 
   ngOnInit(): void {
@@ -88,6 +95,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
       }, 200);
     }
   }
+
   create() {
     /* init with a boilerplate */
     this.creating = true;
@@ -120,7 +128,12 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
     /* get d prints */
     this.digitalPrintService.getDigitalPrints().subscribe((dPrints) => {
       this.digitalPrints = dPrints;
-      this.constructForms();
+
+      this.digitalPartService.getDigitalParts().subscribe((dParts) => {
+        this.digitalParts = dParts;
+        this.constructForms();
+      });
+
     });
   }
 
@@ -132,7 +145,21 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
+    this.requiredFieldsForm.get('digitalPrintID').valueChanges.subscribe((data) => {
+      this.setDigitalPrint(data);
+    });
+    this.setDigitalPrint(this.requiredFieldsForm.get('digitalPrintID').value);
     this.loaded = true;
+  }
+
+  private setDigitalPrint(id: number){
+    console.log(id)
+    this.digitalPrint = this.digitalPrints.filter((dPrint) => {
+      if (dPrint.id === parseInt(this.requiredFieldsForm.get('digitalPrintID').value)) {
+        return dPrint;
+      }
+    })[0];
+    console.log(this.digitalPrint)
   }
 
   /* save product instance */
@@ -167,7 +194,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
             if (this.nav) {
             this.back();
           }
-          this.changed.emit(data);
+            this.changed.emit(data);
         }, (error) => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);

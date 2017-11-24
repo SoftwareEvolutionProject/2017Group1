@@ -17,6 +17,7 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
   private dataLoaded = false;
   @Input('digitalPrint') digitalPrint: DigitalPrint = null;
   @Input('digitalParts') digitalParts: DigitalPart[];
+  @Input('title') title = true;
   @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
   selected: DigitalPart;
 
