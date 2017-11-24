@@ -35,10 +35,19 @@ public class OrderController extends ApiController implements OrderAPI {
         List<Order> orders = new LinkedList<>();
         for (OrderedPart orderedPart : orderedPartList) {
             OrderData tempData = orderDataRepository.getObject(orderedPart.getDigitalPartID());
-            List<OrderedPart> singleList = new LinkedList<>();
-            singleList.add(orderedPart);
-            Order order = new Order(tempData, singleList);
-            orders.add(order);
+            boolean alreadyFound = false;
+            for (Order order : orders) {
+                if (tempData.getId() == order.getId()) {
+                    alreadyFound = true;
+                    break;
+                }
+            }
+            if (!alreadyFound) {
+                List<OrderedPart> singleList = new LinkedList<>();
+                singleList.add(orderedPart);
+                Order order = new Order(tempData, singleList);
+                orders.add(order);
+            }
         }
         return orders;
     }

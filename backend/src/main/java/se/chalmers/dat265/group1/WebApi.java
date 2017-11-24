@@ -187,7 +187,7 @@ public class WebApi {
         get(ORDERS_URL, (request, response) -> {
             String digitalPartID = request.queryParams(DIGITALPART_ID_PARAM);
             if (digitalPartID != null) {
-                oi.getAllOrdersWithDigitalPart(digitalPartID);
+                return oi.getAllOrdersWithDigitalPart(digitalPartID);
             }
             return oi.getAllOrders();
 
