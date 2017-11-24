@@ -111,6 +111,8 @@ export class OrderEditComponent implements OnInit, OnChanges {
 
     const id = this.order.id;
     const order: Order = new Order(this.requiredFieldsForm.value);
+    order.date = this.requiredFieldsForm.get('date').value;
+
     this.creating ? delete order['id'] : order.id = id;
     const orderedParts: OrderedPart[] = [];
     this.orderedPartsFieldsForm.forEach((formGroup) => {

@@ -1,4 +1,4 @@
-<div  class="panel panel-default">
+<div class="panel panel-default">
   <div class="panel-heading">
     <div class="panel-title">Order Details
       <span class="pull-right" *ngIf="order">
@@ -9,15 +9,16 @@
     </div>
   </div>
   <div [hidden]="!order" class="panel-body" style="padding-right: 30px">
-  <div *ngIf="order" class="panel-body" style="padding-right: 30px">
-    ID: {{order.id}}
-  </div>
-  <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
-    Customer: {{customer.name}}
-  </div>
-  <div *ngIf="order" class="panel-body" style="padding-right: 30px">
-    Date: {{order.date}}
-  </div>
+    <div *ngIf="order" class="panel-body" style="padding-right: 30px">
+      ID: {{order.id}}
+    </div>
+    <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
+      Customer: {{customer.name}}
+    </div>
+    <div *ngIf="dateString" class="panel-body" style="padding-right: 30px">
+      Date: {{dateString}}
+    </div>
+
     <h3>Ordered Parts</h3>
     <table id="oPartsTable"
            data-pagination="true"
@@ -28,5 +29,6 @@
       </thead>
       <tbody></tbody>
     </table>
+
   </div>
 </div>

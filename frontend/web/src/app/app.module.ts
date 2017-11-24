@@ -36,6 +36,7 @@ import { OrderEditComponent } from './components/order/order-edit/order-edit.com
 import { OrderListComponent } from './components/order/order-list/order-list.component';
 import { OrderDetailPanelComponent } from './components/order/order-detail-panel/order-detail-panel.component';
 import { OrderMasterViewComponent } from './components/order/order-master-view/order-master-view.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { OrderMasterViewComponent } from './components/order/order-master-view/o
     HttpModule,
     CalendarModule,
     Ng4FilesModule,
+    BrowserAnimationsModule,
 
     RouterModule.forRoot([
       {

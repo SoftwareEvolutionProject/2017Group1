@@ -17,7 +17,7 @@
           <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
             <div [ngClass]="{'has-error': !requiredFieldsForm.get('date').valid}">
               <label>Date</label>
-              <p-calendar formControlName="date" showButtonBar="true"></p-calendar>
+              <p-calendar formControlName="date" dateFormat="yy-mm-dd" showButtonBar="true"></p-calendar>
             </div>
             <div [ngClass]="{'has-error': !requiredFieldsForm.get('customerID').valid}">
               <label>Customer</label>

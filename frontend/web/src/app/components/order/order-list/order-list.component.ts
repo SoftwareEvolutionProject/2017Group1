@@ -93,10 +93,17 @@ export class OrderListComponent implements OnInit, AfterViewInit {
     this.orders.forEach((order) => {
       this.customers.forEach((customer) => {
         if (order.customerID === customer.id) {
+          const date = new Date(order.date);
+          const mm = date.getMonth() + 1;
+          const dd = date.getDate();
+          const dateString = [date.getFullYear(), '-',
+            (mm>9 ? '' : '0') + mm, '-',
+            (dd>9 ? '' : '0') + dd
+          ].join('');
           data.push({
             id: order.id,
             customer: customer.name,
-            date: order.date,
+            date: dateString,
           });
         }
       });

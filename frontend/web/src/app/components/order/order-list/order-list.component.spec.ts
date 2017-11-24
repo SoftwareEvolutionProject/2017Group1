@@ -8,6 +8,8 @@ import {ErrorService} from '../../../services/error.service';
 import { OrderDetailPanelComponent } from '../order-detail-panel/order-detail-panel.component';
 import { OrderListComponent } from './order-list.component';
 import {CalendarModule} from "primeng/primeng";
+import {CustomerService} from "../../../services/customer/customer.service";
+import {CustomerMockService} from "../../../services/customer/customer-mock.service";
 
 describe('OrderListComponent', () => {
   let component: OrderListComponent;
@@ -21,6 +23,7 @@ describe('OrderListComponent', () => {
     TestBed.overrideComponent(OrderListComponent, {
       set: {
         providers: [
+          { provide: CustomerService, useClass: CustomerMockService },
           { provide: OrderService, useClass: OrderMockService },
           { provide: ErrorService, useClass: ErrorService },
           BsModalService,

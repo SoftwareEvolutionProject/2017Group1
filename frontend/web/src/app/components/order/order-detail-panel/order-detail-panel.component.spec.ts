@@ -5,7 +5,7 @@ import {OrderService} from '../../../services/order/order.service';
 import {OrderMockService} from '../../../services/order/order-mock.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {CustomerMockService} from '../../../services/customer/customer-mock.service';
-import {CustomerService} from'"../../../services/customer/customer.service';
+import {CustomerService} from '../../../services/customer/customer.service';
 
 describe('OrderDetailPanelComponent', () => {
   let component: OrderDetailPanelComponent;
@@ -37,3 +37,4 @@ describe('OrderDetailPanelComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

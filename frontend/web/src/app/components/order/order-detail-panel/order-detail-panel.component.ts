@@ -21,6 +21,7 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
   @Input('order') order: Order;
   @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
   private customer: Customer;
+  private dateString: string;
   private orderedParts: OrderedPart[];
 
   constructor(private customerService: CustomerService,
@@ -30,27 +31,29 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.oPartsTable = $('#oPartsTable');
-    this.customerService.getCustomer(this.order.customerID).subscribe(
-      (customer) => {
-        this.customer = customer;
-      },
-    );
+    if (this.order) {
+      this.customerService.getCustomer(this.order.customerID).subscribe(
+        (customer) => {
+          this.customer = customer;
+          const date = new Date(this.order.date);
+          const mm = date.getMonth() + 1;
+          const dd = date.getDate();
+          this.dateString = [date.getFullYear(), '-',
+            (mm>9 ? '' : '0') + mm, '-',
+            (dd>9 ? '' : '0') + dd
+          ].join('');
+          this.loadTables();
+        },
+      );
+    }
   }
   ngOnChanges() {
-    /*this.orderService.getOrderedParts(this.order.id).subscribe(
-      (orderedParts) => {
-        this.orderedParts = orderedParts;
-            this.dataLoaded = true;
-            this.loadTables();
-      }, (error) => {
-        alert(error.verbose_message);
-      },
-    );*/
+      this.loadTables();
   }
 
 
   private loadTables() {
-    if (this.dataLoaded && !this.loadingTable && this.oPartsTable) {
+    if (!this.loadingTable && this.oPartsTable) {
       this.loadingTable = true;
       this.populateOrderedParts();
       this.loadingTable = false;
@@ -61,7 +64,7 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
     const _self = this;
     /*manually generate columns*/
     const columns = [{
-      title: 'Digital Part',
+      title: 'Digital Part ID',
       field: 'digitalPartID',
       sortable: true,
     }, {
@@ -73,22 +76,13 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
       title: 'Amount',
       field: 'amount',
       sortable: true,
-    }, {
-      field: 'operate',
-      title: '<span class="glyphicon glyphicon-cog">',
-      align: 'center',
-      events: {
-        'click .edit'(e, value, row, index) {
-          _self.router.navigate(['ordered-parts', row.id]);
-        },
-      },
-      formatter: this.operateFormatter,
     }];
 
     const data = [];
-    this.orderedParts.forEach((orderedPart) => {
+    console.log(this.order.orderedParts);
+    this.order.orderedParts.forEach((orderedPart) => {
       data.push({
-        digitalPardID: orderedPart.digitalPartID,
+        digitalPartID: orderedPart.digitalPartID,
         amount: orderedPart.amount,
         id: orderedPart.id,
       });
@@ -104,12 +98,4 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
       },
     );
   }
-  private operateFormatter(value, row, index) {
-    return [
-      '<button class="edit btn btn-xs btn-primary" href="javascript:void(0)" title="Edit">',
-      '<i class="glyphicon glyphicon-pencil"></i>',
-      '</button>'
-    ].join('');
-  }
-
 }

@@ -8,6 +8,7 @@ import {HttpClientService} from '../../../services/http/http-client.service';
 import {OrderDetailPanelComponent} from '../order-detail-panel/order-detail-panel.component';
 import {OrderListComponent} from '../order-list/order-list.component';
 import { OrderMasterViewComponent } from './order-master-view.component';
+import {CustomerService} from "../../../services/customer/customer.service";
 
 describe('OrderMasterViewComponent', () => {
   let component: OrderMasterViewComponent;
@@ -22,6 +23,7 @@ describe('OrderMasterViewComponent', () => {
     TestBed.overrideComponent(OrderListComponent, {
       set: {
         providers: [
+          {provide: CustomerService, useClass: CustomerService},
           {provide: OrderService, useClass: OrderService},
           {provide: ErrorService, useClass: ErrorService},
         ],
