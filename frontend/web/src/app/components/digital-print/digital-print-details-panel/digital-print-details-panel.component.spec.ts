@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DigitalPrintDetailsPanelComponent } from './digital-print-details-panel.component';
 import {DigitalPartMockService} from "../../../services/digital-part/digital-part-mock.service";
 import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
+import {DigitalPartDetailPanelComponent} from "../../digital-part/digital-part-detail-panel/digital-part-detail-panel.component";
+import {StlViewerComponent} from "../../stl-viewer/stl-viewer.component";
 
 describe('DigitalPrintDetailsPanelComponent', () => {
   let component: DigitalPrintDetailsPanelComponent;
@@ -10,7 +12,7 @@ describe('DigitalPrintDetailsPanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DigitalPrintDetailsPanelComponent ]
+      declarations: [ DigitalPrintDetailsPanelComponent, DigitalPartDetailPanelComponent, StlViewerComponent ]
     })
     TestBed.overrideComponent(DigitalPrintDetailsPanelComponent, {
       set: {
