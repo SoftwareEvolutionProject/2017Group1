@@ -3,6 +3,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 public interface DBInterface {
-    public ResultSet executeQuerry(String querry);
+    public ResultSet executeQuery(String querry);
     public Connection getConnection();
 }

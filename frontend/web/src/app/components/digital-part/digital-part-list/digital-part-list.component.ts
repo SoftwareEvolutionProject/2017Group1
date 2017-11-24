@@ -13,14 +13,12 @@ declare var $: any;
   providers: [DigitalPartService, ErrorService],
 })
 export class DigitalPartListComponent implements OnInit, AfterViewInit {
-  @Output() selected: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
+  @Output() selectedDigitalPart: EventEmitter<DigitalPart> = new EventEmitter<DigitalPart>();
   private table;
   private digitalParts: DigitalPart[];
-
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
-  selectedDigitalPart: DigitalPart = null;
 
   constructor(private digitalPartService: DigitalPartService,
               private errorService: ErrorService,
@@ -41,7 +39,6 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
     this.digitalPartService.getDigitalParts().subscribe(
       (digitalParts) => {
         this.digitalParts = digitalParts;
-
         this.populate();
         this.prepareTriggers();
       }, (error) => {
@@ -69,6 +66,9 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
       events: {
         'click .edit'(e, value, row, index) {
           _self.router.navigate([_self.router.url, row.id]);
+        },
+        'click .download'(e, value, row, index) {
+          _self.download(row.id);
         },
         'click .delete'(e, value, row, index) {
           _self.delete(row.id);
@@ -99,7 +99,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   private prepareTriggers() {
     const _self = this;
     (this.table as any).on('click-row.bs.table', (row, $element) => {
-      _self.selected.emit(_self.digitalParts.filter((digtialPart) => { if (digtialPart.id === $element.id) { return digtialPart; } })[0]);
+      _self.selectedDigitalPart.emit(_self.digitalParts.filter((digtialPart) => { if (digtialPart.id === $element.id) { return digtialPart; } })[0]);
     });
   }
 
@@ -111,6 +111,9 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
 
   private operateFormatter(value, row, index) {
     return [
+      '<button class="download btn btn-xs btn-primary" href="javascript:void(0)" title="Download">',
+      '<i class="glyphicon glyphicon-download-alt"></i>',
+      '</button>  ',
       '<button class="edit btn btn-xs btn-primary" href="javascript:void(0)" title="Edit">',
       '<i class="glyphicon glyphicon-pencil"></i>',
       '</button>  ',
@@ -124,7 +127,12 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
     this.toBeDeleted = id;
     this.openModal('#deleteFormDismissBtn');
   }
-
+  private download(id) {
+    this.digitalPartService.getDigitalPart(id).subscribe((res) => {
+        // TODO: implement download
+      }
+    );
+  }
   private dismissDelete() {
     this.toBeDeleted = null;
     this.modalRef.hide();

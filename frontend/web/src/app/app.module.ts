@@ -21,7 +21,7 @@ import { DigitalPartMasterViewComponent } from './components/digital-part/digita
 import {DigitalPrintDetailsPanelComponent} from './components/digital-print/digital-print-details-panel/digital-print-details-panel.component';
 import {DigitalPrintEditComponent} from './components/digital-print/digital-print-edit/digital-print-edit.component';
 import {DigitalPrintListComponent} from './components/digital-print/digital-print-list/digital-print-list.component';
-import {DigitalPrintMasterViewComponent} from './components/digital-print/physical-print-master-view/digital-print-master-view.component';
+import {DigitalPrintMasterViewComponent} from './components/digital-print/digital-print-master-view/digital-print-master-view.component';
 import { HomeComponent } from './components/home/home.component';
 import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
 import { MaterialListComponent } from './components/material-list/material-list.component';
@@ -33,6 +33,7 @@ import {PhysicalPrintListComponent} from './components/physical-print/physical-p
 import {PhysicalPrintMasterViewComponent} from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
+import { Ng4FilesModule } from 'angular4-files-upload';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {HttpClientService} from './services/http/http-client.service';
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
+    Ng4FilesModule,
 
     RouterModule.forRoot([
       {

@@ -1,4 +1,4 @@
-<div  class="panel panel-default">
+<div class="panel panel-default">
   <div class="panel-heading">
     <div class="panel-title">Digital Part Details
       <span class="pull-right" *ngIf="digitalPart">
@@ -8,16 +8,18 @@
     </span>
     </div>
   </div>
-  <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
-    Name: {{digitalPart.name}}
-  </div>
-  <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
-    Customer: {{customer.name}}
-  </div>
-  <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
-    Stl-File: {{digitalPart.stlPath}}
-  </div>
-  <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
-    <app-stl-viewer [digitalPartID]="digitalPart.id"></app-stl-viewer>
+  <div [hidden]="!digitalPart" class="panel-body" style="padding-right: 30px">
+    <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
+      Name: {{digitalPart.name}}
+    </div>
+    <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
+      Customer: {{customer.name}}
+    </div>
+    <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
+      Stl-File: {{digitalPart.path}}
+    </div>
+    <div *ngIf="digitalPart" class="panel-body" style="padding-right: 30px">
+      <app-stl-viewer [stlUrl]="digitalPart.path" [digitalPartID]="digitalPart.id"></app-stl-viewer>
+    </div>
   </div>
 </div>

@@ -37,6 +37,12 @@ export class DigitalPrintService {
           return data;
       });
   }
+  uploadMagicsFile(digitalPrint: DigitalPrint, magicsFile: any): Observable<string> {
+    return this.client.post(this.endpoint + '/' + digitalPrint.id + '/magics', magicsFile)
+      .map((data) => {
+        return data;
+      });
+  }
   updateDigitalPrint(digitalPrint: DigitalPrint): Observable<DigitalPrint> {
     return this.client.put(this.endpoint + '/' + digitalPrint.id, JSON.stringify(digitalPrint))
       .map((data) => {

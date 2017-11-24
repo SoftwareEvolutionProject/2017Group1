@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {DigitalPrint} from '../../../model/digital-print';
 import {ErrorService} from '../../../services/error.service';
-import {DigitalPrintService} from "../../../services/digital-print/digital-print.service";
+import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
 declare var $: any;
 
 @Component({
@@ -58,8 +58,8 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
       field: 'id',
       sortable: true,
     }, {
-      title: 'Magics File',
-      field: 'magicsPath',
+      title: 'Name',
+      field: 'name',
       sortable: true,
     }, {
       field: 'operate',
@@ -79,7 +79,7 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
     const data = [];
     this.digitalPrints.forEach((digitalPrint) => {
       data.push({
-        magicsPath: digitalPrint.magicsPath,
+        name: digitalPrint.name,
         id: digitalPrint.id,
       });
     });

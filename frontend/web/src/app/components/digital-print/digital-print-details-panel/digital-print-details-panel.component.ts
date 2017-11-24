@@ -76,7 +76,7 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
       sortable: true,
     },  {
       title: 'STL File',
-      field: 'stlpath',
+      field: 'path',
       sortable: true,
     }];
 
@@ -90,7 +90,7 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
       })[0];
 
       data.push({
-        stlpath: dPart.stlPath,
+        path: dPart.path,
         name: dPart.name,
         id: dPart.id,
         mid: key,
