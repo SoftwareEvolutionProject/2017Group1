@@ -34,7 +34,7 @@ import { PhysicalPrintMasterViewComponent } from './components/physical-print/ph
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { HttpClientService } from './services/http/http-client.service';
 import { PhysicalPartDetailPanelComponent } from './components/physical-part/physical-part-detail-panel/physical-part-detail-panel.component';
-// import { PhysicalPartEditComponent } from './components/physical-part/physical-part-edit/physical-part-edit.component';
+import { PhysicalPartEditComponent } from './components/physical-part/physical-part-edit/physical-part-edit.component';
 import { PhysicalPartListComponent } from './components/physical-part/physical-part-list/physical-part-list.component';
 import { PhysicalPartMasterViewComponent } from './components/physical-part/physical-part-master-view/physical-part-master-view.component';
 
@@ -53,7 +53,7 @@ import { PhysicalPartMasterViewComponent } from './components/physical-part/phys
     DigitalPrintMasterViewComponent,
     DigitalPrintDetailsPanelComponent,
     PhysicalPartListComponent,
-//    PhysicalPartEditComponent,
+    PhysicalPartEditComponent,
     PhysicalPartDetailPanelComponent,
     PhysicalPartMasterViewComponent,
     PhysicalPrintDetailsPanelComponent,
@@ -124,10 +124,10 @@ import { PhysicalPartMasterViewComponent } from './components/physical-part/phys
         path: 'physical-parts',
         component: PhysicalPartMasterViewComponent,
       },
-//      {
-//        path: 'physical-parts/:id',
-//        component: PhysicalPartEditComponent,
-//      },
+      {
+        path: 'physical-parts/:id',
+        component: PhysicalPartEditComponent,
+      },
       {
         path: 'physical-prints',
         component: PhysicalPrintMasterViewComponent,
