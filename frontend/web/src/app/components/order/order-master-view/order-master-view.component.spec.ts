@@ -17,7 +17,7 @@ describe('OrderMasterViewComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpModule, RouterTestingModule, ModalModule.forRoot()],
       providers: [HttpClientService],
-      declarations: [ OrderMasterViewComponent, OrderListComponent, OrderDetailPanelComponent ],
+      declarations: [ OrderMasterViewComponent, OrderListComponent, OrderDetailPanelComponent],
     });
     TestBed.overrideComponent(OrderListComponent, {
       set: {

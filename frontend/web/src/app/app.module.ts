@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { StlViewerComponent } from './components/stl-viewer/stl-viewer.component';
-
+import {CalendarModule} from 'primeng/primeng';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
@@ -75,6 +75,7 @@ import { OrderMasterViewComponent } from './components/order/order-master-view/o
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
+    CalendarModule,
     Ng4FilesModule,
 
     RouterModule.forRoot([

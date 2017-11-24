@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS customer(
 CREATE TABLE IF NOT EXISTS orderdata(
   id serial PRIMARY KEY,
   customerID INTEGER REFERENCES customer(id),
-  date VARCHAR(10)
+  date VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS digitalpart(

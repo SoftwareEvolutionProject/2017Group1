@@ -7,6 +7,7 @@ import {OrderService} from '../../../services/order/order.service';
 import {ErrorService} from '../../../services/error.service';
 import { OrderDetailPanelComponent } from '../order-detail-panel/order-detail-panel.component';
 import { OrderListComponent } from './order-list.component';
+import {CalendarModule} from "primeng/primeng";
 
 describe('OrderListComponent', () => {
   let component: OrderListComponent;
@@ -15,7 +16,7 @@ describe('OrderListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [OrderListComponent, OrderDetailPanelComponent],
-      imports: [RouterTestingModule, ModalModule.forRoot()],
+      imports: [RouterTestingModule, ModalModule.forRoot(), CalendarModule],
     });
     TestBed.overrideComponent(OrderListComponent, {
       set: {

@@ -9,6 +9,7 @@ import {ErrorService} from '../../../services/error.service';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {DigitalPartService} from '../../../services/digital-part/digital-part.service';
 import {DigitalPart} from "../../../model/digital-part";
+import {OrderedPart} from "../../../model/ordered-part";
 
 @Component({
   selector: 'app-order-edit',
@@ -21,7 +22,7 @@ export class OrderEditComponent implements OnInit, OnChanges {
   @Input('nav') nav = true;
   @Input('creating') creating = false;
   private customers: Customer[];
-  digtialPartsFieldsForm: FormGroup[] = [];
+  orderedPartsFieldsForm: FormGroup[] = [];
   private digitalParts: DigitalPart[];
   @Output() changed: EventEmitter<Order> = new EventEmitter<Order>();
   private loaded = false;
@@ -94,7 +95,9 @@ export class OrderEditComponent implements OnInit, OnChanges {
   /* init forms */
   private constructForms() {
     const fields = {
-      customer: [this.order && this.order.customerID ? this.order.customerID : '',
+      customerID: [this.order && this.order.customerID ? this.order.customerID : '',
+        Validators.compose([Validators.required])],
+      date: [this.order && this.order.date ? this.order.date : '',
         Validators.compose([Validators.required])],
     };
 
@@ -109,7 +112,14 @@ export class OrderEditComponent implements OnInit, OnChanges {
     const id = this.order.id;
     const order: Order = new Order(this.requiredFieldsForm.value);
     this.creating ? delete order['id'] : order.id = id;
-
+    const orderedParts: OrderedPart[] = [];
+    this.orderedPartsFieldsForm.forEach((formGroup) => {
+      orderedParts.push(new OrderedPart({
+        amount: formGroup.get('amount').value,
+        digitalPart: formGroup.get('digitalPart').value,
+      }));
+    });
+    order.orderedParts = orderedParts;
     if (this.creating) { // a new product
       this.orderService.createOrder(order).subscribe(
         (data) => {
@@ -143,11 +153,11 @@ export class OrderEditComponent implements OnInit, OnChanges {
       amount: ['',
         Validators.compose([Validators.required])],
     };
-    this.digtialPartsFieldsForm.push(this.formBuilder.group(fields));
+    this.orderedPartsFieldsForm.push(this.formBuilder.group(fields));
   }
 
   deleteDigitalPart(option) {
-    this.digtialPartsFieldsForm.splice(option, 1);
+    this.orderedPartsFieldsForm.splice(option, 1);
   }
 
   cancel() {

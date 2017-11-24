@@ -11,6 +11,7 @@ import {CustomerService} from '../../../services/customer/customer.service';
 import {CustomerMockService} from '../../../services/customer/customer-mock.service';
 import {DigitalPartMockService} from '../../../services/digital-part/digital-part-mock.service';
 import {DigitalPartService} from '../../../services/digital-part/digital-part.service';
+import {CalendarModule} from "primeng/primeng";
 
 describe('OrderEditComponent', () => {
   let component: OrderEditComponent;
@@ -19,7 +20,7 @@ describe('OrderEditComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [OrderEditComponent],
-      imports: [ReactiveFormsModule, RouterTestingModule],
+      imports: [ReactiveFormsModule, RouterTestingModule, CalendarModule],
     });
     TestBed.overrideComponent(OrderEditComponent, {
       set: {

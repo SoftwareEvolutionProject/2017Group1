@@ -15,9 +15,13 @@
           <span *ngIf="creating">Auto Generated </span>
 
           <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
-            <div [ngClass]="{'has-error': !requiredFieldsForm.get('customer').valid}">
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('date').valid}">
+              <label>Date</label>
+              <p-calendar formControlName="date" showButtonBar="true"></p-calendar>
+            </div>
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('customerID').valid}">
               <label>Customer</label>
-              <select name="customer" formControlName="customer" class="selectpicker form-control"
+              <select name="customerID" formControlName="customerID" class="selectpicker form-control"
                       title="Choose Customer">
                 <option title="{{_customer.name}}"
                         *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id
@@ -35,7 +39,7 @@
               Create customer
             </button>
           </div>
-          <div *ngFor="let formGroup of digtialPartsFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
+          <div *ngFor="let formGroup of orderedPartsFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
             <div class="col-sm-5">
               <label>Amount</label>
 
