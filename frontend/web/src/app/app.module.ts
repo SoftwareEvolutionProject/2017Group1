@@ -25,8 +25,6 @@ import {DigitalPrintMasterViewComponent} from './components/digital-print/digita
 import { HomeComponent } from './components/home/home.component';
 import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
 import { MaterialListComponent } from './components/material-list/material-list.component';
-import { OrderDetailComponent } from './components/order-detail/order-detail.component';
-import { OrderListComponent } from './components/order-list/order-list.component';
 import {PhysicalPrintDetailsPanelComponent} from './components/physical-print/physical-print-details-panel/physical-print-details-panel.component';
 import {PhysicalPrintEditComponent} from './components/physical-print/physical-print-edit/physical-print-edit.component';
 import {PhysicalPrintListComponent} from './components/physical-print/physical-print-list/physical-print-list.component';
@@ -34,6 +32,10 @@ import {PhysicalPrintMasterViewComponent} from './components/physical-print/phys
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import {HttpClientService} from './services/http/http-client.service';
 import { Ng4FilesModule } from 'angular4-files-upload';
+import { OrderEditComponent } from './components/order/order-edit/order-edit.component';
+import { OrderListComponent } from './components/order/order-list/order-list.component';
+import { OrderDetailPanelComponent } from './components/order/order-detail-panel/order-detail-panel.component';
+import { OrderMasterViewComponent } from './components/order/order-master-view/order-master-view.component';
 
 @NgModule({
   declarations: [
@@ -52,8 +54,6 @@ import { Ng4FilesModule } from 'angular4-files-upload';
     PhysicalPrintDetailsPanelComponent,
     PhysicalPrintListComponent,
     PhysicalPrintEditComponent,
-    OrderDetailComponent,
-    OrderListComponent,
     MaterialListComponent,
     MaterialDetailComponent,
     CustomerDetailPanelComponent,
@@ -61,6 +61,10 @@ import { Ng4FilesModule } from 'angular4-files-upload';
     PhysicalPrintMasterViewComponent,
     DigitalPartDetailPanelComponent,
     DigitalPartMasterViewComponent,
+    OrderEditComponent,
+    OrderListComponent,
+    OrderDetailPanelComponent,
+    OrderMasterViewComponent,
   ],
   imports: [
     DropdownModule,
@@ -92,11 +96,11 @@ import { Ng4FilesModule } from 'angular4-files-upload';
       },
       {
         path: 'orders',
-        component: OrderListComponent,
+        component: OrderMasterViewComponent,
       },
       {
         path: 'orders/:id',
-        component: OrderDetailComponent,
+        component: OrderEditComponent,
       },
       {
         path: 'digital-parts',

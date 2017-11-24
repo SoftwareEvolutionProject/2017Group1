@@ -1,0 +1,90 @@
+<div class="container">
+
+  <div class="row">
+    <div *ngIf="loaded">
+
+      <h2 *ngIf="!creating">Editing Order</h2>
+      <h2 *ngIf="creating">Creating New Order</h2>
+
+      <hr>
+
+      <div class="panel panel-default">
+        <div class="panel-body" style="padding-right: 30px">
+          <label>ID:</label>
+          <span *ngIf="!creating">{{order.id}} </span>
+          <span *ngIf="creating">Auto Generated </span>
+
+          <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('customer').valid}">
+              <label>Customer</label>
+              <select name="customer" formControlName="customer" class="selectpicker form-control"
+                      title="Choose Customer">
+                <option title="{{_customer.name}}"
+                        *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id
+                        [selected]="_customer.id == order.customerID">
+                  {{_customer.name}}
+                </option>
+              </select>
+            </div>
+          </form>
+
+
+          <div class="row" style="margin-bottom: 10px; margin-top: 20px">
+            <button id="createCustomer" class="col-sm-2 col-sm-offset-10 btn btn-primary btn "
+                    (click)="createCustomer()" style="">
+              Create customer
+            </button>
+          </div>
+          <div *ngFor="let formGroup of digtialPartsFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
+            <div class="col-sm-5">
+              <label>Amount</label>
+
+              <form [formGroup]="formGroup">
+                <div [ngClass]="{'has-error': !formGroup.get('amount').valid}">
+                  <input type="number" min="0" class="form-control" formControlName="amount"
+                         value="{{formGroup.get('amount').value}}">
+                </div>
+              </form>
+            </div>
+            <div class="col-sm-6 ">
+              <label>Digital Part</label>
+              <form [formGroup]="formGroup">
+                <select class="selectpicker form-control" formControlName="digitalPart" title="Choose Digital Part"
+                        [ngClass]="{'has-error': !formGroup.get('digitalPart').valid}">
+                  <option title="{{_digitalPart.name}}"
+                          *ngFor="let _digitalPart of this.digitalParts; let i = index" [value]="_digitalPart.id">
+                    {{_digitalPart.name}}
+                  </option>
+                </select>
+              </form>
+            </div>
+
+            <div class="col-sm-1">
+              <button class="btn btn-danger" (click)="deleteDigitalPart(i)" style="margin-top: 25px">
+                <span class="glyphicon glyphicon-trash"> </span>
+              </button>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom: 10px; margin-top: 20px">
+            <button id="addOption" class="col-sm-2 col-sm-offset-3 btn btn-primary btn " (click)="addDigitalPart()">
+              Add digital part
+            </button>
+            <button id="addOption" class="col-sm-2 col-sm-offset-2 btn btn-primary btn" (click)="addDigitalPart()">
+              Create digital part
+            </button>
+          </div>
+          <div class="pull-left" style="margin-top: 20px">
+            <button class="btn btn-default"
+                    style="min-width: 100px" (click)="cancel()">Cancel
+            </button>
+          </div>
+          <div class="pull-right" style="margin-top: 20px">
+            <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
+                    style="min-width: 100px" (click)="save()">Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
