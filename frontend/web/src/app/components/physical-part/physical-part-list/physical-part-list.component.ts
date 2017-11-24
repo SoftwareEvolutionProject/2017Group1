@@ -38,7 +38,7 @@ export class PhysicalPartListComponent implements OnInit, AfterViewInit {
   }
 
   loadAndPopulate() {
-    /* get users */
+    /* get all Physical Parts */
     this.physicalPartService.getPhysicalParts().subscribe(
       (physicalParts) => {
         this.physicalParts = physicalParts;
@@ -55,16 +55,12 @@ export class PhysicalPartListComponent implements OnInit, AfterViewInit {
     const _self = this;
     /*manually generate columns*/
     const columns = [{
+      title: 'ID',
+      field: 'id',
+      sortable: true,
+    }, {
       title: 'Physical Print ID',
       field: 'physicalPrintID',
-      sortable: true,
-    }, {
-      title: 'Ordered Part ID',
-      field: 'orderedPartID',
-      sortable: true,
-    }, {
-      title: 'Magics Part Pairing ID',
-      field: 'magicsPartPairingID',
       sortable: true,
     }, {
       field: 'operate',
