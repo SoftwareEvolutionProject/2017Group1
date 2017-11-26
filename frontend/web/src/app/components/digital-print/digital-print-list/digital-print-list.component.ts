@@ -10,7 +10,7 @@ declare var $: any;
   selector: 'app-digital-print-list',
   templateUrl: './digital-print-list.component.html',
   styleUrls: ['./digital-print-list.component.scss'],
-  providers: [DigitalPrintService, ErrorService]
+  providers: [DigitalPrintService, ErrorService],
 })
 export class DigitalPrintListComponent implements OnInit, AfterViewInit {
   private modalRef: BsModalRef;
