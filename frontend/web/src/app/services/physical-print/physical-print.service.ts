@@ -36,6 +36,14 @@ export class PhysicalPrintService {
           return data;
       });
   }
+
+  uploadSlmFile(physicalPrint: PhysicalPrint, slmFile: any): Observable<string> {
+    return this.client.post(this.endpoint + '/' + physicalPrint.id + '/slm', slmFile)
+      .map((data) => {
+        return data;
+      });
+  }
+
   updatePhysicalPrint(physicalPrint: PhysicalPrint): Observable<PhysicalPrint> {
     return this.client.put(this.endpoint + '/' + physicalPrint.id, JSON.stringify(physicalPrint))
       .map((data) => {

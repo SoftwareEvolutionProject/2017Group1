@@ -33,7 +33,7 @@ export class PhysicalPartService {
   createPhysicalPart(physicalPart: PhysicalPart): Observable<PhysicalPart> {
     return this.client.post(this.endpoint, physicalPart)
       .map((data) => {
-          return data;
+        return data;
       });
   }
   updatePhysicalPart(physicalPart: PhysicalPart): Observable<PhysicalPart> {

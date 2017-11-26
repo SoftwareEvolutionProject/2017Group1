@@ -3,24 +3,25 @@ package se.chalmers.dat265.group1.model;
 import java.util.Map;
 
 public class DigitalPrint extends DataModel {
-    private int id;
-    private String magicsPath;
-
-    public DigitalPrint(int id, String magicsPath, Map<String, Integer> magicsPartPairing) {
-        this.id = id;
-        this.magicsPath = magicsPath;
-        this.magicsPartPairing = magicsPartPairing;
-    }
 
     /** Map from <Name tag within Magics file, DigitalPartID>*/
     private Map<String, Integer> magicsPartPairing;
+
+    private int id;
+    private String name;
+
+    public DigitalPrint(int id, String name, Map<String, Integer> magicsPartPairing) {
+        this.id = id;
+        this.name = name;
+        this.magicsPartPairing = magicsPartPairing;
+    }
 
     public int getId() {
         return id;
     }
 
-    public String getMagicsPath() {
-        return magicsPath;
+    public String getName() {
+        return name;
     }
 
     /**

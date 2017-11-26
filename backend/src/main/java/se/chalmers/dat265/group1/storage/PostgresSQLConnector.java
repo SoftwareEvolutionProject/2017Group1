@@ -35,8 +35,8 @@ public class PostgresSQLConnector implements DBInterface {
     }
 
     @Override
-    public ResultSet executeQuerry(String query) {
-        System.out.println("Running Querry: " + query);
+    public ResultSet executeQuery(String query) {
+        log.info("Running Query: " + query);
 
         PreparedStatement stmt = null;
 
@@ -44,9 +44,7 @@ public class PostgresSQLConnector implements DBInterface {
             stmt = this.conn.prepareStatement(query);
             return stmt.executeQuery();
         } catch (SQLException e) {
-            log.error("executeQuerry", e);
-        } finally {
-            log.error("Execute Querry failed");
+            log.error("executeQuery", e);
         }
         return null;
     }

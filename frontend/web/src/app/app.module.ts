@@ -21,7 +21,7 @@ import { DigitalPartMasterViewComponent } from './components/digital-part/digita
 import { DigitalPrintDetailsPanelComponent } from './components/digital-print/digital-print-details-panel/digital-print-details-panel.component';
 import { DigitalPrintEditComponent } from './components/digital-print/digital-print-edit/digital-print-edit.component';
 import { DigitalPrintListComponent } from './components/digital-print/digital-print-list/digital-print-list.component';
-import { DigitalPrintMasterViewComponent } from './components/digital-print/physical-print-master-view/digital-print-master-view.component';
+import { DigitalPrintMasterViewComponent } from './components/digital-print/digital-print-master-view/digital-print-master-view.component';
 import { HomeComponent } from './components/home/home.component';
 import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
 import { MaterialListComponent } from './components/material-list/material-list.component';
@@ -32,6 +32,7 @@ import { PhysicalPrintEditComponent } from './components/physical-print/physical
 import { PhysicalPrintListComponent } from './components/physical-print/physical-print-list/physical-print-list.component';
 import { PhysicalPrintMasterViewComponent } from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
+import { Ng4FilesModule } from 'angular4-files-upload';
 import { HttpClientService } from './services/http/http-client.service';
 import { PhysicalPartDetailPanelComponent } from './components/physical-part/physical-part-detail-panel/physical-part-detail-panel.component';
 import { PhysicalPartEditComponent } from './components/physical-part/physical-part-edit/physical-part-edit.component';
@@ -78,6 +79,7 @@ import { PhysicalPartMasterViewComponent } from './components/physical-part/phys
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
+    Ng4FilesModule,
 
     RouterModule.forRoot([
       {
@@ -111,6 +113,10 @@ import { PhysicalPartMasterViewComponent } from './components/physical-part/phys
       {
         path: 'digital-parts/:id',
         component: DigitalPartEditComponent,
+      },
+      {
+        path: 'digital-parts/:id/stl',
+        component: StlViewerComponent,
       },
       {
         path: 'digital-prints',

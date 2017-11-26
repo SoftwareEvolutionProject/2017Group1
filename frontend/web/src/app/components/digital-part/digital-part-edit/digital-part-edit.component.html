@@ -1,10 +1,10 @@
 <div class="container">
 
   <div class="row">
-    <div *ngIf="loaded" >
+    <div *ngIf="loaded">
 
-      <h2  *ngIf="!creating">Editing Digital Part</h2>
-      <h2  *ngIf="creating">Creating new Digital Part</h2>
+      <h2 *ngIf="!creating">Editing Digital Part</h2>
+      <h2 *ngIf="creating">Creating new Digital Part</h2>
 
       <hr>
 
@@ -20,27 +20,61 @@
               <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
                 <input class="form-control" formControlName="name">
               </div>
-              <label>Stl-File</label>
-              <div [ngClass]="{'has-error': !requiredFieldsForm.get('stlPath').valid}">
-                <input class="form-control" formControlName="stlPath">
-              </div>
             </form>
             <label>Customer</label>
-              <select name="cusotmer" class="selectpicker form-control" title="Choose Customer" #c (change)="update(c.value)">
-                <option title="{{_customer.name}}"
-                        *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id [selected]="_customer.id == digitalPart.customerID">
-                  {{_customer.name}}
-                </option>
-              </select>
+            <select name="cusotmer" class="selectpicker form-control" title="Choose Customer" #c
+                    (change)="update(c.value)">
+              <option title="{{_customer.name}}"
+                      *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id
+                      [selected]="_customer.id == digitalPart.customerID">
+                {{_customer.name}}
+              </option>
+            </select>
+
+              <div *ngIf="creating">
+              <label>Stl-File</label>
+
+              <div class="input-group image-preview">
+                <div placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+                  {{selectedFileName}}
+                </div>
+                <!-- don't give a name === doesn't send on POST/GET -->
+                <span class="input-group-btn">
+						<!-- image-preview-clear button -->
+
+						  <button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span
+                class="glyphicon glyphicon-remove"></span> Clear </button>
+
+                  <!-- image-preview-input -->
+            <ng4-files-click (filesSelect)="filesSelect($event)">
+              <div class="btn btn-default stl-file-preview"> <span
+                class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Browse</span>
+                <!-- rename it -->
+              </div>
+            </ng4-files-click>
+						</span></div>
+              <!-- /input-group image-preview [TO HERE]-->
+
+              <br/>
+              <!-- Drop Zone -->
+              <ng4-files-drop (filesSelect)="filesSelect($event)">
+                <div class="upload-drop-zone" id="drop-zone">
+                  Or drag and drop files here
+                </div>
+              </ng4-files-drop>
+              <br/>
+              </div>
           </div>
           <div class="row">
             <div class="pull-left" style="margin-top: 20px">
               <button class="btn btn-default"
-                      style="min-width: 100px" (click)="cancel()">Cancel</button>
+                      style="min-width: 100px" (click)="cancel()">Cancel
+              </button>
             </div>
             <div class="pull-right" style="margin-top: 20px">
-              <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
-                      style="min-width: 100px" (click)="save()">Save</button>
+              <button [disabled]=" (!selectedFile && creating) || !requiredFieldsForm.valid" class="btn btn-primary"
+                      style="min-width: 100px" (click)="save()">Save
+              </button>
             </div>
           </div>
         </div>
@@ -48,3 +82,21 @@
     </div>
   </div>
 </div>
+
+<ng-template #modalError>
+  <div class="modal-header">
+    <h3 class="modal-title">Error when uploading file</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="dismissError()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="alert alert-danger">
+      <p>{{errorMessage}}</p>
+    </div>
+    <div class="modal-footer">
+      <button id="errorFormDismissBtn" type="button" class="btn btn-default" (click)="dismissError()">Dismiss
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -26,7 +26,6 @@ export class DigitalPartService {
           digitalParts[i] = DigitalPart.create(data[i]);
         }
         return digitalParts;
-
       });
   }
 
@@ -34,6 +33,12 @@ export class DigitalPartService {
     return this.client.post(this.endpoint, digitalPart)
       .map((data) => {
           return data;
+      });
+  }
+  uploadStlFile(digitalPart: DigitalPart, stlFile: any): Observable<string> {
+    return this.client.post(this.endpoint + '/' + digitalPart.id + '/stl', stlFile)
+      .map((data) => {
+        return data;
       });
   }
   updateDigitalPart(digitalPart: DigitalPart): Observable<DigitalPart> {

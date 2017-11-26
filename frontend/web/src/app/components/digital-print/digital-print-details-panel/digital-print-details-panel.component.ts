@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {DigitalPart} from '../../../model/digital-part';
 import {DigitalPrint} from '../../../model/digital-print';
 import {DigitalPartService} from '../../../services/digital-part/digital-part.service';
@@ -13,14 +13,20 @@ declare let $: any;
 })
 export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
   private table;
+  private loadingTable = false;
+  private dataLoaded = false;
   @Input('digitalPrint') digitalPrint: DigitalPrint = null;
-  private digitalParts: DigitalPart[];
+  @Input('digitalParts') digitalParts: DigitalPart[];
+  @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
+  selected: DigitalPart;
 
   constructor(private digitalPartService: DigitalPartService) {
 
     /* get parts */
     this.digitalPartService.getDigitalParts().subscribe((dParts) => {
       this.digitalParts = dParts;
+      this.dataLoaded = true;
+      this.loadTable();
     });
   }
 
@@ -28,10 +34,29 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
     this.table = $('#dPartsTable');
   }
 
-  ngOnChanges(){
-    if (this.digitalParts && this.table) { // make sure we truly have loaded the parts
+  ngOnChanges() {
+    this.selected = null;
+    this.loadTable();
+  }
+
+  private loadTable(){
+    if(this.dataLoaded && !this.loadingTable && this.table ){
+      this.loadingTable = true;
       this.populate();
+      this.prepareTriggers();
+      this.loadingTable = false;
     }
+  }
+
+  private prepareTriggers() {
+    const _self = this;
+    (this.table as any).on('click-row.bs.table', (row, $element) => {
+      _self.selected = _self.digitalParts.filter((digitalPart) => {
+        if (digitalPart.id ===  $element.id) {
+          return digitalPart;
+        }
+      })[0];
+    });
   }
 
   private populate() {
@@ -51,7 +76,7 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
       sortable: true,
     },  {
       title: 'STL File',
-      field: 'stlpath',
+      field: 'path',
       sortable: true,
     }];
 
@@ -65,7 +90,7 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
       })[0];
 
       data.push({
-        stlpath: dPart.stlPath,
+        path: dPart.path,
         name: dPart.name,
         id: dPart.id,
         mid: key,

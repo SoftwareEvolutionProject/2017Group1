@@ -43,7 +43,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public List<T> getObjects() {
         String query = "SELECT * FROM \""+ type.getSimpleName().toLowerCase()+ "\"";
-        ResultSet rs =  this.dbInterface.executeQuerry(query);
+        ResultSet rs =  this.dbInterface.executeQuery(query);
         try {
             return this.getMatchJSON(rs); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
@@ -66,7 +66,7 @@ public class GenericRepository <T extends DataModel> {
         sb.append(sqlConditions);
 
 
-        ResultSet rs =  this.dbInterface.executeQuerry(sb.toString());
+        ResultSet rs =  this.dbInterface.executeQuery(sb.toString());
         try {
             return this.getMatchJSON(rs); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
@@ -82,7 +82,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public T getObject(int id) {
         String query = "SELECT * FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
-        ResultSet rs =  this.dbInterface.executeQuerry(query);
+        ResultSet rs =  this.dbInterface.executeQuery(query);
         try {
             return this.getMatchJSON(rs).iterator().next(); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
@@ -164,7 +164,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public void deleteObject(int id) {
         String query = "DELETE FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
-        this.dbInterface.executeQuerry(query);
+        this.dbInterface.executeQuery(query);
 
     }
 

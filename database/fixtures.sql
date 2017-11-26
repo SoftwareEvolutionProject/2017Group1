@@ -30,33 +30,33 @@ INSERT INTO digitalpart (customerID, name) VALUES
   ((select id from customer where name = 'Chalmers n Stuff'), 'Emil'),
   ((select id from customer where name = 'Chalmers n Stuff'), 'Emilia');
 
-INSERT INTO digitalprintdata  (magicsPath) VALUES ('path1'), ('path2');
+INSERT INTO digitalprintdata  (name) VALUES ('path1'), ('path2');
 
 INSERT INTO magicspairing(digitalPrintID, digitalPartID, label) VALUES
-  ((select id from digitalprintdata where magicsPath = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw1'),
-  ((select id from digitalprintdata where magicsPath = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw2'),
-  ((select id from digitalprintdata where magicsPath = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw3'),
-  ((select id from digitalprintdata where magicsPath = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw4'),
-  ((select id from digitalprintdata where magicsPath = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw5'),
-  ((select id from digitalprintdata where magicsPath = 'path1'), (select id from digitalpart where name = 'Hinge'), 'Hinge1'),
-  ((select id from digitalprintdata where magicsPath = 'path1'), (select id from digitalpart where name = 'Hinge'), 'Hinge2'),
-  ((select id from digitalprintdata where magicsPath = 'path1'), (select id from digitalpart where name = 'Hinge'), 'Hinge3');
+  ((select id from digitalprintdata where name = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw1'),
+  ((select id from digitalprintdata where name = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw2'),
+  ((select id from digitalprintdata where name = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw3'),
+  ((select id from digitalprintdata where name = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw4'),
+  ((select id from digitalprintdata where name = 'path1'), (select id from digitalpart where name = 'Screw'), 'Screw5'),
+  ((select id from digitalprintdata where name = 'path1'), (select id from digitalpart where name = 'Hinge'), 'Hinge1'),
+  ((select id from digitalprintdata where name = 'path1'), (select id from digitalpart where name = 'Hinge'), 'Hinge2'),
+  ((select id from digitalprintdata where name = 'path1'), (select id from digitalpart where name = 'Hinge'), 'Hinge3');
 
 
 INSERT INTO magicspairing(digitalPrintID, digitalPartID, label) VALUES
-  ((select id from digitalprintdata where magicsPath = 'path2'), (select id from digitalpart where name = 'Emil'), 'EmilProtype'),
-  ((select id from digitalprintdata where magicsPath = 'path2'), (select id from digitalpart where name = 'Emilia'), 'EmiliaProtype');
+  ((select id from digitalprintdata where name = 'path2'), (select id from digitalpart where name = 'Emil'), 'EmilProtype'),
+  ((select id from digitalprintdata where name = 'path2'), (select id from digitalpart where name = 'Emilia'), 'EmiliaProtype');
 
-INSERT INTO physicalprint (digitalPrintID, slmPath) VALUES
-  ((select id from digitalprintdata where magicsPath = 'path1'), 'slm/path1'),
-  ((select id from digitalprintdata where magicsPath = 'path1'), 'slm/path2');
+INSERT INTO physicalprint (digitalPrintID, path) VALUES
+  ((select id from digitalprintdata where name = 'path1'), 'slm/path1'),
+  ((select id from digitalprintdata where name = 'path1'), 'slm/path2');
 
-INSERT INTO physicalprint (digitalPrintID, slmPath) VALUES
-  ((select id from digitalprintdata where magicsPath = 'path2'), 'slm/path3'),
-  ((select id from digitalprintdata where magicsPath = 'path2'), 'slm/path4'),
-  ((select id from digitalprintdata where magicsPath = 'path2'), 'slm/path5'),
-  ((select id from digitalprintdata where magicsPath = 'path2'), 'slm/path6'),
-  ((select id from digitalprintdata where magicsPath = 'path2'), 'slm/path7');
+INSERT INTO physicalprint (digitalPrintID, path) VALUES
+  ((select id from digitalprintdata where name = 'path2'), 'slm/path3'),
+  ((select id from digitalprintdata where name = 'path2'), 'slm/path4'),
+  ((select id from digitalprintdata where name = 'path2'), 'slm/path5'),
+  ((select id from digitalprintdata where name = 'path2'), 'slm/path6'),
+  ((select id from digitalprintdata where name = 'path2'), 'slm/path7');
 
 
 
@@ -78,5 +78,7 @@ INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingID) V
   (5,3,9), (5,4,10),
   (6,3,9), (6,4,10),
   (7,3,9), (7,4,10);
+
+INSERT INTO stldata (digitalPartID, path) VALUES (2, '/stl/2-1082100546.stl'), (3,'/stl/3-129913882.stl');
 
 COMMIT;

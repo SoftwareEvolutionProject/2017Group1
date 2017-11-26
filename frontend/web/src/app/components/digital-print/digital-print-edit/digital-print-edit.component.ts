@@ -1,12 +1,15 @@
-import {Location} from '@angular/common';
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {DigitalPart} from '../../../model/digital-part';
-import {DigitalPrint} from '../../../model/digital-print';
-import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
-import {ErrorService} from '../../../services/error.service';
+import {Location} from "@angular/common";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute} from "@angular/router";
+import {DigitalPart} from "../../../model/digital-part";
+import {DigitalPrint} from "../../../model/digital-print";
+import {DigitalPrintService} from "../../../services/digital-print/digital-print.service";
+import {ErrorService} from "../../../services/error.service";
 import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {Ng4FilesConfig, Ng4FilesSelected, Ng4FilesService, Ng4FilesStatus} from "angular4-files-upload";
+declare var $: any;
 
 @Component({
   selector: 'app-digital-print-edit',
@@ -19,24 +22,36 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
   @Input('digitalPrint') digitalPrint: DigitalPrint = null;
   @Input('nav') nav = true;
   @Input('creating') creating = false;
+  private modalRef: BsModalRef;
+  @ViewChild('modalError') modalDelete;
   @Output() changed: EventEmitter<DigitalPrint> = new EventEmitter<DigitalPrint>();
-
-  private loaded = false;
-
-  /* forms */
   private requiredFieldsForm: FormGroup = null;
+  private loaded = false;
+  public selectedFile;
+  public selectedFileName;
+  public errorMessage;
+  private stlConfig: Ng4FilesConfig = {
+    acceptExtensions: ['.magics'],
+    maxFilesCount: 1,
+    maxFileSize: 5120000,
+    totalFilesSize: 10120000,
+  };
+  /* forms */
   magicPairingsFieldsForm: FormGroup[] = [];
   private digitalParts: DigitalPart[];
 
-  constructor(private route: ActivatedRoute,
+  constructor(private modalService: BsModalService,
+              private route: ActivatedRoute,
               private digitalPrintService: DigitalPrintService,
               private digitalPartService: DigitalPartService,
               private formBuilder: FormBuilder,
               private errorService: ErrorService,
-              private _location: Location) {
+              private _location: Location,
+              private ng4FilesService: Ng4FilesService) {
   }
 
   ngOnInit(): void {
+    this.ng4FilesService.addConfig(this.stlConfig);
     /* get parts */
     this.digitalPartService.getDigitalParts().subscribe((dParts) => {
       this.digitalParts = dParts;
@@ -53,11 +68,38 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     });
   }
 
+  public filesSelect(selectedFiles: Ng4FilesSelected): void {
+    if (selectedFiles.status === Ng4FilesStatus.STATUS_SUCCESS) {
+      this.selectedFile = selectedFiles.files[0];
+      this.selectedFileName = this.selectedFile.name;
+    } else if (selectedFiles.status === Ng4FilesStatus.STATUS_MAX_FILE_SIZE_EXCEED) {
+      this.errorMessage = 'Max file size exceeded';
+      this.openModal('#errorFormDismissBtn');
+    } else if (selectedFiles.status === Ng4FilesStatus.STATUS_NOT_MATCH_EXTENSIONS) {
+      this.errorMessage = 'Only ".magics" files allowed!';
+      this.openModal('#errorFormDismissBtn');
+    }
+  }
+
+  private dismissError() {
+    this.modalRef.hide();
+  }
+
+  openModal(autoFocusIdWithHashtag: string) {
+    this.modalRef = this.modalService.show(this.modalDelete);
+    if (autoFocusIdWithHashtag != null && autoFocusIdWithHashtag !== '') {
+      const addInput: any = ($(autoFocusIdWithHashtag) as any);
+      setTimeout(() => {
+        addInput.focus();
+      }, 200);
+    }
+  }
+
   create() {
     /* init with a boilerplate */
     this.creating = true;
     if (this.creating) {
-      this.digitalPrint = new DigitalPrint({'magicsPartPairing':{}});
+      this.digitalPrint = new DigitalPrint({'magicsPartPairing': {}});
     }
     this.populate();
   }
@@ -75,12 +117,13 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     this.digitalPrintService.getDigitalPrint(id).subscribe(
       (digitalPrint) => {
         this.digitalPrint = digitalPrint;
+        this.selectedFile = this.digitalPrint.path;
         this.populate();
       },
     );
   }
 
-  private constructMagicPairingFormGroup(){
+  private constructMagicPairingFormGroup() {
     /* load attr with default data from product instance*/
     this.magicPairingsFieldsForm = [];
     Object.getOwnPropertyNames(this.digitalPrint.magicsPartPairing).forEach((id) => {
@@ -121,19 +164,17 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
 
   /* populate data */
   private populate() {
-    this.constructForms();
+    this.constructForms()
+    this.loaded = true;
   }
-
-  /* init forms */
   private constructForms() {
     const fields = {
-      magicsPath: [this.digitalPrint && this.digitalPrint.magicsPath ? this.digitalPrint.magicsPath : '',
+      name: [this.digitalPrint && this.digitalPrint.name ? this.digitalPrint.name : '',
         Validators.compose([Validators.required])],
     };
 
     this.requiredFieldsForm = this.formBuilder.group(fields);
     this.constructMagicPairingFormGroup();
-    this.loaded = true;
   }
 
   /* save product instance */
@@ -151,15 +192,17 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
     digitalPrint.magicsPartPairing = pairings;
 
     console.log(digitalPrint);
-    console.log(JSON.stringify(digitalPrint));
 
     if (this.creating) { // a new product
       this.digitalPrintService.createDigitalPrint(digitalPrint).subscribe(
         (data) => {
-          if (this.nav) {
-            this.back();
-          }
-          this.changed.emit(data);
+          this.digitalPrintService.uploadMagicsFile(data, this.selectedFile).subscribe(
+            (response) => {
+              if (this.nav) {
+                this.back();
+              }
+              this.changed.emit(data);
+            });
         }, (error) => {
           console.log(error);
           this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
