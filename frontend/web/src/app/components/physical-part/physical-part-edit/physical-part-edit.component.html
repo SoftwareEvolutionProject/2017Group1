@@ -25,6 +25,7 @@
             </form>
             <label>Physical Print ID</label>
             <select name="formPhysicalPrintID" class="selectpicker form-control" title="Physical Print ID" #p (change)="updateMagicsPartPairingIDs(p.value)">
+              <option style="display:none" value="">Select a Physical Print</option>
               <option title="{{_physicalPrint.id}}"
                       *ngFor="let _physicalPrint of this.physicalPrints; let i = index" [value]=_physicalPrint.id [selected]="_physicalPrint.id == physicalPart.physicalPrintID">
                 {{_physicalPrint.id}}
