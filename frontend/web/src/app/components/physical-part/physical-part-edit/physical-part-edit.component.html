@@ -34,6 +34,7 @@
 
             <label>Magics Part ID</label>
             <select name="formMagicsPartPairingID" class="selectpicker form-control" title="Magics Part ID" #m (change)="updateOrderedPartIDs(m.value)">
+              <option style="display:none" value="">Select a Magics File Shit</option>
               <option title="{{_magicsPartIDs}}"
                       *ngFor="let _magicsPartIDs of magicsPartIDs; let i = index" [value]=i [selected]="i == physicalPart.magicsPartPairingID">
                 {{_magicsPartIDs}}
