@@ -8,8 +8,8 @@ import { ErrorService } from '../../../services/error.service';
 import { PhysicalPrintService } from '../../../services/physical-print/physical-print.service';
 import { DigitalPrintService } from "../../../services/digital-print/digital-print.service";
 
-import {PhysicalPrint} from '../../../model/physical-print';
-import {DigitalPrint} from "../../../model/digital-print";
+import { PhysicalPrint } from '../../../model/physical-print';
+import { DigitalPrint } from "../../../model/digital-print";
 
 @Component({
   selector: 'app-physical-part-detail',
