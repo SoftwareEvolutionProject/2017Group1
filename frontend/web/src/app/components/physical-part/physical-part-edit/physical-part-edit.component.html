@@ -15,25 +15,35 @@
             <label>ID:</label>
             <span *ngIf="!creating">{{physicalPart.id}} </span>
             <span *ngIf="creating">Auto Generated </span>
+
             <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
               <label>ID</label>
               <div [ngClass]="{'has-error': !requiredFieldsForm.get('id').valid}">
                 <input class="form-control" formControlName="id">
               </div>
-              <label>Physical Print ID</label>
-              <div [ngClass]="{'has-error': !requiredFieldsForm.get('physicalPrintID').valid}">
-                <input class="form-control" formControlName="physicalPrintID">
-              </div>
-              <label>Ordered Part ID</label>
-              <div [ngClass]="{'has-error': !requiredFieldsForm.get('orderedPartID').valid}">
-                <input class="form-control" formControlName="orderedPartID">
-              </div>
-              <label>Magics Part ID</label>
-              <div [ngClass]="{'has-error': !requiredFieldsForm.get('magicsPartPairingID').valid}">
-                <input class="form-control" formControlName="magicsPartPairingID">
-              </div>
+
             </form>
+            <label>Physical Print ID</label>
+            <select name="formPhysicalPrintID" class="selectpicker form-control" title="Physical Print ID" #p (change)="updateMagicsPartPairingIDs(p.value)">
+              <option title="{{_physicalPrint.id}}"
+                      *ngFor="let _physicalPrint of this.physicalPrints; let i = index" [value]=_physicalPrint.id [selected]="_physicalPrint.id == physicalPart.physicalPrintID">
+                {{_physicalPrint.id}}
+              </option>
+            </select>
+
+            <label>Magics Part ID</label>
+            <select name="formMagicsPartPairingID" class="selectpicker form-control" title="Magics Part ID" #m (change)="updateOrderedPartIDs(m.value)">
+              <option title="{{_magicsPartIDs}}"
+                      *ngFor="let _magicsPartIDs of magicsPartIDs; let i = index" [value]=i [selected]="i == physicalPart.magicsPartPairingID">
+                {{_magicsPartIDs}}
+              </option>
+            </select>
+
+            <label>Ordered Part ID</label>
+            <select name="formOrderedPartID" class="selectpicker form-control" title="Ordered Part ID" #o (change)="update(o.value)">
+            </select>
           </div>
+
           <div class="row">
             <div class="pull-left" style="margin-top: 20px">
               <button class="btn btn-default"

@@ -6,14 +6,16 @@ import { PhysicalPart } from '../../../model/physical-part';
 import { PhysicalPartService } from '../../../services/physical-part/physical-part.service';
 import { ErrorService } from '../../../services/error.service';
 import { PhysicalPrintService } from '../../../services/physical-print/physical-print.service';
+import { DigitalPrintService } from "../../../services/digital-print/digital-print.service";
 
 import {PhysicalPrint} from '../../../model/physical-print';
+import {DigitalPrint} from "../../../model/digital-print";
 
 @Component({
   selector: 'app-physical-part-detail',
   templateUrl: './physical-part-edit.component.html',
   styleUrls: ['./physical-part-edit.component.scss'],
-  providers: [PhysicalPartService, PhysicalPrintService, ErrorService],
+  providers: [PhysicalPartService, PhysicalPrintService, DigitalPrintService, ErrorService],
 })
 export class PhysicalPartEditComponent implements OnInit, OnChanges {
 
@@ -27,6 +29,8 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   private requiredFieldsForm: FormGroup = null;
   private physicalPrint: PhysicalPrint;
   private physicalPrints: PhysicalPrint[];
+  private digitalPrint: DigitalPrint;
+  private magicsPartIDs: String[];
 
   /* data */
 
@@ -35,6 +39,7 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
     private physicalPartService: PhysicalPartService,
     private formBuilder: FormBuilder,
     private physicalPrintService: PhysicalPrintService,
+    private digitalPrintService: DigitalPrintService,
     private errorService: ErrorService,
     private _location: Location) { }
 
@@ -59,21 +64,15 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
     this.populate();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(this.physicalPrint);
-    this.physicalPrintService.getAllPhysicalPrint().subscribe((physicalPrints) => {
-      this.physicalPrints = physicalPrints;
-      if (this.creating) {
-        this.create();
-      } else if (this.physicalPart) {
-        this.populate();
-      }
-    });
+  ngOnChanges(change: SimpleChanges) {
+    console.log('ON CHANGE: ' + this.physicalPrint);
   }
+
   update(id) {
-    console.log(id)
+    console.log('UPDATE: ' + id)
     this.physicalPart.id = id;
   }
+
   /* get the product */
   getData(id) {
     this.physicalPartService.getPhysicalPart(id).subscribe(
@@ -88,19 +87,14 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   private populate() {
     this.constructForms();
   }
+
   private constructPhysicalPrintForm() {
 
   }
   /* init forms */
   private constructForms() {
     const fields = {
-      id: [{ value: (this.physicalPart && this.physicalPart.id ? this.physicalPart.id : ''), disabled: true },
-        Validators.compose([Validators.required])],
-      orderedPartID: [(this.physicalPart && this.physicalPart.orderedPartID ? this.physicalPart.orderedPartID : ''),
-        Validators.compose([Validators.required])],
-      physicalPrintID: [(this.physicalPart && this.physicalPart.physicalPrintID ? this.physicalPart.physicalPrintID : ''),
-        Validators.compose([Validators.required])],
-      magicsPartPairingID: [(this.physicalPart && this.physicalPart.magicsPartPairingID ? this.physicalPart.magicsPartPairingID : ''),
+      id: [ { value: (this.physicalPart && this.physicalPart.id ? this.physicalPart.id : ''), disabled: true },
         Validators.compose([Validators.required])],
     };
 
@@ -111,7 +105,7 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
    save() {
     /* convert relevant fields */
     const id = this.physicalPart.id;
-    let data = this.requiredFieldsForm.value;
+    const data = this.requiredFieldsForm.value;
     data.physicalPrintID = this.physicalPart.physicalPrintID;
 
     const physicalPart: PhysicalPart = new PhysicalPart(this.requiredFieldsForm.value);
@@ -147,5 +141,20 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
 
   back() {
     this._location.back();
+  }
+
+  updateMagicsPartPairingIDs(value) {
+    this.physicalPrintService.getPhysicalPrint(value).subscribe(
+      (physicalPrint) => {
+        this.physicalPrint = physicalPrint;
+        this.digitalPrintService.getDigitalPrint(this.physicalPrint.digitalPrintID).subscribe((digitalPrint) => {
+          this.digitalPrint = digitalPrint;
+          this.magicsPartIDs = Object.keys(this.digitalPrint.magicsPartPairing);
+        });
+    });
+  }
+
+  updateOrderedPartIDs(value) {
+
   }
 }
