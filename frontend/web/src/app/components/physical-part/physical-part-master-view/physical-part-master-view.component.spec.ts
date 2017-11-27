@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ModalModule } from 'ngx-bootstrap';
+import { BsModalService, ModalModule } from 'ngx-bootstrap';
 import { PhysicalPartService } from '../../../services/physical-part/physical-part.service';
 import { ErrorService } from '../../../services/error.service';
 import { HttpClientService } from '../../../services/http/http-client.service';
@@ -26,6 +26,7 @@ describe('PhysicalPartMasterViewComponent', () => {
         providers: [
           {provide: PhysicalPartService, useClass: PhysicalPartMockService},
           {provide: ErrorService, useClass: ErrorService},
+          BsModalService,
         ],
       },
     })
