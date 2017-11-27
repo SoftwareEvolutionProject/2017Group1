@@ -6,16 +6,20 @@ import { PhysicalPart } from '../../../model/physical-part';
 import { PhysicalPartService } from '../../../services/physical-part/physical-part.service';
 import { ErrorService } from '../../../services/error.service';
 import { PhysicalPrintService } from '../../../services/physical-print/physical-print.service';
-import { DigitalPrintService } from "../../../services/digital-print/digital-print.service";
+import { DigitalPrintService } from '../../../services/digital-print/digital-print.service';
+import { OrderService } from '../../../services/order/order.service';
 
 import { PhysicalPrint } from '../../../model/physical-print';
-import { DigitalPrint } from "../../../model/digital-print";
+import { DigitalPrint } from '../../../model/digital-print';
+import { Order } from '../../../model/order';
+import { OrderedPart } from '../../../model/ordered-part';
+import {getValueFromObject} from "ngx-bootstrap/typeahead";
 
 @Component({
   selector: 'app-physical-part-detail',
   templateUrl: './physical-part-edit.component.html',
   styleUrls: ['./physical-part-edit.component.scss'],
-  providers: [PhysicalPartService, PhysicalPrintService, DigitalPrintService, ErrorService],
+  providers: [OrderService, PhysicalPartService, PhysicalPrintService, DigitalPrintService, ErrorService],
 })
 export class PhysicalPartEditComponent implements OnInit, OnChanges {
 
@@ -30,7 +34,10 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   private physicalPrint: PhysicalPrint;
   private physicalPrints: PhysicalPrint[];
   private digitalPrint: DigitalPrint;
-  private magicsPartIDs: String[];
+  private orders: Order[];
+  private orderedParts: OrderedPart[];
+
+  private magicsPartIDs: string[];
 
   /* data */
 
@@ -40,6 +47,7 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder,
     private physicalPrintService: PhysicalPrintService,
     private digitalPrintService: DigitalPrintService,
+    private orderService: OrderService,
     private errorService: ErrorService,
     private _location: Location) { }
 
@@ -69,7 +77,7 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   }
 
   update(id) {
-    console.log('UPDATE: ' + id)
+    console.log('UPDATE: ' + id);
     this.physicalPart.id = id;
   }
 
@@ -107,6 +115,8 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
     const id = this.physicalPart.id;
     const data = this.requiredFieldsForm.value;
     data.physicalPrintID = this.physicalPart.physicalPrintID;
+    data.magicsPartPairingID = this.physicalPart.magicsPartPairingID;
+    data.orderedPartID = this.physicalPart.orderedPartID;
 
     const physicalPart: PhysicalPart = new PhysicalPart(this.requiredFieldsForm.value);
     this.creating ? delete physicalPart['id'] : physicalPart.id = id;
@@ -155,6 +165,14 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   }
 
   updateOrderedPartIDs(value) {
-
+    this.orderService.getOrdersByDigitalPartID(getValueFromObject(this.digitalPrint.magicsPartPairing, value)).subscribe(
+      (orders) => {
+        this.orders = orders;
+        this.orderedParts = [];
+        for (let i = 0; i < this.orders.length; ++i) {
+          this.orderedParts = this.orderedParts.concat(this.orders[i].orderedParts);
+        }
+        console.log('Debug: ' + getValueFromObject(this.digitalPrint.magicsPartPairing, value) + ' lol: ' + value + '   orderedParts: ' + this.orderedParts.length + '    orders length: ' + this.orders.length);
+      });
   }
 }

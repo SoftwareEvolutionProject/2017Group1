@@ -7,7 +7,7 @@ import {HttpClient} from '../http/http.client';
 
 @Injectable()
 export class OrderService {
-  private endpoint: string = null;
+  private endpoint: string = HttpClient.orderUrl;
 
   constructor(private http: Http, private client: HttpClientService) {}
 
@@ -15,6 +15,18 @@ export class OrderService {
     return this.client.get(this.endpoint + '/' + id)
       .map((data) => {
         return Order.create(data);
+      });
+  }
+
+  getOrdersByDigitalPartID(digitalPartID): Observable<Order[]> {
+    return this.client.get(this.endpoint + '?digitalPartID=' + digitalPartID)
+      .map((data) => {
+        const orders: Order[] = [];
+        for (let i = 0; i < data.length; i++) {
+          orders[i] = Order.create(data[i]);
+        }
+        return orders;
+
       });
   }
 
