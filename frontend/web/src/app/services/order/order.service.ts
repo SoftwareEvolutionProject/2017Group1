@@ -1,9 +1,9 @@
+import { Headers, Http, Response, ResponseOptions } from '@angular/http';
+import { HttpClient } from '../http/http.client';
+import { HttpClientService } from '../http/http-client.service';
 import { Injectable } from '@angular/core';
-import {Headers, Http, Response, ResponseOptions} from '@angular/http';
-import {Observable} from 'rxjs';
-import {Order} from '../../model/order';
-import {HttpClientService} from '../http/http-client.service';
-import {HttpClient} from '../http/http.client';
+import { Observable} from 'rxjs';
+import { Order } from '../../model/order';
 
 @Injectable()
 export class OrderService {
@@ -11,35 +11,30 @@ export class OrderService {
 
   constructor(private http: Http, private client: HttpClientService) {}
 
+  listOrders(data) {
+    const orders: Order[] = [];
+    for (let i = 0; i < data.length; i++) {
+      orders[i] = Order.create(data[i]);
+    }
+    return orders;
+
+  }
+
   getOrder(id: number): Observable<Order> {
-    return this.client.get(this.endpoint + '/' + id)
+    return this.client.get(`${this.endpoint}/${id}`)
       .map((data) => {
         return Order.create(data);
       });
   }
 
   getOrdersByDigitalPartID(digitalPartID): Observable<Order[]> {
-    return this.client.get(this.endpoint + '?digitalPartID=' + digitalPartID)
-      .map((data) => {
-        const orders: Order[] = [];
-        for (let i = 0; i < data.length; i++) {
-          orders[i] = Order.create(data[i]);
-        }
-        return orders;
-
-      });
+    return this.client.get(`${this.endpoint}?digitalPartID=${digitalPartID}`)
+      .map(this.listOrders);
   }
 
   getOrders(): Observable<Order[]> {
     return this.client.get(this.endpoint)
-      .map((data) => {
-        const orders: Order[] = [];
-        for (let i = 0; i < data.length; i++) {
-          orders[i] = Order.create(data[i]);
-        }
-        return orders;
-
-      });
+      .map(this.listOrders);
   }
 
   createOrder(order: Order): Observable<Order> {
@@ -49,14 +44,14 @@ export class OrderService {
       });
   }
   updateOrder(order: Order): Observable<Order> {
-    return this.client.put(this.endpoint + '/' + order.id, JSON.stringify(order))
+    return this.client.put(`${this.endpoint}/${order.id}`, JSON.stringify(order))
       .map((data) => {
         return data;
       });
   }
 
   deleteOrder(id: number): Observable<boolean> {
-    return this.client.delete(this.endpoint + '/' + id)
+    return this.client.delete(`${this.endpoint}/${id}`)
       .map((data) => {
         return true;
       });
