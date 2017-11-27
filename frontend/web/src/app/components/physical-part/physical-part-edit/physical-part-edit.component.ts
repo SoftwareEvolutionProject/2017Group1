@@ -168,8 +168,8 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
       (orders) => {
         this.orders = orders;
         this.orderedParts = [];
-        for (let i = 0; i < this.orders.length; ++i) {
-          this.orderedParts = this.orderedParts.concat(this.orders[i].orderedParts);
+        for (const i of orders) {
+          this.orderedParts = this.orderedParts.concat(i.orderedParts);
         }
       });
   }
