@@ -18,7 +18,7 @@ describe('PhysicalPartMasterViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule, RouterTestingModule, ModalModule.forRoot()],
+      imports: [HttpModule, ReactiveFormsModule, RouterTestingModule, ModalModule.forRoot()],
       providers: [HttpClientService],
       declarations: [ PhysicalPartMasterViewComponent, PhysicalPartListComponent, PhysicalPartDetailPanelComponent ],
     });

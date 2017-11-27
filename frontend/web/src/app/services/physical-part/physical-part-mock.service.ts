@@ -5,11 +5,6 @@ import {PhysicalPart} from '../../model/physical-part';
 @Injectable()
 export class PhysicalPartMockService {
 
-  public id: number;
-  public orderedPartID: number;
-  public physicalPrintID: number;
-  public magicsPartPairingID: number;
-
   private data: PhysicalPart[] = [
     new PhysicalPart({
       id: 1,
@@ -35,7 +30,7 @@ export class PhysicalPartMockService {
     return Observable.of( this.data.filter((e) => {if (e.id === id) { return e; } })[0]);
   }
 
-  deletePhysicalPart(id: number) {
+  delete(id: number) {
     this.data = this.data.filter((e) => {if (e.id !== id) { return e; } });
     return Observable.of(true);
   }
