@@ -42,7 +42,6 @@ export class PhysicalPartListComponent implements OnInit, AfterViewInit {
     this.physicalPartService.getPhysicalParts().subscribe(
       (physicalParts) => {
         this.physicalParts = physicalParts;
-
         this.populate();
         this.prepareTriggers();
       }, (error) => {
