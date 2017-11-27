@@ -73,11 +73,9 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(change: SimpleChanges) {
-    console.log('ON CHANGE: ' + this.physicalPrint);
   }
 
   update(id) {
-    console.log('UPDATE: ' + id);
     this.physicalPart.id = id;
   }
 
@@ -120,7 +118,6 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
 
     const physicalPart: PhysicalPart = new PhysicalPart(this.requiredFieldsForm.value);
     this.creating ? delete physicalPart['id'] : physicalPart.id = id;
-
     if (this.creating) { // a new product
       this.physicalPartService.createPhysicalPart(physicalPart).subscribe(
         (data) => {
@@ -154,6 +151,7 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   }
 
   updateMagicsPartPairingIDs(value) {
+    this.physicalPart.physicalPrintID = value;
     this.physicalPrintService.getPhysicalPrint(value).subscribe(
       (physicalPrint) => {
         this.physicalPrint = physicalPrint;
@@ -165,6 +163,7 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   }
 
   updateOrderedPartIDs(value) {
+    this.physicalPart.magicsPartPairingID = Number(getValueFromObject(this.digitalPrint.magicsPartPairing, value));
     this.orderService.getOrdersByDigitalPartID(getValueFromObject(this.digitalPrint.magicsPartPairing, value)).subscribe(
       (orders) => {
         this.orders = orders;
@@ -172,7 +171,6 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
         for (let i = 0; i < this.orders.length; ++i) {
           this.orderedParts = this.orderedParts.concat(this.orders[i].orderedParts);
         }
-        console.log('Debug: ' + getValueFromObject(this.digitalPrint.magicsPartPairing, value) + ' lol: ' + value + '   orderedParts: ' + this.orderedParts.length + '    orders length: ' + this.orders.length);
       });
   }
 }

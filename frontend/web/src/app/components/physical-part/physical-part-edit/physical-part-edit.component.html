@@ -43,7 +43,7 @@
               </option>
             </select>
             <label>Ordered Part ID</label>
-            <select name="formOrderedPartID" class="selectpicker form-control" title="Ordered Part ID">
+            <select name="formOrderedPartID" class="selectpicker form-control" title="Ordered Part ID" #o (change)="this.physicalPart.orderedPartID = o.value">
               <option style="display:none" value="">Select an Ordered Part ID</option>
               <option title="{{_orderedPart.id}}"
                       *ngFor="let _orderedPart of this.orderedParts; let i = index"
