@@ -1,4 +1,8 @@
 {
+  "extends": [
+    "tslint:recommended",
+    "tslint-sonarts"
+  ],
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -41,7 +45,7 @@
       }
     ],
     "no-arg": true,
-    "no-bitwise": true,
+    "no-bitwise": false,
     "no-console": [
       true,
       "debug",

@@ -19,9 +19,21 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.scss",
+        "../node_modules/bootstrap-table/dist/bootstrap-table.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/tether/dist/js/tether.js",
+        "../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
+        "../node_modules/bootstrap-table/dist/bootstrap-table.js",
+        "../node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js",
+        "../node_modules/bootstrap-table/dist/locale/bootstrap-table-sv-SE.js",
+        "../node_modules/chart.js/dist/Chart.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -54,7 +66,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "component": {}
   }
 }
