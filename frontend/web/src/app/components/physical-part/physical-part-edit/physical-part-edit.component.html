@@ -1,0 +1,70 @@
+<div class="container">
+
+  <div class="row">
+    <div *ngIf="loaded" >
+
+      <h2  *ngIf="!creating">Editing Physical Part</h2>
+      <h2  *ngIf="creating">Creating new Physical Part</h2>
+
+      <hr>
+
+      <div class="panel panel-default">
+        <div class="panel-body" style="padding: 30px">
+
+          <div class="row">
+            <label>ID:</label>
+            <span *ngIf="!creating">{{physicalPart.id}} </span>
+            <span *ngIf="creating">Auto Generated </span>
+
+            <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
+              <label>ID</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('id').valid}">
+                <input class="form-control" formControlName="id">
+              </div>
+
+            </form>
+            <label>Physical Print ID</label>
+            <select name="formPhysicalPrintID" class="selectpicker form-control" title="Physical Print ID" #p (change)="updateMagicsPartPairingIDs(p.value)">
+              <option style="display:none" value="">Select a Physical Print</option>
+              <option title="{{_physicalPrint.id}}"
+                      *ngFor="let _physicalPrint of this.physicalPrints; let i = index" [value]=_physicalPrint.id [selected]="_physicalPrint.id == physicalPart.physicalPrintID">
+                {{_physicalPrint.id}}
+              </option>
+            </select>
+
+            <label>Magics Part</label>
+            <select name="formMagicsPartPairingID" class="selectpicker form-control" title="Magics Part ID" #m (change)="updateOrderedPartIDs(m.value)">
+              <option style="display:none" value="">Select a Magics File Pairing ID</option>
+              <option title="{{_magicsPartID}}"
+                      *ngFor="let _magicsPartID of this.magicsPartIDs; let i = index"
+                        [value]=_magicsPartID
+                        [selected]="_magicsPartID == physicalPart.magicsPartPairingID">
+                {{_magicsPartID}}
+              </option>
+            </select>
+            <label>Ordered Part ID</label>
+            <select name="formOrderedPartID" class="selectpicker form-control" title="Ordered Part ID" #o (change)="this.physicalPart.orderedPartID = o.value">
+              <option style="display:none" value="">Select an Ordered Part ID</option>
+              <option title="{{_orderedPart.id}}"
+                      *ngFor="let _orderedPart of this.orderedParts; let i = index"
+                      [value]=_orderedPart.id
+                      [selected]="_orderedPart.id == physicalPart.orderedPartID">
+                {{_orderedPart.id}}
+            </select>
+          </div>
+
+          <div class="row">
+            <div class="pull-left" style="margin-top: 20px">
+              <button class="btn btn-default"
+                      style="min-width: 100px" (click)="cancel()">Cancel</button>
+            </div>
+            <div class="pull-right" style="margin-top: 20px">
+              <button [disabled]="requiredFieldsForm.valid" class="btn btn-primary"
+                      style="min-width: 100px" (click)="save()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
-import {OrderedPart} from "./ordered-part";
+import {OrderedPart} from './ordered-part';
+
 export class Order {
 
   public id: number;
