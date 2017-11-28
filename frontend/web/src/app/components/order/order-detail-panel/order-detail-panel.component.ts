@@ -32,23 +32,30 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.oPartsTable = $('#oPartsTable');
     if (this.order) {
-      this.customerService.getCustomer(this.order.customerID).subscribe(
-        (customer) => {
-          this.customer = customer;
-          const date = new Date(this.order.date);
-          const mm = date.getMonth() + 1;
-          const dd = date.getDate();
-          this.dateString = [date.getFullYear(), '-',
-            (mm>9 ? '' : '0') + mm, '-',
-            (dd>9 ? '' : '0') + dd
-          ].join('');
-          this.loadTables();
-        },
-      );
+      this.getCustomerInfo();
     }
+  }
+
+  private getCustomerInfo() {
+    this.customerService.getCustomer(this.order.customerID).subscribe(
+      (customer) => {
+        this.customer = customer;
+        const date = new Date(this.order.date);
+        const mm = date.getMonth() + 1;
+        const dd = date.getDate();
+        this.dateString = [date.getFullYear(), '-',
+          (mm > 9 ? '' : '0') + mm, '-',
+          (dd > 9 ? '' : '0') + dd
+        ].join('');
+        this.loadTables();
+      },
+    );
   }
   ngOnChanges() {
       this.loadTables();
+    if (this.order) {
+      this.getCustomerInfo();
+    }
   }
 
 
