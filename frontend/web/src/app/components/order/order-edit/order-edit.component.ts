@@ -1,16 +1,16 @@
-import {Location} from '@angular/common';
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {Customer} from '../../../model/customer';
-import {DigitalPart} from '../../../model/digital-part';
-import {Order} from '../../../model/order';
-import {OrderedPart} from '../../../model/ordered-part';
-import {CustomerService} from '../../../services/customer/customer.service';
-import {DigitalPartService} from '../../../services/digital-part/digital-part.service';
-import {ErrorService} from '../../../services/error.service';
-import {OrderService} from '../../../services/order/order.service';
+import {Location} from "@angular/common";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {Customer} from "../../../model/customer";
+import {DigitalPart} from "../../../model/digital-part";
+import {Order} from "../../../model/order";
+import {OrderedPart} from "../../../model/ordered-part";
+import {CustomerService} from "../../../services/customer/customer.service";
+import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
+import {ErrorService} from "../../../services/error.service";
+import {OrderService} from "../../../services/order/order.service";
 
 declare var $: any;
 
@@ -37,6 +37,7 @@ export class OrderEditComponent implements OnInit, OnChanges {
 
   constructor(private modalService: BsModalService,
               private route: ActivatedRoute,
+              private router: Router,
               private orderService: OrderService,
               private customerService: CustomerService,
               private digitalPartService: DigitalPartService,
@@ -67,10 +68,12 @@ export class OrderEditComponent implements OnInit, OnChanges {
   }
 
   create() {
+    console.log("creating");
     /* init with a boilerplate */
     this.creating = true;
     if (this.creating) {
       this.order = new Order({});
+      this.order.orderedParts = [];
     }
     this.populate();
   }
@@ -115,12 +118,11 @@ export class OrderEditComponent implements OnInit, OnChanges {
   private constructOrderedPartsForms() {
     /* load attr with default data from product instance*/
     this.orderedPartsFieldsForm = [];
-    console.log(this.order.orderedParts)
-    Object.getOwnPropertyNames(this.order.orderedParts).forEach((index) => {
+
+    this.order.orderedParts.forEach((orderedPart) => {
       this.orderedPartsFieldsForm.push(this.formBuilder.group({
-        amount: [this.order.orderedParts[index] ? this.order.orderedParts[index].amount : '', Validators.compose([Validators.required])],
-        digitalPart: [this.order.orderedParts[index] ? this.order.orderedParts[index].digitalPartID : '',
-          Validators.compose([Validators.required])],
+        amount: [orderedPart.amount, Validators.compose([Validators.required])],
+        digitalPartID: [orderedPart.digitalPartID, Validators.compose([Validators.required])],
       }));
     });
   }
@@ -135,10 +137,11 @@ export class OrderEditComponent implements OnInit, OnChanges {
 
     this.creating ? delete order['id'] : order.id = id;
     const orderedParts: OrderedPart[] = [];
+
     this.orderedPartsFieldsForm.forEach((formGroup) => {
       orderedParts.push(new OrderedPart({
-        digitalPartID: formGroup.get('digitalPart').value.digitalPartID,
-        amount: formGroup.get('amount').value,
+        digitalPartID: formGroup.value.digitalPartID,
+        amount: formGroup.value.amount,
       }));
     });
     order.orderedParts = orderedParts;
@@ -169,9 +172,13 @@ export class OrderEditComponent implements OnInit, OnChanges {
     }
   }
 
+  createNewDigitalPart() {
+    this.router.navigate(['digital-parts', 'create']);
+  }
+
   addDigitalPart() {
     const fields = {
-      digitalPart: ['',
+      digitalPartID: ['',
         Validators.compose([Validators.required])],
       amount: ['',
         Validators.compose([Validators.required])],
@@ -194,13 +201,21 @@ export class OrderEditComponent implements OnInit, OnChanges {
     this._location.back();
   }
 
-  openModal(autoFocusIdWithHashtag: string) {
-    this.modalRef = this.modalService.show(this.modalCustomer);
-    if (autoFocusIdWithHashtag != null && autoFocusIdWithHashtag !== '') {
-      const addInput: any = ($(autoFocusIdWithHashtag) as any);
-      setTimeout(() => {
-        addInput.focus();
-      }, 200);
+  digitalPartsValid(): boolean {
+    let valid = true;
+    if (this.orderedPartsFieldsForm.length === 0) {
+      return false;
     }
+    this.orderedPartsFieldsForm.forEach((formGroup) => {
+      if (!formGroup.valid) {
+        valid = false;
+        return valid;
+      }
+    });
+    return valid;
+  }
+
+  createCustomer() {
+    this.router.navigate(['customers', 'create']);
   }
 }

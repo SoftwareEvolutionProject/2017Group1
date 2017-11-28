@@ -17,11 +17,12 @@
           <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
             <div [ngClass]="{'has-error': !requiredFieldsForm.get('date').valid}">
               <label>Date</label>
-              <p-calendar formControlName="date" dateFormat="yy-mm-dd" showButtonBar="true"></p-calendar>
+              <p-calendar formControlName="date" dateFormat="yy-mm-dd"></p-calendar>
             </div>
+            <label>Customer</label>
             <div [ngClass]="{'has-error': !requiredFieldsForm.get('customerID').valid}">
-              <label>Customer</label>
-              <select name="customerID" formControlName="customerID" class="selectpicker form-control"
+              <select name="customerID" formControlName="customerID"
+                      class="selectpicker form-control"
                       title="Choose Customer">
                 <option title="{{_customer.name}}"
                         *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id
@@ -31,17 +32,8 @@
               </select>
             </div>
           </form>
-
-
-          <div [hidden]="!creating" class="row" style="margin-bottom: 10px; margin-top: 20px">
-            <button id="createCustomer" class="col-sm-2 col-sm-offset-10 btn btn-primary btn "
-                    (click)="openModal()" style="">
-
-              Create customer
-            </button>
-          </div>
           <div *ngFor="let formGroup of orderedPartsFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <label>Amount</label>
 
               <form [formGroup]="formGroup">
@@ -51,19 +43,19 @@
                 </div>
               </form>
             </div>
-            <div class="col-sm-6 ">
+            <div class="col-sm-7 ">
               <label>Digital Part</label>
               <form [formGroup]="formGroup">
-                <select class="selectpicker form-control" formControlName="digitalPart" title="Choose Digital Part"
-                        [ngClass]="{'has-error': !formGroup.get('digitalPart').valid}">
-                  <option title="{{_digitalPart.name}}"
-                          *ngFor="let _digitalPart of this.digitalParts; let i = index" [value]="_digitalPart.id">
-                    {{_digitalPart.name}}
-                  </option>
-                </select>
+                <div [ngClass]="{'has-error': !formGroup.get('digitalPartID').valid}">
+                  <select class="selectpicker form-control" formControlName="digitalPartID" title="Choose Digital Part">
+                    <option title="{{_digitalPart.name}}"
+                            *ngFor="let _digitalPart of this.digitalParts; let i = index" [value]="_digitalPart.id">
+                      {{_digitalPart.name}}
+                    </option>
+                  </select>
+                </div>
               </form>
             </div>
-
             <div class="col-sm-1">
               <button class="btn btn-danger" (click)="deleteDigitalPart(i)" style="margin-top: 25px">
                 <span class="glyphicon glyphicon-trash"> </span>
@@ -71,12 +63,11 @@
             </div>
           </div>
           <div class="row" style="margin-bottom: 10px; margin-top: 20px">
-            <button id="addOption" class="col-sm-2 col-sm-offset-3 btn btn-primary btn " (click)="addDigitalPart()">
-              Add digital part
-            </button>
-            <button id="addOption" class="col-sm-2 col-sm-offset-2 btn btn-primary btn" (click)="addDigitalPart()">
-              Create digital part
-            </button>
+            <div class="col-sm-offset-11 col-sm-1">
+              <button id="addOption" class="btn btn-primary btn " (click)="addDigitalPart()">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </div>
           </div>
           <div class="pull-left" style="margin-top: 20px">
             <button class="btn btn-default"
@@ -84,7 +75,7 @@
             </button>
           </div>
           <div class="pull-right" style="margin-top: 20px">
-            <button [disabled]=" !requiredFieldsForm.valid" class="btn btn-primary"
+            <button [disabled]=" !digitalPartsValid() || !requiredFieldsForm.valid" class="btn btn-primary"
                     style="min-width: 100px" (click)="save()">Save
             </button>
           </div>
@@ -93,23 +84,3 @@
     </div>
   </div>
 </div>
-
-<!-- Modal -->
-<ng-template #modalCustomer>
-  <div class=" modal-lg">
-    <div class="modal-header">
-      <button type="button" class="close pull-right" aria-label="Close" (click)="dismissDelete()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <app-customer-detail></app-customer-detail>
-    </div>
-    <div class="modal-footer">
-      <button id="customerFormDismissBtn" type="button" class="btn btn-default" (click)="dismissCustomer()">Dismiss
-      </button>
-    </div>
-  </div>
-
-
-</ng-template>
