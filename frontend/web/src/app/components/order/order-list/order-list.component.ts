@@ -115,7 +115,7 @@ export class OrderListComponent implements OnInit, AfterViewInit {
         data,
         columns,
         sortStable: true,
-        sortName: 'name',
+        sortName: 'id',
       },
     );
   }
