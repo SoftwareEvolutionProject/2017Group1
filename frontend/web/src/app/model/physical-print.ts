@@ -1,6 +1,7 @@
 export class PhysicalPrint {
   public id: number;
-  public name: string;
+  public digitalPrintID: number;
+  public path: string;
 
   constructor(values: Object = {}) {
     if (!values) {

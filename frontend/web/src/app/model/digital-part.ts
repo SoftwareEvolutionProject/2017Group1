@@ -1,7 +1,8 @@
 export class DigitalPart {
   public id: number;
   public name: string;
-  public stlFile: string;
+  public path: string;
+  public customerID: number;
 
   constructor(values: Object = {}) {
     if (!values) {

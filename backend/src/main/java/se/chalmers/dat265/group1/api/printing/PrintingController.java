@@ -3,27 +3,35 @@ package se.chalmers.dat265.group1.api.printing;
 import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DataModel;
 import se.chalmers.dat265.group1.model.DigitalPrint;
+import se.chalmers.dat265.group1.model.MagicsData;
+import se.chalmers.dat265.group1.model.StlData;
+import se.chalmers.dat265.group1.model.dbEntities.DigitalPrintData;
+import se.chalmers.dat265.group1.model.dbEntities.MagicsPairing;
+import se.chalmers.dat265.group1.model.dto.DigitalPrintMagics;
+import se.chalmers.dat265.group1.storage.FileUtil;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.*;
 
 public class PrintingController extends ApiController implements PrintingAPI {
-    private GenericRepository<DigitalPrintEntity> digitalPrintRepository;
-    private GenericRepository<MagicsPairingEntity> magicsPairingRepository;
-
+    private GenericRepository<DigitalPrintData> digitalPrintRepository;
+    private GenericRepository<MagicsPairing> magicsPairingRepository;
 
     public PrintingController(boolean debug) {
         super(debug);
-        digitalPrintRepository = new GenericRepository<>(DigitalPrintEntity.class, dbConnector);
-        magicsPairingRepository = new GenericRepository<>(MagicsPairingEntity.class, dbConnector);
+        digitalPrintRepository = new GenericRepository<>(DigitalPrintData.class, dbConnector);
+        magicsPairingRepository = new GenericRepository<>(MagicsPairing.class, dbConnector);
     }
 
     @Override
     public List<DigitalPrint> getAllDigitalPrints() {
         List<DigitalPrint> resultList = new LinkedList<>();
-        List<DigitalPrintEntity> dpeList = digitalPrintRepository.getObjects();
-        for (DigitalPrintEntity dpe : dpeList) {
-            resultList.add(getPairings(dpe));
+        List<DigitalPrintData> dpeList = digitalPrintRepository.getObjects();
+        for (DigitalPrintData dpe : dpeList) {
+            System.out.println("Getting stuff for " + dpe.getId());
+            resultList.add(populatePathIfExist(getPairings(dpe)));
         }
 
         return resultList;
@@ -31,89 +39,79 @@ public class PrintingController extends ApiController implements PrintingAPI {
 
     @Override
     public DigitalPrint getDigitalPrint(String id) {
-        DigitalPrintEntity dpe = digitalPrintRepository.getObject(Integer.valueOf(id));
-        return getPairings(dpe);
+        DigitalPrintData dpe = digitalPrintRepository.getObject(Integer.valueOf(id));
+        return populatePathIfExist(getPairings(dpe));
     }
 
     @Override
     public DigitalPrint createDigitalPrint(DigitalPrint digitalPrint) {
-        DigitalPrintEntity dpe = extractDigitalPrintEntity(digitalPrint);
-        List<MagicsPairingEntity> mpeList = extractMagicsPairingEntity(digitalPrint);
+        DigitalPrintData dpe = extractDigitalPrintEntity(digitalPrint);
+        List<MagicsPairing> mpeList = extractMagicsPairingEntity(digitalPrint);
 
-        DigitalPrintEntity returnDpe = digitalPrintRepository.postObject(dpe);
-        List<MagicsPairingEntity> returnMpeList = new LinkedList<>();
+        DigitalPrintData returnDpe = digitalPrintRepository.postObject(dpe);
+        List<MagicsPairing> returnMpeList = new LinkedList<>();
 
-        for (MagicsPairingEntity mpe : mpeList) {
+        for (MagicsPairing mpe : mpeList) {
+            mpe.setDigitalPrintID(returnDpe.getId());
             returnMpeList.add(magicsPairingRepository.postObject(mpe));
         }
 
         return combine(returnDpe, returnMpeList);
     }
 
-    private DigitalPrint getPairings(DigitalPrintEntity dpe) {
-        List<MagicsPairingEntity> mpeList = magicsPairingRepository.getObjects("digitalPrintID=" + dpe.id);
+    @Override
+    public MagicsData uploadMagicsFile(String id, byte[] body, String basePath) throws IOException {
+        boolean exist = false;
+        try {
+            exist = magicsRepo.getObject(Integer.valueOf(id)) != null;
+        } catch (Exception e) {
+            exist = false;
+        }
+        if (exist) {
+            throw new FileAlreadyExistsException("ID have file");
+        }
+        String path = "/magics/" + id + "-" + Arrays.hashCode(body) + ".magics";
+        FileUtil.write(body, basePath + path);
+        return magicsRepo.postObject(new MagicsData(Integer.valueOf(id), path));
+    }
+
+    private DigitalPrint getPairings(DigitalPrintData dpe) {
+        List<MagicsPairing> mpeList = magicsPairingRepository.getObjects("digitalPrintID = " + dpe.getId());
+        System.out.println("Found " + mpeList.size() + " number of pairings");
         return combine(dpe, mpeList);
     }
 
-    private DigitalPrint combine(DigitalPrintEntity dp, List<MagicsPairingEntity> mpList) {
+    private DigitalPrint combine(DigitalPrintData dp, List<MagicsPairing> mpList) {
         Map<String, Integer> magicsPartPairing = new HashMap<>();
 
-        for (MagicsPairingEntity mpe : mpList) {
-            magicsPartPairing.put(mpe.label, mpe.digitalPartID);
+        for (MagicsPairing mpe : mpList) {
+            System.out.println("Label: " + mpe.getLabel());
+            magicsPartPairing.put(mpe.getLabel(), mpe.getDigitalPartID());
         }
 
-        return new DigitalPrint(dp.id, dp.magicsPath, magicsPartPairing);
+        return new DigitalPrint(dp.getId(), dp.getName(), magicsPartPairing);
     }
 
-    private List<MagicsPairingEntity> extractMagicsPairingEntity(DigitalPrint digitalPrint) {
-        List<MagicsPairingEntity> mpeList = new LinkedList<>();
+    private List<MagicsPairing> extractMagicsPairingEntity(DigitalPrint digitalPrint) {
+        List<MagicsPairing> mpeList = new LinkedList<>();
         Set<String> labels = digitalPrint.getMagicsPartPairing().keySet();
         for (String label : labels) {
-            mpeList.add(new MagicsPairingEntity(-1, digitalPrint.getId(), digitalPrint.getMagicsPartPairing().get(label), label));
+            mpeList.add(new MagicsPairing(-1, digitalPrint.getId(), digitalPrint.getMagicsPartPairing().get(label), label));
         }
         return mpeList;
 
     }
 
-    private DigitalPrintEntity extractDigitalPrintEntity(DigitalPrint digitalPrint) {
-        return new DigitalPrintEntity(digitalPrint.getId(), digitalPrint.getMagicsPath());
+    private DigitalPrintData extractDigitalPrintEntity(DigitalPrint digitalPrint) {
+        return new DigitalPrintData(digitalPrint.getId(), digitalPrint.getName());
     }
 
-    private class MagicsPairingEntity implements DataModel {
-        int id, digitalPrintID, digitalPartID;
-        String label;
-
-        public MagicsPairingEntity(int id, int digitalPrintID, int digitalPartID, String label) {
-            this.id = id;
-            this.digitalPrintID = digitalPrintID;
-            this.digitalPartID = digitalPartID;
-            this.label = label;
+    private DigitalPrint populatePathIfExist(DigitalPrint digitalPrint) {
+        List<MagicsData> magicsData = magicsRepo.getObjects("digitalPrintID= "+ digitalPrint.getId());
+        if(magicsData.size()==1){
+            return new DigitalPrintMagics(digitalPrint, magicsData.get(0).getPath());
         }
-
-        @Override
-        public int getId() {
-            return id;
-        }
+        return digitalPrint;
     }
 
-    private class DigitalPrintEntity implements DataModel {
-
-        public DigitalPrintEntity(int id, String magicsPath) {
-            this.id = id;
-            this.magicsPath = magicsPath;
-        }
-
-        public DigitalPrintEntity(String magicsPath) {
-            this.magicsPath = magicsPath;
-            this.id = -1;
-        }
-
-        int id;
-        String magicsPath;
-
-        @Override
-        public int getId() {
-            return id;
-        }
-    }
 }

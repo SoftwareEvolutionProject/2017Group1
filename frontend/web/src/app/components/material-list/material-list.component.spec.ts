@@ -8,7 +8,7 @@ describe('MaterialListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MaterialListComponent ]
+      declarations: [ MaterialListComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('MaterialListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should createPhysicalPrint', () => {
     expect(component).toBeTruthy();
   });
 });

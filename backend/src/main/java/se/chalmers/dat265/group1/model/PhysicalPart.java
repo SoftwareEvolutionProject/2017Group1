@@ -1,13 +1,20 @@
 package se.chalmers.dat265.group1.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class PhysicalPart implements DataModel {
+public class PhysicalPart extends DataModel {
     private int id;
     private int physicalPrintID;
     private int orderedPartID;
-    private String magicsPartPairingID;
-    private List<String> photoPaths;
+    private int magicsPartPairingID;
+
+    public PhysicalPart() {
+        id = -1;
+        physicalPrintID = -1;
+        orderedPartID = -1;
+        magicsPartPairingID = -1;
+    }
 
     public int getId() {
         return id;
@@ -21,11 +28,8 @@ public class PhysicalPart implements DataModel {
         return orderedPartID;
     }
 
-    public String getMagicsPartPairingID() {
+    public int getMagicsPartPairingID() {
         return magicsPartPairingID;
     }
 
-    public List<String> getPhotoPaths() {
-        return photoPaths;
-    }
 }

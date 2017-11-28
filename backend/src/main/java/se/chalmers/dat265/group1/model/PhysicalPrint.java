@@ -1,10 +1,19 @@
 package se.chalmers.dat265.group1.model;
 
-public class PhysicalPrint implements DataModel {
+public class PhysicalPrint extends DataModel {
     private int id;
     private int digitalPrintID;
     private int detailedMaterialId;
-    private String slmPath;
+
+    public PhysicalPrint() {
+        id = -1;
+        digitalPrintID = -1;
+    }
+
+    public PhysicalPrint(int id, int digitalPrintID) {
+        this.id = id;
+        this.digitalPrintID = digitalPrintID;
+    }
 
     public int getId() {
         return id;
@@ -12,10 +21,6 @@ public class PhysicalPrint implements DataModel {
 
     public int getDigitalPrintID() {
         return digitalPrintID;
-    }
-
-    public String getSlmPath() {
-        return slmPath;
     }
 
     public int getDetailedMaterialId() {

@@ -1,6 +1,5 @@
 BEGIN;
 
-
 CREATE TABLE IF NOT EXISTS users (
   id serial primary key,
   username varchar(255) not null,
@@ -22,30 +21,28 @@ CREATE TABLE IF NOT EXISTS customer(
   email VARCHAR(100)
 );
 
-CREATE TABLE IF NOT EXISTS "order"(
+CREATE TABLE IF NOT EXISTS orderdata(
   id serial PRIMARY KEY,
   customerID INTEGER REFERENCES customer(id),
-  date DATE
+  date VARCHAR(10)
 );
 
 CREATE TABLE IF NOT EXISTS digitalpart(
   id serial PRIMARY KEY,
   customerID INTEGER REFERENCES customer(id),
-  name VARCHAR(100),
-  stlPath VARCHAR(300),
-  cadPath VARCHAR(300)
+  name VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS orderedpart(
   id serial PRIMARY KEY,
-  orderID INTEGER REFERENCES "order"(id),
+  orderID INTEGER REFERENCES orderdata(id),
   digitalPartID INTEGER REFERENCES digitalpart(id),
   amount INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS digitalprint(
+CREATE TABLE IF NOT EXISTS digitalprintdata(
   id serial PRIMARY KEY,
-  magicsPath VARCHAR(300)
+  name VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS magicspairing(
@@ -54,14 +51,14 @@ CREATE TABLE IF NOT EXISTS magicspairing(
   digitalPartID INTEGER,
   label VARCHAR(200),
   FOREIGN KEY (digitalPartID) REFERENCES digitalpart(id),
-  FOREIGN KEY (digitalPrintID) REFERENCES digitalprint(id)
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
 );
 
 CREATE TABLE IF NOT EXISTS physicalprint(
   id SERIAL PRIMARY KEY,
   digitalPrintID INTEGER,
-  slmPath VARCHAR(300),
-  FOREIGN KEY (digitalPrintID) REFERENCES digitalprint(id)
+  path VARCHAR(200),
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
 );
 
 CREATE TABLE IF NOT EXISTS physicalpart(
@@ -95,7 +92,26 @@ CREATE TABLE IF NOT EXISTS materialproperty(
   description VARCHAR(500)
 );
 
+CREATE TABLE IF NOT EXISTS magicsdata(
+  id SERIAL PRIMARY KEY,
+  digitalPrintID INTEGER,
+  path VARCHAR(200),
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
+);
 
+CREATE TABLE IF NOT EXISTS stldata(
+  id SERIAL PRIMARY KEY,
+  digitalPartID INTEGER,
+  path VARCHAR(200),
+  FOREIGN KEY (digitalPartID) REFERENCES digitalpart(id)
+);
+
+CREATE TABLE IF NOT EXISTS slmdata(
+  id SERIAL PRIMARY KEY,
+  physicalPrintID INTEGER,
+  path VARCHAR(200),
+  FOREIGN KEY (physicalPrintID) REFERENCES physicalprint(id)
+);
 
 COMMIT;
 

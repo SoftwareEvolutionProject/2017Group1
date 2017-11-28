@@ -1,20 +1,22 @@
+import {OrderedPart} from './ordered-part';
 export class Order {
 
   public id: number;
   public customer: number;
+  public date: string;
+  public orderedParts: OrderedPart[];
 
   constructor(values: Object = {}) {
-    if (!values){
+    if (!values) {
       return null;
     }
     Object.assign(this, values);
   }
 
   static create(json: any) {
-    if (json){
+    if (json) {
       return new Order(json);
-    }
-    else{
+    } else {
       return null;
     }
   }

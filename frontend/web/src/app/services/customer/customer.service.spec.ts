@@ -7,7 +7,7 @@ import {Customer} from '../../model/customer';
 import {HttpClientService} from '../http/http-client.service';
 import {CustomerService} from './customer.service';
 
-describe('CustomerService', () => {
+describe('PhysicalPrintService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -55,7 +55,7 @@ describe('CustomerService', () => {
     expectedResponseArrayCustomers.push(new Customer(item));
   });
 
-  describe('getCustomers()', () => {
+  describe('getAllPhysicalPrint()', () => {
 
     it('should return an array of customers', (done) => {
       backend.connections.subscribe((connection: MockConnection) => {

@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.dat265.sverea</groupId>
+	<groupId>com.dat265.swerea</groupId>
 	<artifactId>parent</artifactId>
 	<version>1</version>
 	<packaging>pom</packaging>
 
-	<name>sverea</name>
+	<name>swerea</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

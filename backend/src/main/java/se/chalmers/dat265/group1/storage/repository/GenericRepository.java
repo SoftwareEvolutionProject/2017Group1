@@ -43,8 +43,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public List<T> getObjects() {
         String query = "SELECT * FROM \""+ type.getSimpleName().toLowerCase()+ "\"";
-        log.info("Running query: "+query);
-        ResultSet rs =  this.dbInterface.executeQuerry(query);
+        ResultSet rs =  this.dbInterface.executeQuery(query);
         try {
             return this.getMatchJSON(rs); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
@@ -60,13 +59,14 @@ public class GenericRepository <T extends DataModel> {
         sb.append("\"");
         for(Class table : tables){
             sb.append(",\"");
-            sb.append(table.getSimpleName());
+            sb.append(table.getSimpleName().toLowerCase());
             sb.append("\"");
         }
         sb.append(" WHERE ");
         sb.append(sqlConditions);
 
-        ResultSet rs =  this.dbInterface.executeQuerry(sb.toString());
+
+        ResultSet rs =  this.dbInterface.executeQuery(sb.toString());
         try {
             return this.getMatchJSON(rs); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
@@ -82,8 +82,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public T getObject(int id) {
         String query = "SELECT * FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
-        log.info("Running query: "+query);
-        ResultSet rs =  this.dbInterface.executeQuerry(query);
+        ResultSet rs =  this.dbInterface.executeQuery(query);
         try {
             return this.getMatchJSON(rs).iterator().next(); //converts resulting set to se.chalmers.dat265.group1.model instance
         } catch (SQLException e) {
@@ -165,8 +164,7 @@ public class GenericRepository <T extends DataModel> {
      */
     public void deleteObject(int id) {
         String query = "DELETE FROM \""+ type.getSimpleName().toLowerCase() +"\" WHERE id="+id;
-        log.info("Running query: "+query);
-        this.dbInterface.executeQuerry(query);
+        this.dbInterface.executeQuery(query);
 
     }
 

@@ -8,7 +8,7 @@ describe('OrderListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderListComponent ]
+      declarations: [ OrderListComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('OrderListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should createPhysicalPrint', () => {
     expect(component).toBeTruthy();
   });
 });

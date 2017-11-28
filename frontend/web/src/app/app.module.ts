@@ -4,29 +4,40 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { StlViewerComponent } from './components/stl-viewer/stl-viewer.component';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {RouterModule} from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 import { SidebarModule } from 'ng-sidebar';
-import {AlertModule, ModalModule} from 'ngx-bootstrap';
-import { CustomerDetailPanelComponent } from './components/customer-detail-panel/customer-detail-panel.component';
-import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
-import { CustomerListComponent } from './components/customer-list/customer-list.component';
-import { DigitalPartDetailComponent } from './components/digital-part-detail/digital-part-detail.component';
-import { DigitalPartListComponent } from './components/digital-part-list/digital-part-list.component';
-import { DigitalPrintDetailComponent } from './components/digital-print-detail/digital-print-detail.component';
-import { DigitalPrintListComponent } from './components/digital-print-list/digital-print-list.component';
+import { AlertModule, ModalModule } from 'ngx-bootstrap';
+import { DropdownModule } from 'primeng/primeng';
+import { CustomerDetailPanelComponent } from './components/customer/customer-detail-panel/customer-detail-panel.component';
+import { CustomerDetailComponent } from './components/customer/customer-detail/customer-detail.component';
+import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
+import { CustomerMasterViewComponent } from './components/customer/customer-master-view/customer-master-view.component';
+import { DigitalPartDetailPanelComponent } from './components/digital-part/digital-part-detail-panel/digital-part-detail-panel.component';
+import { DigitalPartEditComponent } from './components/digital-part/digital-part-edit/digital-part-edit.component';
+import { DigitalPartListComponent } from './components/digital-part/digital-part-list/digital-part-list.component';
+import { DigitalPartMasterViewComponent } from './components/digital-part/digital-part-master-view/digital-part-master-view.component';
+import { DigitalPrintDetailsPanelComponent } from './components/digital-print/digital-print-details-panel/digital-print-details-panel.component';
+import { DigitalPrintEditComponent } from './components/digital-print/digital-print-edit/digital-print-edit.component';
+import { DigitalPrintListComponent } from './components/digital-print/digital-print-list/digital-print-list.component';
+import { DigitalPrintMasterViewComponent } from './components/digital-print/digital-print-master-view/digital-print-master-view.component';
 import { HomeComponent } from './components/home/home.component';
 import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
 import { MaterialListComponent } from './components/material-list/material-list.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
-import { PhysicalPartDetailComponent } from './components/physical-part-detail/physical-part-detail.component';
-import { PhysicalPartListComponent } from './components/physical-part-list/physical-part-list.component';
-import { PhysicalPrintDetailComponent } from './components/physical-print-detail/physical-print-detail.component';
-import { PhysicalPrintListComponent } from './components/physical-print-list/physical-print-list.component';
+import { PhysicalPrintDetailsPanelComponent } from './components/physical-print/physical-print-details-panel/physical-print-details-panel.component';
+import { PhysicalPrintEditComponent } from './components/physical-print/physical-print-edit/physical-print-edit.component';
+import { PhysicalPrintListComponent } from './components/physical-print/physical-print-list/physical-print-list.component';
+import { PhysicalPrintMasterViewComponent } from './components/physical-print/physical-print-master-view/physical-print-master-view.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
-import {HttpClientService} from './services/http/http-client.service';
+import { Ng4FilesModule } from 'angular4-files-upload';
+import { HttpClientService } from './services/http/http-client.service';
+import { PhysicalPartDetailPanelComponent } from './components/physical-part/physical-part-detail-panel/physical-part-detail-panel.component';
+import { PhysicalPartEditComponent } from './components/physical-part/physical-part-edit/physical-part-edit.component';
+import { PhysicalPartListComponent } from './components/physical-part/physical-part-list/physical-part-list.component';
+import { PhysicalPartMasterViewComponent } from './components/physical-part/physical-part-master-view/physical-part-master-view.component';
 
 @NgModule({
   declarations: [
@@ -37,20 +48,30 @@ import {HttpClientService} from './services/http/http-client.service';
     CustomerListComponent,
     CustomerDetailComponent,
     DigitalPartListComponent,
-    DigitalPartDetailComponent,
+    DigitalPartEditComponent,
     DigitalPrintListComponent,
-    DigitalPrintDetailComponent,
-    PhysicalPrintDetailComponent,
-    PhysicalPrintListComponent,
-    PhysicalPartDetailComponent,
+    DigitalPrintEditComponent,
+    DigitalPrintMasterViewComponent,
+    DigitalPrintDetailsPanelComponent,
     PhysicalPartListComponent,
+    PhysicalPartEditComponent,
+    PhysicalPartDetailPanelComponent,
+    PhysicalPartMasterViewComponent,
+    PhysicalPrintDetailsPanelComponent,
+    PhysicalPrintListComponent,
+    PhysicalPrintEditComponent,
     OrderDetailComponent,
     OrderListComponent,
     MaterialListComponent,
     MaterialDetailComponent,
     CustomerDetailPanelComponent,
+    CustomerMasterViewComponent,
+    PhysicalPrintMasterViewComponent,
+    DigitalPartDetailPanelComponent,
+    DigitalPartMasterViewComponent,
   ],
   imports: [
+    DropdownModule,
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     BrowserModule,
@@ -58,15 +79,20 @@ import {HttpClientService} from './services/http/http-client.service';
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
+    Ng4FilesModule,
 
     RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent,
+      },
       {
         path: 'home',
         component: HomeComponent,
       },
       {
         path: 'customers',
-        component: CustomerListComponent,
+        component: CustomerMasterViewComponent,
       },
       {
         path: 'customers/:id',
@@ -82,35 +108,39 @@ import {HttpClientService} from './services/http/http-client.service';
       },
       {
         path: 'digital-parts',
-        component: DigitalPartListComponent,
+        component: DigitalPartMasterViewComponent,
       },
       {
         path: 'digital-parts/:id',
-        component: DigitalPartDetailComponent,
+        component: DigitalPartEditComponent,
       },
       {
-        path: 'physical-parts',
-        component: PhysicalPartListComponent,
-      },
-      {
-        path: 'physical-parts/:id',
-        component: PhysicalPartDetailComponent,
+        path: 'digital-parts/:id/stl',
+        component: StlViewerComponent,
       },
       {
         path: 'digital-prints',
-        component: DigitalPrintListComponent,
+        component: DigitalPrintMasterViewComponent,
       },
       {
         path: 'digital-prints/:id',
-        component: DigitalPrintDetailComponent,
+        component: DigitalPrintEditComponent,
+      },
+      {
+        path: 'physical-parts',
+        component: PhysicalPartMasterViewComponent,
+      },
+      {
+        path: 'physical-parts/:id',
+        component: PhysicalPartEditComponent,
       },
       {
         path: 'physical-prints',
-        component: PhysicalPrintListComponent,
+        component: PhysicalPrintMasterViewComponent,
       },
       {
         path: 'physical-prints/:id',
-        component: PhysicalPrintDetailComponent,
+        component: PhysicalPrintEditComponent,
       },
       {
         path: 'materials',
@@ -127,4 +157,3 @@ import {HttpClientService} from './services/http/http-client.service';
   bootstrap: [AppComponent],
 })
 export class AppModule { }
-

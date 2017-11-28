@@ -9,7 +9,7 @@ module.exports = function (config) {
     customLaunchers: {
       Chrome_without_sandbox: {
         base: 'ChromeHeadless',
-        flags: ['--no-sandbox'] // with sandbox it fails under Docker
+        flags: ['--no-sandbox','--disable-web-security'] // with sandbox it fails under Docker
       }
     },
 
@@ -47,11 +47,11 @@ module.exports = function (config) {
       : ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_ALL,
     autoWatch: true,
     browsers:[ isDocker ? 'Chrome_without_sandbox' : 'Chrome'],
     singleRun: isDocker,
-    browserNoActivityTimeout: 1000000,
+    browserNoActivityTimeout: 10000000,
     captureTimeout: 100000
   });
 };

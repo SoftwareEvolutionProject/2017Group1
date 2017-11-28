@@ -6,8 +6,8 @@ import org.apache.commons.logging.*;
 
 public class PostgresSQLConnector implements DBInterface {
     private Log log = LogFactory.getLog(PostgresSQLConnector.class);
-    private static final String CONNECTION_URL_DOCKER = "jdbc:postgresql://db:5432/svereadb";
-    private static final String CONNECTION_URL_DEBUG = "jdbc:postgresql://localhost:5433/svereadb";
+    private static final String CONNECTION_URL_DOCKER = "jdbc:postgresql://db:5432/swereadb";
+    private static final String CONNECTION_URL_DEBUG = "jdbc:postgresql://localhost:5433/swereadb";
     private static final String USERNAME = "admin";
     private static final String PWD = "1234";
 
@@ -35,16 +35,16 @@ public class PostgresSQLConnector implements DBInterface {
     }
 
     @Override
-    public ResultSet executeQuerry(String query) {
+    public ResultSet executeQuery(String query) {
+        log.info("Running Query: " + query);
+
         PreparedStatement stmt = null;
 
         try {
             stmt = this.conn.prepareStatement(query);
             return stmt.executeQuery();
         } catch (SQLException e) {
-            log.error("executeQuerry", e);
-        } finally {
-            log.error("Execute Querry failed");
+            log.error("executeQuery", e);
         }
         return null;
     }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { LoaderSelector } from '../../stl-viewer/classes/LoaderSelector';
-import { StlLoader } from '../../stl-viewer/classes/StlLoader';
-import { Viewer } from '../../stl-viewer/classes/Viewer';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {LoaderSelector} from '../../stl-viewer/LoaderSelector';
+import {Router} from '@angular/router';
+import {StlLoader} from '../../stl-viewer/StlLoader';
+import {Viewer} from '../../stl-viewer/Viewer';
 declare var JSC3D: any;
 
 @Component({
@@ -9,14 +10,24 @@ declare var JSC3D: any;
   templateUrl: './stl-viewer.component.html',
   styleUrls: ['./stl-viewer.component.scss'],
 })
-export class StlViewerComponent implements OnInit {
 
-  constructor() { }
+export class StlViewerComponent implements OnInit, OnChanges {
+  baseUrl = 'http://localhost:4567';
+  canvas = null;
+  viewer: Viewer;
+  private rotate = false;
+  private timer = null;
+
+  @Input ('digitalPartID') digitalPartID: number;
+  @Input ('stlUrl') stlUrl: string;
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     const canvas = document.getElementById('stl');
     const parameters = {
-      SceneUrl: 'https://rawgit.com/SoftwareEvolutionProject/2017Group1/feature/host-stl-file/top.stl',
+      SceneUrl: this.baseUrl + this.stlUrl,
     };
 
     // ========================================================================
@@ -24,10 +35,37 @@ export class StlViewerComponent implements OnInit {
     stlLoader.setDecimalPrecision(3);
 
     // =========================================================================
-    const viewer = new Viewer(canvas, parameters);
-    viewer.setLoader(stlLoader);
-    viewer.setParameter('Renderer', 'webgl');
-    viewer.init();
+    this.viewer = new Viewer(canvas, parameters);
+    this.viewer.setLoader(stlLoader);
+    this.viewer.setParameter('Renderer', 'webgl');
+    this.viewer.init();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.viewer) {
+      this.viewer.replaceSceneFromUrl(this.baseUrl + this.stlUrl);
+      this.viewer.update();
+    }
   }
 
+  resetView() {
+    this.viewer.resetScene();
+    this.viewer.update();
+  }
+
+  toogleRotation() {
+    this.rotate = !this.rotate;
+
+    if (this.rotate) {
+      this.timer = setInterval(() => {
+        this.viewer.rotate(0.25, 0.5, 0.1);
+        this.viewer.update();
+      }, 10);
+    } else {
+      clearInterval(this.timer);
+    }
+  }
+
+  enlargeViewer() {
+    this.router.navigate([this.router.url + '/' + this.digitalPartID + '/stl']);
+  }
 }
