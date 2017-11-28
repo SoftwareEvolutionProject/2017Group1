@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('Build Docker') {
       steps {
-        sh '''docker-compose up -d --build
-docker exec -it swerea bash'''
+        sh 'docker-compose up -d --build'
+        sh 'docker exec -it swerea bash'
       }
     }
     stage('Init Database') {
