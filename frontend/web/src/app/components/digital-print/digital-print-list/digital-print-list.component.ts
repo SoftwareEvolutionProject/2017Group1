@@ -136,7 +136,6 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
   private download(id) {
     this.digitalPrintService.getDigitalPrint(id).subscribe((res) => {
         window.open('http://localhost:4567/' + res.path);             // Update this to proper path.
-        console.log(res);
       }
     );
   }

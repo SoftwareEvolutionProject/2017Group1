@@ -31,7 +31,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
   public selectedFileName;
   public errorMessage;
   private slmConfig: Ng4FilesConfig = {
-    acceptExtensions: ['.slm'],
+    acceptExtensions: ['slm'],
     maxFilesCount: 1,
     maxFileSize: 5120000,
     totalFilesSize: 10120000,
