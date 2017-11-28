@@ -111,7 +111,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
 
   private operateFormatter(value, row, index) {
     return [
-      '<button class="download btn btn-xs btn-primary" href="javascript:void(0)" title="Download">',
+      '<button class="download btn btn-xs btn-primary" href="_self" title="Download">',
       '<i class="glyphicon glyphicon-download-alt"></i>',
       '</button>  ',
       '<button class="edit btn btn-xs btn-primary" href="javascript:void(0)" title="Edit">',
@@ -129,7 +129,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   }
   private download(id) {
     this.digitalPartService.getDigitalPart(id).subscribe((res) => {
-        // TODO: implement download
+        window.open('http://localhost:4567/' + res.path);             // Update this to proper path.
       }
     );
   }
