@@ -31,7 +31,7 @@ export class DigitalPrintEditComponent implements OnInit, OnChanges {
   public selectedFileName;
   public errorMessage;
   private stlConfig: Ng4FilesConfig = {
-    acceptExtensions: ['.magics'],
+    acceptExtensions: ['magics'],
     maxFilesCount: 1,
     maxFileSize: 5120000,
     totalFilesSize: 10120000,
