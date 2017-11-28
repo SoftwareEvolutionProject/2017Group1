@@ -3,12 +3,14 @@ pipeline {
   stages {
     stage('Build Docker') {
       steps {
+        sh 'ls -al'
         sh 'docker-compose up -d --build'
         sh 'docker exec -it swerea bash'
       }
     }
     stage('Init Database') {
       steps {
+        sh 'ls -al'
         sh 'make db-init '
       }
     }
