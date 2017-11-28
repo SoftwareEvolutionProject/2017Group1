@@ -33,9 +33,10 @@
           </form>
 
 
-          <div class="row" style="margin-bottom: 10px; margin-top: 20px">
+          <div [hidden]="!creating" class="row" style="margin-bottom: 10px; margin-top: 20px">
             <button id="createCustomer" class="col-sm-2 col-sm-offset-10 btn btn-primary btn "
-                    (click)="createCustomer()" style="">
+                    (click)="openModal()" style="">
+
               Create customer
             </button>
           </div>
@@ -92,3 +93,23 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<ng-template #modalCustomer>
+  <div class=" modal-lg">
+    <div class="modal-header">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="dismissDelete()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-customer-detail></app-customer-detail>
+    </div>
+    <div class="modal-footer">
+      <button id="customerFormDismissBtn" type="button" class="btn btn-default" (click)="dismissCustomer()">Dismiss
+      </button>
+    </div>
+  </div>
+
+
+</ng-template>
