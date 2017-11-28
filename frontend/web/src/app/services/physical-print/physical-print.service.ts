@@ -3,7 +3,7 @@ import {Headers, Http, Response, ResponseOptions} from '@angular/http';
 import {Observable} from 'rxjs';
 import {HttpClientService} from '../http/http-client.service';
 import {HttpClient} from '../http/http.client';
-import {PhysicalPrint} from "../../model/physical-print";
+import {PhysicalPrint} from '../../model/physical-print';
 
 @Injectable()
 export class PhysicalPrintService {

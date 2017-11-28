@@ -1,28 +1,29 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {DigitalPrint} from '../../../model/digital-print';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import {PhysicalPart} from '../../../model/physical-part';
+import {PhysicalPartService} from '../../../services/physical-part/physical-part.service';
 import {ErrorService} from '../../../services/error.service';
-import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
+
 declare var $: any;
 
 @Component({
-  selector: 'app-digital-print-list',
-  templateUrl: './digital-print-list.component.html',
-  styleUrls: ['./digital-print-list.component.scss'],
-  providers: [DigitalPrintService, ErrorService],
+  selector: 'app-physical-part-list',
+  templateUrl: './physical-part-list.component.html',
+  styleUrls: ['./physical-part-list.component.scss'],
+  providers: [PhysicalPartService, ErrorService],
 })
-export class DigitalPrintListComponent implements OnInit, AfterViewInit {
+export class PhysicalPartListComponent implements OnInit, AfterViewInit {
+  @Output() selected: EventEmitter<PhysicalPart> = new EventEmitter<PhysicalPart>();
+  private table;
+  private physicalParts: PhysicalPart[];
+
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
+  selectedPhysicalPart: PhysicalPart = null;
 
-  private table;
-  @Input('digitalPrintID') digitalPrints: DigitalPrint [];
-  @Output() selected: EventEmitter<DigitalPrint> = new EventEmitter<DigitalPrint>();
-
-
-  constructor(private digitalPrintService: DigitalPrintService,
+  constructor(private physicalPartService: PhysicalPartService,
               private errorService: ErrorService,
               private router: Router,
               private modalService: BsModalService) {
@@ -37,11 +38,10 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
   }
 
   loadAndPopulate() {
-    /* get users */
-    this.digitalPrintService.getDigitalPrints().subscribe(
-      (digitalPrints) => {
-        this.digitalPrints = digitalPrints;
-
+    /* get all Physical Parts */
+    this.physicalPartService.getPhysicalParts().subscribe(
+      (physicalParts) => {
+        this.physicalParts = physicalParts;
         this.populate();
         this.prepareTriggers();
       }, (error) => {
@@ -53,23 +53,23 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
   private populate() {
     const _self = this;
     /*manually generate columns*/
-    const columns = [ {
+    const columns = [{
       title: 'ID',
       field: 'id',
       sortable: true,
     }, {
-      title: 'Name',
-      field: 'name',
+      title: 'Physical Print ID',
+      field: 'physicalPrintID',
       sortable: true,
     }, {
       field: 'operate',
       title: '<span class="glyphicon glyphicon-cog">',
       align: 'center',
       events: {
-        'click .edit': function(e, value, row, index) {
+        'click .edit'(e, value, row, index) {
           _self.router.navigate([_self.router.url, row.id]);
         },
-        'click .delete': function(e, value, row, index) {
+        'click .delete'(e, value, row, index) {
           _self.delete(row.id);
         },
       },
@@ -77,10 +77,12 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
     }];
 
     const data = [];
-    this.digitalPrints.forEach((digitalPrint) => {
+    this.physicalParts.forEach((physicalPart) => {
       data.push({
-        name: digitalPrint.name,
-        id: digitalPrint.id,
+        physicalPrintID: physicalPart.physicalPrintID,
+        orderedPartID: physicalPart.orderedPartID,
+        magicsPartPairingID: physicalPart.magicsPartPairingID,
+        id: physicalPart.id,
       });
     });
 
@@ -98,17 +100,13 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
   private prepareTriggers() {
     const _self = this;
     (this.table as any).on('click-row.bs.table', (row, $element) => {
-      _self.selected.emit(_self.digitalPrints.filter((digitalPrint) => {
-        if (digitalPrint.id ===  $element.id) {
-          return digitalPrint;
-        }
-      })[0]);
+      _self.selected.emit(_self.physicalParts.filter((physicalPart) => { if (physicalPart.id === $element.id) { return physicalPart; } })[0]);
     });
   }
 
   private amountFormatter(value, row, index) {
     return value > 0 ? '' : {
-      css: {'background-color': 'rgba(255, 0, 0, 0.4)'},
+      css: { 'background-color': 'rgba(255, 0, 0, 0.4)' },
     };
   }
 
@@ -135,13 +133,13 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
 
   private confirmDelete() {
     if (this.toBeDeleted) {
-      this.digitalPrintService.deleteDigitalPrint(this.toBeDeleted).subscribe((res) => {
-          this.toBeDeleted = null;
-          this.modalRef.hide();
-          this.loadAndPopulate();
-        }, (error) => {
-          this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
-        },
+      this.physicalPartService.deletePhysicalPart(this.toBeDeleted).subscribe((res) => {
+        this.toBeDeleted = null;
+        this.modalRef.hide();
+        this.loadAndPopulate();
+      }, (error) => {
+        this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
+      },
       );
     }
   }
