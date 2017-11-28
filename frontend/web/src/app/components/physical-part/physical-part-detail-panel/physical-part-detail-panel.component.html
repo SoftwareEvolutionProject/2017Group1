@@ -1,12 +1,19 @@
-<div  class="panel panel-default">
+<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Details</h3>
+    <div class="panel-title">Details
+      <span class="pull-right" *ngIf="physicalPart">
+      <button type="button" class="btn btn-default" (click)="closeReq.emit()" style="margin-top: -5px">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+      </span>
+    </div>
   </div>
-  <div *ngIf="physicalPart" class="panel-body" style="padding-right: 30px">
-    ID: {{physicalPart.id}} <br>
-    Physical Print ID: {{physicalPart.physicalPrintID}}<br>
-    Ordered Part ID: {{physicalPart.orderedPartID}}<br>
-    Magics Part ID: {{physicalPart.magicsPartPairingID}}
+  <div [hidden]="!physicalPart" class="panel-body" style="padding-right: 30px">
+    <div *ngIf="physicalPart" class="panel-body" style="padding-right: 30px">
+      ID: {{physicalPart.id}} <br>
+      Physical Print ID: {{physicalPart.physicalPrintID}}<br>
+      Ordered Part ID: {{physicalPart.orderedPartID}}<br>
+      Magics Part ID: {{physicalPart.magicsPartPairingID}}
+    </div>
   </div>
 </div>
-

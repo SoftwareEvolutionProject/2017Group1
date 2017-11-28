@@ -4,6 +4,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {DigitalPrint} from '../../../model/digital-print';
 import {ErrorService} from '../../../services/error.service';
 import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
+
 declare var $: any;
 
 @Component({

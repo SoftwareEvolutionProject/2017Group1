@@ -3,13 +3,13 @@
   <div class="row">
     <h2>PhysicalParts</h2><hr>
   </div>
-  <div class="row">
-    <div class="col-md-7" id="list">
+  <div class="row row-fluid">
+    <div [ngClass]="{'col-md-12': !selected, 'col-md-6': selected}" id="list">
       <app-physical-part-list (selected)="physicalPartSelected($event)">
       </app-physical-part-list>
     </div>
-    <div class="col-md-5" id="detail" style="margin-top: 54px">
-      <app-physical-part-detail-panel [physicalPart]="selectedPhysicalPart">
+    <div [ngClass]="{'col-0': !selected, 'col-md-6': selected}" id="detail">
+      <app-physical-part-detail-panel *ngIf="selected" [physicalPart]="selected" (closeReq)="selected = null">
       </app-physical-part-detail-panel>
     </div>
 
