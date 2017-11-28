@@ -62,12 +62,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransformAndRefactor.cs" />
+    <Compile Include="Transformers\PrototypeBestPracticeTransformer.cs" />
     <Compile Include="Transformers\ToggleTransformer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BestPractices.js" />
     <Content Include="JSC3D.js" />
   </ItemGroup>
   <ItemGroup>
