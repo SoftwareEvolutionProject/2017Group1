@@ -37,6 +37,10 @@ import { OrderDetailPanelComponent } from './components/order/order-detail-panel
 import { OrderMasterViewComponent } from './components/order/order-master-view/order-master-view.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HttpClientService } from './services/http/http-client.service';
+import {PhysicalPartListComponent} from "./components/physical-part/physical-part-list/physical-part-list.component";
+import {PhysicalPartEditComponent} from "./components/physical-part/physical-part-edit/physical-part-edit.component";
+import {PhysicalPartDetailPanelComponent} from "./components/physical-part/physical-part-detail-panel/physical-part-detail-panel.component";
+import {PhysicalPartMasterViewComponent} from "./components/physical-part/physical-part-master-view/physical-part-master-view.component";
 
 
 @NgModule({

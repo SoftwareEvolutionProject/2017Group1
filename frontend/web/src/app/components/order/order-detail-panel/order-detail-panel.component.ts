@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, Output, OnInit } from '@angular/core';
-import {Order} from '../../../model/order';
-import {Customer} from '../../../model/customer';
-import {OrderService} from '../../../services/order/order.service';
-import {OrderedPart} from '../../../model/ordered-part';
-import {Router} from '@angular/router';
-import {CustomerService} from '../../../services/customer/customer.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
+import {Order} from "../../../model/order";
+import {Customer} from "../../../model/customer";
+import {OrderService} from "../../../services/order/order.service";
+import {OrderedPart} from "../../../model/ordered-part";
+import {Router} from "@angular/router";
+import {CustomerService} from "../../../services/customer/customer.service";
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-order-detail-panel',
@@ -51,8 +51,9 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
       },
     );
   }
+
   ngOnChanges() {
-      this.loadTables();
+    this.loadTables();
     if (this.order) {
       this.getCustomerInfo();
     }
@@ -75,11 +76,11 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
       field: 'digitalPartID',
       sortable: true,
     }, {
-        title: 'ID',
-        field: 'id',
-        visible: false,
-        sortable: true,
-    },{
+      title: 'ID',
+      field: 'id',
+      visible: false,
+      sortable: true,
+    }, {
       title: 'Amount',
       field: 'amount',
       sortable: true,
