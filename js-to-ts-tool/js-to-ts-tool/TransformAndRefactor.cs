@@ -23,13 +23,21 @@ namespace js_to_ts_tool {
         }
 
         public bool Run() {
-            transformer.FindJSNamespace();
-            transformer.ExtractClasses();
-            transformer.FetchAllClassnames();
-            transformer.CleanUpClasses();
-            transformer.CleanUpFunctions();
-            transformer.CleanUpVariables();
-            PrintToFile();
+            if(!transformer.FindJSNamespace())
+                return false;
+            if (!transformer.ExtractClasses())
+                return false;
+            if (!transformer.FetchAllClassnames())
+                return false;
+            if (!transformer.CleanUpClasses())
+                return false;
+            if (!transformer.CleanUpFunctions())
+                return false;
+            if (!transformer.CleanUpVariables())
+                return false;
+            if (!PrintToFile())
+                return false;
+            
             return true;
         }
         
