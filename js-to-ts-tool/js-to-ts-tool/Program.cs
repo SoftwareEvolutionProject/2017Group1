@@ -24,7 +24,7 @@ namespace js_to_ts_tool {
 
             TransformAndRefactor tr = new TransformAndRefactor(fileText);
 
-            if (tr.run()) {
+            if (tr.Run()) {
                 Console.WriteLine("Your file was successfully refactored and transformed.");
                 Console.WriteLine("Further work is still required though!");
             } else {
