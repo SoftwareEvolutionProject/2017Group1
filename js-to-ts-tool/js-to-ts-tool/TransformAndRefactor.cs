@@ -4,11 +4,11 @@ using System.IO;
 namespace js_to_ts_tool {
     class TransformAndRefactor {
 
-        String outputPath = "output/";
+        String outputPath = "";
 
         ITransformer transformer;
 
-        public TransformAndRefactor(String fileContent, String outputPath = "output/") {
+        public TransformAndRefactor(String fileContent, String outputPath = "") {
             this.outputPath = outputPath;
             
             if(PrototypeBestPracticeTransformer.IsOfType(fileContent)) {
@@ -38,12 +38,12 @@ namespace js_to_ts_tool {
             int j = 0;
 
             if (!Directory.Exists(outputPath)) {
-                Console.WriteLine("directory does not exist, creating!");
+                Console.WriteLine("directory does not exist, creating: " + outputPath);
                 Directory.CreateDirectory(outputPath);
             }
 
             for (int i = 1; i < transformer.Classes.Length; i+=2, j++) {
-                String path = outputPath + transformer.ClassNames[j] + ".ts";
+                String path = outputPath + "\\" + transformer.ClassNames[j] + ".ts";
                 
                 using (StreamWriter sw = File.CreateText(path)) {
                     sw.WriteLine(transformer.Classes[i]);

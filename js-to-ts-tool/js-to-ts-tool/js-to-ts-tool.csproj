@@ -69,8 +69,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BestPractices.js" />
-    <Content Include="JSC3D.js" />
+    <Content Include="JavaScript\folderinfolder\BestPractices.js" />
+    <Content Include="JavaScript\JSC3D.js" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
