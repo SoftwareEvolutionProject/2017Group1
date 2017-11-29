@@ -54,7 +54,10 @@ namespace js_to_ts_tool
         private static bool Transform(String fileName, String folderPath = "") {
             String fileText;
             try {
-                fileText = File.ReadAllText(folderPath + "\\" +  fileName);
+                if(folderPath != "") {
+                    folderPath += "\\";
+                }
+                fileText = File.ReadAllText(folderPath +  fileName);
             } catch (Exception e) {
                 Console.WriteLine(e.ToString());
                 return false;

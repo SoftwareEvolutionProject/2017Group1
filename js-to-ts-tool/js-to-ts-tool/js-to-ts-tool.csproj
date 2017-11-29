@@ -71,6 +71,7 @@
   <ItemGroup>
     <Content Include="JavaScript\folderinfolder\BestPractices.js" />
     <Content Include="JavaScript\JSC3D.js" />
+    <Content Include="JavaScript\Lightense.js" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

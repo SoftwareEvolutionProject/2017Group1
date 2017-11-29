@@ -15,7 +15,7 @@ namespace js_to_ts_tool {
         public String[] ClassNames { get { return classNames; } }
 
         // How to find constructor functions.
-        static String classRegexPattern = @"var +[A-Za-z_][A-Za-z0-9_]* *= *function [A-Za-z_][A-Za-z0-9_]* *\( *[A-Za-z_][A-Za-z0-9_ ,]* *\) *{";
+        static String classRegexPattern = @"var +[A-Za-z_][A-Za-z0-9_]* *= *function *([A-Za-z_]?[A-Za-z0-9_ ,]*)? *\( *[A-Za-z_]?[A-Za-z0-9_ ,]* *\) *{";
 
         public PrototypeBestPracticeTransformer(String fileContent) {
             this.fileContent = fileContent;
