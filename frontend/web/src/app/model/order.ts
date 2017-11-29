@@ -1,8 +1,9 @@
 import {OrderedPart} from './ordered-part';
+
 export class Order {
 
   public id: number;
-  public customer: number;
+  public customerID: number;
   public date: string;
   public orderedParts: OrderedPart[];
 

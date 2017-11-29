@@ -8,30 +8,29 @@ export class OrderMockService {
   public id: number;
   public customer: number;
   public date: string;
-
-  private data: Order[] = [
+  private orders: Order[] = [
     new Order({
       id: 1,
-      order : 1,
-      name: 'Cool order',
+      customer: 'Customer 1',
+      date: '2017-11-22',
     }), new Order({
       id: 2,
-      order : 1,
-      name: 'Best order',
+      customer: 'Customer 2',
+      date: '2017-11-23',
     }),
   ];
 
   constructor() {
   }
 
-  getAll(): Observable<Order[]> {
-    return Observable.of(this.data);
+  getOrders(): Observable<Order[]> {
+    return Observable.of(this.orders);
   }
-  get(id: number): Observable<Order> {
-    return Observable.of( this.data.filter((e) => {if (e.id === id) { return e; } })[0]);
+  getDigialPart(id: number): Observable<Order> {
+    return Observable.of( this.orders.filter((order) => {if (order.id == id) { return order; } })[0]);
   }
   delete(id: number) {
-    this.data = this.data.filter((e) => {if (e.id !== id) { return e; } });
+    this.orders = this.orders.filter((order) => {if (order.id != id) { return order; } });
     return Observable.of(true);
   }
 }
