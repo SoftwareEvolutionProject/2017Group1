@@ -18,6 +18,7 @@ export class PhysicalPartDetailPanelComponent implements OnInit, OnChanges {
   @Input('nav') nav = true;
   @Input('creating') creating = false;
   @Output() changed: EventEmitter<PhysicalPart> = new EventEmitter<PhysicalPart>();
+  @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
   private loaded = false;
 
   /* forms */
