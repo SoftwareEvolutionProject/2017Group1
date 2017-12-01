@@ -7,8 +7,8 @@ import se.chalmers.dat265.group1.model.Material;
 public class MaterialData extends DataModel {
 
     private int id;
-    private int name;
-    private int supplierName;
+    private String name;
+    private String supplierName;
     private double initialAmount;
 
     public MaterialData(Material material) {
@@ -18,16 +18,23 @@ public class MaterialData extends DataModel {
         initialAmount = material.getInitialAmount();
     }
 
+    public MaterialData() {
+        id = -1;
+        name = "";
+        supplierName = "";
+        initialAmount = -1;
+    }
+
     @Override
     public int getId() {
         return id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public int getSupplierName() {
+    public String getSupplierName() {
         return supplierName;
     }
 

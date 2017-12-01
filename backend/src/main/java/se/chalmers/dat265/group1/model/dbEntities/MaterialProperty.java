@@ -16,6 +16,13 @@ public class MaterialProperty extends DataModel {
         this.materialID = materialID;
     }
 
+    public MaterialProperty() {
+        id = -1;
+        name = "";
+        description = "";
+        materialID = -1;
+    }
+
     @Override
     public int getId() {
         return 0;

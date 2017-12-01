@@ -6,13 +6,13 @@ import java.util.Map;
 
 public class Material extends DataModel {
     private int id;
-    private int name;
-    private int supplierName;
+    private String name;
+    private String supplierName;
     private double initialAmount;
     private List<MaterialGrade> materialGrades;
     private Map<String, String> materialProperties;
 
-    public Material(int id, int name, int supplierName, double initialAmount, List<MaterialGrade> materialGrades, Map<String, String> materialProperties) {
+    public Material(int id, String name, String supplierName, double initialAmount, List<MaterialGrade> materialGrades, Map<String, String> materialProperties) {
         this.id = id;
         this.name = name;
         this.supplierName = supplierName;
@@ -26,11 +26,11 @@ public class Material extends DataModel {
         return id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public int getSupplierName() {
+    public String getSupplierName() {
         return supplierName;
     }
 

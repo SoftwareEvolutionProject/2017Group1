@@ -17,6 +17,13 @@ public class MaterialGrade extends DataModel {
         this.amount = amount;
     }
 
+    public MaterialGrade() {
+        id = -1;
+        materialID = -1;
+        reusedTimes = -1;
+        amount = -1;
+    }
+
     public int getReusedTimes() {
         return reusedTimes;
     }
