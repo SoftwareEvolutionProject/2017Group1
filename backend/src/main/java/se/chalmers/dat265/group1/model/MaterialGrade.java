@@ -1,6 +1,6 @@
 package se.chalmers.dat265.group1.model;
 
-public class MaterialGrade implements DataModel {
+public class MaterialGrade extends DataModel {
     private int id;
     private int materialID;
     private int reusedTimes;

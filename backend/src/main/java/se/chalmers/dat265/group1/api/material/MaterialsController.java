@@ -86,7 +86,7 @@ public class MaterialsController extends ApiController implements MaterialAPI {
         throw new NotImplementedException("TODO");
     }
 
-    private class MaterialProperty implements DataModel {
+    private class MaterialProperty extends DataModel {
         int id;
         String name;
         String description;

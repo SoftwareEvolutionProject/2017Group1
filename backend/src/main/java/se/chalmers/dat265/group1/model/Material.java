@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Material implements DataModel {
+public class Material extends DataModel {
     private int id;
     private int name;
     private int supplierName;
