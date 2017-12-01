@@ -15,7 +15,7 @@ pipeline {
       parallel {
         stage('Front-end') {
           steps {
-            sh 'docker exec swerea bash -c "make install-client"'
+            sh 'docker exec swerea bash -c "make install-frontend"'
           }
         }
         stage('Back-end') {
