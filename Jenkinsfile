@@ -3,27 +3,24 @@ pipeline {
   stages {
     stage('Build Docker') {
       steps {
-        sh 'ls -al'
         sh 'docker-compose up -d --build'
-        sh 'docker exec -it swerea bash'
       }
     }
     stage('Init Database') {
       steps {
-        sh 'ls -al'
-        sh 'make db-init '
+        sh 'docker exec swerea bash -c "make db-init"'
       }
     }
     stage('Install') {
       parallel {
         stage('Front-end') {
           steps {
-            sh 'make install-client'
+            sh 'docker exec swerea bash -c "make install-client"'
           }
         }
         stage('Back-end') {
           steps {
-            sh 'make install-backend'
+            sh 'docker exec swerea bash -c "make install-backend"'
           }
         }
       }
@@ -32,12 +29,12 @@ pipeline {
       parallel {
         stage('run front-end') {
           steps {
-            sh 'make backend'
+            sh 'docker exec swerea bash -c "make frontend"'
           }
         }
         stage('run back-end') {
           steps {
-            sh 'make frontend'
+            sh 'docker exec swerea bash -c "make backend"'
           }
         }
       }
