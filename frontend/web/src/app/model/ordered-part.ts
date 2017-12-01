@@ -1,7 +1,7 @@
 export class OrderedPart {
   public id: number;
   public amount: number;
-  public digitalPart: number;
+  public digitalPartID: number;
   public order: number;
 
   constructor(values: Object = {}) {

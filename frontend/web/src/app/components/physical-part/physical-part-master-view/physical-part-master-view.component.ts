@@ -8,14 +8,14 @@ import {PhysicalPart} from '../../../model/physical-part';
 })
 export class PhysicalPartMasterViewComponent implements OnInit {
 
-  selectedPhysicalPart: PhysicalPart = null;
+  selected: PhysicalPart = null;
   constructor() { }
 
   ngOnInit() {
   }
 
   public physicalPartSelected(event) {
-    this.selectedPhysicalPart = event;
+    this.selected = event;
   }
 
 }

@@ -20,17 +20,18 @@
               <div [ngClass]="{'has-error': !requiredFieldsForm.get('name').valid}">
                 <input class="form-control" formControlName="name">
               </div>
+              <label>Customer</label>
+              <div [ngClass]="{'has-error': !requiredFieldsForm.get('customerID').valid}">
+                <select name="customerID" formControlName="customerID" class="selectpicker form-control"
+                        title="Choose Customer">
+                  <option title="{{_customer.name}}"
+                          *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id
+                          [selected]="_customer.id == digitalPart.customerID">
+                    {{_customer.name}}
+                  </option>
+                </select>
+              </div>
             </form>
-            <label>Customer</label>
-            <select name="cusotmer" class="selectpicker form-control" title="Choose Customer" #c
-                    (change)="update(c.value)">
-              <option title="{{_customer.name}}"
-                      *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id
-                      [selected]="_customer.id == digitalPart.customerID">
-                {{_customer.name}}
-              </option>
-            </select>
-
               <div *ngIf="creating">
               <label>Stl-File</label>
 
