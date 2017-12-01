@@ -6,8 +6,11 @@ install:
 install-backend:
 	cd /usr/src/app && mvn clean install
 
-install-client:
+install-frontend:
 	cd /usr/src/app/frontend/web && npm install
+
+install-backend:
+	cd /usr/src/app && mvn clean install
 
 run: backend frontend
 
