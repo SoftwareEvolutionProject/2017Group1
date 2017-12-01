@@ -5,6 +5,7 @@ import se.chalmers.dat265.group1.api.ApiController;
 import se.chalmers.dat265.group1.model.DataModel;
 import se.chalmers.dat265.group1.model.Material;
 import se.chalmers.dat265.group1.model.MaterialGrade;
+import se.chalmers.dat265.group1.model.dbEntities.MaterialProperty;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
 import java.util.*;
@@ -44,7 +45,7 @@ public class MaterialsController extends ApiController implements MaterialAPI {
         Map<String, String> propertiesMap = new HashMap<>();
 
         for (MaterialProperty property : propertyList) {
-            propertiesMap.put(property.name, property.description);
+            propertiesMap.put(property.getName(), property.getDescription());
         }
 
         material.setMaterialGrades(grades);
@@ -86,24 +87,4 @@ public class MaterialsController extends ApiController implements MaterialAPI {
         throw new NotImplementedException("TODO");
     }
 
-    private class MaterialProperty extends DataModel {
-        int id;
-        String name;
-        String description;
-        int materialID;
-
-
-        public MaterialProperty(int id, String name, String description, int materialID) {
-            this.id = id;
-            this.name = name;
-            this.description = description;
-            this.materialID = materialID;
-        }
-
-        @Override
-        public int getId() {
-            return 0;
-        }
-
-    }
 }
