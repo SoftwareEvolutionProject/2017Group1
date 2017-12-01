@@ -213,7 +213,12 @@ public class WebApi {
 
         get(MATERIALS_URL, (request, response) -> mi.getAllMaterials(), gson::toJson);
         get(MATERIALS_URL + MATERIAL_ID_URL, ((request, response) -> mi.getMaterial(request.params(MATERIAL_ID_PARAM))), gson::toJson);
-        post(MATERIALS_URL, ((request, response) -> mi.createNewMaterial(gson.fromJson(request.body(), Material.class))), gson::toJson);
+        post(MATERIALS_URL, ((request, response) -> {
+            Material material = mi.createNewMaterial(gson.fromJson(request.body(), Material.class));
+            response.status(201);
+            return material;
+        }), gson::toJson);
+
         put(MATERIALS_URL + MATERIAL_ID_URL + "/:gradeLevel/decrease/:amount", (request, response) -> mi.decreaseLevelAmount(
                 Integer.valueOf(request.params(MATERIAL_ID_PARAM)),
                 Integer.valueOf(request.params("gradeLevel")),
