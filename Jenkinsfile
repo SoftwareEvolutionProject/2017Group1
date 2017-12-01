@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('Purge Docker') {
       steps {
-        sh 'docker rm $(docker ps -a -q)'
-        sh 'docker rmi $(docker images -q)'
+        sh 'docker rm --force $(docker ps -a -q)'
+        sh 'docker rmi --force $(docker images -q)'
       }
     }
     stage('Build Docker') {
