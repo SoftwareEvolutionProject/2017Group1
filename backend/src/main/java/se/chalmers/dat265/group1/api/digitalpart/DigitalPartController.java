@@ -68,7 +68,7 @@ public class DigitalPartController extends ApiController implements DigitalPartA
         if (exist){
             throw new FileAlreadyExistsException("ID have file");
         }
-        String path = "/stl/" + digitalPartID + "-" + Arrays.hashCode(body) + ".stl";
+        String path = "stl/" + digitalPartID + "-" + Arrays.hashCode(body) + ".stl";
         FileUtil.write(body, basePath+path);
         
         return stlRepo.postObject(new StlData(Integer.valueOf(digitalPartID), path));

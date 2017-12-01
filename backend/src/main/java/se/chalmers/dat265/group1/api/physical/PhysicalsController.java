@@ -76,7 +76,7 @@ public class PhysicalsController extends ApiController implements PhysicalAPI {
         if (exist) {
             throw new FileAlreadyExistsException("ID have file");
         }
-        String path = "/slm/" + id + "-" + Arrays.hashCode(body) + ".slm";
+        String path = "slm/" + id + "-" + Arrays.hashCode(body) + ".slm";
         FileUtil.write(body, absolutePath + path);
         return slmRepo.postObject(new SlmData(Integer.valueOf(id), path));
     }

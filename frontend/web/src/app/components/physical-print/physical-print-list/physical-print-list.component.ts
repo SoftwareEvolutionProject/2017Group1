@@ -4,6 +4,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PhysicalPrint} from '../../../model/physical-print';
 import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
 import {ErrorService} from '../../../services/error.service';
+import {HttpClient} from "../../../services/http/http.client";
 declare var $: any;
 
 @Component({
@@ -140,7 +141,7 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
   }
   private download(id) {
     this.physicalPrintService.getPhysicalPrint(id).subscribe((res) => {
-        window.open('http://localhost:4567/' + res.path);             // Update this to proper path.
+        window.open(HttpClient.baseUrl + res.path);
       }
     );
   }

@@ -12,7 +12,7 @@ declare var JSC3D: any;
 })
 
 export class StlViewerComponent implements OnInit, OnChanges {
-  baseUrl = 'http://localhost:4567';
+  @Input('baseUrl') baseUrl = null;
   canvas = null;
   viewer: Viewer;
   private rotate = false;
