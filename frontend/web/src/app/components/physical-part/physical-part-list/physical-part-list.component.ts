@@ -1,28 +1,29 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {PhysicalPrint} from '../../../model/physical-print';
-import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
+import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import {PhysicalPart} from '../../../model/physical-part';
+import {PhysicalPartService} from '../../../services/physical-part/physical-part.service';
 import {ErrorService} from '../../../services/error.service';
+
 declare var $: any;
 
 @Component({
-  selector: 'app-physical-print-list',
-  templateUrl: './physical-print-list.component.html',
-  styleUrls: ['./physical-print-list.component.scss'],
-  providers: [PhysicalPrintService, ErrorService]
+  selector: 'app-physical-part-list',
+  templateUrl: './physical-part-list.component.html',
+  styleUrls: ['./physical-part-list.component.scss'],
+  providers: [PhysicalPartService, ErrorService],
 })
-export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
+export class PhysicalPartListComponent implements OnInit, AfterViewInit {
+  private physicalParts: PhysicalPart[];
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
 
   private table;
-  @Input('physicalPrint') physicalPrints: PhysicalPrint [];
-  @Output() selected: EventEmitter<PhysicalPrint> = new EventEmitter<PhysicalPrint>();
+  @Input('physicalPartID') physicalPartPrints: PhysicalPart [];
+  @Output() selected: EventEmitter<PhysicalPart> = new EventEmitter<PhysicalPart>();
 
-
-  constructor(private physicalPrintService: PhysicalPrintService,
+  constructor(private physicalPartService: PhysicalPartService,
               private errorService: ErrorService,
               private router: Router,
               private modalService: BsModalService) {
@@ -37,11 +38,10 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
   }
 
   loadAndPopulate() {
-    /* get users */
-    this.physicalPrintService.getAllPhysicalPrint().subscribe(
-      (physicalPrints) => {
-        this.physicalPrints = physicalPrints;
-
+    /* get all Physical Parts */
+    this.physicalPartService.getPhysicalParts().subscribe(
+      (physicalParts) => {
+        this.physicalParts = physicalParts;
         this.populate();
         this.prepareTriggers();
       }, (error) => {
@@ -53,30 +53,23 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
   private populate() {
     const _self = this;
     /*manually generate columns*/
-    const columns = [ {
+    const columns = [{
       title: 'ID',
       field: 'id',
       sortable: true,
-    },{
-      title: 'Digital Print',
-      field: 'digitalPrintID',
-      sortable: true,
-    },{
-      title: 'SLM File',
-      field: 'path',
+    }, {
+      title: 'Physical Print ID',
+      field: 'physicalPrintID',
       sortable: true,
     }, {
       field: 'operate',
       title: '<span class="glyphicon glyphicon-cog">',
       align: 'center',
       events: {
-        'click .edit': function(e, value, row, index) {
+        'click .edit'(e, value, row, index) {
           _self.router.navigate([_self.router.url, row.id]);
         },
-        'click .download'(e, value, row, index) {
-          _self.download(row.id);
-        },
-        'click .delete': function(e, value, row, index) {
+        'click .delete'(e, value, row, index) {
           _self.delete(row.id);
         },
       },
@@ -84,11 +77,12 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
     }];
 
     const data = [];
-    this.physicalPrints.forEach((physicalPrint) => {
+    this.physicalParts.forEach((physicalPart) => {
       data.push({
-        path: physicalPrint.path,
-        id: physicalPrint.id,
-        digitalPrintID : physicalPrint.digitalPrintID,
+        physicalPrintID: physicalPart.physicalPrintID,
+        orderedPartID: physicalPart.orderedPartID,
+        magicsPartPairingID: physicalPart.magicsPartPairingID,
+        id: physicalPart.id,
       });
     });
 
@@ -106,9 +100,9 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
   private prepareTriggers() {
     const _self = this;
     (this.table as any).on('click-row.bs.table', (row, $element) => {
-      _self.selected.emit(_self.physicalPrints.filter((physicalPrint) => {
-        if (physicalPrint.id ===  $element.id) {
-          return physicalPrint;
+      _self.selected.emit(_self.physicalParts.filter((physicalPart) => {
+        if (physicalPart.id === $element.id) {
+          return physicalPart;
         }
       })[0]);
     });
@@ -116,15 +110,12 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
 
   private amountFormatter(value, row, index) {
     return value > 0 ? '' : {
-      css: {'background-color': 'rgba(255, 0, 0, 0.4)'},
+      css: { 'background-color': 'rgba(255, 0, 0, 0.4)' },
     };
   }
 
   private operateFormatter(value, row, index) {
     return [
-      '<button class="download btn btn-xs btn-primary" href="_self" title="Download">',
-      '<i class="glyphicon glyphicon-download-alt"></i>',
-      '</button>  ',
       '<button class="edit btn btn-xs btn-primary" href="javascript:void(0)" title="Edit">',
       '<i class="glyphicon glyphicon-pencil"></i>',
       '</button>  ',
@@ -138,12 +129,7 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
     this.toBeDeleted = id;
     this.openModal('#deleteFormDismissBtn');
   }
-  private download(id) {
-    this.physicalPrintService.getPhysicalPrint(id).subscribe((res) => {
-        window.open('http://localhost:4567/' + res.path);             // Update this to proper path.
-      }
-    );
-  }
+
   private dismissDelete() {
     this.toBeDeleted = null;
     this.modalRef.hide();
@@ -151,7 +137,7 @@ export class PhysicalPrintListComponent implements OnInit, AfterViewInit {
 
   private confirmDelete() {
     if (this.toBeDeleted) {
-      this.physicalPrintService.deletePhysicalPrint(this.toBeDeleted).subscribe((res) => {
+      this.physicalPartService.deletePhysicalPart(this.toBeDeleted).subscribe((res) => {
           this.toBeDeleted = null;
           this.modalRef.hide();
           this.loadAndPopulate();
