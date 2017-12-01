@@ -170,7 +170,7 @@ INSERT INTO stldata (digitalPartID, path) VALUES (2, '/stl/2-1082100546.stl'), (
 
 COMMIT;
 
-INSERT INTO material (name, supplierName, initialAmount) VALUES
+INSERT INTO materialdata (name, supplierName, initialAmount) VALUES
   ('Stenhårt malm', 'JimmyBs stenhårda gäng', 100),
   ('Dagis Tenn', 'Johans leksaksoutlet', 80);
 

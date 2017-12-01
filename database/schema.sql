@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS physicalpart(
   FOREIGN KEY (magicsPartPairingID) REFERENCES magicspairing(id)
 );
 
-CREATE TABLE IF NOT EXISTS material(
+CREATE TABLE IF NOT EXISTS materialdata(
   id SERIAL PRIMARY KEY,
   name VARCHAR(200),
   supplierName VARCHAR(100),
@@ -80,14 +80,14 @@ CREATE TABLE IF NOT EXISTS material(
 
 CREATE TABLE IF NOT EXISTS materialgrade(
   id SERIAL PRIMARY KEY,
-  materialID INTEGER REFERENCES material(id),
+  materialID INTEGER REFERENCES materialdata(id),
   reusedTimes INT,
   amount FLOAT
 );
 
 CREATE TABLE IF NOT EXISTS materialproperty(
   id SERIAL PRIMARY KEY,
-  materialID INTEGER REFERENCES material(id),
+  materialID INTEGER REFERENCES materialdata(id),
   name VARCHAR(100),
   description VARCHAR(500)
 );

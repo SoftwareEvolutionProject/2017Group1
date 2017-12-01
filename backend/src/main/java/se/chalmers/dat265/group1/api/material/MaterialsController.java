@@ -2,9 +2,9 @@ package se.chalmers.dat265.group1.api.material;
 
 import org.apache.commons.lang3.NotImplementedException;
 import se.chalmers.dat265.group1.api.ApiController;
-import se.chalmers.dat265.group1.model.DataModel;
 import se.chalmers.dat265.group1.model.Material;
 import se.chalmers.dat265.group1.model.MaterialGrade;
+import se.chalmers.dat265.group1.model.dbEntities.MaterialData;
 import se.chalmers.dat265.group1.model.dbEntities.MaterialProperty;
 import se.chalmers.dat265.group1.storage.repository.GenericRepository;
 
@@ -23,9 +23,9 @@ public class MaterialsController extends ApiController implements MaterialAPI {
     public List<Material> getAllMaterials() {
         List<Material> materials = new LinkedList<>();
 
-        List<Material> incompleteMaterials = materialRepository.getObjects();
-        for (Material material : incompleteMaterials) {
-            materials.add(stageMaterial(material));
+        List<MaterialData> incompleteMaterials = materialRepository.getObjects();
+        for (MaterialData materialData : incompleteMaterials) {
+            materials.add(stageMaterial(materialData));
         }
 
         return materials;
@@ -39,21 +39,16 @@ public class MaterialsController extends ApiController implements MaterialAPI {
         return propertyRepository.getObjects("materialID=" + id);
     }
 
-    private Material stageMaterial(Material material) {
-        List<MaterialGrade> grades = getMaterialGrades(material.getId());
-        List<MaterialProperty> propertyList = getMaterialProperties(material.getId());
+    private Material stageMaterial(MaterialData materialData) {
+        List<MaterialGrade> grades = getMaterialGrades(materialData.getId());
+        List<MaterialProperty> propertyList = getMaterialProperties(materialData.getId());
         Map<String, String> propertiesMap = new HashMap<>();
 
         for (MaterialProperty property : propertyList) {
             propertiesMap.put(property.getName(), property.getDescription());
         }
 
-        material.setMaterialGrades(grades);
-        material.setMaterialProperties(propertiesMap);
-
-        return material;
-
-
+        return new Material(materialData.getId(),materialData.getName(), materialData.getSupplierName(), materialData.getInitialAmount(),grades, propertiesMap);
     }
 
     @Override
@@ -63,7 +58,8 @@ public class MaterialsController extends ApiController implements MaterialAPI {
 
     @Override
     public Material createNewMaterial(Material material) {
-        int id = materialRepository.postObject(material).getId();
+        MaterialData md = new MaterialData(material);
+        int id = materialRepository.postObject(md).getId();
 
         for (MaterialGrade grade : material.getMaterialGrades()) {
             grade.setMaterialID(id);

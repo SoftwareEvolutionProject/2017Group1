@@ -2,6 +2,7 @@ package se.chalmers.dat265.group1.api;
 
 import se.chalmers.dat265.group1.model.DataModel;
 import se.chalmers.dat265.group1.model.*;
+import se.chalmers.dat265.group1.model.dbEntities.MaterialData;
 import se.chalmers.dat265.group1.model.dbEntities.OrderData;
 import se.chalmers.dat265.group1.model.dbEntities.OrderedPart;
 import se.chalmers.dat265.group1.storage.DBInterface;
@@ -17,7 +18,7 @@ public class ApiController {
     protected GenericRepository<DigitalPart> digitalPartRepository;
     protected GenericRepository<PhysicalPart> physicalPartRepository;
     protected GenericRepository<PhysicalPrint> physicalPrintRepository;
-    protected GenericRepository<Material> materialRepository;
+    protected GenericRepository<MaterialData> materialRepository;
     protected GenericRepository<MaterialGrade> materialGradeRepository;
     protected GenericRepository<StlData> stlRepo;
     protected GenericRepository<MagicsData> magicsRepo;
@@ -31,7 +32,7 @@ public class ApiController {
         digitalPartRepository = new GenericRepository<>(DigitalPart.class, dbConnector);
         physicalPartRepository = new GenericRepository<>(PhysicalPart.class, dbConnector);
         physicalPrintRepository = new GenericRepository<>(PhysicalPrint.class, dbConnector);
-        materialRepository = new GenericRepository<>(Material.class, dbConnector);
+        materialRepository = new GenericRepository<>(MaterialData.class, dbConnector);
         materialGradeRepository = new GenericRepository<>(MaterialGrade.class, dbConnector);
         stlRepo = new GenericRepository<>(StlData.class,dbConnector);
         magicsRepo = new GenericRepository<>(MagicsData.class,dbConnector);
