@@ -75,12 +75,29 @@ public class MaterialsController extends ApiController implements MaterialAPI {
 
     @Override
     public Material decreaseLevelAmount(int materialID, int materialGrade, double amount) {
+        checkNotNegative(amount);
+        changeMaterialAmount(materialID, materialGrade, -amount);
+        return getMaterial(materialID+"");
+    }
+
+    private void changeMaterialAmount(int materialID, int materialGrade, double v) {
+        
+
+
         throw new NotImplementedException("TODO");
+    }
+
+    private void checkNotNegative(double amount) {
+        if(amount<0){
+            throw new IllegalArgumentException("Amount needs to be bigger than 0");
+        }
     }
 
     @Override
     public Material increaseLevelAmount(int materialID, int materialGrade, double amount) {
-        throw new NotImplementedException("TODO");
+        checkNotNegative(amount);
+        changeMaterialAmount(materialID, materialGrade, amount);
+        return getMaterial(materialID+"");
     }
 
 }
