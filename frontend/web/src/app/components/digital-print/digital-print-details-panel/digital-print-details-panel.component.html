@@ -1,14 +1,20 @@
 <div  class="panel panel-default">
   <div class="panel-heading">
-    <div class="panel-title">Digital Print Details
-    <span class="pull-right" *ngIf="digitalPrint">
-      <button type="button" class="btn btn-default" (click)="closeReq.emit()" style="margin-top: -5px">
-        <span class="glyphicon glyphicon-remove"></span>
-      </button>
-    </span>
+    <div class="panel-title" >Digital Print Details
+      <span class="pull-right" *ngIf="digitalPrint && close">
+        <button type="button" class="btn btn-default" (click)="closeReq.emit()" style="margin-top: -5px">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </span>
+      <span class="pull-right" *ngIf="digitalPrint && minimize">
+        <button type="button" class="btn btn-default" (click)="minimized = !minimized" style="margin-top: -5px">
+          <span *ngIf="minimized" class="glyphicon glyphicon-chevron-down"></span>
+          <span *ngIf="!minimized" class="glyphicon glyphicon-chevron-up"></span>
+        </button>
+      </span>
     </div>
   </div>
-  <div [hidden]="!digitalPrint" class="panel-body" style="padding-right: 30px">
+  <div [hidden]="!digitalPrint || minimized" class="panel-body" style="padding-right: 30px">
 
     <div class="row row-fluid">
       <div [ngClass]="{'col-sm-12': !selected, 'col-lg-5': selected}">
