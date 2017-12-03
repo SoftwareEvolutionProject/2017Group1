@@ -39,4 +39,8 @@ public class MaterialGrade extends DataModel {
     public int getMaterialID() {
         return materialID;
     }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 }

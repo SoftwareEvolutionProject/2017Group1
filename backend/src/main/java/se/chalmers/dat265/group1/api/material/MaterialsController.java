@@ -48,7 +48,7 @@ public class MaterialsController extends ApiController implements MaterialAPI {
             propertiesMap.put(property.getName(), property.getDescription());
         }
 
-        return new Material(materialData.getId(),materialData.getName(), materialData.getSupplierName(), materialData.getInitialAmount(),grades, propertiesMap);
+        return new Material(materialData.getId(), materialData.getName(), materialData.getSupplierName(), materialData.getInitialAmount(), grades, propertiesMap);
     }
 
     @Override
@@ -77,18 +77,18 @@ public class MaterialsController extends ApiController implements MaterialAPI {
     public Material decreaseLevelAmount(int materialID, int materialGrade, double amount) {
         checkNotNegative(amount);
         changeMaterialAmount(materialID, materialGrade, -amount);
-        return getMaterial(materialID+"");
+        return getMaterial(materialID + "");
     }
 
-    private void changeMaterialAmount(int materialID, int materialGrade, double v) {
-        
+    private void changeMaterialAmount(int materialID, int reusedTimes, double deltaWeight) {
+        MaterialGrade materialGrade = materialGradeRepository.getObjects("materialID=" + materialID + "AND reusedTimes=" + reusedTimes).get(0);
+        materialGrade.setAmount(materialGrade.getAmount() + deltaWeight);
 
-
-        throw new NotImplementedException("TODO");
+        materialGradeRepository.updateObject(materialGrade);
     }
 
     private void checkNotNegative(double amount) {
-        if(amount<0){
+        if (amount < 0) {
             throw new IllegalArgumentException("Amount needs to be bigger than 0");
         }
     }
@@ -97,7 +97,7 @@ public class MaterialsController extends ApiController implements MaterialAPI {
     public Material increaseLevelAmount(int materialID, int materialGrade, double amount) {
         checkNotNegative(amount);
         changeMaterialAmount(materialID, materialGrade, amount);
-        return getMaterial(materialID+"");
+        return getMaterial(materialID + "");
     }
 
 }
