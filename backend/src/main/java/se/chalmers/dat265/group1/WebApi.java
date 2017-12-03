@@ -1,6 +1,7 @@
 package se.chalmers.dat265.group1;
 
-import se.chalmers.dat265.group1.api.MaterialInterface;
+import se.chalmers.dat265.group1.api.material.MaterialAPI;
+import se.chalmers.dat265.group1.api.material.MaterialsController;
 import se.chalmers.dat265.group1.api.order.OrderAPI;
 import se.chalmers.dat265.group1.api.order.OrderController;
 import se.chalmers.dat265.group1.api.physical.PhysicalAPI;
@@ -30,7 +31,7 @@ public class WebApi {
     private static CustomerAPI ci;
     private static OrderAPI oi;
     private static DigitalPartAPI dpi;
-    private static MaterialInterface mi;
+    private static MaterialAPI mi;
     private static PrintingAPI pi;
     private static PhysicalAPI phi;
 
@@ -56,12 +57,16 @@ public class WebApi {
     private static final String PHYSICALPRINT_ID_PARAM = "physicalPrintID";
     private static final String PHYSICALPRINT_ID_URL = PARAM_URL_PREFIX + PHYSICALPRINT_ID_PARAM;
 
+
+    private static final String MATERIALS_URL = "/materials";
+    private static final String MATERIAL_ID_PARAM = "materialID";
+    private static final String MATERIAL_ID_URL = PARAM_URL_PREFIX + MATERIAL_ID_PARAM;
+
     private static final String PHYSICALPARTS_URL = "/physical-parts";
     private static final String PHYSICALPART_ID_PARAM = "physicalPartID";
     private static final String PHYSICALPART_ID_URL = PARAM_URL_PREFIX + PHYSICALPART_ID_PARAM;
 
     private static File storageFolder;
-
     private static Gson gson = new Gson();
     private static boolean debug;
 
@@ -72,6 +77,7 @@ public class WebApi {
         boolean debug = prepareDebug(args);
         ci = new CustomerController(debug);
         dpi = new DigitalPartController(debug);
+        mi = new MaterialsController(debug);
         oi = new OrderController(debug);
         pi = new PrintingController(debug);
         phi = new PhysicalsController(debug);
@@ -94,8 +100,8 @@ public class WebApi {
         setupPrintingInterface();
         setupOrderInterface();
         setupDigitalPartsInterface();
+        setupMaterialInterface();
         setupPhysicalInterface();
-
 
         log.info("ENDPOINT SETUP COMPLETE: " + (System.currentTimeMillis() - start) + " ms");
         log.info("SERVER RUNNING!");
@@ -201,6 +207,27 @@ public class WebApi {
             return order;
         }), gson::toJson);
 
+    }
+
+    private static void setupMaterialInterface() {
+
+        get(MATERIALS_URL, (request, response) -> mi.getAllMaterials(), gson::toJson);
+        get(MATERIALS_URL + MATERIAL_ID_URL, ((request, response) -> mi.getMaterial(request.params(MATERIAL_ID_PARAM))), gson::toJson);
+        post(MATERIALS_URL, ((request, response) -> {
+            Material material = mi.createNewMaterial(gson.fromJson(request.body(), Material.class));
+            response.status(201);
+            return material;
+        }), gson::toJson);
+
+        put(MATERIALS_URL + MATERIAL_ID_URL + "/:gradeLevel/decrease/:amount", (request, response) -> mi.decreaseLevelAmount(
+                Integer.valueOf(request.params(MATERIAL_ID_PARAM)),
+                Integer.valueOf(request.params("gradeLevel")),
+                Double.valueOf(request.params("amount"))), gson::toJson);
+
+        put(MATERIALS_URL + MATERIAL_ID_URL + "/:gradeLevel/increase/:amount", (request, response) -> mi.increaseLevelAmount(
+                Integer.valueOf(request.params(MATERIAL_ID_PARAM)),
+                Integer.valueOf(request.params("gradeLevel")),
+                Double.valueOf(request.params("amount"))), gson::toJson);
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.
