@@ -1,15 +1,20 @@
-<div class="container">
+<div class="container" *ngIf="loaded">
 
     <div class="row">
       <h2>Physical Prints</h2><hr>
     </div>
     <div class="row row-fluid">
       <div [ngClass]="{'col-md-12': !selected, 'col-md-6': selected}" id="list">
-        <app-physical-print-list (selected)="physicalPrintSelected($event)">
+        <app-physical-print-list (selected)="physicalPrintSelected($event)"
+                                 [physicalPrints]="physicalPrints">
         </app-physical-print-list>
       </div>
       <div [ngClass]="{'col-0': !selected, 'col-md-6': selected}" id="detail">
-        <app-physical-print-details-panel *ngIf="selected" [physicalPrint]="selected"
+        <app-physical-print-details-panel *ngIf="selected"
+                                          [physicalPrint]="selected"
+                                          [physicalParts]="physicalParts"
+                                          [digitalPrint]="digitalPrint"
+                                          [digitalParts]="digitalParts"
                                           (closeReq)="selected = null">
         </app-physical-print-details-panel>
       </div>

@@ -40,7 +40,7 @@
 					},
 					"response": [
 						{
-							"id": "45dbe26b-b94c-4551-a5e3-f5f57e5f70c0",
+							"id": "6238ec7a-6623-4a28-9a57-f2f2a0ffea7e",
 							"name": "Get All Customers",
 							"originalRequest": {
 								"method": "GET",
@@ -141,7 +141,7 @@
 					},
 					"response": [
 						{
-							"id": "2c8ae85b-cb53-4cdf-8fbb-d26cc3572942",
+							"id": "7132e870-f8e1-4350-b778-4c736818f3dd",
 							"name": "Get Customers",
 							"originalRequest": {
 								"method": "GET",
@@ -245,7 +245,7 @@
 					},
 					"response": [
 						{
-							"id": "a35e3be3-b72e-4bae-8699-814b230d9728",
+							"id": "ef8acae4-38ae-42f2-beed-6b707f3f633b",
 							"name": "Get Digital-parts of Customer",
 							"originalRequest": {
 								"method": "GET",
@@ -350,7 +350,7 @@
 					},
 					"response": [
 						{
-							"id": "951fa70f-0547-48dc-a8da-3827e8109aef",
+							"id": "1aca104d-1de4-4309-a878-9da2e978ea1c",
 							"name": "Get Orders of Customer",
 							"originalRequest": {
 								"method": "GET",
@@ -460,7 +460,7 @@
 					},
 					"response": [
 						{
-							"id": "7957c89e-1fe4-4dd4-9564-2dc2e7a39e6c",
+							"id": "720a047d-922c-427c-8be4-f6ec213d7dcf",
 							"name": "New Customer",
 							"originalRequest": {
 								"method": "POST",
@@ -577,7 +577,7 @@
 					},
 					"response": [
 						{
-							"id": "1db13f92-1bd6-49bb-9e2f-86bd43ed94ca",
+							"id": "955b3465-f472-4e3a-acde-ab4c493bcd62",
 							"name": "Edit Customer",
 							"originalRequest": {
 								"method": "PUT",
@@ -687,7 +687,7 @@
 					},
 					"response": [
 						{
-							"id": "4102c30d-8768-438a-b112-c68f2457bc03",
+							"id": "b517dedf-65ee-4522-8686-b0829bbefaaf",
 							"name": "Delete customer",
 							"originalRequest": {
 								"method": "DELETE",
@@ -794,7 +794,7 @@
 					},
 					"response": [
 						{
-							"id": "a35c7c2f-d768-402f-9719-71eaff602ea6",
+							"id": "b8bdf69a-8b3a-4f1a-ac3c-735172708e56",
 							"name": "Get Orders",
 							"originalRequest": {
 								"method": "GET",
@@ -901,7 +901,7 @@
 					},
 					"response": [
 						{
-							"id": "b44fdc77-c27e-4da6-81bc-751eeb1f0f23",
+							"id": "07f2a76e-cbb9-46e2-b9df-f2ab98a35d99",
 							"name": "Get Orders filter",
 							"originalRequest": {
 								"method": "GET",
@@ -1009,7 +1009,7 @@
 					},
 					"response": [
 						{
-							"id": "f922d9ac-3fae-4913-aac1-87e53db6436c",
+							"id": "451a8238-add3-4597-98ad-cd78728c4856",
 							"name": "Get specific order",
 							"originalRequest": {
 								"method": "GET",
@@ -1120,7 +1120,7 @@
 					},
 					"response": [
 						{
-							"id": "59757b64-754c-4910-95f9-0eb2f895ac76",
+							"id": "95d73abe-eed3-47ee-a750-82fbdf3bc064",
 							"name": "Create Order",
 							"originalRequest": {
 								"method": "POST",
@@ -1226,7 +1226,7 @@
 					},
 					"response": [
 						{
-							"id": "82345404-cb8c-4460-b23f-4864c35df4fe",
+							"id": "0d7a15f7-c591-4693-a847-a15e8b7913cb",
 							"name": "Edit Order",
 							"originalRequest": {
 								"method": "PUT",
@@ -1342,7 +1342,7 @@
 					},
 					"response": [
 						{
-							"id": "9bad31e6-6ef0-4559-9011-ca345597d74c",
+							"id": "31b290e5-1042-4c72-8a32-a364311ac47f",
 							"name": "Get specific digital print",
 							"originalRequest": {
 								"method": "GET",
@@ -1444,7 +1444,7 @@
 					},
 					"response": [
 						{
-							"id": "c2822f79-2b4b-426c-8e89-f31c423f6342",
+							"id": "8ec754a9-4442-4b67-895d-12e63894bc99",
 							"name": "Get digital prints",
 							"originalRequest": {
 								"method": "GET",
@@ -1513,7 +1513,7 @@
 							"body": "{\"path\":\"/magics/1-1082100546.magics\",\"magicsPartPairing\":{\"Hinge3\":2,\"Screw2\":1,\"Screw3\":1,\"Screw1\":1,\"Screw4\":1,\"Screw5\":1,\"Hinge1\":2,\"Hinge2\":2},\"id\":1,\"name\":\"path1\"}"
 						},
 						{
-							"id": "3369940a-f383-40a2-8a23-64e4c973b5a9",
+							"id": "3573edbc-4b01-4250-87cb-c46d8de2069d",
 							"name": "Get digital prints",
 							"originalRequest": {
 								"method": "GET",
@@ -1622,7 +1622,7 @@
 					},
 					"response": [
 						{
-							"id": "6c36d204-f0c7-47b8-b328-054ed7cb2f62",
+							"id": "7da61e36-a11b-4a7b-966d-66badcab3dba",
 							"name": "Create Digital Print",
 							"originalRequest": {
 								"method": "POST",
@@ -1762,7 +1762,7 @@
 					},
 					"response": [
 						{
-							"id": "b6ae598e-720f-4d3a-a97f-a19a24769c00",
+							"id": "8920df20-7199-4f93-8ffc-445d8c8e0dac",
 							"name": "Get Digital Parts",
 							"originalRequest": {
 								"method": "GET",
@@ -1863,7 +1863,7 @@
 					},
 					"response": [
 						{
-							"id": "9e03f07c-8cf9-47ed-b510-077e4ec02bdf",
+							"id": "001a1788-2996-4060-b17c-f2630e60091f",
 							"name": "Get Specific Digital Part",
 							"originalRequest": {
 								"method": "GET",
@@ -1972,7 +1972,7 @@
 					},
 					"response": [
 						{
-							"id": "49c103df-403e-45d2-ba25-420a96113949",
+							"id": "a798c40c-549f-4b94-92af-47d4c852804f",
 							"name": "Create Digital Part",
 							"originalRequest": {
 								"method": "POST",
@@ -2089,7 +2089,7 @@
 					},
 					"response": [
 						{
-							"id": "d7658d6a-89d9-49b8-9424-00d4d4d90fbf",
+							"id": "b2b588f5-66c3-47ab-970e-2509eef6d3e9",
 							"name": "Edit Digital Part",
 							"originalRequest": {
 								"method": "PUT",
@@ -2207,7 +2207,7 @@
 					},
 					"response": [
 						{
-							"id": "c508441b-8560-44db-ac33-e432c3fac8f2",
+							"id": "bd0ea632-89e8-4220-893e-e2b8d759adbb",
 							"name": "Post Stl File",
 							"originalRequest": {
 								"method": "POST",
@@ -2323,7 +2323,7 @@
 							},
 							"response": [
 								{
-									"id": "79ac9081-a120-4470-a233-0a8ab2db36ca",
+									"id": "09b0070e-3402-40de-8a4c-e57f6ef927e7",
 									"name": "Get Specific Physical Print",
 									"originalRequest": {
 										"method": "GET",
@@ -2424,7 +2424,7 @@
 							},
 							"response": [
 								{
-									"id": "ada1e660-0c23-4bc7-a7cd-90873badfde6",
+									"id": "5bbd276a-d0ca-438d-a21d-1d0902cb8aaf",
 									"name": "Get Physical Print",
 									"originalRequest": {
 										"method": "GET",
@@ -2534,7 +2534,7 @@
 							},
 							"response": [
 								{
-									"id": "c444f629-bbb9-468f-9e19-fe9cd7286dab",
+									"id": "9d7c4b13-c589-480b-af4c-9931afa3f8aa",
 									"name": "Create Physical Print",
 									"originalRequest": {
 										"method": "POST",
@@ -2653,7 +2653,7 @@
 							},
 							"response": [
 								{
-									"id": "676a615a-ee8d-4870-9a00-a10a8a44263d",
+									"id": "4d0699ed-345d-46ba-b48d-c46d96f32460",
 									"name": "Edit Physical Print",
 									"originalRequest": {
 										"method": "PUT",
@@ -2771,7 +2771,7 @@
 							},
 							"response": [
 								{
-									"id": "28e5c0d2-bdaf-4d45-a8f6-f87f7899ffc9",
+									"id": "868df4cd-d24b-415a-b8ed-9a9c150537a9",
 									"name": "Post Stl File",
 									"originalRequest": {
 										"method": "POST",
@@ -2845,7 +2845,7 @@
 									"body": "{\"id\":2,\"digitalPartID\":2,\"path\":\"/stl/2-1082100546.stl\"}"
 								},
 								{
-									"id": "5039d960-cd38-4a65-a2ee-ea7f3dcc7d54",
+									"id": "ab80e94a-5b8f-46f2-9224-47451acca1d8",
 									"name": "Post Slm Fil",
 									"originalRequest": {
 										"method": "POST",
@@ -2958,7 +2958,7 @@
 							},
 							"response": [
 								{
-									"id": "74fa1b16-4108-41c2-b759-b93c9d34964e",
+									"id": "f4420570-5b67-4360-bfe6-bb9708ea814b",
 									"name": "Get Specific Physical Part",
 									"originalRequest": {
 										"method": "GET",
@@ -3059,7 +3059,7 @@
 							},
 							"response": [
 								{
-									"id": "36511c47-9da6-4871-b62e-63d1049ac9d8",
+									"id": "cb16395f-a5d1-44b8-9300-b7020cee8350",
 									"name": "Get Physical Parts",
 									"originalRequest": {
 										"method": "GET",
@@ -3169,7 +3169,7 @@
 							},
 							"response": [
 								{
-									"id": "d1ca8951-44df-4f85-8c7b-e2122e282acd",
+									"id": "6c66265e-c2ae-4c31-b384-13bc68eca17b",
 									"name": "Create Physical Part",
 									"originalRequest": {
 										"method": "POST",
@@ -3288,7 +3288,7 @@
 							},
 							"response": [
 								{
-									"id": "8168560c-f108-4601-8b3b-c5bd99b54fc1",
+									"id": "d9d2772e-07e0-4cfa-8efc-a59330bba6ce",
 									"name": "Edit Physical Part",
 									"originalRequest": {
 										"method": "PUT",
@@ -3369,6 +3369,620 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Materials",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all materials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/materials",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"materials"
+							]
+						},
+						"description": "Getting all material information for all materials"
+					},
+					"response": [
+						{
+							"id": "68d2a681-9e54-4f55-be9b-c7af9e44a8c1",
+							"name": "Gett all materials",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/materials",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"materials"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2017 10:46:19 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 4544,
+							"body": "[{\"id\":1,\"name\":\"Stenhårt malm\",\"supplierName\":\"JimmyBs stenhårda gäng\",\"initialAmount\":100.0,\"materialGrades\":[{\"id\":1,\"materialID\":1,\"reusedTimes\":1,\"amount\":10.0},{\"id\":2,\"materialID\":1,\"reusedTimes\":2,\"amount\":10.0},{\"id\":3,\"materialID\":1,\"reusedTimes\":3,\"amount\":5.0}],\"materialProperties\":{\"Densitet\":\"Black Hole\",\"Färg\":\"Regnbågen\",\"Kommentar\":\"För hårt för ditt eget bästa\",\"Hårdhet\":\"Stenhårt\"}},{\"id\":2,\"name\":\"Dagis Tenn\",\"supplierName\":\"Johans leksaksoutlet\",\"initialAmount\":80.0,\"materialGrades\":[{\"id\":4,\"materialID\":2,\"reusedTimes\":0,\"amount\":50.0},{\"id\":5,\"materialID\":2,\"reusedTimes\":1,\"amount\":10.0},{\"id\":6,\"materialID\":2,\"reusedTimes\":2,\"amount\":10.0},{\"id\":7,\"materialID\":2,\"reusedTimes\":3,\"amount\":5.0},{\"id\":8,\"materialID\":2,\"reusedTimes\":4,\"amount\":5.0}],\"materialProperties\":{\"Böjbar\":\"Om mar är buff\",\"Tennsoldater\":\"WarHammer som gäller har jag hört\",\"Barnvänligt\":\"Med vuxet sällskap\"}}]"
+						}
+					]
+				},
+				{
+					"name": "Get a material",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/materials/{{materialID}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"materials",
+								"{{materialID}}"
+							]
+						},
+						"description": "Getting all material information for all materials"
+					},
+					"response": [
+						{
+							"id": "11a079e6-0a2f-472d-b2d2-88eed7eeb633",
+							"name": "Gett all materials",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/materials",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"materials"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2017 10:46:19 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 4544,
+							"body": "[{\"id\":1,\"name\":\"Stenhårt malm\",\"supplierName\":\"JimmyBs stenhårda gäng\",\"initialAmount\":100.0,\"materialGrades\":[{\"id\":1,\"materialID\":1,\"reusedTimes\":1,\"amount\":10.0},{\"id\":2,\"materialID\":1,\"reusedTimes\":2,\"amount\":10.0},{\"id\":3,\"materialID\":1,\"reusedTimes\":3,\"amount\":5.0}],\"materialProperties\":{\"Densitet\":\"Black Hole\",\"Färg\":\"Regnbågen\",\"Kommentar\":\"För hårt för ditt eget bästa\",\"Hårdhet\":\"Stenhårt\"}},{\"id\":2,\"name\":\"Dagis Tenn\",\"supplierName\":\"Johans leksaksoutlet\",\"initialAmount\":80.0,\"materialGrades\":[{\"id\":4,\"materialID\":2,\"reusedTimes\":0,\"amount\":50.0},{\"id\":5,\"materialID\":2,\"reusedTimes\":1,\"amount\":10.0},{\"id\":6,\"materialID\":2,\"reusedTimes\":2,\"amount\":10.0},{\"id\":7,\"materialID\":2,\"reusedTimes\":3,\"amount\":5.0},{\"id\":8,\"materialID\":2,\"reusedTimes\":4,\"amount\":5.0}],\"materialProperties\":{\"Böjbar\":\"Om mar är buff\",\"Tennsoldater\":\"WarHammer som gäller har jag hört\",\"Barnvänligt\":\"Med vuxet sällskap\"}}]"
+						},
+						{
+							"id": "ea5483f6-705b-4ff9-839f-db3e5f3ef889",
+							"name": "Get a materials",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/materials/{{materialID}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"materials",
+										"{{materialID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2017 10:49:48 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 40,
+							"body": "{\"id\":1,\"name\":\"Stenhårt malm\",\"supplierName\":\"JimmyBs stenhårda gäng\",\"initialAmount\":100.0,\"materialGrades\":[{\"id\":1,\"materialID\":1,\"reusedTimes\":1,\"amount\":10.0},{\"id\":2,\"materialID\":1,\"reusedTimes\":2,\"amount\":10.0},{\"id\":3,\"materialID\":1,\"reusedTimes\":3,\"amount\":5.0}],\"materialProperties\":{\"Densitet\":\"Black Hole\",\"Färg\":\"Regnbågen\",\"Kommentar\":\"För hårt för ditt eget bästa\",\"Hårdhet\":\"Stenhårt\"}}"
+						}
+					]
+				},
+				{
+					"name": "Create a new material",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"name\": \"Stenhårt malm\",\n    \"supplierName\": \"JimmyBs stenhårda gäng\",\n    \"initialAmount\": 100,\n    \"materialGrades\": [\n        {\n\n            \"reusedTimes\": 1,\n            \"amount\": 10\n        },\n        {\n            \n            \n            \"reusedTimes\": 2,\n            \"amount\": 10\n        },\n        {\n           \n            \n            \"reusedTimes\": 3,\n            \"amount\": 5\n        }\n    ],\n    \"materialProperties\": {\n        \"Densitet\": \"Black Hole\",\n        \"Färg\": \"Regnbågen\",\n        \"Kommentar\": \"För hårt för ditt eget bästa\",\n        \"Hårdhet\": \"Stenhårt\"\n    }\n }"
+						},
+						"url": {
+							"raw": "{{domain}}/materials",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"materials"
+							]
+						},
+						"description": "Creates a new material to be used within the system"
+					},
+					"response": []
+				},
+				{
+					"name": "Decrease a grade level",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/materials/{{materialID}}/{{gradeLevel}}/decrease/{{decreaseAmount}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"materials",
+								"{{materialID}}",
+								"{{gradeLevel}}",
+								"decrease",
+								"{{decreaseAmount}}"
+							]
+						},
+						"description": "Decrease the amount available for a specific grade of a given material."
+					},
+					"response": [
+						{
+							"id": "238a166e-e1ed-4963-a092-18c28ae25653",
+							"name": "Decrease a grade level",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/materials/{{materialID}}/{{gradeLevel}}/decrease/{{decreaseAmount}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"materials",
+										"{{materialID}}",
+										"{{gradeLevel}}",
+										"decrease",
+										"{{decreaseAmount}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Dec 2017 10:36:59 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 3503,
+							"body": "{\"id\":1,\"name\":\"Stenhårt malm\",\"supplierName\":\"JimmyBs stenhårda gäng\",\"initialAmount\":100.0,\"materialGrades\":[{\"id\":2,\"materialID\":1,\"reusedTimes\":2,\"amount\":10.0},{\"id\":3,\"materialID\":1,\"reusedTimes\":3,\"amount\":5.0},{\"id\":1,\"materialID\":1,\"reusedTimes\":1,\"amount\":5.0}],\"materialProperties\":{\"Densitet\":\"Black Hole\",\"Färg\":\"Regnbågen\",\"Kommentar\":\"För hårt för ditt eget bästa\",\"Hårdhet\":\"Stenhårt\"}}"
+						}
+					]
+				},
+				{
+					"name": "Increase a grade level",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{domain}}/materials/{{materialID}}/{{gradeLevel}}/increase/{{increaseAmount}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"materials",
+								"{{materialID}}",
+								"{{gradeLevel}}",
+								"increase",
+								"{{increaseAmount}}"
+							]
+						},
+						"description": "Increase the amount available for a specific grade of a given material."
+					},
+					"response": [
+						{
+							"id": "f1b448eb-22ce-435a-8985-f2b567a12462",
+							"name": "Decrease a grade level",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/materials/{{materialID}}/{{gradeLevel}}/decrease/{{decreaseAmount}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"materials",
+										"{{materialID}}",
+										"{{gradeLevel}}",
+										"decrease",
+										"{{decreaseAmount}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Dec 2017 10:36:59 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 3503,
+							"body": "{\"id\":1,\"name\":\"Stenhårt malm\",\"supplierName\":\"JimmyBs stenhårda gäng\",\"initialAmount\":100.0,\"materialGrades\":[{\"id\":2,\"materialID\":1,\"reusedTimes\":2,\"amount\":10.0},{\"id\":3,\"materialID\":1,\"reusedTimes\":3,\"amount\":5.0},{\"id\":1,\"materialID\":1,\"reusedTimes\":1,\"amount\":5.0}],\"materialProperties\":{\"Densitet\":\"Black Hole\",\"Färg\":\"Regnbågen\",\"Kommentar\":\"För hårt för ditt eget bästa\",\"Hårdhet\":\"Stenhårt\"}}"
+						},
+						{
+							"id": "79c04c85-3701-4531-8ef3-223917aa2acc",
+							"name": "Increase a grade level",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{domain}}/materials/{{materialID}}/{{gradeLevel}}/increase/{{increaseAmount}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"materials",
+										"{{materialID}}",
+										"{{gradeLevel}}",
+										"increase",
+										"{{increaseAmount}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "*",
+									"name": "Access-Control-Allow-Headers",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Access-Control-Request-Method",
+									"value": "*",
+									"name": "Access-Control-Request-Method",
+									"description": "Used when issuing a preflight request to let the server know what HTTP method will be used when the actual request is made."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Dec 2017 10:39:48 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Jetty(9.4.4.v20170414)",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 35,
+							"body": "{\"id\":1,\"name\":\"Stenhårt malm\",\"supplierName\":\"JimmyBs stenhårda gäng\",\"initialAmount\":100.0,\"materialGrades\":[{\"id\":2,\"materialID\":1,\"reusedTimes\":2,\"amount\":10.0},{\"id\":3,\"materialID\":1,\"reusedTimes\":3,\"amount\":5.0},{\"id\":1,\"materialID\":1,\"reusedTimes\":1,\"amount\":10.0}],\"materialProperties\":{\"Densitet\":\"Black Hole\",\"Färg\":\"Regnbågen\",\"Kommentar\":\"För hårt för ditt eget bästa\",\"Hårdhet\":\"Stenhårt\"}}"
+						}
+					]
 				}
 			]
 		}
