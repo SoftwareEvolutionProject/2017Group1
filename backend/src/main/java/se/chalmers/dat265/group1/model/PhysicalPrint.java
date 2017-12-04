@@ -3,6 +3,7 @@ package se.chalmers.dat265.group1.model;
 public class PhysicalPrint extends DataModel {
     private int id;
     private int digitalPrintID;
+    private int detailedMaterialId;
 
     public PhysicalPrint() {
         id = -1;
@@ -20,5 +21,9 @@ public class PhysicalPrint extends DataModel {
 
     public int getDigitalPrintID() {
         return digitalPrintID;
+    }
+
+    public int getDetailedMaterialId() {
+        return detailedMaterialId;
     }
 }

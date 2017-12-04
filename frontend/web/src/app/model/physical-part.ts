@@ -1,3 +1,5 @@
+import {PhysicalPrint} from "./physical-print";
+
 export class PhysicalPart {
   public id: number;
   public orderedPartID: number;
@@ -17,5 +19,11 @@ export class PhysicalPart {
     } else {
       return null;
     }
+  }
+
+  static createFromPhysicalPrint(pPrint: PhysicalPrint): PhysicalPart {
+    const pp = new PhysicalPart();
+    pp.physicalPrintID = pPrint.id;
+    return pp;
   }
 }

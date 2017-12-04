@@ -12,13 +12,19 @@
     <div *ngIf="physicalPrint">
     ID: {{physicalPrint.id}} <br>
     Digital Print: {{physicalPrint.digitalPrintID}}<br>
+    <app-digital-print-details-panel *ngIf="digitalPrint && digitalParts"
+                                     [digitalParts]="digitalParts" [digitalPrint]="digitalPrint"
+                                     [close]="false"
+                                     [minimize]="true"
+                                     [minimized]="true"
+    ></app-digital-print-details-panel>
 
     SLM File: {{physicalPrint.path}}
     </div>
 
     <br>
 
-    <h3>Physical Parts Included:</h3>
+    <h3>Physical Parts Printed:</h3>
     <table id="pPartsTable">
 
       <thead>
