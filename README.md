@@ -20,8 +20,15 @@ Backend API documentation is hosted through postman and found at the link below.
 It is setup using docker. Set up docker container with backend/fronted/postgres:
 > docker-compose up -d --build
 
+
 Get into the container:
 > docker exec -it swerea bash
+
+
+Set base url when not in production mode by creating frontend/web/.env and adding BACKEND_URL.
+<br>Example:
+> BACKEND_URL="http://localhost:4567"
+
 
 Run whatever you want, use the makefile for aid
 
