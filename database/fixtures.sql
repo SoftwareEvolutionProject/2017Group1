@@ -22,6 +22,11 @@ COMMIT;
 INSERT INTO customer (name, email) VALUES ('Testbolag', 'test@testbolag.se');
 INSERT INTO customer (name, email) VALUES ('Chalmers n Stuff', 'gangsters@tjalmers.se');
 
+INSERT INTO materialdata (name, supplierName, initialAmount) VALUES
+  ('Stenhårt malm', 'JimmyBs stenhårda gäng', 100),
+  ('Dagis Tenn', 'Johans leksaksoutlet', 80);
+
+
 INSERT INTO orderdata (customerID, date) VALUES
   ((SELECT id
     FROM customer
@@ -104,30 +109,30 @@ INSERT INTO magicspairing (digitalPrintID, digitalPartID, label) VALUES
                             FROM digitalpart
                             WHERE name = 'Emilia'), 'EmiliaProtype');
 
-INSERT INTO physicalprint (digitalPrintID, path) VALUES
+INSERT INTO physicalprint (digitalPrintID, path, materialID, materialGrade) VALUES
   ((SELECT id
     FROM digitalprintdata
-    WHERE name = 'path1'), 'slm/path1'),
+    WHERE name = 'path1'), 'slm/path1', 1,0),
   ((SELECT id
     FROM digitalprintdata
-    WHERE name = 'path1'), 'slm/path2');
+    WHERE name = 'path1'), 'slm/path2', 1,1);
 
-INSERT INTO physicalprint (digitalPrintID, path) VALUES
+INSERT INTO physicalprint (digitalPrintID, path, materialID, materialGrade) VALUES
   ((SELECT id
     FROM digitalprintdata
-    WHERE name = 'path2'), 'slm/path3'),
+    WHERE name = 'path2'), 'slm/path3',2,0),
   ((SELECT id
     FROM digitalprintdata
-    WHERE name = 'path2'), 'slm/path4'),
+    WHERE name = 'path2'), 'slm/path4',2,1),
   ((SELECT id
     FROM digitalprintdata
-    WHERE name = 'path2'), 'slm/path5'),
+    WHERE name = 'path2'), 'slm/path5',2,0),
   ((SELECT id
     FROM digitalprintdata
-    WHERE name = 'path2'), 'slm/path6'),
+    WHERE name = 'path2'), 'slm/path6',2,2),
   ((SELECT id
     FROM digitalprintdata
-    WHERE name = 'path2'), 'slm/path7');
+    WHERE name = 'path2'), 'slm/path7',2,1);
 
 
 INSERT INTO orderedpart (orderID, digitalPartID, amount) VALUES
@@ -168,14 +173,6 @@ INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingID) V
 
 INSERT INTO stldata (digitalPartID, path) VALUES (2, '/stl/2-1082100546.stl'), (3, '/stl/3-129913882.stl');
 
-COMMIT;
-
-INSERT INTO materialdata (name, supplierName, initialAmount) VALUES
-  ('Stenhårt malm', 'JimmyBs stenhårda gäng', 100),
-  ('Dagis Tenn', 'Johans leksaksoutlet', 80);
-
-COMMIT;
-
 INSERT INTO materialproperty (materialID, name, description) VALUES
   (1, 'Hårdhet', 'Stenhårt'),
   (1, 'Densitet', 'Black Hole'),
@@ -187,12 +184,10 @@ INSERT INTO materialproperty (materialID, name, description) VALUES
   (2, 'Böjbar', 'Om mar är buff'),
   (2, 'Tennsoldater', 'WarHammer som gäller har jag hört');
 
-COMMIT;
-
 INSERT INTO materialgrade (materialID, reusedTimes, amount) VALUES
   (1, 1, 10), (1, 2, 10), (1, 3, 5);
 
 INSERT INTO materialgrade (materialID, reusedTimes, amount) VALUES
   (2, 0, 50), (2, 1, 10), (2, 2, 10), (2, 3, 5), (2, 4, 5);
 
-COMMIT;
+COMMIT ;
