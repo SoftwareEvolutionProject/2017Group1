@@ -46,6 +46,6 @@ Thumbs.db
 
 # Environment variable stuff
 .env
-/src/app/environments/environment.*.ts
+/src/environments/environment.*.ts
 .v8flags.*.json
 /ts-node-*
