@@ -1,5 +1,7 @@
+import { environment } from '../../../environments/environment';
+
 export class HttpClient {
-  static baseUrl = 'http://46.101.132.193:4567/';
+  static baseUrl = environment.backendUrl + '/';
   static loginUrl = HttpClient.baseUrl + 'login';
   static customerUrl = HttpClient.baseUrl + 'customers';
   static orderUrl = HttpClient.baseUrl + 'orders';

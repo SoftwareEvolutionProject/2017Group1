@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { DigitalPart } from '../../../model/digital-part';
 import { DigitalPartService } from '../../../services/digital-part/digital-part.service';
 import { ErrorService } from '../../../services/error.service';
+import {HttpClient} from "../../../services/http/http.client";
 declare var $: any;
 
 @Component({
@@ -129,7 +130,7 @@ export class DigitalPartListComponent implements OnInit, AfterViewInit {
   }
   private download(id) {
     this.digitalPartService.getDigitalPart(id).subscribe((res) => {
-        window.open('http://localhost:4567/' + res.path);             // Update this to proper path.
+        window.open(HttpClient.baseUrl + res.path);
       }
     );
   }

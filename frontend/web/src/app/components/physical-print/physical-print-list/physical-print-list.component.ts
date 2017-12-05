@@ -3,7 +3,9 @@ import {Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {PhysicalPrint} from '../../../model/physical-print';
 import {ErrorService} from '../../../services/error.service';
+import {HttpClient} from '../../../services/http/http.client';
 import {PhysicalPrintService} from '../../../services/physical-print/physical-print.service';
+
 declare var $: any;
 
 @Component({
@@ -146,7 +148,7 @@ export class PhysicalPrintListComponent implements OnInit, OnChanges {
   }
   private download(id) {
     this.physicalPrintService.getPhysicalPrint(id).subscribe((res) => {
-        window.open('http://localhost:4567/' + res.path);             // Update this to proper path.
+        window.open(HttpClient.baseUrl + res.path);
       }
     );
   }
