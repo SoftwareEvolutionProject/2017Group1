@@ -3,6 +3,8 @@ package se.chalmers.dat265.group1.model;
 public class PhysicalPrint extends DataModel {
     private int id;
     private int digitalPrintID;
+    private int materialID;
+    private int materialGrade;
 
     public PhysicalPrint() {
         id = -1;
