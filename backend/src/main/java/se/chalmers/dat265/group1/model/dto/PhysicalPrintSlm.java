@@ -6,7 +6,7 @@ public class PhysicalPrintSlm extends PhysicalPrint {
     private String path = "";
 
     public PhysicalPrintSlm(PhysicalPrint physicalPrint, String path) {
-        super(physicalPrint.getId(), physicalPrint.getDigitalPrintID());
+        super(physicalPrint.getId(), physicalPrint.getDigitalPrintID(), physicalPrint.getMaterialID(), physicalPrint.getMaterialGrade());
         this.path = path;
     }
 }

@@ -9,11 +9,15 @@ public class PhysicalPrint extends DataModel {
     public PhysicalPrint() {
         id = -1;
         digitalPrintID = -1;
+        materialGrade = -1;
+        materialID = -1;
     }
 
-    public PhysicalPrint(int id, int digitalPrintID) {
+    public PhysicalPrint(int id, int digitalPrintID, int materialID, int materialGrade) {
         this.id = id;
         this.digitalPrintID = digitalPrintID;
+        this.materialID = materialID;
+        this.materialGrade = materialGrade;
     }
 
     public int getId() {
@@ -24,4 +28,11 @@ public class PhysicalPrint extends DataModel {
         return digitalPrintID;
     }
 
+    public int getMaterialID() {
+        return materialID;
+    }
+
+    public int getMaterialGrade() {
+        return materialGrade;
+    }
 }
