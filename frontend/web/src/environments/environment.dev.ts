@@ -1,5 +1,5 @@
 
 export const environment = {
   production: false,
-  backendUrl: "",
+  backendUrl: "undefined",
 };
