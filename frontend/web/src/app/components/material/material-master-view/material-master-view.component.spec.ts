@@ -8,7 +8,6 @@ import {HttpClientService} from '../../../services/http/http-client.service';
 import {MaterialDetailPanelComponent} from '../material-detail-panel/material-detail-panel.component';
 import {MaterialListComponent} from '../material-list/material-list.component';
 import { MaterialMasterViewComponent } from './material-master-view.component';
-import {CustomerService} from "../../../services/customer/customer.service";
 
 describe('MaterialMasterViewComponent', () => {
   let component: MaterialMasterViewComponent;
@@ -23,7 +22,6 @@ describe('MaterialMasterViewComponent', () => {
     TestBed.overrideComponent(MaterialListComponent, {
       set: {
         providers: [
-          {provide: CustomerService, useClass: CustomerService},
           {provide: MaterialService, useClass: MaterialService},
           {provide: ErrorService, useClass: ErrorService},
         ],

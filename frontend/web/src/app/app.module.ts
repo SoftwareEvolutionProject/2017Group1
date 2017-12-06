@@ -23,8 +23,6 @@ import { DigitalPrintEditComponent } from './components/digital-print/digital-pr
 import { DigitalPrintListComponent } from './components/digital-print/digital-print-list/digital-print-list.component';
 import { DigitalPrintMasterViewComponent } from './components/digital-print/digital-print-master-view/digital-print-master-view.component';
 import { HomeComponent } from './components/home/home.component';
-import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
-import { MaterialListComponent } from './components/material-list/material-list.component';
 import {PhysicalPrintDetailsPanelComponent} from './components/physical-print/physical-print-details-panel/physical-print-details-panel.component';
 import {PhysicalPrintEditComponent} from './components/physical-print/physical-print-edit/physical-print-edit.component';
 import {PhysicalPrintListComponent} from './components/physical-print/physical-print-list/physical-print-list.component';
@@ -44,6 +42,7 @@ import {PhysicalPartMasterViewComponent} from "./components/physical-part/physic
 import { MaterialDetailPanelComponent } from './components/material/material-detail-panel/material-detail-panel.component';
 import { MaterialEditComponent } from './components/material/material-edit/material-edit.component';
 import { MaterialMasterViewComponent } from './components/material/material-master-view/material-master-view.component';
+import { MaterialListComponent } from './components/material/material-list/material-list.component';
 
 
 @NgModule({
@@ -68,7 +67,6 @@ import { MaterialMasterViewComponent } from './components/material/material-mast
     PhysicalPrintListComponent,
     PhysicalPrintEditComponent,
     MaterialListComponent,
-    MaterialDetailComponent,
     CustomerDetailPanelComponent,
     CustomerMasterViewComponent,
     PhysicalPrintMasterViewComponent,

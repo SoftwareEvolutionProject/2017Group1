@@ -15,9 +15,9 @@
           <span *ngIf="creating">Auto Generated </span>
 
           <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
-            <div [ngClass]="{'has-error': !requiredFieldsForm.get('date').valid}">
-              <label>Date</label>
-              <p-calendar formControlName="date" dateFormat="yy-mm-dd"></p-calendar>
+            <label>Supplier Name</label>
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('supplierName').valid}">
+              <input class="form-control" formControlName="supplierName" value="{{material.supplierName}}">
             </div>
             <label>Customer</label>
             <div [ngClass]="{'has-error': !requiredFieldsForm.get('customerID').valid}">
