@@ -69,6 +69,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="JavaScript\DragSelect.js" />
     <Content Include="JavaScript\folderinfolder\BestPractices.js" />
     <Content Include="JavaScript\JSC3D.js" />
     <Content Include="JavaScript\Lightense.js" />

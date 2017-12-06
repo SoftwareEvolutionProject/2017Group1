@@ -15,7 +15,7 @@ namespace js_to_ts_tool {
         public String[] ClassNames { get { return classNames; } }
 
         // How to find constructor functions.
-        static String classRegexPattern = @"var +[A-Za-z_][A-Za-z0-9_]* *= *function *([A-Za-z_]?[A-Za-z0-9_ ,]*)? *\( *[A-Za-z_]?[A-Za-z0-9_ ,]* *\) *{";
+        static String classRegexPattern = @"function +([A-Za-z_][A-Za-z0-9_]*) *[A-Za-z_]?[A-Za-z0-9_ ,]*? *\( *[A-Za-z_]?[A-Za-z0-9_ ,]* *\) *{|var +([A-Za-z_][A-Za-z0-9_]*) *= *function *[A-Za-z_]?[A-Za-z0-9_ ,]*? *\( *[A-Za-z_]?[A-Za-z0-9_ ,]* *\) *{";
 
         public PrototypeBestPracticeTransformer(String fileContent) {
             this.fileContent = fileContent;
@@ -27,7 +27,7 @@ namespace js_to_ts_tool {
 
         public bool CleanUpClasses() {
             for(int i=2, j=0;i<classes.Length;i+=2, j++) {
-                classes[i] = "export class " + classNames[j] + " {\n\tconstructor " + Regex.Match(classes[i-1], @"\([A-Za-z_][A-Za-z0-9_, ]*\)") + " {" + classes[i] + "}\n";
+                classes[i] = "export class " + classNames[j] + " {\n\tconstructor " + Regex.Match(classes[i-1], @"\( *[A-Za-z_][A-Za-z0-9_, ]*\)") + " {" + classes[i] + "}\n";
                 
 //                Match s = Regex.Match(classes[i], classRegexPattern);
 //                Match arguments = Regex.Match(s.ToString(), @"\([A-Za-z_][A-Za-z0-9_, ]*\)");
@@ -40,6 +40,7 @@ namespace js_to_ts_tool {
 
         public bool CleanUpFunctions() {
             for (int i = 2, j = 0; i < classes.Length; i += 2, j++) {
+                classes[i] = Regex.Replace(classes[i], @"[A-Za-z_][A-Za-z0-9_]*\.prototype\._", "private ");
                 classes[i] = Regex.Replace(classes[i], @"[A-Za-z_][A-Za-z0-9_]*\.prototype\.", "");
                 classes[i] = Regex.Replace(classes[i], @"= *function", " ");
             }
@@ -48,12 +49,14 @@ namespace js_to_ts_tool {
         }
 
         public bool CleanUpVariables() {
-            // Is in variable constructor. No work needed
+            for (int i = 0; i < classes.Length; i++) {
+                classes[i] = Regex.Replace(classes[i], @"this\._", "this.");
+            }
             return true;
         }
 
         public bool ExtractClasses() {
-            classes = Regex.Split(fileContent, "(" + classRegexPattern + ")");
+            classes = Regex.Split(fileContent, classRegexPattern);
             return true;
         }
 
@@ -61,7 +64,14 @@ namespace js_to_ts_tool {
             classNames = new String[classes.Length / 2];
 
             for (int i = 1, j = 0; i < classes.Length; i+=2, j++) {
-                classNames[j] = classes[i].Trim().Split(' ')[1];
+                Match m = Regex.Match(classes[i], classRegexPattern);
+                if (m.Groups.Count > 0) {
+                    if (m.Groups[1].Value.Length != 0) {
+                        classNames[j] = m.Groups[1].Value;
+                    } else if (m.Groups[2].Value.Length != 0) {
+                        classNames[j] = m.Groups[2].Value;
+                    }
+                }
             }
 
             return true;
