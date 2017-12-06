@@ -23,18 +23,23 @@
             <div [ngClass]="{'has-error': !requiredFieldsForm.get('supplierName').valid}">
               <input class="form-control" formControlName="supplierName" value="{{material.supplierName}}">
             </div>
+            <label>Initial Amount</label>
+            <div [ngClass]="{'has-error': !requiredFieldsForm.get('initialAmount').valid}">
+              <input type="number" min="0" class="form-control" formControlName="initialAmount" value="{{material.initialAmount}}">
+            </div>
           </form>
+          <h2>Material Grades</h2>
           <div *ngFor="let formGroup of materialGradeFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
-            <div class="col-sm-4">
-              <label>ID</label>
+            <div class="col-sm-5">
+              <label>Reused times</label>
               <form [formGroup]="formGroup">
-                <div [ngClass]="{'has-error': !formGroup.get('text').valid}">
-                  <input type="text" class="form-control" formControlName="text"
-                         value="{{formGroup.get('text').value}}">
+                <div [ngClass]="{'has-error': !formGroup.get('reusedTimes').valid}">
+                  <input type="number" min="0" class="form-control" formControlName="reusedTimes"
+                         value="{{formGroup.get('reusedTimes').value}}">
                 </div>
               </form>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <label>Amount</label>
               <form [formGroup]="formGroup">
                 <div [ngClass]="{'has-error': !formGroup.get('amount').valid}">
@@ -56,13 +61,46 @@
               </button>
             </div>
           </div>
+          <h2>Material Properties</h2>
+          <div *ngFor="let formGroup of materialPropertiesFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
+            <div class="col-sm-5">
+              <label>Property</label>
+              <form [formGroup]="formGroup">
+                <div [ngClass]="{'has-error': !formGroup.get('property').valid}">
+                  <input type="text" class="form-control" formControlName="property"
+                         value="{{formGroup.get('property').value}}">
+                </div>
+              </form>
+            </div>
+            <div class="col-sm-6">
+              <label>Value</label>
+              <form [formGroup]="formGroup">
+                <div [ngClass]="{'has-error': !formGroup.get('value').valid}">
+                  <input type="text" class="form-control" formControlName="value"
+                         value="{{formGroup.get('value').value}}">
+                </div>
+              </form>
+            </div>
+            <div class="col-sm-1">
+              <button class="btn btn-danger" (click)="deleteMaterialGrade(i)" style="margin-top: 25px">
+                <span class="glyphicon glyphicon-trash"> </span>
+              </button>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom: 10px; margin-top: 20px">
+            <div class="col-sm-offset-11 col-sm-1">
+              <button id="addOption" class="btn btn-primary btn " (click)="addMaterialProperty()">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </div>
+          </div>
           <div class="pull-left" style="margin-top: 20px">
             <button class="btn btn-default"
                     style="min-width: 100px" (click)="cancel()">Cancel
             </button>
           </div>
           <div class="pull-right" style="margin-top: 20px">
-            <button [disabled]=" !materialGradesValid() || !requiredFieldsForm.valid" class="btn btn-primary"
+            <button [disabled]=" !materialPropertiesValid() || !materialGradesValid() || !requiredFieldsForm.valid" class="btn btn-primary"
                     style="min-width: 100px" (click)="save()">Save
             </button>
           </div>
