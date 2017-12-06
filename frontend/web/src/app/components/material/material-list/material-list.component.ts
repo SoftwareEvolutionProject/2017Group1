@@ -2,7 +2,6 @@ import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from 
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import {Material} from '../../../model/material';
-import {CustomerService} from '../../../services/customer/customer.service';
 import {ErrorService} from '../../../services/error.service';
 import {MaterialService} from '../../../services/material/material.service';
 
@@ -12,7 +11,7 @@ declare var $: any;
   selector: 'app-material-list',
   templateUrl: './material-list.component.html',
   styleUrls: ['./material-list.component.scss'],
-  providers: [MaterialService, CustomerService, ErrorService],
+  providers: [MaterialService, ErrorService],
 })
 export class MaterialListComponent implements OnInit, AfterViewInit {
   @Output() selected: EventEmitter<Material> = new EventEmitter<Material>();
@@ -24,8 +23,7 @@ export class MaterialListComponent implements OnInit, AfterViewInit {
   private toBeDeleted: number = null;
   selectedMaterial: Material = null;
 
-  constructor(private customerService: CustomerService,
-              private materialService: MaterialService,
+  constructor(private materialService: MaterialService,
               private errorService: ErrorService,
               private router: Router,
               private modalService: BsModalService) {
