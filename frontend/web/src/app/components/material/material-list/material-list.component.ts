@@ -2,7 +2,6 @@ import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from 
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import {Material} from '../../../model/material';
-import {Customer} from '../../../model/customer';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {ErrorService} from '../../../services/error.service';
 import {MaterialService} from '../../../services/material/material.service';
@@ -19,7 +18,6 @@ export class MaterialListComponent implements OnInit, AfterViewInit {
   @Output() selected: EventEmitter<Material> = new EventEmitter<Material>();
   private table;
   private materials: Material[];
-  private customers: Customer[];
 
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
@@ -45,14 +43,9 @@ export class MaterialListComponent implements OnInit, AfterViewInit {
     /* get users */
     this.materialService.getMaterials().subscribe(
       (materials) => {
-        this.customerService.getCustomers().subscribe(
-          (customers) => {
-            this.customers = customers;
-            this.materials = materials;
-            this.populate();
-            this.prepareTriggers();
-          },
-        );
+        this.materials = materials;
+        this.populate();
+        this.prepareTriggers();
       }, (error) => {
         alert(error.verbose_message);
       },
@@ -67,12 +60,24 @@ export class MaterialListComponent implements OnInit, AfterViewInit {
       field: 'id',
       sortable: true,
     }, {
-      title: 'Customer',
-      field: 'customer',
+      title: 'Name',
+      field: 'name',
       sortable: true,
     }, {
-      title: 'Date',
-      field: 'date',
+      title: 'Supplier name',
+      field: 'supplierName',
+      sortable: true,
+    }, {
+      title: 'Initial ammount',
+      field: 'supplierName',
+      sortable: true,
+    }, {
+      title: 'Material grades',
+      field: 'materialGrades',
+      sortable: true,
+    }, {
+      title: 'Material properties',
+      field: 'materialProperties',
       sortable: true,
     }, {
       field: 'operate',
@@ -91,21 +96,13 @@ export class MaterialListComponent implements OnInit, AfterViewInit {
 
     const data = [];
     this.materials.forEach((material) => {
-      this.customers.forEach((customer) => {
-        if (material.customerID === customer.id) {
-          const date = new Date(material.date);
-          const mm = date.getMonth() + 1;
-          const dd = date.getDate();
-          const dateString = [date.getFullYear(), '-',
-            (mm>9 ? '' : '0') + mm, '-',
-            (dd>9 ? '' : '0') + dd
-          ].join('');
-          data.push({
-            id: material.id,
-            customer: customer.name,
-            date: dateString,
-          });
-        }
+      data.push({
+        id: material.id,
+        name: material.name,
+        supplierName: material.supplierName,
+        initialAmmount: material.initialAmmount,
+        materialGrades: material.materialGrades,
+        materialProperties: material.materialProperties,
       });
     });
 
