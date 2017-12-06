@@ -14,6 +14,7 @@ declare var $: any;
 })
 export class MaterialDetailPanelComponent implements OnInit, OnChanges {
   private materialTable;
+  private propertyTable;
   private loadingTable = false;
   private dataLoaded = false;
   @Input('material') material: Material;
@@ -27,7 +28,8 @@ export class MaterialDetailPanelComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.materialTable = $('#materialTable');
+    this.materialTable = $('#materialGradeTable');
+    this.propertyTable = $('#materialPropertyTable')
     if (this.material) {
       this.getMaterialInfo();
     }
@@ -59,17 +61,35 @@ export class MaterialDetailPanelComponent implements OnInit, OnChanges {
   }
 
   private populateMaterialProperties() {
-    this.materialPropertiesFieldNames = [];
-    this.materialPropertiesFieldNames = Object.getOwnPropertyNames(this.material.materialProperties); /*.forEach((id) => {
-      this.materialPropertiesFieldNames.push(this.formBuilder.group({
-        magicsId: [id,
-          Validators.compose([Validators.required])],
-        digitalPart: [this.digitalPrint.magicsPartPairing[id] ? this.digitalPrint.magicsPartPairing[id] : '',
-          Validators.compose([Validators.required])],
-      }));
-    });*/
-    console.log("Material properties field names: ", this.materialPropertiesFieldNames);
+    const _self = this;
+    /*manually generate columns*/
+    const columns = [{
+      title: 'Property',
+      field: 'property',
+      sortable: true,
+    }, {
+      title: 'Value',
+      field: 'value',
+      sortable: true,
+    }];
 
+    const data = [];
+    this.materialPropertiesFieldNames = [];
+    Object.getOwnPropertyNames(this.material.materialProperties).forEach((key) => {
+      data.push({
+        property: key,
+        value: this.material.materialProperties[key],
+      });
+    });
+    (this.propertyTable as any).bootstrapTable('destroy');
+    (this.propertyTable as any).bootstrapTable(
+      {
+        data,
+        columns,
+        sortStable: true,
+        sortName: 'id',
+      },
+    );
   }
 
   private populateMaterialGrades() {

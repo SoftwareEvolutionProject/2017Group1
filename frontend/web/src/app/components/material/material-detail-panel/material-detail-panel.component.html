@@ -21,12 +21,8 @@
     <div *ngIf="material" class="panel-body" style="padding-right: 30px">
       Initial amount: {{material.initialAmount}}
     </div>
-    <div *ngIf="material" class="panel-body" style="padding-right: 30px">
-      Material properties: {{material.materialProperties}}
-    </div>
-
     <h3>Material grades</h3>
-    <table id="materialTable"
+    <table id="materialGradeTable"
            data-pagination="true"
            data-page-list="[10, 25, 50, 100, ALL]">
       <thead>
@@ -35,6 +31,15 @@
       </thead>
       <tbody></tbody>
     </table>
-
+    <h3>Material Properties</h3>
+    <table id="materialPropertyTable"
+           data-pagination="true"
+           data-page-list="[10, 25, 50, 100, ALL]">
+      <thead>
+      <tr>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
 </div>
