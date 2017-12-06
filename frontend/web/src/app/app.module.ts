@@ -41,6 +41,9 @@ import {PhysicalPartListComponent} from "./components/physical-part/physical-par
 import {PhysicalPartEditComponent} from "./components/physical-part/physical-part-edit/physical-part-edit.component";
 import {PhysicalPartDetailPanelComponent} from "./components/physical-part/physical-part-detail-panel/physical-part-detail-panel.component";
 import {PhysicalPartMasterViewComponent} from "./components/physical-part/physical-part-master-view/physical-part-master-view.component";
+import { MaterialDetailPanelComponent } from './components/material/material-detail-panel/material-detail-panel.component';
+import { MaterialEditComponent } from './components/material/material-edit/material-edit.component';
+import { MaterialMasterViewComponent } from './components/material/material-master-view/material-master-view.component';
 
 
 @NgModule({
@@ -75,6 +78,9 @@ import {PhysicalPartMasterViewComponent} from "./components/physical-part/physic
     OrderListComponent,
     OrderDetailPanelComponent,
     OrderMasterViewComponent,
+    MaterialDetailPanelComponent,
+    MaterialEditComponent,
+    MaterialMasterViewComponent,
   ],
   imports: [
     DropdownModule,
