@@ -1,26 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderDetailPanelComponent } from './order-detail-panel.component';
-import {OrderService} from '../../../services/order/order.service';
-import {OrderMockService} from '../../../services/order/order-mock.service';
+import { MaterialDetailPanelComponent } from './material-detail-panel.component';
+import {MaterialService} from '../../../services/material/material.service';
+import {MaterialMockService} from '../../../services/material/material-mock.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {CustomerMockService} from '../../../services/customer/customer-mock.service';
 import {CustomerService} from '../../../services/customer/customer.service';
 
-describe('OrderDetailPanelComponent', () => {
-  let component: OrderDetailPanelComponent;
-  let fixture: ComponentFixture<OrderDetailPanelComponent>;
+describe('MaterialDetailPanelComponent', () => {
+  let component: MaterialDetailPanelComponent;
+  let fixture: ComponentFixture<MaterialDetailPanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [OrderDetailPanelComponent],
+      declarations: [MaterialDetailPanelComponent],
       imports: [RouterTestingModule],
     })
-    TestBed.overrideComponent(OrderDetailPanelComponent, {
+    TestBed.overrideComponent(MaterialDetailPanelComponent, {
       set: {
         providers: [
           { provide: CustomerService, useClass: CustomerMockService },
-          { provide: OrderService, useClass: OrderMockService },
+          { provide: MaterialService, useClass: MaterialMockService },
         ],
       },
     })
@@ -28,12 +28,12 @@ describe('OrderDetailPanelComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrderDetailPanelComponent);
+    fixture = TestBed.createComponent(MaterialDetailPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should OrderDetailPanelComponent', () => {
+  it('should MaterialDetailPanelComponent', () => {
     expect(component).toBeTruthy();
   });
 });

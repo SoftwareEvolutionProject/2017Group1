@@ -1,46 +1,46 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
-import {Order} from "../../../model/order";
+import {Material} from "../../../model/material";
 import {Customer} from "../../../model/customer";
-import {OrderService} from "../../../services/order/order.service";
-import {OrderedPart} from "../../../model/ordered-part";
+import {MaterialService} from "../../../services/material/material.service";
+import {MaterialedPart} from "../../../model/materialed-part";
 import {Router} from "@angular/router";
 import {CustomerService} from "../../../services/customer/customer.service";
 
 declare var $: any;
 
 @Component({
-  selector: 'app-order-detail-panel',
-  templateUrl: './order-detail-panel.component.html',
-  styleUrls: ['./order-detail-panel.component.scss'],
-  providers: [OrderService, CustomerService],
+  selector: 'app-material-detail-panel',
+  templateUrl: './material-detail-panel.component.html',
+  styleUrls: ['./material-detail-panel.component.scss'],
+  providers: [MaterialService, CustomerService],
 })
-export class OrderDetailPanelComponent implements OnInit, OnChanges {
+export class MaterialDetailPanelComponent implements OnInit, OnChanges {
   private oPartsTable;
   private loadingTable = false;
   private dataLoaded = false;
-  @Input('order') order: Order;
+  @Input('material') material: Material;
   @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
   private customer: Customer;
   private dateString: string;
-  private orderedParts: OrderedPart[];
+  private materialedParts: MaterialedPart[];
 
   constructor(private customerService: CustomerService,
-              private orderService: OrderService,
+              private materialService: MaterialService,
               private router: Router) {
   }
 
   ngOnInit() {
     this.oPartsTable = $('#oPartsTable');
-    if (this.order) {
+    if (this.material) {
       this.getCustomerInfo();
     }
   }
 
   private getCustomerInfo() {
-    this.customerService.getCustomer(this.order.customerID).subscribe(
+    this.customerService.getCustomer(this.material.customerID).subscribe(
       (customer) => {
         this.customer = customer;
-        const date = new Date(this.order.date);
+        const date = new Date(this.material.date);
         const mm = date.getMonth() + 1;
         const dd = date.getDate();
         this.dateString = [date.getFullYear(), '-',
@@ -54,7 +54,7 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.loadTables();
-    if (this.order) {
+    if (this.material) {
       this.getCustomerInfo();
     }
   }
@@ -63,12 +63,12 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
   private loadTables() {
     if (!this.loadingTable && this.oPartsTable) {
       this.loadingTable = true;
-      this.populateOrderedParts();
+      this.populateMaterialedParts();
       this.loadingTable = false;
     }
   }
 
-  private populateOrderedParts() {
+  private populateMaterialedParts() {
     const _self = this;
     /*manually generate columns*/
     const columns = [{
@@ -87,12 +87,12 @@ export class OrderDetailPanelComponent implements OnInit, OnChanges {
     }];
 
     const data = [];
-    console.log(this.order.orderedParts);
-    this.order.orderedParts.forEach((orderedPart) => {
+    console.log(this.material.materialedParts);
+    this.material.materialedParts.forEach((materialedPart) => {
       data.push({
-        digitalPartID: orderedPart.digitalPartID,
-        amount: orderedPart.amount,
-        id: orderedPart.id,
+        digitalPartID: materialedPart.digitalPartID,
+        amount: materialedPart.amount,
+        id: materialedPart.id,
       });
     });
     console.log(data, columns, this.oPartsTable);

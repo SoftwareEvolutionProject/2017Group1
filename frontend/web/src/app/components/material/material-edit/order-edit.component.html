@@ -3,15 +3,15 @@
   <div class="row">
     <div *ngIf="loaded">
 
-      <h2 *ngIf="!creating">Editing Order</h2>
-      <h2 *ngIf="creating">Creating New Order</h2>
+      <h2 *ngIf="!creating">Editing Material</h2>
+      <h2 *ngIf="creating">Creating New Material</h2>
 
       <hr>
 
       <div class="panel panel-default">
         <div class="panel-body" style="padding-right: 30px">
           <label>ID:</label>
-          <span *ngIf="!creating">{{order.id}} </span>
+          <span *ngIf="!creating">{{material.id}} </span>
           <span *ngIf="creating">Auto Generated </span>
 
           <form *ngIf="requiredFieldsForm" [formGroup]="requiredFieldsForm">
@@ -26,13 +26,13 @@
                       title="Choose Customer">
                 <option title="{{_customer.name}}"
                         *ngFor="let _customer of this.customers; let i = index" [value]=_customer.id
-                        [selected]="_customer.id == order.customerID">
+                        [selected]="_customer.id == material.customerID">
                   {{_customer.name}}
                 </option>
               </select>
             </div>
           </form>
-          <div *ngFor="let formGroup of orderedPartsFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
+          <div *ngFor="let formGroup of materialedPartsFieldsForm; let i = index" class="row" style="margin-bottom: 10px">
             <div class="col-sm-4">
               <label>Amount</label>
 

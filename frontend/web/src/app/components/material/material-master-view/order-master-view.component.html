@@ -1,16 +1,16 @@
 <div class="container">
 
   <div class="row ">
-    <h2>Orders</h2><hr>
+    <h2>Materials</h2><hr>
   </div>
   <div class="row row-fluid">
     <div  [ngClass]="{'col-md-12': !selected, 'col-md-6': selected}" id="list">
-      <app-order-list (selected)="orderSelected($event)">
-      </app-order-list>
+      <app-material-list (selected)="materialSelected($event)">
+      </app-material-list>
     </div>
     <div  [ngClass]="{'col-0': !selected, 'col-md-6': selected}" id="detail">
-      <app-order-detail-panel  *ngIf="selected"  [order]="selected" (closeReq)="selected = null">
-      </app-order-detail-panel>
+      <app-material-detail-panel  *ngIf="selected"  [material]="selected" (closeReq)="selected = null">
+      </app-material-detail-panel>
     </div>
 
   </div>

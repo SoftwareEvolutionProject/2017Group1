@@ -5,31 +5,31 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Customer} from "../../../model/customer";
 import {DigitalPart} from "../../../model/digital-part";
-import {Order} from "../../../model/order";
-import {OrderedPart} from "../../../model/ordered-part";
+import {Material} from "../../../model/material";
+import {MaterialedPart} from "../../../model/materialed-part";
 import {CustomerService} from "../../../services/customer/customer.service";
 import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
 import {ErrorService} from "../../../services/error.service";
-import {OrderService} from "../../../services/order/order.service";
+import {MaterialService} from "../../../services/material/material.service";
 
 declare var $: any;
 
 @Component({
-  selector: 'app-order-edit',
-  templateUrl: './order-edit.component.html',
-  styleUrls: ['./order-edit.component.scss'],
-  providers: [OrderService, CustomerService, DigitalPartService, ErrorService],
+  selector: 'app-material-edit',
+  templateUrl: './material-edit.component.html',
+  styleUrls: ['./material-edit.component.scss'],
+  providers: [MaterialService, CustomerService, DigitalPartService, ErrorService],
 })
-export class OrderEditComponent implements OnInit, OnChanges {
-  @Input('order') order: Order = null;
+export class MaterialEditComponent implements OnInit, OnChanges {
+  @Input('material') material: Material = null;
   @Input('nav') nav = true;
   @Input('creating') creating = false;
   private customers: Customer[];
   private modalRef: BsModalRef;
   @ViewChild('modalCustomer') modalCustomer;
-  orderedPartsFieldsForm: FormGroup[] = [];
+  materialedPartsFieldsForm: FormGroup[] = [];
   private digitalParts: DigitalPart[];
-  @Output() changed: EventEmitter<Order> = new EventEmitter<Order>();
+  @Output() changed: EventEmitter<Material> = new EventEmitter<Material>();
   private loaded = false;
 
   /* forms */
@@ -38,7 +38,7 @@ export class OrderEditComponent implements OnInit, OnChanges {
   constructor(private modalService: BsModalService,
               private route: ActivatedRoute,
               private router: Router,
-              private orderService: OrderService,
+              private materialService: MaterialService,
               private customerService: CustomerService,
               private digitalPartService: DigitalPartService,
               private formBuilder: FormBuilder,
@@ -72,8 +72,8 @@ export class OrderEditComponent implements OnInit, OnChanges {
     /* init with a boilerplate */
     this.creating = true;
     if (this.creating) {
-      this.order = new Order({});
-      this.order.orderedParts = [];
+      this.material = new Material({});
+      this.material.materialedParts = [];
     }
     this.populate();
   }
@@ -81,16 +81,16 @@ export class OrderEditComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.creating) {
       this.create();
-    } else if (this.order) {
+    } else if (this.material) {
       this.populate();
     }
   }
 
   /* get the product */
   getData(id) {
-    this.orderService.getOrder(id).subscribe(
-      (order) => {
-        this.order = order;
+    this.materialService.getMaterial(id).subscribe(
+      (material) => {
+        this.material = material;
         this.populate();
       },
     );
@@ -103,11 +103,11 @@ export class OrderEditComponent implements OnInit, OnChanges {
 
   /* init forms */
   private constructForms() {
-    this.constructOrderedPartsForms();
+    this.constructMaterialedPartsForms();
     const fields = {
-      customerID: [this.order && this.order.customerID ? this.order.customerID : '',
+      customerID: [this.material && this.material.customerID ? this.material.customerID : '',
         Validators.compose([Validators.required])],
-      date: [this.order && this.order.date ? this.order.date : '',
+      date: [this.material && this.material.date ? this.material.date : '',
         Validators.compose([Validators.required])],
     };
 
@@ -115,14 +115,14 @@ export class OrderEditComponent implements OnInit, OnChanges {
     this.loaded = true;
   }
 
-  private constructOrderedPartsForms() {
+  private constructMaterialedPartsForms() {
     /* load attr with default data from product instance*/
-    this.orderedPartsFieldsForm = [];
+    this.materialedPartsFieldsForm = [];
 
-    this.order.orderedParts.forEach((orderedPart) => {
-      this.orderedPartsFieldsForm.push(this.formBuilder.group({
-        amount: [orderedPart.amount, Validators.compose([Validators.required])],
-        digitalPartID: [orderedPart.digitalPartID, Validators.compose([Validators.required])],
+    this.material.materialedParts.forEach((materialedPart) => {
+      this.materialedPartsFieldsForm.push(this.formBuilder.group({
+        amount: [materialedPart.amount, Validators.compose([Validators.required])],
+        digitalPartID: [materialedPart.digitalPartID, Validators.compose([Validators.required])],
       }));
     });
   }
@@ -131,22 +131,22 @@ export class OrderEditComponent implements OnInit, OnChanges {
   save() {
     /* convert relevant fields */
 
-    const id = this.order.id;
-    const order: Order = new Order(this.requiredFieldsForm.value);
-    order.date = this.requiredFieldsForm.get('date').value;
+    const id = this.material.id;
+    const material: Material = new Material(this.requiredFieldsForm.value);
+    material.date = this.requiredFieldsForm.get('date').value;
 
-    this.creating ? delete order['id'] : order.id = id;
-    const orderedParts: OrderedPart[] = [];
+    this.creating ? delete material['id'] : material.id = id;
+    const materialedParts: MaterialedPart[] = [];
 
-    this.orderedPartsFieldsForm.forEach((formGroup) => {
-      orderedParts.push(new OrderedPart({
+    this.materialedPartsFieldsForm.forEach((formGroup) => {
+      materialedParts.push(new MaterialedPart({
         digitalPartID: formGroup.value.digitalPartID,
         amount: formGroup.value.amount,
       }));
     });
-    order.orderedParts = orderedParts;
+    material.materialedParts = materialedParts;
     if (this.creating) { // a new product
-      this.orderService.createOrder(order).subscribe(
+      this.materialService.createMaterial(material).subscribe(
         (data) => {
           if (this.nav) {
             this.back();
@@ -158,7 +158,7 @@ export class OrderEditComponent implements OnInit, OnChanges {
         },
       );
     } else {
-      this.orderService.updateOrder(order).subscribe(
+      this.materialService.updateMaterial(material).subscribe(
         (data) => {
           if (this.nav) {
             this.back();
@@ -183,18 +183,18 @@ export class OrderEditComponent implements OnInit, OnChanges {
       amount: ['',
         Validators.compose([Validators.required])],
     };
-    this.orderedPartsFieldsForm.push(this.formBuilder.group(fields));
+    this.materialedPartsFieldsForm.push(this.formBuilder.group(fields));
   }
 
   deleteDigitalPart(option) {
-    this.orderedPartsFieldsForm.splice(option, 1);
+    this.materialedPartsFieldsForm.splice(option, 1);
   }
 
   cancel() {
     if (this.nav) {
       this.back();
     }
-    this.changed.emit(this.order);
+    this.changed.emit(this.material);
   }
 
   back() {
@@ -203,10 +203,10 @@ export class OrderEditComponent implements OnInit, OnChanges {
 
   digitalPartsValid(): boolean {
     let valid = true;
-    if (this.orderedPartsFieldsForm.length === 0) {
+    if (this.materialedPartsFieldsForm.length === 0) {
       return false;
     }
-    this.orderedPartsFieldsForm.forEach((formGroup) => {
+    this.materialedPartsFieldsForm.forEach((formGroup) => {
       if (!formGroup.valid) {
         valid = false;
         return valid;

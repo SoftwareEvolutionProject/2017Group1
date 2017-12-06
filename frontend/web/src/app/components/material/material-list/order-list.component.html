@@ -14,7 +14,7 @@
   <br>
   <div>
     <button class="btn btn-primary pull-right" style="min-width: 100px" (click)="create()">
-      <span style="margin-left : 5px" class="glyphicon glyphicon-plus"></span> Add Order </button>
+      <span style="margin-left : 5px" class="glyphicon glyphicon-plus"></span> Add Material </button>
   </div>
 
 
@@ -22,7 +22,7 @@
 <!-- Modal -->
 <ng-template #modalDelete>
   <div class="modal-header">
-    <h3 class="modal-title">Delete order</h3>
+    <h3 class="modal-title">Delete material</h3>
     <button type="button" class="close pull-right" aria-label="Close" (click)="dismissDelete()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -31,7 +31,7 @@
     <div class="alert alert-danger">
       <strong>Warning!</strong>
       <br/>
-      <p>Are you sure you want to permanently delete the order?</p>
+      <p>Are you sure you want to permanently delete the material?</p>
     </div>
     <div class="modal-footer">
       <button id="deleteFormDismissBtn" type="button" class="btn btn-default" (click)="dismissDelete()">Dismiss

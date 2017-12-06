@@ -1,16 +1,16 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <div class="panel-title">Order Details
-      <span class="pull-right" *ngIf="order">
+    <div class="panel-title">Material Details
+      <span class="pull-right" *ngIf="material">
       <button type="button" class="btn btn-default" (click)="closeReq.emit()" style="margin-top: -5px">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
     </span>
     </div>
   </div>
-  <div [hidden]="!order" class="panel-body" style="padding-right: 30px">
-    <div *ngIf="order" class="panel-body" style="padding-right: 30px">
-      ID: {{order.id}}
+  <div [hidden]="!material" class="panel-body" style="padding-right: 30px">
+    <div *ngIf="material" class="panel-body" style="padding-right: 30px">
+      ID: {{material.id}}
     </div>
     <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
       Customer: {{customer.name}}
@@ -19,7 +19,7 @@
       Date: {{dateString}}
     </div>
 
-    <h3>Ordered Parts</h3>
+    <h3>Materialed Parts</h3>
     <table id="oPartsTable"
            data-pagination="true"
            data-page-list="[10, 25, 50, 100, ALL]">

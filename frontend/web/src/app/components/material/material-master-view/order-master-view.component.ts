@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import {Order} from '../../../model/order';
+import {Material} from '../../../model/material';
 
 @Component({
-  selector: 'app-order-master-view',
-  templateUrl: './order-master-view.component.html',
-  styleUrls: ['./order-master-view.component.scss'],
+  selector: 'app-material-master-view',
+  templateUrl: './material-master-view.component.html',
+  styleUrls: ['./material-master-view.component.scss'],
 })
-export class OrderMasterViewComponent implements OnInit {
+export class MaterialMasterViewComponent implements OnInit {
 
-  selected: Order = null;
+  selected: Material = null;
   constructor() { }
 
   ngOnInit() {
   }
 
-  public orderSelected(event) {
+  public materialSelected(event) {
     this.selected = event;
   }
 

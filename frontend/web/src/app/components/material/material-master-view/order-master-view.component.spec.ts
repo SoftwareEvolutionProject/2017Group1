@@ -3,28 +3,28 @@ import {ErrorService} from '../../../services/error.service';
 import {HttpModule} from '@angular/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ModalModule} from 'ngx-bootstrap';
-import {OrderService} from '../../../services/order/order.service';
+import {MaterialService} from '../../../services/material/material.service';
 import {HttpClientService} from '../../../services/http/http-client.service';
-import {OrderDetailPanelComponent} from '../order-detail-panel/order-detail-panel.component';
-import {OrderListComponent} from '../order-list/order-list.component';
-import { OrderMasterViewComponent } from './order-master-view.component';
+import {MaterialDetailPanelComponent} from '../material-detail-panel/material-detail-panel.component';
+import {MaterialListComponent} from '../material-list/material-list.component';
+import { MaterialMasterViewComponent } from './material-master-view.component';
 import {CustomerService} from "../../../services/customer/customer.service";
 
-describe('OrderMasterViewComponent', () => {
-  let component: OrderMasterViewComponent;
-  let fixture: ComponentFixture<OrderMasterViewComponent>;
+describe('MaterialMasterViewComponent', () => {
+  let component: MaterialMasterViewComponent;
+  let fixture: ComponentFixture<MaterialMasterViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule, RouterTestingModule, ModalModule.forRoot()],
       providers: [HttpClientService],
-      declarations: [ OrderMasterViewComponent, OrderListComponent, OrderDetailPanelComponent],
+      declarations: [ MaterialMasterViewComponent, MaterialListComponent, MaterialDetailPanelComponent],
     });
-    TestBed.overrideComponent(OrderListComponent, {
+    TestBed.overrideComponent(MaterialListComponent, {
       set: {
         providers: [
           {provide: CustomerService, useClass: CustomerService},
-          {provide: OrderService, useClass: OrderService},
+          {provide: MaterialService, useClass: MaterialService},
           {provide: ErrorService, useClass: ErrorService},
         ],
       },
@@ -33,12 +33,12 @@ describe('OrderMasterViewComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrderMasterViewComponent);
+    fixture = TestBed.createComponent(MaterialMasterViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create OrderMasterViewComponent', () => {
+  it('should create MaterialMasterViewComponent', () => {
     expect(component).toBeTruthy();
   });
 });
