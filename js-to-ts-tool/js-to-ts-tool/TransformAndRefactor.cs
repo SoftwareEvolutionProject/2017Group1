@@ -52,7 +52,8 @@ namespace js_to_ts_tool {
 
             for (int i = 1; i < transformer.Classes.Length; i+=2, j++) {
                 String path = outputPath + "\\" + transformer.ClassNames[j] + ".ts";
-                
+
+                Console.WriteLine("Writing: " + path);
                 using (StreamWriter sw = File.CreateText(path)) {
                     sw.WriteLine(transformer.Classes[i]);
                     sw.WriteLine(transformer.Classes[i + 1]);
