@@ -158,11 +158,11 @@ import { MaterialMasterViewComponent } from './components/material/material-mast
       },
       {
         path: 'materials',
-        component: MaterialListComponent,
+        component: MaterialMasterViewComponent,
       },
       {
         path: 'materials/:id',
-        component: MaterialDetailComponent,
+        component: MaterialEditComponent,
       },
     ]),
   ],
