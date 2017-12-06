@@ -4,6 +4,8 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {DigitalPrint} from '../../../model/digital-print';
 import {ErrorService} from '../../../services/error.service';
 import {DigitalPrintService} from '../../../services/digital-print/digital-print.service';
+import {HttpClient} from "../../../services/http/http.client";
+
 declare var $: any;
 
 @Component({
@@ -135,7 +137,7 @@ export class DigitalPrintListComponent implements OnInit, AfterViewInit {
   }
   private download(id) {
     this.digitalPrintService.getDigitalPrint(id).subscribe((res) => {
-        window.open('http://localhost:4567/' + res.path);             // Update this to proper path.
+        window.open(HttpClient.baseUrl + res.path);
       }
     );
   }

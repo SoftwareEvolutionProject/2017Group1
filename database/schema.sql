@@ -54,11 +54,21 @@ CREATE TABLE IF NOT EXISTS magicspairing(
   FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
 );
 
+CREATE TABLE IF NOT EXISTS materialdata(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200),
+  supplierName VARCHAR(100),
+  initialAmount FLOAT
+);
+
 CREATE TABLE IF NOT EXISTS physicalprint(
   id SERIAL PRIMARY KEY,
   digitalPrintID INTEGER,
+  materialID INTEGER,
+  materialGrade INTEGER,
   path VARCHAR(200),
-  FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id)
+  FOREIGN KEY (digitalPrintID) REFERENCES digitalprintdata(id),
+  FOREIGN KEY (materialID) REFERENCES materialdata(id)
 );
 
 CREATE TABLE IF NOT EXISTS physicalpart(
@@ -69,6 +79,20 @@ CREATE TABLE IF NOT EXISTS physicalpart(
   FOREIGN KEY (physicalPrintID) REFERENCES physicalprint(id),
   FOREIGN KEY (orderedPartID) REFERENCES orderedpart(id),
   FOREIGN KEY (magicsPartPairingID) REFERENCES magicspairing(id)
+);
+
+CREATE TABLE IF NOT EXISTS materialgrade(
+  id SERIAL PRIMARY KEY,
+  materialID INTEGER REFERENCES materialdata(id),
+  reusedTimes INT,
+  amount FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS materialproperty(
+  id SERIAL PRIMARY KEY,
+  materialID INTEGER REFERENCES materialdata(id),
+  name VARCHAR(100),
+  description VARCHAR(500)
 );
 
 CREATE TABLE IF NOT EXISTS magicsdata(

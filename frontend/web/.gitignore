@@ -43,3 +43,9 @@ Thumbs.db
 
 # test reports
 /coverage
+
+# Environment variable stuff
+.env
+/src/environments/environment.*.ts
+.v8flags.*.json
+/ts-node-*

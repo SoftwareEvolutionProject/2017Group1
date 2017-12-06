@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import {PhysicalPart} from '../../../model/physical-part';
@@ -14,14 +14,14 @@ declare var $: any;
   providers: [PhysicalPartService, ErrorService],
 })
 export class PhysicalPartListComponent implements OnInit, AfterViewInit {
-  @Output() selected: EventEmitter<PhysicalPart> = new EventEmitter<PhysicalPart>();
-  private table;
   private physicalParts: PhysicalPart[];
-
   private modalRef: BsModalRef;
   @ViewChild('modalDelete') modalDelete;
   private toBeDeleted: number = null;
-  selectedPhysicalPart: PhysicalPart = null;
+
+  private table;
+  @Input('physicalPartID') physicalPartPrints: PhysicalPart [];
+  @Output() selected: EventEmitter<PhysicalPart> = new EventEmitter<PhysicalPart>();
 
   constructor(private physicalPartService: PhysicalPartService,
               private errorService: ErrorService,
@@ -100,7 +100,11 @@ export class PhysicalPartListComponent implements OnInit, AfterViewInit {
   private prepareTriggers() {
     const _self = this;
     (this.table as any).on('click-row.bs.table', (row, $element) => {
-      _self.selected.emit(_self.physicalParts.filter((physicalPart) => { if (physicalPart.id === $element.id) { return physicalPart; } })[0]);
+      _self.selected.emit(_self.physicalParts.filter((physicalPart) => {
+        if (physicalPart.id === $element.id) {
+          return physicalPart;
+        }
+      })[0]);
     });
   }
 
@@ -134,12 +138,12 @@ export class PhysicalPartListComponent implements OnInit, AfterViewInit {
   private confirmDelete() {
     if (this.toBeDeleted) {
       this.physicalPartService.deletePhysicalPart(this.toBeDeleted).subscribe((res) => {
-        this.toBeDeleted = null;
-        this.modalRef.hide();
-        this.loadAndPopulate();
-      }, (error) => {
-        this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
-      },
+          this.toBeDeleted = null;
+          this.modalRef.hide();
+          this.loadAndPopulate();
+        }, (error) => {
+          this.errorService.showAlert(error.verobose_message_header, error.verbose_message);
+        },
       );
     }
   }

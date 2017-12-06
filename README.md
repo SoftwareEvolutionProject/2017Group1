@@ -1,4 +1,4 @@
-# 2017Group1 [![Build Status](https://travis-ci.org/SoftwareEvolutionProject/2017Group1.svg?branch=develop)](https://travis-ci.org/SoftwareEvolutionProject/2017Group1)
+# 2017Group1 [![Build Status](https://travis-ci.org/SoftwareEvolutionProject/2017Group1.svg?branch=develop)](https://travis-ci.org/SoftwareEvolutionProject/2017Group1) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Mobius1/Selectable/blob/master/LICENSE)
 ## Course
 - Course Name: Software Evolution Project
 - Course Code: DAT265
@@ -20,8 +20,15 @@ Backend API documentation is hosted through postman and found at the link below.
 It is setup using docker. Set up docker container with backend/fronted/postgres:
 > docker-compose up -d --build
 
+
 Get into the container:
 > docker exec -it swerea bash
+
+
+Set base url when not in production mode by creating frontend/web/.env and adding BACKEND_URL.
+<br>Example:
+> BACKEND_URL="http://localhost:4567"
+
 
 Run whatever you want, use the makefile for aid
 

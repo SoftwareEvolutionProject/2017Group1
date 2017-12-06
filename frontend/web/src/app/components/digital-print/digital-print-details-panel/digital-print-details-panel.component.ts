@@ -15,8 +15,11 @@ export class DigitalPrintDetailsPanelComponent implements OnInit, OnChanges {
   private table;
   private loadingTable = false;
   private dataLoaded = false;
+  @Input('minimized') minimized = false;
   @Input('digitalPrint') digitalPrint: DigitalPrint = null;
   @Input('digitalParts') digitalParts: DigitalPart[];
+  @Input('close') close = true;
+  @Input('minimize') minimize = false;
   @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
   selected: DigitalPart;
 

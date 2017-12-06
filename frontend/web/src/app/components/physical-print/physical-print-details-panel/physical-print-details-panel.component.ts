@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import {PhysicalPart} from '../../../model/physical-part';
 import {PhysicalPrint} from '../../../model/physical-print';
 import {PhysicalPartService} from '../../../services/physical-part/physical-part.service';
+import {DigitalPart} from "../../../model/digital-part";
+import {DigitalPrint} from "../../../model/digital-print";
 declare let $: any;
 
 @Component({
@@ -17,7 +19,11 @@ export class PhysicalPrintDetailsPanelComponent implements OnInit, OnChanges {
 
   @Input('physicalPrint') physicalPrint: PhysicalPrint = null;
   @Input('physicalParts') physicalParts: PhysicalPart [] = null;
+  @Input('digitalPrint') digitalPrint: DigitalPrint = null;
+  @Input('digitalParts') digitalParts: DigitalPart [] = null;
   @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
+
+
 
   constructor(private physicalPartService: PhysicalPartService) {
     /* get parts */
