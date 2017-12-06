@@ -64,14 +64,7 @@ namespace js_to_ts_tool {
             classNames = new String[classes.Length / 2];
 
             for (int i = 1, j = 0; i < classes.Length; i+=2, j++) {
-                Match m = Regex.Match(classes[i], classRegexPattern);
-                if (m.Groups.Count > 0) {
-                    if (m.Groups[1].Value.Length != 0) {
-                        classNames[j] = m.Groups[1].Value;
-                    } else if (m.Groups[2].Value.Length != 0) {
-                        classNames[j] = m.Groups[2].Value;
-                    }
-                }
+                classNames[j] = classes[i];
             }
 
             return true;
