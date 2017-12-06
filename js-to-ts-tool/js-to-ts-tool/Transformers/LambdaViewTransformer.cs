@@ -43,7 +43,7 @@ namespace js_to_ts_tool {
         }
 
         public static bool IsOfType(String filecontent) {
-            return true;
+            return false;
         }
 
     }
