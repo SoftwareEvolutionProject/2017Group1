@@ -3,7 +3,7 @@ export class MaterialGrade {
   public id: number;
   public materialID: number;
   public reusedTimes: number;
-  public ammount: number;
+  public amount: number;
 
   constructor(values: Object = {}) {
     if (!values) {
