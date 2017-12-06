@@ -23,8 +23,6 @@ import { DigitalPrintEditComponent } from './components/digital-print/digital-pr
 import { DigitalPrintListComponent } from './components/digital-print/digital-print-list/digital-print-list.component';
 import { DigitalPrintMasterViewComponent } from './components/digital-print/digital-print-master-view/digital-print-master-view.component';
 import { HomeComponent } from './components/home/home.component';
-import { MaterialDetailComponent } from './components/material-detail/material-detail.component';
-import { MaterialListComponent } from './components/material-list/material-list.component';
 import {PhysicalPrintDetailsPanelComponent} from './components/physical-print/physical-print-details-panel/physical-print-details-panel.component';
 import {PhysicalPrintEditComponent} from './components/physical-print/physical-print-edit/physical-print-edit.component';
 import {PhysicalPrintListComponent} from './components/physical-print/physical-print-list/physical-print-list.component';
@@ -41,6 +39,10 @@ import {PhysicalPartListComponent} from "./components/physical-part/physical-par
 import {PhysicalPartEditComponent} from "./components/physical-part/physical-part-edit/physical-part-edit.component";
 import {PhysicalPartDetailPanelComponent} from "./components/physical-part/physical-part-detail-panel/physical-part-detail-panel.component";
 import {PhysicalPartMasterViewComponent} from "./components/physical-part/physical-part-master-view/physical-part-master-view.component";
+import { MaterialDetailPanelComponent } from './components/material/material-detail-panel/material-detail-panel.component';
+import { MaterialEditComponent } from './components/material/material-edit/material-edit.component';
+import { MaterialMasterViewComponent } from './components/material/material-master-view/material-master-view.component';
+import { MaterialListComponent } from './components/material/material-list/material-list.component';
 
 
 @NgModule({
@@ -65,7 +67,6 @@ import {PhysicalPartMasterViewComponent} from "./components/physical-part/physic
     PhysicalPrintListComponent,
     PhysicalPrintEditComponent,
     MaterialListComponent,
-    MaterialDetailComponent,
     CustomerDetailPanelComponent,
     CustomerMasterViewComponent,
     PhysicalPrintMasterViewComponent,
@@ -75,6 +76,9 @@ import {PhysicalPartMasterViewComponent} from "./components/physical-part/physic
     OrderListComponent,
     OrderDetailPanelComponent,
     OrderMasterViewComponent,
+    MaterialDetailPanelComponent,
+    MaterialEditComponent,
+    MaterialMasterViewComponent,
   ],
   imports: [
     DropdownModule,
@@ -152,11 +156,11 @@ import {PhysicalPartMasterViewComponent} from "./components/physical-part/physic
       },
       {
         path: 'materials',
-        component: MaterialListComponent,
+        component: MaterialMasterViewComponent,
       },
       {
         path: 'materials/:id',
-        component: MaterialDetailComponent,
+        component: MaterialEditComponent,
       },
     ]),
   ],

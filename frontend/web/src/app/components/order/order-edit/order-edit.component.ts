@@ -26,7 +26,7 @@ export class OrderEditComponent implements OnInit, OnChanges {
   @Input('creating') creating = false;
   private customers: Customer[];
   private modalRef: BsModalRef;
-  @ViewChild('modalCustomer') modalCustomer;
+  @ViewChild('modalMaterial') modalCustomer;
   orderedPartsFieldsForm: FormGroup[] = [];
   private digitalParts: DigitalPart[];
   @Output() changed: EventEmitter<Order> = new EventEmitter<Order>();

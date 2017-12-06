@@ -1,0 +1,18 @@
+<div class="container">
+
+  <div class="row ">
+    <h2>Materials</h2><hr>
+  </div>
+  <div class="row row-fluid">
+    <div  [ngClass]="{'col-md-12': !selected, 'col-md-6': selected}" id="list">
+      <app-material-list (selected)="materialSelected($event)">
+      </app-material-list>
+    </div>
+    <div  [ngClass]="{'col-0': !selected, 'col-md-6': selected}" id="detail">
+      <app-material-detail-panel  *ngIf="selected"  [material]="selected" (closeReq)="selected = null">
+      </app-material-detail-panel>
+    </div>
+
+  </div>
+</div>
+

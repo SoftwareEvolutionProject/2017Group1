@@ -9,4 +9,5 @@ export class HttpClient {
   static physicalPrintUrl = HttpClient.baseUrl + 'physical-prints';
   static digitalPartUrl = HttpClient.baseUrl + 'digital-parts';
   static digitalPrintUrl = HttpClient.baseUrl + 'digital-prints';
+  static materialUrl = HttpClient.baseUrl + 'materials';
 }
