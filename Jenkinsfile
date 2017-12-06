@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  environment {
+    BUILD_ID='dontKillMe'
+    BACKEND_URL='46.101.132.193:4567'
+  }
   stages {
     stage('Purge Docker') {
       steps {
