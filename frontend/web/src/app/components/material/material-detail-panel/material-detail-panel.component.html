@@ -12,15 +12,21 @@
     <div *ngIf="material" class="panel-body" style="padding-right: 30px">
       ID: {{material.id}}
     </div>
-    <div *ngIf="customer" class="panel-body" style="padding-right: 30px">
-      Customer: {{customer.name}}
+    <div *ngIf="material" class="panel-body" style="padding-right: 30px">
+      Name: {{material.name}}
     </div>
-    <div *ngIf="dateString" class="panel-body" style="padding-right: 30px">
-      Date: {{dateString}}
+    <div *ngIf="material" class="panel-body" style="padding-right: 30px">
+      Supplier name: {{material.supplierName}}
+    </div>
+    <div *ngIf="material" class="panel-body" style="padding-right: 30px">
+      Initial amount: {{material.initialAmount}}
+    </div>
+    <div *ngIf="material" class="panel-body" style="padding-right: 30px">
+      Material properties: {{material.materialProperties}}
     </div>
 
-    <h3>Materialed Parts</h3>
-    <table id="oPartsTable"
+    <h3>Material grades</h3>
+    <table id="materialTable"
            data-pagination="true"
            data-page-list="[10, 25, 50, 100, ALL]">
       <thead>

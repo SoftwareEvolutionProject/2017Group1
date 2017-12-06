@@ -66,16 +66,8 @@ export class MaterialListComponent implements OnInit, AfterViewInit {
       field: 'supplierName',
       sortable: true,
     }, {
-      title: 'Initial ammount',
-      field: 'supplierName',
-      sortable: true,
-    }, {
-      title: 'Material grades',
-      field: 'materialGrades',
-      sortable: true,
-    }, {
-      title: 'Material properties',
-      field: 'materialProperties',
+      title: 'Initial amount',
+      field: 'initialAmount',
       sortable: true,
     }, {
       field: 'operate',
@@ -98,7 +90,7 @@ export class MaterialListComponent implements OnInit, AfterViewInit {
         id: material.id,
         name: material.name,
         supplierName: material.supplierName,
-        initialAmmount: material.initialAmmount,
+        initialAmount: material.initialAmount,
         materialGrades: material.materialGrades,
         materialProperties: material.materialProperties,
       });
