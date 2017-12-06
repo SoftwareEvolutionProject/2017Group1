@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Material} from "../../../model/material";
-import {Customer} from "../../../model/customer";
 import {MaterialService} from "../../../services/material/material.service";
-import {MaterialedPart} from "../../../model/materialed-part";
 import {Router} from "@angular/router";
 import {CustomerService} from "../../../services/customer/customer.service";
 
@@ -20,9 +18,8 @@ export class MaterialDetailPanelComponent implements OnInit, OnChanges {
   private dataLoaded = false;
   @Input('material') material: Material;
   @Output() closeReq: EventEmitter<null> = new EventEmitter<null>();
-  private customer: Customer;
   private dateString: string;
-  private materialedParts: MaterialedPart[];
+  // private materialedParts: MaterialedPart[];
 
   constructor(private customerService: CustomerService,
               private materialService: MaterialService,
@@ -32,12 +29,12 @@ export class MaterialDetailPanelComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.oPartsTable = $('#oPartsTable');
     if (this.material) {
-      this.getCustomerInfo();
+      // this.getCustomerInfo();
     }
   }
 
   private getCustomerInfo() {
-    this.customerService.getCustomer(this.material.customerID).subscribe(
+    /*this.customerService.getCustomer(this.material.customerID).subscribe(
       (customer) => {
         this.customer = customer;
         const date = new Date(this.material.date);
@@ -49,7 +46,7 @@ export class MaterialDetailPanelComponent implements OnInit, OnChanges {
         ].join('');
         this.loadTables();
       },
-    );
+    );*/
   }
 
   ngOnChanges() {
@@ -58,7 +55,6 @@ export class MaterialDetailPanelComponent implements OnInit, OnChanges {
       this.getCustomerInfo();
     }
   }
-
 
   private loadTables() {
     if (!this.loadingTable && this.oPartsTable) {
@@ -72,20 +68,32 @@ export class MaterialDetailPanelComponent implements OnInit, OnChanges {
     const _self = this;
     /*manually generate columns*/
     const columns = [{
-      title: 'Digital Part ID',
-      field: 'digitalPartID',
-      sortable: true,
-    }, {
       title: 'ID',
       field: 'id',
       visible: false,
       sortable: true,
     }, {
-      title: 'Amount',
-      field: 'amount',
+      title: 'Name',
+      field: 'name',
+      sortable: true,
+    }, {
+      title: 'Supplier name',
+      field: 'supplierName',
+      sortable: true,
+    }, {
+      title: 'Initial ammount',
+      field: 'supplierName',
+      sortable: true,
+    }, {
+      title: 'Material grades',
+      field: 'materialGrades',
+      sortable: true,
+    }, {
+      title: 'Material properties',
+      field: 'materialProperties',
       sortable: true,
     }];
-
+/*
     const data = [];
     console.log(this.material.materialedParts);
     this.material.materialedParts.forEach((materialedPart) => {
@@ -104,6 +112,6 @@ export class MaterialDetailPanelComponent implements OnInit, OnChanges {
         sortStable: true,
         sortName: 'name',
       },
-    );
+    );*/
   }
 }
