@@ -6,11 +6,11 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Customer} from "../../../model/customer";
 import {DigitalPart} from "../../../model/digital-part";
 import {Material} from "../../../model/material";
-import {MaterialedPart} from "../../../model/materialed-part";
 import {CustomerService} from "../../../services/customer/customer.service";
 import {DigitalPartService} from "../../../services/digital-part/digital-part.service";
 import {ErrorService} from "../../../services/error.service";
 import {MaterialService} from "../../../services/material/material.service";
+import {MaterialGrade} from "../../../model/material-grade";
 
 declare var $: any;
 
@@ -24,10 +24,9 @@ export class MaterialEditComponent implements OnInit, OnChanges {
   @Input('material') material: Material = null;
   @Input('nav') nav = true;
   @Input('creating') creating = false;
-  private customers: Customer[];
   private modalRef: BsModalRef;
-  @ViewChild('modalCustomer') modalCustomer;
-  materialedPartsFieldsForm: FormGroup[] = [];
+  @ViewChild('modalMaterial') modalMaterial;
+  materialGradeFieldsForm: FormGroup[] = [];
   private digitalParts: DigitalPart[];
   @Output() changed: EventEmitter<Material> = new EventEmitter<Material>();
   private loaded = false;
@@ -39,8 +38,6 @@ export class MaterialEditComponent implements OnInit, OnChanges {
               private route: ActivatedRoute,
               private router: Router,
               private materialService: MaterialService,
-              private customerService: CustomerService,
-              private digitalPartService: DigitalPartService,
               private formBuilder: FormBuilder,
               private errorService: ErrorService,
               private _location: Location) {
@@ -48,22 +45,12 @@ export class MaterialEditComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.customerService.getCustomers().subscribe(
-        (customers) => {
-          this.digitalPartService.getDigitalParts().subscribe(
-            (digitalParts) => {
-              this.customers = customers;
-              this.digitalParts = digitalParts;
-              const id = params['id'];
-              if (id === 'create') { // new product is being created
-                this.create();
-              } else if (id) {
-                this.getData(id);
-              }
-            });
-
-        },
-      );
+            const id = params['id'];
+            if (id === 'create') { // new material is being created
+              this.create();
+            } else if (id) {
+              this.getData(id);
+            }
     });
   }
 
@@ -73,7 +60,7 @@ export class MaterialEditComponent implements OnInit, OnChanges {
     this.creating = true;
     if (this.creating) {
       this.material = new Material({});
-      this.material.materialedParts = [];
+      this.material.materialGrades = new Array<MaterialGrade>();
     }
     this.populate();
   }
@@ -103,11 +90,11 @@ export class MaterialEditComponent implements OnInit, OnChanges {
 
   /* init forms */
   private constructForms() {
-    this.constructMaterialedPartsForms();
+    this.constructMaterialGradeForms();
     const fields = {
-      customerID: [this.material && this.material.customerID ? this.material.customerID : '',
+      name: [this.material && this.material.name ? this.material.name : '',
         Validators.compose([Validators.required])],
-      date: [this.material && this.material.date ? this.material.date : '',
+      supplierName: [this.material && this.material.supplierName ? this.material.supplierName : '',
         Validators.compose([Validators.required])],
     };
 
@@ -115,14 +102,14 @@ export class MaterialEditComponent implements OnInit, OnChanges {
     this.loaded = true;
   }
 
-  private constructMaterialedPartsForms() {
+  private constructMaterialGradeForms() {
     /* load attr with default data from product instance*/
-    this.materialedPartsFieldsForm = [];
+    this.materialGradeFieldsForm = [];
 
-    this.material.materialedParts.forEach((materialedPart) => {
-      this.materialedPartsFieldsForm.push(this.formBuilder.group({
-        amount: [materialedPart.amount, Validators.compose([Validators.required])],
-        digitalPartID: [materialedPart.digitalPartID, Validators.compose([Validators.required])],
+    this.material.materialGrades.forEach((materialGrade) => {
+      this.materialGradeFieldsForm.push(this.formBuilder.group({
+        amount: [materialGrade.amount, Validators.compose([Validators.required])],
+        digitalPartID: [materialGrade.id, Validators.compose([Validators.required])],
       }));
     });
   }
@@ -133,18 +120,17 @@ export class MaterialEditComponent implements OnInit, OnChanges {
 
     const id = this.material.id;
     const material: Material = new Material(this.requiredFieldsForm.value);
-    material.date = this.requiredFieldsForm.get('date').value;
 
     this.creating ? delete material['id'] : material.id = id;
-    const materialedParts: MaterialedPart[] = [];
+    const materalGrades: MaterialGrade[] = new Array<MaterialGrade>();
 
-    this.materialedPartsFieldsForm.forEach((formGroup) => {
-      materialedParts.push(new MaterialedPart({
-        digitalPartID: formGroup.value.digitalPartID,
+    this.materialGradeFieldsForm.forEach((formGroup) => {
+      materalGrades.push(new MaterialGrade({
+        id: formGroup.value.id,
         amount: formGroup.value.amount,
       }));
     });
-    material.materialedParts = materialedParts;
+    material.materialGrades = materalGrades;
     if (this.creating) { // a new product
       this.materialService.createMaterial(material).subscribe(
         (data) => {
@@ -176,18 +162,18 @@ export class MaterialEditComponent implements OnInit, OnChanges {
     this.router.navigate(['digital-parts', 'create']);
   }
 
-  addDigitalPart() {
+  addMaterialGrade() {
     const fields = {
       digitalPartID: ['',
         Validators.compose([Validators.required])],
       amount: ['',
         Validators.compose([Validators.required])],
     };
-    this.materialedPartsFieldsForm.push(this.formBuilder.group(fields));
+    this.materialGradeFieldsForm.push(this.formBuilder.group(fields));
   }
 
-  deleteDigitalPart(option) {
-    this.materialedPartsFieldsForm.splice(option, 1);
+  deleteMaterialGrade(option) {
+    this.materialGradeFieldsForm.splice(option, 1);
   }
 
   cancel() {
@@ -201,12 +187,12 @@ export class MaterialEditComponent implements OnInit, OnChanges {
     this._location.back();
   }
 
-  digitalPartsValid(): boolean {
+  materialGradesValid(): boolean {
     let valid = true;
-    if (this.materialedPartsFieldsForm.length === 0) {
+    if (this.materialGradeFieldsForm.length === 0) {
       return false;
     }
-    this.materialedPartsFieldsForm.forEach((formGroup) => {
+    this.materialGradeFieldsForm.forEach((formGroup) => {
       if (!formGroup.valid) {
         valid = false;
         return valid;

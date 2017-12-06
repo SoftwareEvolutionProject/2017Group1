@@ -41,7 +41,8 @@ export class MaterialMockService {
         Kommentar: 'För hårt för ditt eget bästa',
         Hårdhet: 'Stenhårt',
       },
-    }];
+    }),
+  ];
 
   constructor() {
   }
