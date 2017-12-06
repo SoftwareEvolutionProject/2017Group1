@@ -98,7 +98,7 @@ export class MaterialListComponent implements OnInit, AfterViewInit {
         id: material.id,
         name: material.name,
         supplierName: material.supplierName,
-        initialAmmount: material.initialAmmount,
+        initialAmmount: material.initialAmount,
         materialGrades: material.materialGrades,
         materialProperties: material.materialProperties,
       });

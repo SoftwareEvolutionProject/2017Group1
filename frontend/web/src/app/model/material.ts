@@ -5,7 +5,7 @@ export class Material {
   public id: number;
   public name: string;
   public supplierName: string;
-  public initialAmmount: number;
+  public initialAmount: number;
   public materialGrades: MaterialGrade[];
   public materialProperties: any;
 
