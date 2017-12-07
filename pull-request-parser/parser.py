@@ -34,7 +34,6 @@ def get_pull_request(user, password):
     pullrequests = []
 
     for i in range(1, pullrequestnr+1):
-    #for i in range(1, 15):
         r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i), auth=(user, password))
         prtext = r.text
         data = json.loads(prtext)
