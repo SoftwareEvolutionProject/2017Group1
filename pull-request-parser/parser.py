@@ -1,8 +1,17 @@
 import json
 import requests
 import csv
+from requests.auth import HTTPBasicAuth
 
-r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls?state=all')
+# Reading credentials
+file = open("authorization.txt", "r")
+user = file.readline()
+password = file.readline()
+
+print user
+print password
+
+r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls?state=all', auth=(user, password))
 
 prtext = r.text
 
