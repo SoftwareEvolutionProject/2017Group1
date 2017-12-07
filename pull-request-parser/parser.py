@@ -74,13 +74,13 @@ def get_pull_request(user, password):
 # Get data from commits.
 #######################################################################
 def get_commit_data(pullrequests, user, password):
-    setup_progress_bar("Fetching commit data", len(pullrequests))
+    #setup_progress_bar("Fetching commit data", len(pullrequests))
     for pullrequest in pullrequests:
 
         r = requests.get(pullrequest.commits_url, auth=(user, password))
         cmtext = r.text
         data = json.loads(cmtext)
-        
+        '''
         for unicodeData in data:
             for key in unicodeData:
                 if key == "commit":
@@ -91,8 +91,20 @@ def get_commit_data(pullrequests, user, password):
                                     contributor = commitData[authorKey]
                                     if not contributor in pullrequest.contributors:
                                         pullrequest.contributors.append(contributor)
-        increase_progress_bar()
-    finish_progress_bar()
+        '''
+        
+        for unicodeData in data:
+            for key in unicodeData:
+                if key == "commit":
+                    for commitKey, commitData in unicodeData[key].iteritems():
+                        if commitKey == "author":
+                            contributor = commitData["name"]                                    
+                            if not contributor in pullrequest.contributors:
+                                print contributor
+                                pullrequest.contributors.append(contributor)
+        
+    #    increase_progress_bar()
+    #finish_progress_bar()
 
     return pullrequests
 
