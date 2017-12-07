@@ -134,7 +134,6 @@ pullrequests = get_pull_request(user, password)
 pullrequests = get_commit_data(pullrequests, user, password)
 
 # Print data to file
-print "Writing to file"
 file = open("output.csv", "w")
 file.write(Pullrequest.get_headers())
 setup_progress_bar("Saving data to file", len(pullrequests))
