@@ -3,9 +3,7 @@ import time
 import sys
 import subprocess
 import requests
-#from requests.auth import HTTPBasicAuth
 from Pullrequest import Pullrequest
-#import collections
 
 
 ##############################################################################
@@ -80,29 +78,7 @@ def get_commit_data(pullrequests, user, password):
         r = requests.get(pullrequest.commits_url, auth=(user, password))
         cmtext = r.text
         data = json.loads(cmtext)
-        '''
-        for unicodeData in data:
-            for key in unicodeData:
-                if key == "commit":
-                    for commitKey, commitData in unicodeData[key].iteritems():
-                        if commitKey == "author":
-                            for authorKey in commitData:
-                                if authorKey == "name":
-                                    contributor = commitData[authorKey]
-                                    if not contributor in pullrequest.contributors:
-                                        pullrequest.contributors.append(contributor)
-        '''
-        
-        '''
-        for unicodeData in data:
-            for key in unicodeData:
-                if key == "commit":
-                    for commitKey, commitData in unicodeData[key].iteritems():
-                        if commitKey == "author":
-                            contributor = commitData["name"]                                    
-                            if not contributor in pullrequest.contributors:
-                                pullrequest.contributors.append(contributor)
-        '''
+
         for unicodeData in data:
             for commitKey, commitData in unicodeData["commit"].iteritems():
                 if commitKey == "author":
