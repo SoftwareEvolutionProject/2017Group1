@@ -11,22 +11,22 @@ password = file.readline().strip()
 print user
 print password
 
+# Fetching number of requests.
 r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls?state=all', auth=(user, password))
 
 prtext = r.text
-
 data = json.loads(prtext)
 
 pullrequestnr = -1
-
 for json_dict in data:
     for key,value in json_dict.iteritems():
         if key == "number":
             if value > pullrequestnr:
                 pullrequestnr = value
             
-print pullrequestnr
+print "We found " + pullrequestnr + " pullrequests"
 
+# Fetching all the pull requests
 for i in range(1, pullrequestnr+1):
     r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i), auth=(user, password))
     prtext = r.text
