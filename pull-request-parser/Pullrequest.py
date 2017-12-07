@@ -1,13 +1,5 @@
 class Pullrequest:
-    '''
-    url = ""
-    number = ""
-    title = ""
-    key = ""
-    additions = ""
-    deletions = ""
-    changed_files = ""
-    '''
+
     def __init__(self):
         self.url = ""
         self.number = 0
