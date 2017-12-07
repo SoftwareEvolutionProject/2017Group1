@@ -74,7 +74,7 @@ def get_pull_request(user, password):
 # Get data from commits.
 #######################################################################
 def get_commit_data(pullrequests, user, password):
-    #setup_progress_bar("Fetching commit data", len(pullrequests))
+    setup_progress_bar("Fetching commit data", len(pullrequests))
     for pullrequest in pullrequests:
 
         r = requests.get(pullrequest.commits_url, auth=(user, password))
@@ -93,6 +93,7 @@ def get_commit_data(pullrequests, user, password):
                                         pullrequest.contributors.append(contributor)
         '''
         
+        '''
         for unicodeData in data:
             for key in unicodeData:
                 if key == "commit":
@@ -100,11 +101,17 @@ def get_commit_data(pullrequests, user, password):
                         if commitKey == "author":
                             contributor = commitData["name"]                                    
                             if not contributor in pullrequest.contributors:
-                                print contributor
                                 pullrequest.contributors.append(contributor)
+        '''
+        for unicodeData in data:
+            for commitKey, commitData in unicodeData["commit"].iteritems():
+                if commitKey == "author":
+                    contributor = commitData["name"]                                    
+                    if not contributor in pullrequest.contributors:
+                        pullrequest.contributors.append(contributor)
         
-    #    increase_progress_bar()
-    #finish_progress_bar()
+        increase_progress_bar()
+    finish_progress_bar()
 
     return pullrequests
 
@@ -155,6 +162,6 @@ setup_progress_bar("Saving data to file", len(pullrequests))
 for r in pullrequests:
     file.write(r.to_string().encode("utf-8") + "\n")
     increase_progress_bar()
-    time.sleep(0.001)   # The computer is to slow for the output to console if we dont sleep a little bit
+    time.sleep(0.01)   # The computer is to slow for the output to console if we dont sleep a little bit
 file.close()
 finish_progress_bar()
