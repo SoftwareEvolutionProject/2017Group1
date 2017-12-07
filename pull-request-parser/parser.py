@@ -29,9 +29,12 @@ for json_dict in data:
             
 print "We found " + str(pullrequestnr) + " pullrequests"
 
-
 # Fetching all the pull requests
-for i in range(1, pullrequestnr+1):
+pullrequests = []
+
+#for i in range(1, pullrequestnr+1):
+for i in range(1, 5):
+    print "Fetching pullrequest number: " + str(i);
     r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i), auth=(user, password))
     prtext = r.text
     data = json.loads(prtext)
@@ -57,4 +60,7 @@ for i in range(1, pullrequestnr+1):
         if key == "changed_files":
             pullrequest.changed_files = data[key]
 
-    print pullrequest.to_string()
+    pullrequests.append(pullrequest)
+
+for r in pullrequests:
+    
