@@ -17,15 +17,9 @@ class Pullrequest:
         self.deletions = 0
         self.changed_files = 0
 
-    '''
-    def __init__(self, url, number, user, key, additions, deletions, changed_files):
-        self.url = url
-        self.number = number
-        self.user = user
-        self.key = key
-        self.addditions = additions
-        self.deletions = deletions
-        self.changed_files = changed_files
-    '''
+    @staticmethod
+    def get_headers():
+        return "url;number;title;user;additions;deletions;changed_files\n"
+
     def to_string(self):
-        return self.url  + "\n" + str(self.number) + "\n" + self.title + "\n" + self.user + "\n" + str(self.addditions) + "\n" + str(self.deletions) + "\n" + str(self.changed_files)
+        return self.url  + ";" + str(self.number) + ";" + self.title + ";" + self.user + ";" + str(self.addditions) + ";" + str(self.deletions) + ";" + str(self.changed_files)

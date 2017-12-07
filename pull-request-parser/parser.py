@@ -6,13 +6,14 @@ from Pullrequest import Pullrequest
 import sys
 import unicodedata
 import collections
+import csv
 
 
 # Reading credentials
 file = open("authorization.txt", "r")
 user = file.readline().strip()
 password = file.readline().strip()
-
+file.close()
 
 # Fetching number of requests.
 r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls?state=all', auth=(user, password))
@@ -33,7 +34,7 @@ print "We found " + str(pullrequestnr) + " pullrequests"
 pullrequests = []
 
 #for i in range(1, pullrequestnr+1):
-for i in range(1, 5):
+for i in range(1, 70):
     print "Fetching pullrequest number: " + str(i);
     r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i), auth=(user, password))
     prtext = r.text
@@ -62,5 +63,9 @@ for i in range(1, 5):
 
     pullrequests.append(pullrequest)
 
+# Print data to file
+file = open("output.csv", "w")
+file.write(Pullrequest.get_headers())
 for r in pullrequests:
-    
+    file.write(r.to_string() + "\n")
+file.close()
