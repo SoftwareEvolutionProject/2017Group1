@@ -26,8 +26,8 @@ def get_pull_request(user, password):
     # Fetching all the pull requests
     pullrequests = []
 
-    #for i in range(1, pullrequestnr+1):
-    for i in range(1, 2):
+    for i in range(1, pullrequestnr+1):
+    #for i in range(1, 15):
         print "Fetching pullrequest number " + str(i);
         r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i), auth=(user, password))
         prtext = r.text
@@ -56,7 +56,8 @@ def get_pull_request(user, password):
             if key == "commits_url":
                 pullrequest.commits_url = data[key]
 
-        pullrequests.append(pullrequest)
+        if pullrequest.number != 0:
+            pullrequests.append(pullrequest)
 
     return pullrequests
 
@@ -66,6 +67,9 @@ def get_pull_request(user, password):
 #######################################################################
 def get_commit_data(pullrequests, user, password):
     for pullrequest in pullrequests:
+        #if pullrequest.number == 0:
+        #    continue
+        
         print "Fetching commit data for: " + str(pullrequest.number)
 
         r = requests.get(pullrequest.commits_url, auth=(user, password))
