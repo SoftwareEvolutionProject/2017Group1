@@ -5,8 +5,8 @@ from requests.auth import HTTPBasicAuth
 
 # Reading credentials
 file = open("authorization.txt", "r")
-user = file.readline()
-password = file.readline()
+user = file.readline().strip()
+password = file.readline().strip()
 
 print user
 print password
@@ -27,8 +27,8 @@ for json_dict in data:
             
 print pullrequestnr
 
-for i in range(1, pullrequestnr):
-    r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i))
+for i in range(1, pullrequestnr+1):
+    r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i), auth=(user, password))
     prtext = r.text
     data = json.loads(prtext)
     for key in data:
