@@ -3,6 +3,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 from Pullrequest import Pullrequest
 import collections
+import time
+import sys
 
 ##############################################################################
 # Pull requests
@@ -90,12 +92,46 @@ def get_commit_data(pullrequests, user, password):
     return pullrequests
 
 
+#######################################################################
+# Progress bar
+#######################################################################
+def setup_progress_bar(title, width):
+    print title
+    sys.stdout.write("[%s]" % (" " * toolbar_width))
+    sys.stdout.flush()
+    sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
+
+def increase_progress_bar():
+    sys.stdout.write("-")
+    sys.stdout.flush()
+
+def finish_progress_bar():
+    sys.stdout.write("\n")
+    
 
 #######################################################################
 # Main
 #######################################################################
 
+
+toolbar_width = 40
+setup_progress_bar("First progress bar", toolbar_width)
+for i in xrange(toolbar_width):
+    time.sleep(0.1)
+    increase_progress_bar()
+finish_progress_bar()
+
+setup_progress_bar("Second progress bar", toolbar_width)
+for i in xrange(toolbar_width):
+    time.sleep(0.1)
+    increase_progress_bar()
+finish_progress_bar()
+
+
+
+'''
 # Reading credentials
+print "Reading credentials"
 file = open("authorization.txt", "r")
 user = file.readline().strip()
 password = file.readline().strip()
@@ -105,9 +141,11 @@ pullrequests = get_pull_request(user, password)
 pullrequests = get_commit_data(pullrequests, user, password)
 
 # Print data to file
+" Writing to file"
 file = open("output.csv", "w")
 file.write(Pullrequest.get_headers())
 for r in pullrequests:
     print "Storing request number: " + str(r.number)
     file.write(r.to_string().encode("utf-8") + "\n")
 file.close()
+'''
