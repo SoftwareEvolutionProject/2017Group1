@@ -26,7 +26,9 @@ class Pullrequest:
     def get_contributors(self):
         cbutors = ""
         for c in self.contributors:
-            cbutors = cbutors + ", " + c
+            if len(cbutors) > 0:
+                cbutors = cbutors + ", "
+            cbutors = cbutors + c
         return cbutors
 
     def to_string(self):

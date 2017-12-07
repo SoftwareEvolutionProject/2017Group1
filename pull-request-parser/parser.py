@@ -27,7 +27,7 @@ def get_pull_request(user, password):
     pullrequests = []
 
     #for i in range(1, pullrequestnr+1):
-    for i in range(1, 6):
+    for i in range(1, 2):
         print "Fetching pullrequest number " + str(i);
         r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i), auth=(user, password))
         prtext = r.text
@@ -105,6 +105,5 @@ file = open("output.csv", "w")
 file.write(Pullrequest.get_headers())
 for r in pullrequests:
     print "Storing request number: " + str(r.number)
-    print r.to_string()
-    file.write(r.to_string() + "\n")
+    file.write(r.to_string().encode("utf-8") + "\n")
 file.close()
