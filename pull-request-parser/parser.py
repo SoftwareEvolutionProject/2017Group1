@@ -5,6 +5,7 @@ from Pullrequest import Pullrequest
 import collections
 import time
 import sys
+import subprocess
 
 ##############################################################################
 # Pull requests
@@ -23,14 +24,14 @@ def get_pull_request(user, password):
                 if value > pullrequestnr:
                     pullrequestnr = value
                 
-    print "We found " + str(pullrequestnr) + " pullrequests"
+    setup_progress_bar("Fetching pull request data", pullrequestnr)
 
     # Fetching all the pull requests
     pullrequests = []
 
     for i in range(1, pullrequestnr+1):
     #for i in range(1, 15):
-        print "Fetching pullrequest number " + str(i);
+        #print "Fetching pullrequest number " + str(i);
         r = requests.get('https://api.github.com/repos/SoftwareEvolutionProject/2017Group1/pulls/'+str(i), auth=(user, password))
         prtext = r.text
         data = json.loads(prtext)
@@ -61,6 +62,9 @@ def get_pull_request(user, password):
         if pullrequest.number != 0:
             pullrequests.append(pullrequest)
 
+        increase_progress_bar()
+    finish_progress_bar()
+
     return pullrequests
 
 
@@ -68,11 +72,12 @@ def get_pull_request(user, password):
 # Get data from commits.
 #######################################################################
 def get_commit_data(pullrequests, user, password):
+    setup_progress_bar("Fetching commit data", len(pullrequests))
     for pullrequest in pullrequests:
         #if pullrequest.number == 0:
         #    continue
         
-        print "Fetching commit data for: " + str(pullrequest.number)
+        #print "Fetching commit data for: " + str(pullrequest.number)
 
         r = requests.get(pullrequest.commits_url, auth=(user, password))
         cmtext = r.text
@@ -88,6 +93,8 @@ def get_commit_data(pullrequests, user, password):
                                     contributor = commitData[authorKey]
                                     if not contributor in pullrequest.contributors:
                                         pullrequest.contributors.append(contributor)
+        increase_progress_bar()
+    finish_progress_bar()
 
     return pullrequests
 
@@ -97,12 +104,12 @@ def get_commit_data(pullrequests, user, password):
 #######################################################################
 def setup_progress_bar(title, width):
     print title
-    sys.stdout.write("[%s]" % (" " * toolbar_width))
+    sys.stdout.write("%s" % (chr(176) * width))
     sys.stdout.flush()
-    sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
+    sys.stdout.write("\b" * (width)) # return to start of line, after '['
 
 def increase_progress_bar():
-    sys.stdout.write("-")
+    sys.stdout.write(chr(219))
     sys.stdout.flush()
 
 def finish_progress_bar():
@@ -113,23 +120,9 @@ def finish_progress_bar():
 # Main
 #######################################################################
 
+#clear the screen
+tmp = subprocess.call('cls', shell=True)
 
-toolbar_width = 40
-setup_progress_bar("First progress bar", toolbar_width)
-for i in xrange(toolbar_width):
-    time.sleep(0.1)
-    increase_progress_bar()
-finish_progress_bar()
-
-setup_progress_bar("Second progress bar", toolbar_width)
-for i in xrange(toolbar_width):
-    time.sleep(0.1)
-    increase_progress_bar()
-finish_progress_bar()
-
-
-
-'''
 # Reading credentials
 print "Reading credentials"
 file = open("authorization.txt", "r")
@@ -141,11 +134,14 @@ pullrequests = get_pull_request(user, password)
 pullrequests = get_commit_data(pullrequests, user, password)
 
 # Print data to file
-" Writing to file"
+print "Writing to file"
 file = open("output.csv", "w")
 file.write(Pullrequest.get_headers())
+setup_progress_bar("Saving data to file", len(pullrequests))
 for r in pullrequests:
-    print "Storing request number: " + str(r.number)
+    #print "Storing request number: " + str(r.number)
     file.write(r.to_string().encode("utf-8") + "\n")
+    increase_progress_bar()
+    time.sleep(0.005)   # The computer is to slow for the output to console if we dont sleep a little bit
 file.close()
-'''
+finish_progress_bar()
