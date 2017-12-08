@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'variables';
+@import '../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
+@import '../node_modules/bootstrap-table/dist/bootstrap-table';
+
+#table {
+  background-color: white;
+}
+
+
+.row-fluid div {
+  -webkit-transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease, padding 0.2s ease, opacity 0.2s ease;
+  -moz-transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease, padding 0.2s ease, opacity 0.2s ease;
+  -o-transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease, padding 0.2s ease, opacity 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease, padding 0.2s ease, opacity 0.2s ease;
+}
+
+
+
+.col-0 {width: 0 !important;float:left}

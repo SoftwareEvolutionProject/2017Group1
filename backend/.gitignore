@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/java,macos,maven,eclipse,windows,netbeans,intellij
+# Created by https://www.gitignore.io/se.chalmers.dat265.group1.api/java,macos,maven,eclipse,windows,netbeans,intellij
 
 ### Eclipse ###
 
@@ -217,4 +217,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/java,macos,maven,eclipse,windows,netbeans,intellij
+# End of https://www.gitignore.io/se.chalmers.dat265.group1.api/java,macos,maven,eclipse,windows,netbeans,intellij
