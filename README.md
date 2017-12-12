@@ -1,4 +1,4 @@
-# 2017Group1 [![Build Status](https://travis-ci.org/SoftwareEvolutionProject/2017Group1.svg?branch=develop)](https://travis-ci.org/SoftwareEvolutionProject/2017Group1) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Mobius1/Selectable/blob/master/LICENSE)
+# 2017Group1 [![Build Status](https://travis-ci.org/SoftwareEvolutionProject/2017Group1.svg?branch=develop)](https://travis-ci.org/SoftwareEvolutionProject/2017Group1) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/SoftwareEvolutionProject/2017Group1/blob/master/LICENSE)
 ## Course
 - Course Name: Software Evolution Project
 - Course Code: DAT265
