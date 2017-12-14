@@ -159,17 +159,17 @@ INSERT INTO orderedpart (orderID, digitalPartID, amount) VALUES
                                  FROM digitalpart
                                  WHERE name = 'Emilia'), 6);
 
-INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingID) VALUES
-  (1, 1, 1), (1, 1, 2), (1, 1, 3), (1, 1, 4), (1, 1, 5), (1, 2, 6), (1, 2, 7), (1, 2, 8),
-  (2, 1, 1), (2, 1, 2), (2, 1, 3), (2, 1, 4), (2, 2, 6);
+INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingLabel) VALUES
+  (1, 1, 'Screw1'), (1, 1, 'Screw2'), (1, 1, 'Screw3'), (1, 1, 'Screw4'), (1, 1, 'Screw5'), (1, 2, 'Hinge1'), (1, 2, 'Hinge2'), (1, 2, 'Hinge3'),
+  (2, 1, 'Screw1'), (2, 1, 'Screw2'), (2, 1, 'Screw3'), (2, 1, 'Screw4'), (2, 2, 'Hinge1');
 /*Skipping three on purpose*/
 
-INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingID) VALUES
-  (3, 3, 9), (3, 4, 10),
-  (4, 3, 9), (4, 4, 10),
-  (5, 3, 9), (5, 4, 10),
-  (6, 3, 9), (6, 4, 10),
-  (7, 3, 9), (7, 4, 10);
+INSERT INTO physicalpart (physicalPrintID, orderedPartID, magicsPartPairingLabel) VALUES
+  (3, 3, 'EmilProtype'), (3, 4, 'EmiliaProtype'),
+  (4, 3, 'EmilProtype'), (4, 4, 'EmiliaProtype'),
+  (5, 3, 'EmilProtype'), (5, 4, 'EmiliaProtype'),
+  (6, 3, 'EmilProtype'), (6, 4, 'EmiliaProtype'),
+  (7, 3, 'EmilProtype'), (7, 4, 'EmiliaProtype');
 
 INSERT INTO stldata (digitalPartID, path) VALUES (2, '/stl/2-1082100546.stl'), (3, '/stl/3-129913882.stl');
 
