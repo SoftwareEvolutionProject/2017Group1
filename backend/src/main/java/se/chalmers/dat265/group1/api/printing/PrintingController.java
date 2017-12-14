@@ -70,7 +70,7 @@ public class PrintingController extends ApiController implements PrintingAPI {
         if (exist) {
             throw new FileAlreadyExistsException("ID have file");
         }
-        String path = "magics/" + id + "-" + Arrays.hashCode(body) + ".magics";
+        String path = "/magics/" + id + "-" + Arrays.hashCode(body) + ".magics";
         FileUtil.write(body, basePath + path);
         return magicsRepo.postObject(new MagicsData(Integer.valueOf(id), path));
     }
