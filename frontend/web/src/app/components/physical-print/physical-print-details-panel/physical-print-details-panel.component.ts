@@ -78,7 +78,7 @@ export class PhysicalPrintDetailsPanelComponent implements OnInit, OnChanges {
       data.push({
         id: part.id,
         order: part.orderedPartID,
-        mid: part.magicsPartPairingID,
+        mid: part.magicsPartPairingLabel,
       });
     });
 

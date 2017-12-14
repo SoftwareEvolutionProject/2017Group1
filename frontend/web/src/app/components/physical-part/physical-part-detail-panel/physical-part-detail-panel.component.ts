@@ -79,7 +79,7 @@ export class PhysicalPartDetailPanelComponent implements OnInit, OnChanges {
       Validators.compose([Validators.required])],
       orderedPartID: [this.physicalPart && this.physicalPart.orderedPartID ? this.physicalPart.orderedPartID : '',
       Validators.compose([Validators.required])],
-      magicsPartPairingID: [this.physicalPart && this.physicalPart.magicsPartPairingID ? this.physicalPart.magicsPartPairingID : '',
+      magicsPartPairingID: [this.physicalPart && this.physicalPart.magicsPartPairingLabel ? this.physicalPart.magicsPartPairingLabel : '',
         Validators.compose([Validators.required])],
     };
 

@@ -81,7 +81,7 @@ export class PhysicalPartListComponent implements OnInit, AfterViewInit {
       data.push({
         physicalPrintID: physicalPart.physicalPrintID,
         orderedPartID: physicalPart.orderedPartID,
-        magicsPartPairingID: physicalPart.magicsPartPairingID,
+        magicsPartPairingID: physicalPart.magicsPartPairingLabel,
         id: physicalPart.id,
       });
     });

@@ -196,6 +196,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
         dParts.push(this.digitalParts.filter((dPart) => {
           if (dPart.id === this.digitalPrint.magicsPartPairing[key]) {
             dPart["mkey"] = key;
+            console.log(dPart)
             return dPart;
           }
         })[0]);
@@ -221,7 +222,7 @@ export class PhysicalPrintEditComponent implements OnInit, OnChanges {
           Object.getOwnPropertyNames(this.digitalPrint.magicsPartPairing).forEach((key, index) => {
             let pp = PhysicalPart.createFromPhysicalPrint(pPrint);
             pp.orderedPartID = this.physicalPartOrderArray[index];
-            pp.magicsPartPairingLabel = 
+            pp.magicsPartPairingLabel = key;
             this.physicalPartService.createPhysicalPart(pp).subscribe((success) => {
             });
           });

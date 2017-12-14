@@ -113,7 +113,7 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
     const id = this.physicalPart.id;
     const data = this.requiredFieldsForm.value;
     data.physicalPrintID = this.physicalPart.physicalPrintID;
-    data.magicsPartPairingID = this.physicalPart.magicsPartPairingID;
+    data.magicsPartPairingLabel = this.physicalPart.magicsPartPairingLabel;
     data.orderedPartID = this.physicalPart.orderedPartID;
 
     const physicalPart: PhysicalPart = new PhysicalPart(this.requiredFieldsForm.value);
@@ -163,7 +163,7 @@ export class PhysicalPartEditComponent implements OnInit, OnChanges {
   }
 
   updateOrderedPartIDs(value) {
-    this.physicalPart.magicsPartPairingID = Number(getValueFromObject(this.digitalPrint.magicsPartPairing, value));
+    this.physicalPart.magicsPartPairingLabel = (getValueFromObject(this.digitalPrint.magicsPartPairing, value));
     this.orderService.getOrdersByDigitalPartID(getValueFromObject(this.digitalPrint.magicsPartPairing, value)).subscribe(
       (orders) => {
         this.orders = orders;
