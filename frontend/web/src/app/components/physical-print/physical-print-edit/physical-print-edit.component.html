@@ -22,9 +22,8 @@
             <div *ngIf="creating" [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
               <select class="form-control" formControlName="digitalPrintID" title="Choose Digital Print"
                       [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
-                <option *ngFor="let _digitalPrint of this.digitalPrints; let i = index" [value]="_digitalPrint.id"
-                        title="{{_digitalPrint.id}}">
-                  {{_digitalPrint.id}}
+                <option *ngFor="let _digitalPrint of this.digitalPrints; let i = index" [value]="_digitalPrint.id">
+                  {{_digitalPrint.name}}
                 </option>
               </select>
             </div>
@@ -32,13 +31,52 @@
             <div *ngIf="!creating">
               <input disabled value="{{physicalPrint.digitalPrintID}}" class="form-control">
             </div>
+            <div *ngIf="digitalPrint" class="alert alert-info" role="alert">
+              A Physical Part will be created for each Digital Part in the Digital Print, Please link them to the corresponding order
+            </div>
+
+            <div *ngIf="digitalPrint" class="container">
+
+              <div *ngFor="let dpart of this.getDigitalParts(this.digitalPrint); let i = index"  >
+
+                <div class="col-md-2">
+                  <label>ID:</label> Generated
+                </div>
+                <div class="col-md-2">
+                  <label>Digital Part: </label> {{dpart[id]}}
+                </div>
+                <div class="col-md-2">
+                  <label>Magics ID: </label> {{dpart[mkey]}}
+                </div>
+
+
+                <div class="col-md-6">
+                  <select name="formOrderedPartID" class="selectpicker form-control" title="Ordered Part ID" #o (change)="this.physicalPartOrderArray[i] = o.value">
+                    <option style="display:none" value="">Select an Ordered Part ID</option>
+                    <option title="{{_orderedPart.id}}"
+                            *ngFor="let _orderedPart of this.orderedParts; let i = index"
+                            [value]=_orderedPart.id>
+                      {{_orderedPart.id}}
+                  </select>
+                </div>
+              </div>
+              <br>
+            </div>
+
+            <!--&lt;!&ndash;<app-digital-print-details-panel *ngIf="digitalPrint" [digitalPrint]="digitalPrint"-->
+                                             <!--[digitalParts]="digitalParts" [close]="false">-->
+            <!--</app-digital-print-details-panel>&ndash;&gt;-->
+
+            <label>Slelect Material</label>
+            <div *ngIf="loaded" [ngClass]="{'has-error': !requiredFieldsForm.get('digitalPrintID').valid}">
+              <select class="form-control" formControlName="materialID" title="Choose Material"
+                      [ngClass]="{'has-error': !requiredFieldsForm.get('materialID').valid}">
+                <option *ngFor="let _material of this.materials; let i = index" [value]="_material.id">
+                  {{_material.name}}, {{_material.supplierName}}
+                </option>
+              </select>
+            </div>
           </form>
-          <div *ngIf="digitalPrint" class="alert alert-info" role="alert">A Physical Part will be created for each
-            Digital Part in the Digital Print
-          </div>
-          <app-digital-print-details-panel *ngIf="digitalPrint" [digitalPrint]="digitalPrint"
-                                           [digitalParts]="digitalParts" [close]="false">
-          </app-digital-print-details-panel>
 
           <div *ngIf="creating">
             <label>Slm File</label>
