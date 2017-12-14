@@ -75,10 +75,9 @@ CREATE TABLE IF NOT EXISTS physicalpart(
   id SERIAL PRIMARY KEY,
   physicalPrintID INTEGER,
   orderedPartID INTEGER,
-  magicsPartPairingID INTEGER,
+  magicsPartPairingLabel VARCHAR(200),
   FOREIGN KEY (physicalPrintID) REFERENCES physicalprint(id),
-  FOREIGN KEY (orderedPartID) REFERENCES orderedpart(id),
-  FOREIGN KEY (magicsPartPairingID) REFERENCES magicspairing(id)
+  FOREIGN KEY (orderedPartID) REFERENCES orderedpart(id)
 );
 
 CREATE TABLE IF NOT EXISTS materialgrade(

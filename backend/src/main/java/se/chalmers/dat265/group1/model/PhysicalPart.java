@@ -7,13 +7,13 @@ public class PhysicalPart extends DataModel {
     private int id;
     private int physicalPrintID;
     private int orderedPartID;
-    private int magicsPartPairingID;
+    private String magicsPartPairingLabel;
 
     public PhysicalPart() {
         id = -1;
         physicalPrintID = -1;
         orderedPartID = -1;
-        magicsPartPairingID = -1;
+        magicsPartPairingLabel = "";
     }
 
     public int getId() {
@@ -28,8 +28,8 @@ public class PhysicalPart extends DataModel {
         return orderedPartID;
     }
 
-    public int getMagicsPartPairingID() {
-        return magicsPartPairingID;
+    public String getMagicsPartPairingLabel() {
+        return magicsPartPairingLabel;
     }
 
 }
