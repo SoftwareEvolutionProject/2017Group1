@@ -37,20 +37,20 @@
 
             <div *ngIf="digitalPrint" class="container">
 
-              <div *ngFor="let dpart of this.getDigitalParts(this.digitalPrint); let i = index"  >
+              <div *ngFor="let dpart of this.getDigitalParts(this.digitalPrint); let i = index"  class="row">
 
                 <div class="col-md-2">
                   <label>ID:</label> Generated
                 </div>
                 <div class="col-md-2">
-                  <label>Digital Part: </label> {{dpart[id]}}
+                  <label>Digital Part: </label> {{dpart.id}}
                 </div>
                 <div class="col-md-2">
-                  <label>Magics Part Pairing Label: </label> {{dpart[mkey]}}
+                  <label>Magics Label: </label> {{dpart.mkey}}
                 </div>
 
 
-                <div class="col-md-6">
+                <div class="col-md-5">
                   <select name="formOrderedPartID" class="selectpicker form-control" title="Ordered Part ID" #o (change)="this.physicalPartOrderArray[i] = o.value">
                     <option style="display:none" value="">Select an Ordered Part ID</option>
                     <option title="{{_orderedPart.id}}"
