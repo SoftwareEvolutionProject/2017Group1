@@ -42,6 +42,7 @@ export class StlViewerComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.viewer) {
+      console.log((this.baseUrl + this.stlUrl).replace('//','/'))
       this.viewer.replaceSceneFromUrl((this.baseUrl + this.stlUrl).replace('//','/'));
       this.viewer.update();
     }
