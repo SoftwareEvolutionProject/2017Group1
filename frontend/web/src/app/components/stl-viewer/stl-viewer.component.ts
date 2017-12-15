@@ -27,7 +27,7 @@ export class StlViewerComponent implements OnInit, OnChanges {
   ngOnInit() {
     const canvas = document.getElementById('stl');
     console.log(this.baseUrl, this.stlUrl, (this.baseUrl + this.stlUrl),  (this.baseUrl + this.stlUrl).replace("//",'/'))
-    let url = (this.baseUrl + this.stlUrl).replace("//",'/')
+    let url = (this.baseUrl + this.stlUrl).replace("\/\/",'\/')
     console.log(url)
     const parameters = {
       SceneUrl: url,
@@ -46,7 +46,7 @@ export class StlViewerComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.viewer) {
       console.log(this.baseUrl, this.stlUrl, (this.baseUrl + this.stlUrl),  (this.baseUrl + this.stlUrl).replace("//",'/'))
-      let url = (this.baseUrl + this.stlUrl).replace("//",'/')
+      let url = (this.baseUrl + this.stlUrl).replace("\/\/",'\/')
       console.log(url)
       this.viewer.replaceSceneFromUrl(url);
       this.viewer.update();
