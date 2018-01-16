@@ -4,7 +4,7 @@ export class PhysicalPart {
   public id: number;
   public orderedPartID: number;
   public physicalPrintID: number;
-  public magicsPartPairingID: number;
+  public magicsPartPairingLabel: string;
 
   constructor(values: Object = {}) {
     if (!values) {
